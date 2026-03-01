@@ -4,27 +4,31 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import YDTLogo from '@/components/YDTLogo';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { Suspense } from 'react';
 import { Compass, Sparkles, Layout, History, Zap, Languages, Trophy, BookOpen, PenTool, X } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 
-export default function MobileShell({ children }: { children: React.ReactNode }) {
-    const clearProgress = useAppStore((state) => state.clearProgress);
-    const lastActiveRoute = useAppStore((state) => state.lastActiveRoute);
-    const setLastActiveRoute = useAppStore((state) => state.setLastActiveRoute);
-
-    const router = useRouter();
+function RouteTracker() {
     const pathname = usePathname();
     const searchParams = useSearchParams();
-
-    const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
+    const setLastActiveRoute = useAppStore((state) => state.setLastActiveRoute);
 
     useEffect(() => {
-        // Track the current route
         if (pathname && pathname !== '/') {
             const currentRoute = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
             setLastActiveRoute(currentRoute);
         }
     }, [pathname, searchParams, setLastActiveRoute]);
+
+    return null;
+}
+
+export default function MobileShell({ children }: { children: React.ReactNode }) {
+    const clearProgress = useAppStore((state) => state.clearProgress);
+    const lastActiveRoute = useAppStore((state) => state.lastActiveRoute);
+
+    const router = useRouter();
+    const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
 
     const handleClearProgress = () => {
         if (confirm("Clear Progress?")) {
@@ -34,6 +38,9 @@ export default function MobileShell({ children }: { children: React.ReactNode })
 
     return (
         <div className="min-h-screen bg-slate-50 flex justify-center py-0 sm:py-8 font-sans text-slate-900 leading-normal">
+            <Suspense fallback={null}>
+                <RouteTracker />
+            </Suspense>
             <div className="w-full max-w-[450px] bg-white min-h-screen sm:min-h-[850px] sm:rounded-[3rem] shadow-2xl overflow-hidden flex flex-col relative border-x border-slate-200">
 
                 {/* LOGO SECTION */}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import ReadingLab from '@/components/features/ReadingLab';
 import MobileShell from '@/components/layout/MobileShell';
@@ -8,7 +8,7 @@ import { RefreshCw } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { supabase } from '@/lib/supabase';
 
-export default function ReadingLabPage() {
+function ReadingLabContent() {
     const router = useRouter();
     const incrementProgress = useAppStore(state => state.incrementProgress);
     const [loading, setLoading] = useState(true);
@@ -26,27 +26,22 @@ export default function ReadingLabPage() {
             setLoading(true);
             setErrorMsg(null);
             try {
-                // Fetch a random reading lab from Supabase
-                // Using a simple Math.random trick with the id, or just fetching all and picking one client-side if the dataset is small.
-                // For a robust app, you would use a Postgres function or randomize by id range. Here we fetch a few and pick a random one.
                 const { data, error } = await supabase
                     .from('reading_labs')
                     .select('*')
-                    .limit(50); // Fetch up to 50 recent passages
+                    .limit(50);
 
                 if (error) {
                     throw error;
                 }
 
                 if (data && data.length > 0) {
-                    // Pick a random passage from the fetched list
                     const randomIndex = Math.floor(Math.random() * data.length);
                     const selectedLab = data[randomIndex];
 
                     setReadingPassage(selectedLab.passage);
                     setQuestions(selectedLab.questions);
                 } else {
-                    // Fallback if DB is empty
                     throw new Error("No reading passages found in database. Please generate some from the Admin Panel.");
                 }
 
@@ -75,40 +70,48 @@ export default function ReadingLabPage() {
 
     if (errorMsg) {
         return (
-            <MobileShell>
-                <div className="flex flex-col items-center justify-center py-32 text-center px-6">
-                    <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mb-4 text-2xl">⚠️</div>
-                    <p className="font-bold text-slate-800 mb-2">{errorMsg}</p>
-                    <button onClick={() => window.location.reload()} className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold mt-4 shadow-lg active:scale-95 transition-all">Tekrar Dene</button>
-                    <button onClick={() => router.push('/')} className="px-6 py-3 text-slate-500 font-bold mt-2 hover:text-indigo-600">Ana Sayfaya Dön</button>
-                </div>
-            </MobileShell>
+            <div className="flex flex-col items-center justify-center py-32 text-center px-6">
+                <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mb-4 text-2xl">⚠️</div>
+                <p className="font-bold text-slate-800 mb-2">{errorMsg}</p>
+                <button onClick={() => window.location.reload()} className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold mt-4 shadow-lg active:scale-95 transition-all">Tekrar Dene</button>
+                <button onClick={() => router.push('/')} className="px-6 py-3 text-slate-500 font-bold mt-2 hover:text-indigo-600">Ana Sayfaya Dön</button>
+            </div>
+        );
+    }
+
+    if (loading || questions.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center py-32 animate-pulse">
+                <RefreshCw className="animate-spin text-indigo-600 mb-4" size={48} />
+                <p className="font-black text-indigo-600 uppercase text-[10px] tracking-widest">Lab Syncing...</p>
+            </div>
         );
     }
 
     return (
+        <ReadingLab
+            questions={questions}
+            currentIdx={currentIdx}
+            readingPassage={readingPassage}
+            isTextExpanded={isTextExpanded}
+            setIsTextExpanded={setIsTextExpanded}
+            handleNext={handleNext}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            showFeedback={showFeedback}
+            setShowFeedback={setShowFeedback}
+            showHint={showHint}
+            setShowHint={setShowHint}
+        />
+    );
+}
+
+export default function ReadingLabPage() {
+    return (
         <MobileShell>
-            {loading || questions.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-32 animate-pulse">
-                    <RefreshCw className="animate-spin text-indigo-600 mb-4" size={48} />
-                    <p className="font-black text-indigo-600 uppercase text-[10px] tracking-widest">Lab Syncing...</p>
-                </div>
-            ) : (
-                <ReadingLab
-                    questions={questions}
-                    currentIdx={currentIdx}
-                    readingPassage={readingPassage}
-                    isTextExpanded={isTextExpanded}
-                    setIsTextExpanded={setIsTextExpanded}
-                    handleNext={handleNext}
-                    selectedOption={selectedOption}
-                    setSelectedOption={setSelectedOption}
-                    showFeedback={showFeedback}
-                    setShowFeedback={setShowFeedback}
-                    showHint={showHint}
-                    setShowHint={setShowHint}
-                />
-            )}
+            <Suspense fallback={<div className="flex justify-center py-20"><RefreshCw className="animate-spin text-indigo-600" /></div>}>
+                <ReadingLabContent />
+            </Suspense>
         </MobileShell>
     );
 }
