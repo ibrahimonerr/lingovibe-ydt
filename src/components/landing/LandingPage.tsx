@@ -86,11 +86,11 @@ export function LandingPage() {
         <Container className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/8 ring-1 ring-white/10">
-              <span className="text-sm font-semibold tracking-tight">LV</span>
+              <span className="text-sm font-semibold tracking-tight">YH</span>
             </div>
             <div className="leading-tight">
               <div className="text-sm font-semibold tracking-tight">
-                LingoVibe
+                YDTHub
               </div>
               <div className="text-xs text-white/60">Learn with real content</div>
             </div>
@@ -122,7 +122,7 @@ export function LandingPage() {
                 .
               </h1>
               <p className="mt-4 text-pretty text-base leading-7 text-white/70 sm:text-lg">
-                LingoVibe turns your interests into a daily learning habit:
+                YDTHub turns your interests into a daily learning habit:
                 import any text, read today’s news in your level, and practice
                 grammar with short, satisfying drills.
               </p>
@@ -232,9 +232,9 @@ export function LandingPage() {
         <Container className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3 text-sm text-white/70">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/8 ring-1 ring-white/10">
-              <span className="text-xs font-semibold">LV</span>
+              <span className="text-xs font-semibold">YH</span>
             </div>
-            <span>© {new Date().getFullYear()} LingoVibe</span>
+            <span>© {new Date().getFullYear()} YDTHub</span>
           </div>
           <div className="text-sm text-white/60">
             Custom text • Daily news • Grammar

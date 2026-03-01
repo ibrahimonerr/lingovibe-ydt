@@ -1,47 +1,47 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Prefer server-only key if available, fall back to NEXT_PUBLIC_ for dev/demo.
-const apiKey =
-  process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+const apiKey = process.env.GEMINI_API_KEY;
 
 if (!apiKey) {
   console.warn(
-    'Gemini API key is not set. Define GEMINI_API_KEY (recommended) or NEXT_PUBLIC_GEMINI_API_KEY in .env.local.'
+    'Gemini API key is not set. Define GEMINI_API_KEY in .env.local.'
   );
 }
 
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
 const SYSTEM_PROMPT = `
-You are a language learning assistant.
+You are a language learning assistant for YDT (Turkish university entrance exam for foreign language).
 
 Given an English text, you must answer in **valid JSON only** with the
-following structure (no extra commentary, no markdown):
+following structure:
 
 {
   "summary": "one short paragraph in English",
   "keywords": ["keyword1", "keyword2", "keyword3"],
   "questions": [
     {
-      "prompt": "Question in English?",
-      "options": ["A) ...", "B) ...", "C) ...", "D) ..."]
-    },
-    {
-      "prompt": "Question in English?",
-      "options": ["A) ...", "B) ...", "C) ...", "D) ..."]
-    },
-    {
-      "prompt": "Question in English?",
-      "options": ["A) ...", "B) ...", "C) ...", "D) ..."]
+      "question": "Question in English?",
+      "options": {
+        "A": "Option A text",
+        "B": "Option B text",
+        "C": "Option C text",
+        "D": "Option D text",
+        "E": "Option E text"
+      },
+      "correct": "A",
+      "explanation": "ANLAM: ... | TACTIC: ..."
     }
   ]
 }
 
 Rules:
 - keywords must be 3 short phrases extracted from the text.
-- each options array must contain exactly 4 options starting with "A) ", "B) ", "C) ", "D) ".
-- Do not include explanations or indicate which option is correct.
+- Provide exactly 3 questions based on the text.
+- 'options' must be an object with keys A, B, C, D, E without prefixes.
+- 'correct' must be the correct option key strictly (e.g. "A").
+- 'explanation' must explain the answer in Turkish, preferably with 'ANLAM:' (meaning) and 'TACTIC:' (test-taking strategy) parts.
 `;
 
 export async function POST(req: NextRequest) {
@@ -62,27 +62,27 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-2.5-flash',
+      generationConfig: {
+        responseMimeType: "application/json",
+      }
+    });
 
     const result = await model.generateContent([
       SYSTEM_PROMPT,
-      '\n\nUser text:\n',
+      '\\n\\nUser text:\\n',
       text
     ]);
 
     const responseText = result.response.text();
 
-    // Try to be robust against markdown fences or commentary.
-    const cleaned = responseText
-      .replace(/```json/gi, '')
-      .replace(/```/g, '')
-      .trim();
-
     let parsed;
     try {
-      parsed = JSON.parse(cleaned);
+      parsed = JSON.parse(responseText);
     } catch {
-      const match = cleaned.match(/\{[\s\S]*\}/);
+      // Fallback in case the model ignored responseMimeType
+      const match = responseText.match(/\\{[\\s\\S]*\\}/);
       if (!match) {
         throw new Error('Model returned non-JSON response.');
       }

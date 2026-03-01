@@ -1,14 +1,39 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
 
+import SplashScreenWrapper from "@/components/SplashScreenWrapper";
+
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0f172a",
+};
 
 export const metadata: Metadata = {
   title: "YDTHub",
   description:
-    "AI-Powered YDT Learning Center: Custom texts, daily news, and grammar practice — designed to help you learn faster and stay consistent."
+    "AI-Powered YDT Learning Center: Custom texts, daily news, and grammar practice — designed to help you learn faster and stay consistent.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "YDTHub",
+  },
+  icons: {
+    apple: "/apple-touch-icon.png",
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 export default function RootLayout({
@@ -25,7 +50,9 @@ export default function RootLayout({
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(91,124,255,0.08),transparent_60%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.06),transparent_22%,transparent_78%,rgba(255,255,255,0.04))]" />
         </div>
-        {children}
+        <SplashScreenWrapper>
+          {children}
+        </SplashScreenWrapper>
       </body>
     </html>
   );

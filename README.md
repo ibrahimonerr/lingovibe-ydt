@@ -1,4 +1,4 @@
-## LingoVibe
+## YDTHub
 
 Next.js + Tailwind starter for a language learning app.
 
