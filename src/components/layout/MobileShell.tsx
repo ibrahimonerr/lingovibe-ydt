@@ -37,14 +37,14 @@ export default function MobileShell({ children }: { children: React.ReactNode })
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 flex justify-center py-0 sm:py-8 font-sans text-slate-900 leading-normal">
+        <div className="h-dvh w-full overflow-hidden bg-slate-50 flex justify-center py-0 sm:py-8 font-sans text-slate-900 leading-normal">
             <Suspense fallback={null}>
                 <RouteTracker />
             </Suspense>
-            <div className="w-full max-w-[450px] bg-white min-h-screen sm:min-h-[850px] sm:rounded-[3rem] shadow-2xl overflow-hidden flex flex-col relative border-x border-slate-200">
+            <div className="w-full max-w-[450px] bg-white h-full sm:rounded-[3rem] shadow-2xl flex flex-col relative border-x border-slate-200">
 
                 {/* LOGO SECTION */}
-                <header className="pt-8 pb-3 text-center border-b border-slate-50 bg-white">
+                <header className="pt-8 pb-3 text-center border-b border-slate-50 bg-white shrink-0">
                     <Link href="/" className="inline-block">
                         <YDTLogo size="md" theme="dark" showSlogan={false} />
                     </Link>
@@ -54,7 +54,7 @@ export default function MobileShell({ children }: { children: React.ReactNode })
                     {children}
                 </main>
 
-                <nav className="fixed bottom-0 w-full max-w-[450px] bg-white border-t p-6 flex justify-center items-center rounded-t-[3rem] shadow-2xl z-50">
+                <nav className="absolute bottom-0 w-full bg-white border-t p-6 flex justify-center items-center rounded-t-[3rem] shadow-[0_-15px_40px_-15px_rgba(0,0,0,0.15)] z-50">
                     <button onClick={() => setIsNavMenuOpen(true)} className="w-16 h-16 rounded-[1.5rem] bg-indigo-900 flex items-center justify-center text-white shadow-xl -mt-16 border-[6px] border-white active:scale-90 transition-all z-50">
                         <span className="text-2xl font-black italic">Y</span>
                     </button>

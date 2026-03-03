@@ -89,7 +89,10 @@ async function seedReading() {
     for (let i = 0; i < COUNTS.READING; i++) {
         console.log(`[Reading] Generating ${i + 1}/${COUNTS.READING}...`);
         try {
-            const prompt = `Generate a short English reading passage (about 100-150 words) suitable for YDT (Turkish university language exam) along with 3 multiple-choice questions in valid JSON format.
+            const prompt = `Task: Generate a short English reading passage (about 100-150 words) suitable for YDT (Turkish university language exam) along with 3 multiple-choice questions.
+Level: Advanced English
+Format: valid JSON only
+Structure:
 {
   "passage": "passage text...",
   "quiz": [
@@ -99,11 +102,14 @@ async function seedReading() {
       "correct": "A",
       "hint": "Türkçe ipucu. Hangi satıra veya kelimeye odaklanmalı?",
       "quote": "The EXACT sentence or phrase from the passage where the answer is found. Must match passage text perfectly.",
-      "explanation": "ANLAM: ... | TACTIC: ..."
+      "explanation": "ANLAM: (Türkçe anlam) | TACTIC: (Soru çözüm tekniği - Türkçe)"
     }
   ]
 }
-Return only JSON block. Ensure explanation is in Turkish.`;
+
+CRITICAL:
+1. The explanation MUST be 100% in TURKISH. No English or other languages in explanation/hint.
+2. Return ONLY JSON.`;
 
             const parsed = await generateWithGeminiFallback(prompt);
 
@@ -133,8 +139,10 @@ async function seedGrammar() {
             console.log(`[Grammar - ${topic}] Generating ${i + 1}/${COUNTS.PER_TOPIC}...`);
 
             try {
-                const prompt = `Generate 3 English grammar multiple-choice questions for YDT (Turkish university language exam) level in valid JSON format.
+                const prompt = `Task: Generate 3 English grammar multiple-choice questions for YDT level.
 Topic: ${topic}
+Format: valid JSON only
+Structure:
 {
   "quiz": [
     {
@@ -142,11 +150,14 @@ Topic: ${topic}
       "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
       "correct": "A",
       "hint": "Türkçe ipucu. Hangi dilbilgisi kuralına veya anahtar kelimeye odaklanmalı?",
-      "explanation": "ANLAM: ... | TACTIC: ..."
+      "explanation": "ANLAM: (Türkçe anlam) | TACTIC: (Soru çözüm tekniği - Türkçe)"
     }
   ]
 }
-Return only JSON block without markdown wrappers if possible. Ensure explanation is in Turkish.`;
+
+CRITICAL: 
+1. Explanation and hint MUST be 100% in TURKISH.
+2. Return ONLY JSON.`;
 
                 const parsed = await generateWithGeminiFallback(prompt);
 
@@ -168,6 +179,14 @@ Return only JSON block without markdown wrappers if possible. Ensure explanation
     }
 }
 
+const TOPIC_SPECIFIC_PROMPTS: Record<string, string> = {
+    "Cloze Test": "Generate a short English paragraph with 3 missing parts (blanks). Create multiple-choice questions for each blank (A, B, C, D, E) that test grammar or vocabulary in context.",
+    "Sentence Completion": "Generate a sentence with one half missing. Provide 5 options to complete the sentence logically and grammatically. The missing part should be a significant clause.",
+    "Restatement": "Generate a complex English sentence. The task is to 'find the sentence that has the closest meaning' to the given one. Provide 5 options where only one is synonymous and the others have subtle meaning differences. This is for the 'Anlamca En Yakın Cümleyi Bulma' section of YDT.",
+    "Paragraph Completion": "Generate a coherent English paragraph with one sentence removed. Provide 5 options for the missing sentence, only one of which fits the flow and logic perfectly.",
+    "Irrelevant": "Generate a coherent English paragraph of 5-6 sentences, where one sentence is 'irrelevant' (breaks the flow or changes the topic slightly). Provide the sentences numbered 1-5 and ask which one is irrelevant."
+};
+
 async function seedSkills() {
     console.log(`\n🎯 Generating Skills Labs (${SKILLS_TOPICS.length} topics x ${COUNTS.PER_TOPIC} sets)...`);
 
@@ -176,19 +195,28 @@ async function seedSkills() {
             console.log(`[Skills - ${topic}] Generating ${i + 1}/${COUNTS.PER_TOPIC}...`);
 
             try {
-                const prompt = `Generate 3 English ${topic} multiple-choice questions for YDT (Turkish university language exam) level in valid JSON format.
+                const topicPrompt = TOPIC_SPECIFIC_PROMPTS[topic] || `Generate 3 English ${topic} multiple-choice questions.`;
+                const prompt = `Task: ${topicPrompt}
+Level: YDT (Turkish university language exam - Advanced English)
+Quantity: 3 questions
+Format: valid JSON only
+Structure:
 {
   "quiz": [
     {
       "question": "question text...",
       "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
       "correct": "A",
-      "hint": "Türkçe ipucu. Hangi bağlaca veya yapısal ilişkiye dikkat etmeli?",
-      "explanation": "ANLAM: ... | TACTIC: ..."
+      "hint": "Türkçe ipucu. Hangi bağlaca, yapısal ilişkiye veya anahtar kelimeye dikkat etmeli?",
+      "explanation": "ANLAM: (Türkçe çeviri ve anlam açıklaması) | TACTIC: (Soru çözüm tekniği - Türkçe)"
     }
   ]
 }
-Return only JSON block without markdown wrappers if possible. Ensure explanation is in Turkish.`;
+
+CRITICAL: 
+1. The explanation MUST be entirely in TURKISH. Do not use any other language like German or English in the explanation.
+2. For Restatement: Ensure the question asks for the 'closest meaning' to a given sentence.
+3. Return ONLY the JSON block.`;
 
                 const parsed = await generateWithGeminiFallback(prompt);
 
@@ -216,7 +244,7 @@ async function main() {
     console.log("🤖 Priority: Gemini → Groq fallback");
     console.log(`📊 Per topic: ${COUNTS.PER_TOPIC} sets\n`);
 
-    // await seedReading();  // uncomment to also seed reading
+    await seedReading();
     await seedGrammar();
     await seedSkills();
 

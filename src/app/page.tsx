@@ -54,10 +54,10 @@ export default function YDTHub() {
 
   return (
     <div
-      className="min-h-dvh bg-slate-50 flex justify-center py-0 sm:py-8 font-sans text-slate-900 leading-normal"
+      className="h-dvh w-full overflow-hidden bg-slate-50 flex justify-center py-0 sm:py-8 font-sans text-slate-900 leading-normal"
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
-      <div className="w-full max-w-[450px] bg-white min-h-dvh sm:min-h-[850px] sm:rounded-[3rem] shadow-2xl overflow-hidden flex flex-col relative border-x border-slate-200">
+      <div className="w-full max-w-[450px] bg-white h-full sm:rounded-[3rem] shadow-2xl flex flex-col relative border-x border-slate-200">
 
         {/* Spacer that pushes all content down */}
         <div className="flex-1" />
@@ -120,9 +120,20 @@ export default function YDTHub() {
 
         {/* MODALLAR */}
         {['grammar', 'skills', 'vocab_select'].includes(mode) && view === 'home' && (
-          <div className="absolute inset-0 z-[120] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 z-[120] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4"
+            onClick={(e) => {
+              // Close if clicking directly on the backdrop (not inside the modal)
+              if (e.target === e.currentTarget) setMode('');
+            }}
+          >
             <div className="w-full max-w-[380px] bg-white rounded-[2.5rem] p-6 shadow-2xl animate-in zoom-in-95 duration-200">
-              <div className="text-center font-black uppercase text-[11px] text-indigo-600 mb-6 border-b pb-4 italic">Lab Selection</div>
+              <div className="flex justify-between items-center mb-6 border-b pb-4">
+                <span className="font-black uppercase text-[11px] text-indigo-600 italic">Lab Selection</span>
+                <button onClick={() => setMode('')} className="p-2 bg-slate-50 text-slate-400 rounded-full hover:bg-slate-100 transition-colors">
+                  <X size={18} />
+                </button>
+              </div>
               <div className="space-y-2 max-h-[350px] overflow-y-auto custom-scrollbar">
                 {mode === 'vocab_select' ? (
                   <>
@@ -143,7 +154,7 @@ export default function YDTHub() {
         )}
 
         {/* BOTTOM NAV */}
-        <nav className="fixed bottom-0 w-full max-w-[450px] bg-white border-t p-6 flex justify-center items-center rounded-t-[3rem] shadow-2xl z-50">
+        <nav className="absolute bottom-0 w-full bg-white border-t p-6 flex justify-center items-center rounded-t-[3rem] shadow-[0_-15px_40px_-15px_rgba(0,0,0,0.15)] z-50">
           <button onClick={() => setIsNavMenuOpen(true)} className="w-16 h-16 rounded-[1.5rem] bg-indigo-900 flex items-center justify-center text-white shadow-xl -mt-16 border-[6px] border-white active:scale-90 transition-all z-50">
             <span className="text-2xl font-black italic">Y</span>
           </button>
