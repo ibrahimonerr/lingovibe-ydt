@@ -7,6 +7,8 @@ import MobileShell from '@/components/layout/MobileShell';
 import { RefreshCw } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
+import ReadingLab from '@/components/features/ReadingLab';
+
 function SkillsLabContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -14,10 +16,12 @@ function SkillsLabContent() {
 
     const [loading, setLoading] = useState(true);
     const [questions, setQuestions] = useState<any[]>([]);
+    const [passage, setPassage] = useState<string | null>(null);
     const [currentIdx, setCurrentIdx] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [showHint, setShowHint] = useState(false);
+    const [isTextExpanded, setIsTextExpanded] = useState(false);
 
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -25,6 +29,7 @@ function SkillsLabContent() {
         const fetchQuestions = async () => {
             setLoading(true);
             setErrorMsg(null);
+            setPassage(null);
             try {
                 let query = supabase.from('skills_labs').select('*').limit(50);
 
@@ -34,21 +39,52 @@ function SkillsLabContent() {
 
                 const { data, error } = await query;
 
-                if (error) {
-                    throw error;
-                }
+                if (error) throw error;
 
                 if (data && data.length > 0) {
                     const randomIndex = Math.floor(Math.random() * data.length);
                     const selectedLab = data[randomIndex];
-                    setQuestions(selectedLab.question);
+                    const raw = selectedLab.question;
+
+                    if (topic === 'Cloze Test') {
+                        // seed-cloze-skills.ts saved the whole parsed object.
+                        // Due to a serialization quirk it may be stored as { '0': { passage, questions } }
+                        // or directly as { passage, questions }. Handle both.
+                        const clozeData = raw['0'] ?? raw;
+                        setPassage(clozeData.passage || null);
+                        const qs = (clozeData.questions || []).map((q: any) => ({
+                            ...q,
+                            question: `Choose the best option for blank (${q.id}):`,
+                        }));
+                        setQuestions(qs);
+
+                    } else if (topic === 'Irrelevant') {
+                        // Has: sentences[], correct_answer (Roman numeral letter like 'C'),
+                        // hint, feedback. NO options field — build options from sentences.
+                        const letters = ['A', 'B', 'C', 'D', 'E'];
+                        const sentences: string[] = raw.sentences || [];
+                        const opts: Record<string, string> = {};
+                        sentences.forEach((s: string, i: number) => {
+                            opts[letters[i]] = s;
+                        });
+                        const normalized = {
+                            ...raw,
+                            question: 'Which sentence breaks the flow of the paragraph?',
+                            options: opts,
+                            correct_answer: raw.correct_answer, // e.g. 'C'
+                        };
+                        setQuestions([normalized]);
+
+                    } else {
+                        setQuestions(Array.isArray(raw) ? raw : [raw]);
+                    }
                 } else {
-                    throw new Error("Veritabanında bu yeteneğe ait soru bulunamadı. Lütfen Admin panelinden üretin.");
+                    throw new Error("Veritabanında bu yeteneğe ait soru bulunamadı.");
                 }
 
             } catch (error: any) {
                 console.error("Supabase Fetch Error:", error);
-                setErrorMsg(error.message || "Sorular yüklenemedi. Bağlantıyı kontrol edin.");
+                setErrorMsg(error.message || "Sorular yüklenemedi.");
             } finally {
                 setLoading(false);
             }
@@ -88,10 +124,31 @@ function SkillsLabContent() {
         );
     }
 
-    // Uses GrammarLab UI since it represents the same basic test shape for these features
+    if (topic === 'Cloze Test') {
+        return (
+            <ReadingLab
+                questions={questions}
+                currentIdx={currentIdx}
+                readingPassage={passage}
+                isTextExpanded={true}
+                setIsTextExpanded={setIsTextExpanded}
+                handleNext={handleNext}
+                selectedOption={selectedOption}
+                setSelectedOption={setSelectedOption}
+                showFeedback={showFeedback}
+                setShowFeedback={setShowFeedback}
+                showHint={showHint}
+                setShowHint={setShowHint}
+            />
+        );
+    }
+
+    const currentQuestion = questions[currentIdx];
+    if (!currentQuestion) return null;
+
     return (
         <GrammarLab
-            question={questions[currentIdx]}
+            question={currentQuestion}
             mode="skills"
             handleNext={handleNext}
             selectedOption={selectedOption}

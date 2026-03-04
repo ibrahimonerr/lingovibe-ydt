@@ -8,6 +8,7 @@ import MobileShell from '@/components/layout/MobileShell';
 import { RefreshCw } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { YDT_VOCAB_DB } from '@/data/ydtVocab';
+import { supabase } from '@/lib/supabase';
 
 function VocabLabContent() {
     const router = useRouter();
@@ -23,126 +24,121 @@ function VocabLabContent() {
     const incrementProgress = useAppStore(state => state.incrementProgress);
 
     useEffect(() => {
-        const generateLocalVocab = () => {
+        const fetchVocab = async () => {
             if (vocabSubMode === 'wordmap') {
                 setLoading(false);
                 return;
             }
             setLoading(true);
             try {
-                // Determine how many questions to generate (e.g., 3)
-                const numQuestions = 3;
-                const generatedQuiz = [];
+                const { data, error } = await supabase
+                    .from('vocab_labs')
+                    .select('*')
+                    .eq('mode', vocabSubMode)
+                    .limit(50);
 
-                // Helper to get random elements from an array
-                const getRandomElements = (arr: any[], count: number) => {
-                    const shuffled = [...arr].sort(() => 0.5 - Math.random());
-                    return shuffled.slice(0, count);
-                };
+                if (error) throw error;
 
-                for (let i = 0; i < numQuestions; i++) {
-                    const randomWords = getRandomElements(YDT_VOCAB_DB, 4);
-                    const targetWord = randomWords[0];
-                    const otherWords = randomWords.slice(1);
-
-                    if (vocabSubMode === 'loop') {
-                        generatedQuiz.push({
-                            question: targetWord.word,
-                            explanation: `ANLAM: ${targetWord.meaning} | MNEMONIC: ${targetWord.mnemonic}`
-                        });
-                    } else if (vocabSubMode === 'synonym') {
-                        // Generate a synonym question
-                        const optionsObj: any = {};
-                        const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
-
-                        let wrongOptionIdx = 0;
-                        for (let letter of 'ABCD') {
-                            if (letter === correctLetter) {
-                                // Assign a legitimate synonym as correct
-                                optionsObj[letter] = targetWord.synonyms.length > 0
-                                    ? targetWord.synonyms[0]
-                                    : targetWord.meaning;
-                            } else {
-                                // Assign wrong meanings/synonyms
-                                optionsObj[letter] = otherWords[wrongOptionIdx].synonyms[0] || otherWords[wrongOptionIdx].meaning;
-                                wrongOptionIdx++;
-                            }
-                        }
-
-                        generatedQuiz.push({
-                            question: `Find the SYNONYM for: **${targetWord.word}**`,
-                            options: optionsObj,
-                            correct: correctLetter,
-                            explanation: `ANLAM: ${targetWord.meaning} | TACTIC: Synonyms include ${targetWord.synonyms.join(', ')}.`
-                        });
-                    } else if (vocabSubMode === 'context') {
-                        // Context question
-                        const blankedContext = targetWord.context.replace(new RegExp(targetWord.word, 'gi'), '_____');
-                        const optionsObj: any = {};
-                        const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
-
-                        const contextDistractors = getRandomElements(YDT_VOCAB_DB.filter(w => w.id !== targetWord.id), 3);
-                        let wrongOptionIdx = 0;
-
-                        for (let letter of 'ABCD') {
-                            if (letter === correctLetter) {
-                                optionsObj[letter] = targetWord.word.toLowerCase();
-                            } else {
-                                optionsObj[letter] = contextDistractors[wrongOptionIdx].word.toLowerCase();
-                                wrongOptionIdx++;
-                            }
-                        }
-
-                        generatedQuiz.push({
-                            question: blankedContext,
-                            options: optionsObj,
-                            correct: correctLetter,
-                            explanation: `ANLAM: ${targetWord.meaning}. Metindeki anlama uyan kelime '${targetWord.word}' olmalıdır.`
-                        });
-                    } else if (vocabSubMode === 'odd') {
-                        // Odd one out question (3 related, 1 unrelated)
-                        const optionsObj: any = {};
-                        const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)]; // This will be the odd one
-
-                        // We need 3 related words. We can use the word, and 2 of its synonyms.
-                        // For simplicity let's use the word itself, its synonym, and another synonym as 3 related ones, and 1 antonym or random as odd
-                        const oddWordOptions = [
-                            targetWord.word,
-                            targetWord.synonyms[0] || targetWord.meaning,
-                            targetWord.synonyms[1] || targetWord.meaning + ' (similar)'
-                        ];
-
-                        const oddWord = targetWord.antonyms.length > 0 ? targetWord.antonyms[0] : otherWords[0].word;
-                        let relatedIdx = 0;
-
-                        for (let letter of 'ABCD') {
-                            if (letter === correctLetter) {
-                                optionsObj[letter] = oddWord;
-                            } else {
-                                optionsObj[letter] = oddWordOptions[relatedIdx];
-                                relatedIdx++;
-                            }
-                        }
-
-                        generatedQuiz.push({
-                            question: "Find the odd-one out:",
-                            options: optionsObj,
-                            correct: correctLetter,
-                            explanation: `ANLAM: Diğer kelimeler '${targetWord.meaning}' ile ilgiliyken doğru cevap zıt/farklı anlamlıdır.`
-                        });
-                    }
+                if (data && data.length > 0) {
+                    // Randomly select one "batch" (which is actually a single question object in this schema)
+                    const shuffled = data.sort(() => 0.5 - Math.random());
+                    const selectedModeQuestions = shuffled.slice(0, 5).map(item => item.question);
+                    setQuestions(selectedModeQuestions);
+                } else {
+                    // Fallback to local generation logic if DB is empty
+                    generateLocalVocab();
                 }
-
-                setQuestions(generatedQuiz);
             } catch (error) {
-                console.error("Local Generation Error:", error);
-                alert("Sorular oluşturulamadı. Lütfen tekrar deneyin.");
+                console.error("Supabase Fetch Error:", error);
+                generateLocalVocab();
             } finally {
                 setLoading(false);
             }
         };
 
-        generateLocalVocab();
+        const generateLocalVocab = () => {
+            // ... (rest of local logic remains as fallback)
+            const numQuestions = 3;
+            const generatedQuiz = [];
+            const getRandomElements = (arr: any[], count: number) => {
+                const shuffled = [...arr].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            };
+
+            for (let i = 0; i < numQuestions; i++) {
+                const randomWords = getRandomElements(YDT_VOCAB_DB, 4);
+                const targetWord = randomWords[0];
+                const otherWords = randomWords.slice(1);
+
+                if (vocabSubMode === 'loop') {
+                    generatedQuiz.push({
+                        question: targetWord.word,
+                        explanation: `ANLAM: ${targetWord.meaning} | MNEMONIC: ${targetWord.mnemonic}`
+                    });
+                } else if (vocabSubMode === 'synonym') {
+                    const optionsObj: any = {};
+                    const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
+                    let wrongOptionIdx = 0;
+                    for (let letter of 'ABCD') {
+                        if (letter === correctLetter) {
+                            optionsObj[letter] = targetWord.synonyms.length > 0 ? targetWord.synonyms[0] : targetWord.meaning;
+                        } else {
+                            optionsObj[letter] = otherWords[wrongOptionIdx].synonyms[0] || otherWords[wrongOptionIdx].meaning;
+                            wrongOptionIdx++;
+                        }
+                    }
+                    generatedQuiz.push({
+                        question: `Find the SYNONYM for: **${targetWord.word}**`,
+                        options: optionsObj,
+                        correct: correctLetter,
+                        explanation: `ANLAM: ${targetWord.meaning} | TACTIC: Synonyms include ${targetWord.synonyms.join(', ')}.`
+                    });
+                } else if (vocabSubMode === 'context') {
+                    const blankedContext = targetWord.context.replace(new RegExp(targetWord.word, 'gi'), '_____');
+                    const optionsObj: any = {};
+                    const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
+                    const contextDistractors = getRandomElements(YDT_VOCAB_DB.filter(w => w.id !== targetWord.id), 3);
+                    let wrongOptionIdx = 0;
+                    for (let letter of 'ABCD') {
+                        if (letter === correctLetter) {
+                            optionsObj[letter] = targetWord.word.toLowerCase();
+                        } else {
+                            optionsObj[letter] = contextDistractors[wrongOptionIdx].word.toLowerCase();
+                            wrongOptionIdx++;
+                        }
+                    }
+                    generatedQuiz.push({
+                        question: blankedContext,
+                        options: optionsObj,
+                        correct: correctLetter,
+                        explanation: `ANLAM: ${targetWord.meaning}. Metindeki anlama uyan kelime '${targetWord.word}' olmalıdır.`
+                    });
+                } else if (vocabSubMode === 'odd') {
+                    const optionsObj: any = {};
+                    const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
+                    const oddWordOptions = [targetWord.word, targetWord.synonyms[0] || targetWord.meaning, targetWord.synonyms[1] || targetWord.meaning + ' (similar)'];
+                    const oddWord = targetWord.antonyms.length > 0 ? targetWord.antonyms[0] : otherWords[0].word;
+                    let relatedIdx = 0;
+                    for (let letter of 'ABCD') {
+                        if (letter === correctLetter) {
+                            optionsObj[letter] = oddWord;
+                        } else {
+                            optionsObj[letter] = oddWordOptions[relatedIdx];
+                            relatedIdx++;
+                        }
+                    }
+                    generatedQuiz.push({
+                        question: "Find the odd-one out:",
+                        options: optionsObj,
+                        correct: correctLetter,
+                        explanation: `ANLAM: Diğer kelimeler '${targetWord.meaning}' ile ilgiliyken doğru cevap zıt/farklı anlamlıdır.`
+                    });
+                }
+            }
+            setQuestions(generatedQuiz);
+        };
+
+        fetchVocab();
     }, [vocabSubMode]);
 
     const handleNext = () => {

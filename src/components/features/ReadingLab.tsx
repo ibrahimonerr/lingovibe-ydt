@@ -11,7 +11,36 @@ export default function ReadingLab({
   if (!questions || !questions[currentIdx]) return null;
   const question = questions[currentIdx];
 
-  const renderExplanation = (explanation: string) => {
+  const renderExplanation = (explanation: string, feedback?: any) => {
+    if (feedback) {
+      const items = [
+        { label: "Analitik Doğrulama", type: "LOGIC", content: feedback.correct_logic, icon: <Target size={14} /> },
+        { label: "Sinsi Çeldirici", type: "TRAP", content: feedback.trap_analysis, icon: <Lightbulb size={14} /> },
+        { label: "YDT Taktiği", type: "TACTIC", content: feedback.exam_tactic, icon: <Zap size={14} /> },
+        { label: "Bağlamsal Çeviri", type: "ANLAM", content: feedback.contextual_translation || feedback.translation, icon: <BookOpen size={14} /> }
+      ];
+
+      return items.filter(item => item.content).map((item, i) => {
+        const styles: any = {
+          "LOGIC": { bg: "bg-indigo-600 shadow-indigo-200", text: "text-white", labelColor: "text-indigo-200" },
+          "TRAP": { bg: "bg-rose-50 border-rose-100 border-2", text: "text-rose-900", labelColor: "text-rose-600" },
+          "TACTIC": { bg: "bg-amber-50 border-amber-100 border-2", text: "text-amber-900", labelColor: "text-amber-600" },
+          "ANLAM": { bg: "bg-teal-50 border-teal-100 border-2", text: "text-teal-900", labelColor: "text-teal-600" }
+        };
+
+        const style = styles[item.type] || { bg: "bg-slate-50 border-slate-100 border-2", text: "text-slate-700", labelColor: "text-slate-400" };
+
+        return (
+          <div key={i} className={`p-4 rounded-[1.8rem] mb-3 shadow-sm animate-in zoom-in-95 ${style.bg} ${style.text}`}>
+            <div className={`flex items-center gap-2 text-[9px] font-black uppercase mb-1 tracking-widest ${style.labelColor}`}>
+              {item.icon} {item.label}
+            </div>
+            <div className="text-[13px] font-bold leading-relaxed italic">{item.content}</div>
+          </div>
+        );
+      });
+    }
+
     if (!explanation) return null;
     const parts = explanation.split('|');
 
@@ -152,7 +181,8 @@ export default function ReadingLab({
       {selectedOption && !showFeedback && !showHint && (
         <button
           onClick={() => {
-            if (selectedOption === question.correct) {
+            const correctAnswer = question.correct_answer || question.correct;
+            if (selectedOption === correctAnswer) {
               setShowFeedback(true);
               setShowHint(false);
             } else {
@@ -223,14 +253,14 @@ export default function ReadingLab({
                   <Lightbulb size={20} />
                 </div>
                 <div className="font-black text-[12px] uppercase tracking-tighter">
-                  Result: <span className={selectedOption === question.correct ? 'text-amber-600' : 'text-rose-600'}>
-                    {selectedOption === question.correct ? 'INSIGHTFUL' : 'MISINTERPRETED'}
+                  Result: <span className={selectedOption === (question.correct_answer || question.correct) ? 'text-amber-600' : 'text-rose-600'}>
+                    {selectedOption === (question.correct_answer || question.correct) ? 'INSIGHTFUL' : 'MISINTERPRETED'}
                   </span>
                 </div>
               </div>
 
               <div className="space-y-1">
-                {renderExplanation(question.explanation)}
+                {renderExplanation(question.explanation, question.feedback)}
               </div>
             </div>
           </div>

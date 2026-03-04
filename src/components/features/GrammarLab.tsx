@@ -13,7 +13,36 @@ export default function GrammarLab({
   const themeClass = isSkills ? 'violet' : 'emerald';
   const labTitle = isSkills ? 'Skills Strategy' : 'Grammar Focus';
 
-  const renderExplanation = (explanation: string) => {
+  const renderExplanation = (explanation: string, feedback?: any) => {
+    if (feedback) {
+      const items = [
+        { label: "Analitik Doğrulama", type: "LOGIC", content: feedback.correct_logic, icon: <Target size={14} /> },
+        { label: "Sinsi Çeldirici", type: "TRAP", content: feedback.trap_analysis, icon: <AlertCircle size={14} /> },
+        { label: "YDT Taktiği", type: "TACTIC", content: feedback.exam_tactic, icon: <Sparkles size={14} /> },
+        { label: "Bağlamsal Çeviri", type: "ANLAM", content: feedback.contextual_translation || feedback.translation, icon: <BookOpen size={14} /> }
+      ];
+
+      return items.filter(item => item.content).map((item, i) => {
+        const styles: any = {
+          "LOGIC": { bg: "bg-indigo-600 shadow-indigo-200", text: "text-white", labelColor: "text-indigo-200" },
+          "TRAP": { bg: "bg-rose-50 border-rose-100 border-2", text: "text-rose-900", labelColor: "text-rose-600" },
+          "TACTIC": { bg: "bg-amber-50 border-amber-100 border-2", text: "text-amber-900", labelColor: "text-amber-600" },
+          "ANLAM": { bg: isSkills ? "bg-violet-50 border-violet-100 border-2" : "bg-emerald-50 border-emerald-100 border-2", text: isSkills ? "text-violet-900" : "text-emerald-900", labelColor: isSkills ? "text-violet-600" : "text-emerald-600" }
+        };
+
+        const style = styles[item.type] || { bg: "bg-slate-50 border-slate-100 border-2", text: "text-slate-700", labelColor: "text-slate-400" };
+
+        return (
+          <div key={i} className={`p-4 rounded-[1.8rem] mb-3 shadow-sm ${style.bg} ${style.text}`}>
+            <div className={`flex items-center gap-2 text-[9px] font-black uppercase mb-1 tracking-widest ${style.labelColor}`}>
+              {item.icon} {item.label}
+            </div>
+            <div className="text-[13px] font-bold leading-relaxed italic">{item.content}</div>
+          </div>
+        );
+      });
+    }
+
     if (!explanation) return null;
     const parts = explanation.split('|');
 
@@ -45,7 +74,7 @@ export default function GrammarLab({
       {/* DINAMIK SORU KARTI */}
       <div className="relative group">
         <div className={`absolute -inset-1 bg-gradient-to-r ${isSkills ? 'from-violet-500 to-purple-500' : 'from-emerald-500 to-teal-500'} rounded-[2.5rem] blur opacity-10 transition duration-1000`}></div>
-        <div className={`relative p-7 bg-white border-2 ${isSkills ? 'border-violet-50' : 'border-emerald-50'} rounded-[2.5rem] shadow-xl text-[18px] font-bold text-slate-800 leading-relaxed italic`}>
+        <div className={`relative p-7 bg-white border-2 ${isSkills ? 'border-violet-50' : 'border-emerald-50'} rounded-[2.5rem] shadow-xl text-[18px] font-bold text-slate-800 leading-relaxed italic whitespace-pre-wrap`}>
           <div className={`absolute -top-3 left-8 text-white text-[9px] font-black px-4 py-1 rounded-full uppercase tracking-tighter shadow-md ${isSkills ? 'bg-violet-600' : 'bg-emerald-500'}`}>
             {labTitle}
           </div>
@@ -77,7 +106,8 @@ export default function GrammarLab({
       {selectedOption && !showFeedback && !showHint && (
         <button
           onClick={() => {
-            if (selectedOption === question.correct) {
+            const correctAnswer = question.correct_answer || question.correct;
+            if (selectedOption === correctAnswer) {
               setShowFeedback(true);
               setShowHint(false);
             } else {
@@ -136,10 +166,10 @@ export default function GrammarLab({
                   <Lightbulb size={20} />
                 </div>
                 <div className="font-black text-[12px] uppercase tracking-tighter">
-                  Result: <span className={selectedOption === question.correct ? (isSkills ? 'text-violet-600' : 'text-emerald-600') : 'text-rose-600'}>{selectedOption === question.correct ? 'WELL SOLVED' : 'STRATEGY ERROR'}</span>
+                  Result: <span className={selectedOption === (question.correct_answer || question.correct) ? (isSkills ? 'text-violet-600' : 'text-emerald-600') : 'text-rose-600'}>{selectedOption === (question.correct_answer || question.correct) ? 'WELL SOLVED' : 'STRATEGY ERROR'}</span>
                 </div>
               </div>
-              <div className="space-y-1">{renderExplanation(question.explanation)}</div>
+              <div className="space-y-1">{renderExplanation(question.explanation, question.feedback)}</div>
             </div>
           </div>
           <button onClick={handleNext} className={`w-full ${isSkills ? 'bg-violet-900' : 'bg-slate-900'} text-white py-5 rounded-[2.2rem] font-black uppercase text-[12px] shadow-xl active:scale-95 transition-all tracking-widest`}>Next Challenge</button>
