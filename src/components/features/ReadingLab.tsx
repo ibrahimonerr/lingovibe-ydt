@@ -84,30 +84,47 @@ export default function ReadingLab({
   };
 
   const renderPassage = () => {
-    if (!showHint || !question.quote || !readingPassage) return readingPassage;
+    if (!readingPassage) return null;
 
-    try {
-      const escapeRegExp = (string: string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(`(${escapeRegExp(question.quote)})`, 'i');
-      const parts = readingPassage.split(regex);
+    // Highlight both __N__ and (N) blank formats
+    // Split on blank markers first: __1__ ... __5__ or (1) ... (5)
+    const blankRegex = /(__\d+__|(?<!\w)\(\d+\)(?!\w))/g;
 
-      if (parts.length === 1) return readingPassage; // Quote not found in text
+    const parts = readingPassage.split(blankRegex);
 
-      return (
-        <>
-          {parts.map((part: string, i: number) =>
-            regex.test(part) ? (
-              <mark key={i} className="bg-orange-200 text-orange-900 px-1 rounded-sm mx-0.5 shadow-sm animate-pulse font-bold decoration-orange-400 underline decoration-wavy underline-offset-4">
+    // If hint quote is active, we also want to highlight the quote
+    const quoteRegex = showHint && question.quote
+      ? new RegExp(`(${question.quote.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'i')
+      : null;
+
+    return (
+      <>
+        {parts.map((part: string, i: number) => {
+          if (blankRegex.test(part) || /^__\d+__$/.test(part) || /^\(\d+\)$/.test(part)) {
+            // Extract the number from __N__ or (N)
+            const num = part.replace(/__/g, '').replace(/[()]/g, '');
+            return (
+              <span
+                key={i}
+                className="inline-flex items-center justify-center bg-amber-100 text-amber-800 border-2 border-amber-400 rounded-lg px-2 py-0.5 mx-1 font-black text-[15px] shadow-sm"
+              >
+                [{num}]
+              </span>
+            );
+          }
+          if (quoteRegex && quoteRegex.test(part)) {
+            return (
+              <mark key={i} className="bg-orange-200 text-orange-900 px-1 rounded-sm mx-0.5 shadow-sm animate-pulse font-bold underline decoration-wavy decoration-orange-400 underline-offset-4">
                 {part}
               </mark>
-            ) : part
-          )}
-        </>
-      );
-    } catch (e) {
-      return readingPassage;
-    }
+            );
+          }
+          return <span key={i}>{part}</span>;
+        })}
+      </>
+    );
   };
+
 
   return (
     <div className="space-y-6 animate-in slide-in-from-right-8 duration-500 pb-10">
