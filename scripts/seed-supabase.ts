@@ -27,7 +27,7 @@ const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
 // Number of records to generate per specific topic
 const COUNTS = {
     READING: 10,
-    PER_TOPIC: 5
+    PER_TOPIC: 1
 };
 
 // Exact Subtopics from UI (src/app/page.tsx)

@@ -21,7 +21,7 @@ const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const COUNTS = {
-    PER_TOPIC: 5 // How many iterations per topic
+    PER_TOPIC: 1 // How many iterations per topic
 };
 
 const SKILLS_TOPICS = ["Cloze Test", "Sentence Completion", "Restatement", "Paragraph Completion", "Irrelevant"];
@@ -29,13 +29,13 @@ const SKILLS_TOPICS = ["Cloze Test", "Sentence Completion", "Restatement", "Para
 const SKILLS_SPECIFIC_PROMPTS: Record<string, string> = {
     "Cloze Test": `Generate a short academic or informative English paragraph of about 100 words with 5 missing parts (blanks numbered 1 to 5). Then, create 5 multiple-choice questions corresponding to each blank. The blanks should test a mix of vocabulary, prepositions, conjunctions, and verb tenses appropriately contextualized within the passage. The options should be challenging and suitable for YDT.`,
 
-    "Sentence Completion": `Generate 5 challenging 'Sentence Completion' questions. Each question should provide half of a complex sentence (either the main clause or the subordinate clause) ending or beginning with a blank. The 5 options must be full clauses that grammatically and logically complete the sentence. Use advanced conjunctions (e.g., although, provided that, given that, much as) and ensure distractors are grammatically correct but logically flawed in context.`,
+    "Sentence Completion": `Generate 3 challenging 'Sentence Completion' questions. Each question should provide half of a complex sentence (either the main clause or the subordinate clause) ending or beginning with a blank. The 5 options must be full clauses that grammatically and logically complete the sentence. Use advanced conjunctions (e.g., although, provided that, given that, much as) and ensure distractors are grammatically correct but logically flawed in context.`,
 
-    "Restatement": `Generate 5 challenging 'Restatement (Anlamca En Yakın Cümle)' questions. For each question, provide a complex, nuanced English sentence. The 5 options should be alternative ways to express this sentence. Only one option should capture the exact meaning, tone, and logical relationship (e.g., cause/effect, concession) of the original without omitting details or adding unstated facts. The distractors should alter the meaning slightly (e.g., changing 'some' to 'all', or shifting the cause-effect relationship).`,
+    "Restatement": `Generate 3 challenging 'Restatement (Anlamca En Yakın Cümle)' questions. For each question, provide a complex, nuanced English sentence. The 5 options should be alternative ways to express this sentence. Only one option should capture the exact meaning, tone, and logical relationship (e.g., cause/effect, concession) of the original without omitting details or adding unstated facts. The distractors should alter the meaning slightly (e.g., changing 'some' to 'all', or shifting the cause-effect relationship).`,
 
-    "Paragraph Completion": `Generate 5 challenging 'Paragraph Completion' questions. For each question, write a coherent, academic paragraph of 4-5 sentences where one crucial sentence is missing (indicated by a blank). Provide 5 options for the missing sentence. The correct option must seamlessly bridge the ideas before and after the blank, maintaining pronoun references, chronological order, or logical flow. Distractors should be on-topic but disrupt the paragraph's specific flow or logical progression.`,
+    "Paragraph Completion": `Generate 3 challenging 'Paragraph Completion' questions. For each question, write a coherent, academic paragraph of 4-5 sentences where one crucial sentence is missing (indicated by a blank). Provide 5 options for the missing sentence. The correct option must seamlessly bridge the ideas before and after the blank, maintaining pronoun references, chronological order, or logical flow. Distractors should be on-topic but disrupt the paragraph's specific flow or logical progression.`,
 
-    "Irrelevant": `Generate 5 challenging 'Irrelevant Sentence' questions. For each question, provide a coherent English paragraph of EXACTLY 5 sentences, numbered (I), (II), (III), (IV), (V). Four sentences should develop a single main idea logically. One sentence must be irrelevant—it may be related to the general topic but breaks the specific logical flow, changes the focus, or introduces an unconnected detail. The options should simply be A) I, B) II, C) III, D) IV, E) V.`
+    "Irrelevant": `Generate 3 challenging 'Irrelevant Sentence' questions. For each question, provide a coherent English paragraph of EXACTLY 3 sentences, numbered (I), (II), (III), (IV), (V). Four sentences should develop a single main idea logically. One sentence must be irrelevant—it may be related to the general topic but breaks the specific logical flow, changes the focus, or introduces an unconnected detail. The options should simply be A) I, B) II, C) III, D) IV, E) V.`
 };
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -112,12 +112,12 @@ async function seedSkills() {
             console.log(`[Skills - ${topic}] Generating set ${i + 1}/${COUNTS.PER_TOPIC}...`);
 
             try {
-                const topicPrompt = SKILLS_SPECIFIC_PROMPTS[topic] || `Generate 5 English ${topic} multiple-choice questions.`;
+                const topicPrompt = SKILLS_SPECIFIC_PROMPTS[topic] || `Generate 3 English ${topic} multiple-choice questions.`;
 
                 const prompt = `Task: ${topicPrompt}
 Topic: ${topic}
 Level: YDT (Turkish university language exam - Advanced English)
-Quantity: EXACTLY 5 questions (If Cloze Test, 1 paragraph with 5 blanks and 5 questions. For others, 5 standalone questions or paragraphs).
+Quantity: EXACTLY 3 questions (If Cloze Test, 1 paragraph with 5 blanks and 5 questions. For others, 5 standalone questions or paragraphs).
 Format: valid JSON only
 
 Structure:
@@ -134,7 +134,7 @@ Structure:
 }
 
 CRITICAL INSTRUCTIONS: 
-1. The 'quiz' array MUST contain EXACTLY 5 questions.
+1. The 'quiz' array MUST contain EXACTLY 3 questions.
 2. The 'explanation' and 'hint' MUST be 100% in TURKISH. No other languages allowed in the explanation.
 3. For Restatement: The question should ask for the 'closest meaning'.
 4. For Irrelevant: Put the Roman numerals in the text like (I) ... (II) ...

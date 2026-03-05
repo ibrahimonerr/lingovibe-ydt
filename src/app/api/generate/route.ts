@@ -27,8 +27,8 @@ export async function POST(req: NextRequest) {
     const rawText = result.response.text();
 
     return NextResponse.json({ rawText });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error while generating content:', error);
-    return NextResponse.json({ error: error.message || 'Server Sync Error' }, { status: 500 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : 'Server Sync Error' }, { status: 500 });
   }
 }

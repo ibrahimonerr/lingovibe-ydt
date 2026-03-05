@@ -45,9 +45,9 @@ Return only JSON block. Ensure explanation is in Turkish.`;
             } else {
                 throw new Error("Invalid structure from AI.");
             }
-        } catch (e: any) {
+        } catch (e) {
             console.error(e);
-            setStatus({ type: 'error', msg: e.message || 'An error occurred.' });
+            setStatus({ type: 'error', msg: e instanceof Error ? e.message : 'An error occurred.' });
         } finally {
             setLoading(false);
         }
@@ -88,9 +88,9 @@ Return only JSON block without markdown wrappers if possible. Ensure explanation
             } else {
                 throw new Error("Invalid structure from AI.");
             }
-        } catch (e: any) {
+        } catch (e) {
             console.error(e);
-            setStatus({ type: 'error', msg: e.message || 'An error occurred.' });
+            setStatus({ type: 'error', msg: e instanceof Error ? e.message : 'An error occurred.' });
         } finally {
             setLoading(false);
         }
@@ -129,9 +129,9 @@ Return only JSON block without markdown wrappers if possible. Ensure explanation
             } else {
                 throw new Error("Invalid structure from AI.");
             }
-        } catch (e: any) {
+        } catch (e) {
             console.error(e);
-            setStatus({ type: 'error', msg: e.message || 'An error occurred.' });
+            setStatus({ type: 'error', msg: e instanceof Error ? e.message : 'An error occurred.' });
         } finally {
             setLoading(false);
         }

@@ -2,16 +2,34 @@
 import React from 'react';
 import { BookOpen, Target, Lightbulb, ChevronRight, Maximize2, Minimize2, Sparkles, Zap, RefreshCw } from 'lucide-react';
 
+import { Question, Feedback } from '@/types';
+import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
+import { useAppStore } from '@/store/useAppStore';
+
 export default function ReadingLab({
   questions, currentIdx, readingPassage, isTextExpanded, setIsTextExpanded,
   handleNext, selectedOption, setSelectedOption, showFeedback, setShowFeedback,
   showHint, setShowHint
-}: any) {
+}: {
+  questions: Question[],
+  currentIdx: number,
+  readingPassage: string,
+  isTextExpanded: boolean,
+  setIsTextExpanded: (v: boolean) => void,
+  handleNext: () => void,
+  selectedOption: string | null,
+  setSelectedOption: (v: string | null) => void,
+  showFeedback: boolean,
+  setShowFeedback: (v: boolean) => void,
+  showHint: boolean,
+  setShowHint: (v: boolean) => void
+}) {
 
   if (!questions || !questions[currentIdx]) return null;
   const question = questions[currentIdx];
+  const recordAnswer = useAppStore(state => state.recordAnswer);
 
-  const renderExplanation = (explanation: string, feedback?: any) => {
+  const renderExplanation = (explanation: string, feedback?: Feedback) => {
     if (feedback) {
       const items = [
         { label: "Analitik Doğrulama", type: "LOGIC", content: feedback.correct_logic, icon: <Target size={14} /> },
@@ -21,7 +39,7 @@ export default function ReadingLab({
       ];
 
       return items.filter(item => item.content).map((item, i) => {
-        const styles: any = {
+        const styles: Record<string, { bg: string, text: string, labelColor: string }> = {
           "LOGIC": { bg: "bg-indigo-600 shadow-indigo-200", text: "text-white", labelColor: "text-indigo-200" },
           "TRAP": { bg: "bg-rose-50 border-rose-100 border-2", text: "text-rose-900", labelColor: "text-rose-600" },
           "TACTIC": { bg: "bg-amber-50 border-amber-100 border-2", text: "text-amber-900", labelColor: "text-amber-600" },
@@ -48,7 +66,7 @@ export default function ReadingLab({
       const [label, ...content] = p.split(':');
       const type = label?.trim().toUpperCase();
 
-      const styles: any = {
+      const styles: Record<string, { bg: string, text: string, labelColor: string, icon: React.ReactNode }> = {
         "TACTIC": {
           bg: "bg-indigo-600 shadow-indigo-200",
           text: "text-white",
@@ -112,13 +130,25 @@ export default function ReadingLab({
               </span>
             );
           }
+
           if (quoteRegex && quoteRegex.test(part)) {
+            const subParts = part.split(quoteRegex);
             return (
-              <mark key={i} className="bg-orange-200 text-orange-900 px-1 rounded-sm mx-0.5 shadow-sm animate-pulse font-bold underline decoration-wavy decoration-orange-400 underline-offset-4">
-                {part}
-              </mark>
+              <span key={i}>
+                {subParts.map((sp, j) => {
+                  if (j % 2 === 1) { // Captured match from the regex is always at odd indices
+                    return (
+                      <mark key={j} className="bg-orange-200 text-orange-900 px-1 rounded-sm mx-0.5 shadow-sm animate-pulse font-bold underline decoration-wavy decoration-orange-400 underline-offset-4">
+                        {sp}
+                      </mark>
+                    );
+                  }
+                  return <span key={j}>{sp}</span>;
+                })}
+              </span>
             );
           }
+
           return <span key={i}>{part}</span>;
         })}
       </>
@@ -173,7 +203,7 @@ export default function ReadingLab({
 
       {/* OPTIONS */}
       <div className="grid gap-3">
-        {question.options && Object.entries(question.options).map(([key, value]: any) => (
+        {question.options && Object.entries(question.options).map(([key, value]: [string, string]) => (
           <button
             key={key}
             disabled={showFeedback}
@@ -197,13 +227,17 @@ export default function ReadingLab({
       {/* ACTION BUTTON */}
       {selectedOption && !showFeedback && !showHint && (
         <button
-          onClick={() => {
+          onClick={async () => {
             const correctAnswer = question.correct_answer || question.correct;
             if (selectedOption === correctAnswer) {
               setShowFeedback(true);
               setShowHint(false);
+              recordAnswer(true, showHint);
+              await Haptics.notification({ type: NotificationType.Success }).catch(() => { });
             } else {
               setShowHint(true);
+              recordAnswer(false, true);
+              await Haptics.impact({ style: ImpactStyle.Light }).catch(() => { });
             }
           }}
           className="w-full py-5 bg-slate-900 text-white rounded-[2.2rem] font-black uppercase text-[12px] shadow-xl hover:bg-black transition-all flex items-center justify-center gap-2"

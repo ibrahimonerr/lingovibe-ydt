@@ -4,15 +4,16 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import ReadingLab from '@/components/features/ReadingLab';
 import MobileShell from '@/components/layout/MobileShell';
+import { Question } from '@/types';
 import { RefreshCw } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { supabase } from '@/lib/supabase';
 
 function ReadingLabContent() {
     const router = useRouter();
-    const incrementProgress = useAppStore(state => state.incrementProgress);
+    const { incrementProgress, prefetchedLabs } = useAppStore();
     const [loading, setLoading] = useState(true);
-    const [questions, setQuestions] = useState<any[]>([]);
+    const [questions, setQuestions] = useState<Question[]>([]);
     const [readingPassage, setReadingPassage] = useState<string | null>(null);
     const [currentIdx, setCurrentIdx] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -23,11 +24,20 @@ function ReadingLabContent() {
 
     useEffect(() => {
         const fetchReading = async () => {
+            if (prefetchedLabs.reading && prefetchedLabs.reading.length > 0) {
+                const randomIndex = Math.floor(Math.random() * prefetchedLabs.reading.length);
+                const selectedLab = prefetchedLabs.reading[randomIndex];
+                setReadingPassage(selectedLab.passage);
+                setQuestions(selectedLab.questions);
+                setLoading(false);
+                return;
+            }
+
             setLoading(true);
             setErrorMsg(null);
             try {
                 const { data, error } = await supabase
-                    .from('reading_labs')
+                    .from('reading_questions')
                     .select('*')
                     .limit(50);
 
@@ -45,9 +55,9 @@ function ReadingLabContent() {
                     throw new Error("No reading passages found in database. Please generate some from the Admin Panel.");
                 }
 
-            } catch (error: any) {
+            } catch (error) {
                 console.error("Supabase Fetch Error:", error);
-                setErrorMsg(error.message || "Okuma parçası yüklenemedi. Veritabanı bağlantısını kontrol edin.");
+                setErrorMsg(error instanceof Error ? error.message : "Okuma parçası yüklenemedi. Veritabanı bağlantısını kontrol edin.");
             } finally {
                 setLoading(false);
             }
@@ -92,7 +102,7 @@ function ReadingLabContent() {
         <ReadingLab
             questions={questions}
             currentIdx={currentIdx}
-            readingPassage={readingPassage}
+            readingPassage={readingPassage || ''}
             isTextExpanded={isTextExpanded}
             setIsTextExpanded={setIsTextExpanded}
             handleNext={handleNext}

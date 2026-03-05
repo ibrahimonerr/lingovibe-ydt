@@ -5,3 +5,10 @@ build/
 .env*
 .DS_Store
 *.local
+
+# Python and other scripts
+.venv/
+*.py
+*.pdf
+*.txt
+*.js

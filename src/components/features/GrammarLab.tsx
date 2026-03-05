@@ -2,18 +2,33 @@
 import React from 'react';
 import { Lightbulb, Target, BookOpen, Sparkles, ChevronRight, AlertCircle, RefreshCw } from 'lucide-react';
 
+import { Question, Feedback } from '@/types';
+import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
+import { useAppStore } from '@/store/useAppStore';
+
 export default function GrammarLab({
   question, mode, handleNext, selectedOption, setSelectedOption, showFeedback, setShowFeedback,
   showHint, setShowHint
-}: any) {
+}: {
+  question: Question | null,
+  mode: string,
+  handleNext: () => void,
+  selectedOption: string | null,
+  setSelectedOption: (v: string | null) => void,
+  showFeedback: boolean,
+  setShowFeedback: (v: boolean) => void,
+  showHint: boolean,
+  setShowHint: (v: boolean) => void
+}) {
 
   if (!question) return null;
+  const recordAnswer = useAppStore(state => state.recordAnswer);
 
   const isSkills = mode === 'skills';
   const themeClass = isSkills ? 'violet' : 'emerald';
   const labTitle = isSkills ? 'Skills Strategy' : 'Grammar Focus';
 
-  const renderExplanation = (explanation: string, feedback?: any) => {
+  const renderExplanation = (explanation: string, feedback?: Feedback) => {
     if (feedback) {
       const items = [
         { label: "Analitik Doğrulama", type: "LOGIC", content: feedback.correct_logic, icon: <Target size={14} /> },
@@ -23,7 +38,7 @@ export default function GrammarLab({
       ];
 
       return items.filter(item => item.content).map((item, i) => {
-        const styles: any = {
+        const styles: Record<string, { bg: string, text: string, labelColor: string }> = {
           "LOGIC": { bg: "bg-indigo-600 shadow-indigo-200", text: "text-white", labelColor: "text-indigo-200" },
           "TRAP": { bg: "bg-rose-50 border-rose-100 border-2", text: "text-rose-900", labelColor: "text-rose-600" },
           "TACTIC": { bg: "bg-amber-50 border-amber-100 border-2", text: "text-amber-900", labelColor: "text-amber-600" },
@@ -50,7 +65,7 @@ export default function GrammarLab({
       const [label, ...content] = p.split(':');
       const type = label?.trim().toUpperCase();
 
-      const styles: any = {
+      const styles: Record<string, { bg: string, text: string, labelColor: string, icon: React.ReactNode }> = {
         "TACTIC": { bg: "bg-indigo-600 shadow-indigo-200", text: "text-white", labelColor: "text-indigo-200", icon: <Target size={14} /> },
         "ANLAM": { bg: isSkills ? "bg-violet-50 border-violet-100 border-2" : "bg-emerald-50 border-emerald-100 border-2", text: isSkills ? "text-violet-900" : "text-emerald-900", labelColor: isSkills ? "text-violet-600" : "text-emerald-600", icon: <BookOpen size={14} /> },
         "NOTE": { bg: "bg-amber-50 border-amber-100 border-2", text: "text-amber-900", labelColor: "text-amber-600", icon: <AlertCircle size={14} /> }
@@ -88,7 +103,7 @@ export default function GrammarLab({
 
       {/* SEÇENEKLER */}
       <div className="grid gap-3">
-        {question.options && Object.entries(question.options).map(([key, value]: any) => (
+        {question.options && Object.entries(question.options).map(([key, value]: [string, string]) => (
           <button key={key} disabled={showFeedback} onClick={() => setSelectedOption(key)}
             className={`group relative p-5 text-left rounded-[1.8rem] border-2 transition-all duration-300 transform active:scale-[0.98]
               ${selectedOption === key
@@ -105,13 +120,17 @@ export default function GrammarLab({
 
       {selectedOption && !showFeedback && !showHint && (
         <button
-          onClick={() => {
+          onClick={async () => {
             const correctAnswer = question.correct_answer || question.correct;
             if (selectedOption === correctAnswer) {
               setShowFeedback(true);
               setShowHint(false);
+              recordAnswer(true, showHint);
+              await Haptics.notification({ type: NotificationType.Success }).catch(() => { });
             } else {
               setShowHint(true);
+              recordAnswer(false, true);
+              await Haptics.impact({ style: ImpactStyle.Light }).catch(() => { });
             }
           }}
           className={`w-full py-5 ${isSkills ? 'bg-violet-900' : 'bg-slate-900'} text-white rounded-[2.2rem] font-black uppercase text-[12px] flex items-center justify-center gap-2 transition-all`}

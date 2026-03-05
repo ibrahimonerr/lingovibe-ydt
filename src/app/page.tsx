@@ -10,7 +10,16 @@ import {
 import { useAppStore } from '@/store/useAppStore';
 
 const grammarTopics = ["Tenses & Aspect", "Modals", "Passive", "Conditionals", "Conjunctions", "Prepositions"];
-const skillTopics = ["Cloze Test", "Sentence Completion", "Restatement", "Paragraph Completion", "Irrelevant"];
+const skillTopics = [
+  "Cloze Test",
+  "Sentence Completion",
+  "Translation (EN-TR)",
+  "Translation (TR-EN)",
+  "Dialogue Completion",
+  "Restatement",
+  "Paragraph Completion",
+  "Irrelevant"
+];
 
 export default function YDTHub() {
   const router = useRouter();

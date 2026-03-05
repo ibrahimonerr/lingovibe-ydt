@@ -5,7 +5,7 @@ import Link from 'next/link';
 import YDTLogo from '@/components/YDTLogo';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { Suspense } from 'react';
-import { Compass, Sparkles, Layout, History, Zap, Languages, Trophy, BookOpen, PenTool, X } from 'lucide-react';
+import { Compass, Sparkles, Layout, History, Zap, Languages, Trophy, BookOpen, PenTool, PieChart, X } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 
 function RouteTracker() {
@@ -89,17 +89,21 @@ export default function MobileShell({ children }: { children: React.ReactNode })
                                         <Zap size={20} className="text-amber-500" />
                                         <span className="font-black text-[10px] uppercase">Reading</span>
                                     </button>
-                                    <button onClick={() => { setIsNavMenuOpen(false); router.push('/'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-indigo-50">
+                                    <button onClick={() => { setIsNavMenuOpen(false); router.push('/vocab-lab'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-indigo-50">
                                         <Languages size={20} className="text-indigo-600" />
                                         <span className="font-black text-[10px] uppercase">Vocab</span>
                                     </button>
-                                    <button onClick={() => { setIsNavMenuOpen(false); router.push('/'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-emerald-50">
+                                    <button onClick={() => { setIsNavMenuOpen(false); router.push('/grammar-lab'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-emerald-50">
                                         <Trophy size={20} className="text-emerald-600" />
                                         <span className="font-black text-[10px] uppercase">Grammar</span>
                                     </button>
-                                    <button onClick={() => { setIsNavMenuOpen(false); router.push('/'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-violet-50">
+                                    <button onClick={() => { setIsNavMenuOpen(false); router.push('/skills-lab'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-violet-50">
                                         <BookOpen size={20} className="text-violet-600" />
                                         <span className="font-black text-[10px] uppercase">Skills</span>
+                                    </button>
+                                    <button onClick={() => { setIsNavMenuOpen(false); router.push('/progress'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-slate-100">
+                                        <PieChart size={20} className="text-slate-800" />
+                                        <span className="font-black text-[10px] uppercase">Progress</span>
                                     </button>
                                     <button onClick={() => { setIsNavMenuOpen(false); router.push('/analyzer'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-rose-50">
                                         <PenTool size={20} className="text-rose-600" />

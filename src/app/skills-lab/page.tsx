@@ -8,14 +8,17 @@ import { RefreshCw } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
 import ReadingLab from '@/components/features/ReadingLab';
+import { useAppStore } from '@/store/useAppStore';
+import { Question } from '@/types';
 
 function SkillsLabContent() {
     const router = useRouter();
+    const { prefetchedLabs } = useAppStore();
     const searchParams = useSearchParams();
     const topic = searchParams.get('topic') || '';
 
     const [loading, setLoading] = useState(true);
-    const [questions, setQuestions] = useState<any[]>([]);
+    const [questions, setQuestions] = useState<Question[]>([]);
     const [passage, setPassage] = useState<string | null>(null);
     const [currentIdx, setCurrentIdx] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -27,11 +30,25 @@ function SkillsLabContent() {
 
     useEffect(() => {
         const fetchQuestions = async () => {
+            if (!topic && prefetchedLabs.skills && prefetchedLabs.skills.length > 0) {
+                const randomIndex = Math.floor(Math.random() * prefetchedLabs.skills.length);
+                const selectedLab = prefetchedLabs.skills[randomIndex];
+
+                if (selectedLab.passage) {
+                    setPassage(selectedLab.passage);
+                    setQuestions(selectedLab.questions as Question[]);
+                } else {
+                    setQuestions(selectedLab.question as Question[]);
+                }
+                setLoading(false);
+                return;
+            }
+
             setLoading(true);
             setErrorMsg(null);
             setPassage(null);
             try {
-                let query = supabase.from('skills_labs').select('*').limit(50);
+                let query = supabase.from('skills_questions').select('*').limit(50);
 
                 if (topic) {
                     query = query.eq('topic', topic);
@@ -55,7 +72,7 @@ function SkillsLabContent() {
                         const qs = (clozeData.questions || []).map((q: any) => ({
                             ...q,
                             question: `Choose the best option for blank (${q.id}):`,
-                        }));
+                        })) as Question[];
                         setQuestions(qs);
 
                     } else if (topic === 'Irrelevant') {
@@ -67,12 +84,12 @@ function SkillsLabContent() {
                         sentences.forEach((s: string, i: number) => {
                             opts[letters[i]] = s;
                         });
-                        const normalized = {
+                        const normalized: Question = {
                             ...raw,
                             question: 'Which sentence breaks the flow of the paragraph?',
                             options: opts,
                             correct_answer: raw.correct_answer, // e.g. 'C'
-                        };
+                        } as Question;
                         setQuestions([normalized]);
 
                     } else {
@@ -82,9 +99,9 @@ function SkillsLabContent() {
                     throw new Error("Veritabanında bu yeteneğe ait soru bulunamadı.");
                 }
 
-            } catch (error: any) {
+            } catch (error) {
                 console.error("Supabase Fetch Error:", error);
-                setErrorMsg(error.message || "Sorular yüklenemedi.");
+                setErrorMsg(error instanceof Error ? error.message : "Sorular yüklenemedi.");
             } finally {
                 setLoading(false);
             }
@@ -129,7 +146,7 @@ function SkillsLabContent() {
             <ReadingLab
                 questions={questions}
                 currentIdx={currentIdx}
-                readingPassage={passage}
+                readingPassage={passage || ''}
                 isTextExpanded={true}
                 setIsTextExpanded={setIsTextExpanded}
                 handleNext={handleNext}

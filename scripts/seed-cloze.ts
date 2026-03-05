@@ -21,8 +21,8 @@ const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const COUNTS = {
-    PER_BATCH: 1,
-    PER_SET: 5
+    PER_BATCH: 1, // Number of batches to generate (4 * 5 = 20 questions)
+    QUESTIONS_PER_BATCH: 1
 };
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -32,7 +32,7 @@ async function generateWithGroq(prompt: string): Promise<string> {
         messages: [{ role: 'user', content: prompt }],
         model: 'llama-3.3-70b-versatile',
         temperature: 0.7,
-        max_tokens: 2500,
+        max_tokens: 3500,
     });
     return chatCompletion.choices[0]?.message?.content || "";
 }
@@ -48,7 +48,7 @@ async function generateWithGeminiFallback(prompt: string, retries = 3): Promise<
                 if (!jsonMatch) throw new Error("Could not find JSON in response");
                 return JSON.parse(jsonMatch[0]);
             } catch (e: any) {
-                console.warn(`⚠️ Groq Attempt ${attempt} failed: ${e.message}`);
+                console.warn(`⚠️ Groq Parse/Logic Error (attempt ${attempt}): ${e.message}`);
                 if (attempt === retries) throw e;
                 await delay(3000);
             }
@@ -68,8 +68,10 @@ async function generateWithGeminiFallback(prompt: string, retries = 3): Promise<
                     geminiQuotaExceeded = true;
                     return await generateWithGeminiFallback(prompt, retries);
                 }
+                console.warn(`⚠️ Gemini failed (attempt ${attempt}): ${geminiError.message}. Falling back to Groq...`);
                 rawText = await generateWithGroq(prompt);
             }
+
             const jsonMatch = rawText.match(/\{[\s\S]*\}/);
             if (!jsonMatch) throw new Error("Could not find JSON in response");
             return JSON.parse(jsonMatch[0]);
@@ -81,72 +83,69 @@ async function generateWithGeminiFallback(prompt: string, retries = 3): Promise<
     }
 }
 
-async function seedInContext() {
-    console.log(`\n👁️ Generating In-Context Vocab Labs (${COUNTS.PER_BATCH} batches of 5 questions each)...\n`);
+async function seedCloze() {
+    console.log(`\n📚 Generating Cloze Labs (${COUNTS.PER_BATCH} batches of 5 questions each)...\n`);
 
     for (let i = 0; i < COUNTS.PER_BATCH; i++) {
-        console.log(`[In-Context] Generating batch ${i + 1}/${COUNTS.PER_BATCH}...`);
+        console.log(`[Cloze] Generating batch ${i + 1}/${COUNTS.PER_BATCH}...`);
 
         try {
-            const prompt = `Task: Generate 3 advanced English 'Vocabulary in Context' multiple-choice questions for YDT level.
-Each question should feature a complex sentence (15-25 words) with one target word replaced by a blank '_____'.
+            const prompt = `Sen kıdemli bir YDT (YKS-DİL) içerik hazırlama uzmanı ve başdenetmenisin. Üreteceğin tüm içerikler B2-C1 (Upper-Intermediate/Advanced) seviyesinde, akademik bir dille (bilim, tarih, felsefe, çevre) yazılmalıdır. Sadece JSON formatında çıktı ver, açıklama metni ekleme.
 
-The target words should be academic verbs, adjectives, or adverbs commonly found in YDT (e.g., fluctuate, ambiguous, predominantly, exacerbate, preliminary).
+[SİSTEM TALİMATI]
+Task: Generate a high-quality academic English paragraph (about 150-200 words) suitable for YDT (Advanced level).
+The paragraph MUST contain EXACTLY 5 numbered blanks for a cloze test, formatted as ___1___, ___2___, ___3___, ___4___, ___5___.
+Then generate EXACTLY 5 multiple-choice questions corresponding to these blanks.
 
-Distractors (wrong options) should be grammatically correct but logically/semantically incorrect for the specific context.
+Topics: Science, History, Environment, Psychology, Technology, or Art.
 
-Structure:
+JSON Format:
 {
+  "passage": "Full passage text with numbered blanks here...",
   "quiz": [
     {
-      "question": "Sentence with _____ blank...",
+      "question": "Choose the best option for blank number 1",
       "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
-      "correct": "Letter",
-      "hint": "Türkçe ipucu. Cümledeki hangi anahtar kelime ipucu veriyor?",
-      "explanation": "ANLAM: (Cümlenin çevirisi) | TACTIC: (Doğru kelimenin neden seçildiğini ve diğerlerinin neden olmadığını açıklayan Türkçe analiz)"
+      "correct_answer": "Letter",
+      "hint": "Türkçe ipucu. Boşluğun öncesinde ve sonrasında ne tür bir yapı veya anlam var?",
+      "quote": "The exact sentence containing the blank.",
+      "feedback": {
+        "correct_logic": "Doğru cevabın neden doğru olduğunu kurala veya anlama dayandırarak açıkla.",
+        "trap_analysis": "Öğrencinin hangi yanlış şıkka neden düşebileceğini analiz et.",
+        "exam_tactic": "Bu boşluk doldurma (cloze test) sorusu tipi için profesyonel bir ipucu ver.",
+        "contextual_translation": "İlgili cümlenin akademik Türkçe çevirisi."
+      }
     }
   ]
 }
 
 CRITICAL: 
-1. Explanation and Hint MUST be in TURKISH.
-2. EXACTLY 3 questions per batch.
-3. Return ONLY valid JSON.`;
+1. The 'question' and 'options' MUST be 100% in ENGLISH.
+2. The 'feedback' and 'hint' MUST be 100% in TURKISH.
+3. The 'quiz' array MUST have EXACTLY 5 questions.
+4. The blanks in the 'passage' MUST strictly be formatted as ___1___ to ___5___.
+5. Return ONLY the JSON object.`;
 
             const parsed = await generateWithGeminiFallback(prompt);
 
-            if (parsed && Array.isArray(parsed.quiz)) {
-                // Assuming we use vocab_labs table or similar. 
-                // In your UI, vocab context usually uses a generic 'vocab_labs' or similar if implemented.
-                // If there's no specific table, we'll use a new one or 'skills_labs' with a specific topic name.
-                // Let's check for 'vocab_labs' table existence indirectly by trying to insert.
-                const { error } = await supabase.from('vocab_labs').insert([
-                    { mode: 'context', question: parsed.quiz }
+            if (parsed && parsed.passage && Array.isArray(parsed.quiz)) {
+                const { error } = await supabase.from('cloze_labs').insert([
+                    { passage: parsed.passage, questions: parsed.quiz }
                 ]);
-
-                if (error) {
-                    console.error("Supabase Error (Maybe vocab_labs table doesn't exist?):", error.message);
-                    // Fallback to skills_labs if vocab_labs doesn't exist
-                    const { error: error2 } = await supabase.from('skills_labs').insert([
-                        { topic: 'In-Context Vocab', question: parsed.quiz }
-                    ]);
-                    if (error2) throw error2;
-                    console.log(`✅ [In-Context] Saved to skills_labs (Topic: In-Context Vocab) - Batch ${i + 1}`);
-                } else {
-                    console.log(`✅ [In-Context] Saved to vocab_labs - Batch ${i + 1}`);
-                }
+                if (error) throw error;
+                console.log(`✅ [Cloze] Saved batch ${i + 1} with ${parsed.quiz.length} questions.`);
             }
         } catch (e: any) {
-            console.error(`❌ [In-Context] Error on batch ${i + 1}:`, e.message);
+            console.error(`❌ [Cloze] Error on batch ${i + 1}:`, e.message);
         }
         await delay(3000);
     }
 }
 
 async function main() {
-    console.log("🚀 Starting In-Context Vocab Seed Data Generation...");
-    await seedInContext();
-    console.log("\n✨ In-Context Vocab seeding completed!");
+    console.log("🚀 Starting Cloze Seed Data Generation...");
+    await seedCloze();
+    console.log("\n✨ Cloze seeding completed!");
     process.exit(0);
 }
 

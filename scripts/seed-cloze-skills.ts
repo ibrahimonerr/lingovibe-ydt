@@ -21,7 +21,7 @@ const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const COUNTS = {
-    PER_BATCH: 4, // 4 batches * 5 questions = 20 total
+    PER_BATCH: 1, // 4 batches * 5 questions = 20 total
 };
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));

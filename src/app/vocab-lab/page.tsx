@@ -9,6 +9,7 @@ import { RefreshCw } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { YDT_VOCAB_DB } from '@/data/ydtVocab';
 import { supabase } from '@/lib/supabase';
+import { Question } from '@/types';
 
 function VocabLabContent() {
     const router = useRouter();
@@ -16,12 +17,12 @@ function VocabLabContent() {
     const vocabSubMode = searchParams.get('mode') || 'synonym';
 
     const [loading, setLoading] = useState(true);
-    const [questions, setQuestions] = useState<any[]>([]);
+    const [questions, setQuestions] = useState<Question[]>([]);
     const [currentIdx, setCurrentIdx] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
-    const incrementProgress = useAppStore(state => state.incrementProgress);
+    const { incrementProgress, prefetchedLabs } = useAppStore();
 
     useEffect(() => {
         const fetchVocab = async () => {
@@ -29,23 +30,29 @@ function VocabLabContent() {
                 setLoading(false);
                 return;
             }
+
+            if (prefetchedLabs.vocab && prefetchedLabs.vocab.length > 0) {
+                // Use prefetched data for zero loading time
+                const prefetchedItems = prefetchedLabs.vocab.map(item => item.question || item);
+                setQuestions(prefetchedItems.slice(0, 5));
+                setLoading(false);
+                return;
+            }
+
             setLoading(true);
             try {
+                // Fetch from vocabulary_questions (new seed format)
                 const { data, error } = await supabase
-                    .from('vocab_labs')
+                    .from('vocabulary_questions')
                     .select('*')
-                    .eq('mode', vocabSubMode)
                     .limit(50);
 
                 if (error) throw error;
 
                 if (data && data.length > 0) {
-                    // Randomly select one "batch" (which is actually a single question object in this schema)
                     const shuffled = data.sort(() => 0.5 - Math.random());
-                    const selectedModeQuestions = shuffled.slice(0, 5).map(item => item.question);
-                    setQuestions(selectedModeQuestions);
+                    setQuestions(shuffled.slice(0, 5));
                 } else {
-                    // Fallback to local generation logic if DB is empty
                     generateLocalVocab();
                 }
             } catch (error) {
@@ -59,7 +66,7 @@ function VocabLabContent() {
         const generateLocalVocab = () => {
             // ... (rest of local logic remains as fallback)
             const numQuestions = 3;
-            const generatedQuiz = [];
+            const generatedQuiz: Question[] = [];
             const getRandomElements = (arr: any[], count: number) => {
                 const shuffled = [...arr].sort(() => 0.5 - Math.random());
                 return shuffled.slice(0, count);
@@ -72,11 +79,14 @@ function VocabLabContent() {
 
                 if (vocabSubMode === 'loop') {
                     generatedQuiz.push({
+                        id: targetWord.id,
                         question: targetWord.word,
+                        options: {},
+                        correct: '',
                         explanation: `ANLAM: ${targetWord.meaning} | MNEMONIC: ${targetWord.mnemonic}`
                     });
                 } else if (vocabSubMode === 'synonym') {
-                    const optionsObj: any = {};
+                    const optionsObj: Record<string, string> = {};
                     const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
                     let wrongOptionIdx = 0;
                     for (let letter of 'ABCD') {
@@ -88,6 +98,7 @@ function VocabLabContent() {
                         }
                     }
                     generatedQuiz.push({
+                        id: targetWord.id,
                         question: `Find the SYNONYM for: **${targetWord.word}**`,
                         options: optionsObj,
                         correct: correctLetter,
@@ -95,7 +106,7 @@ function VocabLabContent() {
                     });
                 } else if (vocabSubMode === 'context') {
                     const blankedContext = targetWord.context.replace(new RegExp(targetWord.word, 'gi'), '_____');
-                    const optionsObj: any = {};
+                    const optionsObj: Record<string, string> = {};
                     const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
                     const contextDistractors = getRandomElements(YDT_VOCAB_DB.filter(w => w.id !== targetWord.id), 3);
                     let wrongOptionIdx = 0;
@@ -108,13 +119,14 @@ function VocabLabContent() {
                         }
                     }
                     generatedQuiz.push({
+                        id: targetWord.id,
                         question: blankedContext,
                         options: optionsObj,
                         correct: correctLetter,
                         explanation: `ANLAM: ${targetWord.meaning}. Metindeki anlama uyan kelime '${targetWord.word}' olmalıdır.`
                     });
                 } else if (vocabSubMode === 'odd') {
-                    const optionsObj: any = {};
+                    const optionsObj: Record<string, string> = {};
                     const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
                     const oddWordOptions = [targetWord.word, targetWord.synonyms[0] || targetWord.meaning, targetWord.synonyms[1] || targetWord.meaning + ' (similar)'];
                     const oddWord = targetWord.antonyms.length > 0 ? targetWord.antonyms[0] : otherWords[0].word;
@@ -128,6 +140,7 @@ function VocabLabContent() {
                         }
                     }
                     generatedQuiz.push({
+                        id: targetWord.id,
                         question: "Find the odd-one out:",
                         options: optionsObj,
                         correct: correctLetter,
