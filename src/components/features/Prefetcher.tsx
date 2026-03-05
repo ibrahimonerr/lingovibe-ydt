@@ -18,22 +18,22 @@ export default function Prefetcher() {
 
                 // Sadece elimizde veri olmayan modüller için ön yükleme yap
                 if (prefetchedLabs.reading.length === 0) {
-                    const { data } = await supabase.from('reading_questions').select('*').limit(3).order('id', { ascending: false });
+                    const { data } = await supabase.from('reading_labs').select('*').limit(3).order('id', { ascending: false });
                     if (data && data.length > 0) setPrefetchedLabs('reading', data);
                 }
 
                 if (prefetchedLabs.vocab.length === 0) {
-                    const { data } = await supabase.from('vocabulary_questions').select('*').limit(5).order('id', { ascending: false });
+                    const { data } = await supabase.from('vocab_labs').select('*').limit(5).order('id', { ascending: false });
                     if (data && data.length > 0) setPrefetchedLabs('vocab', data);
                 }
 
                 if (prefetchedLabs.grammar.length === 0) {
-                    const { data } = await supabase.from('grammar_questions').select('*').limit(5).order('id', { ascending: false });
+                    const { data } = await supabase.from('grammar_labs').select('*').limit(5).order('id', { ascending: false });
                     if (data && data.length > 0) setPrefetchedLabs('grammar', data);
                 }
 
                 if (prefetchedLabs.skills.length === 0) {
-                    const { data } = await supabase.from('skills_questions').select('*').limit(3).order('id', { ascending: false });
+                    const { data } = await supabase.from('skills_labs').select('*').limit(3).order('id', { ascending: false });
                     if (data && data.length > 0) setPrefetchedLabs('skills', data);
                 }
 

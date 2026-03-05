@@ -37,7 +37,7 @@ function ReadingLabContent() {
             setErrorMsg(null);
             try {
                 const { data, error } = await supabase
-                    .from('reading_questions')
+                    .from('reading_labs')
                     .select('*')
                     .limit(50);
 

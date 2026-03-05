@@ -48,7 +48,7 @@ function SkillsLabContent() {
             setErrorMsg(null);
             setPassage(null);
             try {
-                let query = supabase.from('skills_questions').select('*').limit(50);
+                let query = supabase.from('skills_labs').select('*').limit(50);
 
                 if (topic) {
                     query = query.eq('topic', topic);

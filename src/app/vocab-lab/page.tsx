@@ -41,17 +41,18 @@ function VocabLabContent() {
 
             setLoading(true);
             try {
-                // Fetch from vocabulary_questions (new seed format)
                 const { data, error } = await supabase
-                    .from('vocabulary_questions')
+                    .from('vocab_labs')
                     .select('*')
+                    .eq('mode', vocabSubMode)
                     .limit(50);
 
                 if (error) throw error;
 
                 if (data && data.length > 0) {
                     const shuffled = data.sort(() => 0.5 - Math.random());
-                    setQuestions(shuffled.slice(0, 5));
+                    const selectedModeQuestions = shuffled.slice(0, 5).map(item => item.question);
+                    setQuestions(selectedModeQuestions);
                 } else {
                     generateLocalVocab();
                 }

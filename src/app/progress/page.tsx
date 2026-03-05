@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import MobileShell from '@/components/layout/MobileShell';
 import { useAppStore } from '@/store/useAppStore';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { Target, Lightbulb, XCircle, Trophy, BookOpen, Languages, Zap, RefreshCw } from 'lucide-react';
+import { Target, Lightbulb, XCircle, Trophy, BookOpen, Languages, Zap, RefreshCw, PieChart as PieChartIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ProgressDashboard() {
@@ -100,7 +100,7 @@ export default function ProgressDashboard() {
                 </div>
 
                 {/* SUCCESS RATE PIE CHART */}
-                {totalAttempted > 0 && (
+                {totalAttempted > 0 ? (
                     <div className="bg-white p-6 rounded-[2.5rem] border-2 border-slate-100 shadow-sm">
                         <h3 className="font-black text-slate-800 mb-6 text-center uppercase tracking-wider text-sm">Doğruluk Analizi</h3>
                         <div className="h-48 w-full">
@@ -137,6 +137,12 @@ export default function ProgressDashboard() {
                                 <span className="text-xs font-bold text-slate-600">Wrong</span>
                             </div>
                         </div>
+                    </div>
+                ) : (
+                    <div className="bg-white p-6 rounded-[2.5rem] border-2 border-slate-100 shadow-sm flex flex-col items-center justify-center text-center opacity-70">
+                        <PieChartIcon size={48} className="text-slate-200 mb-3" />
+                        <h3 className="font-black text-slate-800 mb-2 uppercase tracking-wider text-sm">Doğruluk Analizi</h3>
+                        <p className="text-slate-400 text-xs font-medium px-4">Pasta grafiğini (Pie Chart) görebilmek için önce birkaç soru çözmelisiniz.</p>
                     </div>
                 )}
 

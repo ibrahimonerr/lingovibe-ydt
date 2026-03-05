@@ -37,10 +37,10 @@ function GrammarLabContent() {
             setLoading(true);
             setErrorMsg(null);
             try {
-                let query = supabase.from('grammar_questions').select('*').limit(50);
+                let query = supabase.from('grammar_labs').select('*').limit(50);
 
                 if (topic && topic !== 'Mixed') {
-                    // Note: Ensure topic filtering matches grammar_questions schema if needed
+                    query = query.eq('topic', topic);
                 }
 
                 const { data, error } = await query;
@@ -50,8 +50,9 @@ function GrammarLabContent() {
                 }
 
                 if (data && data.length > 0) {
-                    const shuffled = data.sort(() => 0.5 - Math.random());
-                    setQuestions(shuffled.slice(0, 5));
+                    const randomIndex = Math.floor(Math.random() * data.length);
+                    const selectedLab = data[randomIndex];
+                    setQuestions(selectedLab.question);
                 } else {
                     throw new Error("Veritabanında bu konuya ait soru bulunamadı. Lütfen Admin panelinden üretin.");
                 }
