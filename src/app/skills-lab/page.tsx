@@ -108,7 +108,7 @@ function SkillsLabContent() {
         };
 
         fetchQuestions();
-    }, [topic]);
+    }, [topic, prefetchedLabs.skills]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {

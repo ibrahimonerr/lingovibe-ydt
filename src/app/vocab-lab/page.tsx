@@ -165,7 +165,7 @@ function VocabLabContent() {
         };
 
         fetchVocab();
-    }, [vocabSubMode]);
+    }, [vocabSubMode, prefetchedLabs.vocab]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {

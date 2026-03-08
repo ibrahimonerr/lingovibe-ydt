@@ -64,7 +64,7 @@ function ReadingLabContent() {
         };
 
         fetchReading();
-    }, []);
+    }, [prefetchedLabs.reading]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {

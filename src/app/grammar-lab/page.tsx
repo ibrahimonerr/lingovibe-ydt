@@ -66,7 +66,7 @@ function GrammarLabContent() {
         };
 
         fetchQuestions();
-    }, [topic]);
+    }, [topic, prefetchedLabs.grammar]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {
