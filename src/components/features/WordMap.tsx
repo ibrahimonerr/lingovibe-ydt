@@ -83,7 +83,7 @@ function FlashcardPhase({ words, onComplete }: { words: YDTVocab[]; onComplete: 
               style={{ backfaceVisibility: 'hidden' }}
             >
               <p className="text-2xl font-black tracking-tight text-white mb-3">{word.word}</p>
-              <p className="text-[10px] text-slate-400 italic leading-relaxed">"{word.context}"</p>
+              <p className="text-[10px] text-slate-400 italic leading-relaxed">&quot;{word.context}&quot;</p>
               <p className="mt-4 text-[8px] font-black text-slate-600 uppercase tracking-widest">Tap to flip</p>
             </div>
 
@@ -401,7 +401,7 @@ export default function WordMap({ onComplete }: { onComplete?: () => void }) {
           <Trophy className="text-indigo-400" size={40} />
         </div>
         <h3 className="text-lg font-black italic uppercase">Daily Complete!</h3>
-        <p className="text-slate-400 text-[11px]">You've already completed today's Word Map.</p>
+        <p className="text-slate-400 text-[11px]">You&apos;ve already completed today&apos;s Word Map.</p>
         {session && (
           <div className="flex gap-4 mt-2">
             <div className="bg-slate-800 rounded-2xl p-3 text-center border border-slate-700">

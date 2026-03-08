@@ -22,9 +22,9 @@ export default function VocabMaster({
   setShowFeedback: (v: boolean) => void
 }) {
 
+  const recordAnswer = useAppStore(state => state.recordAnswer);
   if (!questions || !questions[currentIdx]) return null;
   const q = questions[currentIdx];
-  const recordAnswer = useAppStore(state => state.recordAnswer);
 
   const renderCardDetails = (explanation: string) => {
     if (!explanation) return null;

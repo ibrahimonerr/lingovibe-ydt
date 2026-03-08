@@ -21,8 +21,8 @@ export default function GrammarLab({
   setShowHint: (v: boolean) => void
 }) {
 
-  if (!question) return null;
   const recordAnswer = useAppStore(state => state.recordAnswer);
+  if (!question) return null;
 
   const isSkills = mode === 'skills';
   const themeClass = isSkills ? 'violet' : 'emerald';

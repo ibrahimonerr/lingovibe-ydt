@@ -25,9 +25,9 @@ export default function ReadingLab({
   setShowHint: (v: boolean) => void
 }) {
 
+  const recordAnswer = useAppStore(state => state.recordAnswer);
   if (!questions || !questions[currentIdx]) return null;
   const question = questions[currentIdx];
-  const recordAnswer = useAppStore(state => state.recordAnswer);
 
   const renderExplanation = (explanation: string, feedback?: Feedback) => {
     if (feedback) {
@@ -264,7 +264,7 @@ export default function ReadingLab({
                 {question.quote && (
                   <div className="mt-3 p-3 bg-white rounded-xl border border-orange-100 text-[12px] text-orange-800 font-medium shadow-sm">
                     <span className="text-[10px] font-black uppercase text-orange-400 block mb-1">Passage Quote</span>
-                    "{question.quote}"
+                    &quot;{question.quote}&quot;
                   </div>
                 )}
               </div>
