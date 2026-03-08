@@ -14,33 +14,30 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function cleanup() {
-    console.log("🧼 Cleaning up low-quality/incorrectly formatted questions...");
+async function clearAllQuestions() {
+    console.log("🗑️  Clearing ALL question data from database...\n");
 
-    // 1. Delete "In-Context Vocab" from skills_labs (since we have vocab_labs now)
-    const { error: err1 } = await supabase.from('skills_labs').delete().eq('topic', 'In-Context Vocab');
-    if (err1) console.error("Error cleaning skills_labs:", err1.message);
-    else console.log("✅ Removed 'In-Context Vocab' from skills_labs.");
+    // 1. Clear grammar_labs
+    const { error: err1 } = await supabase.from('grammar_labs').delete().gt('id', 0);
+    if (err1) console.error("❌ Error clearing grammar_labs:", err1.message);
+    else console.log("✅ Cleared grammar_labs");
 
-    // 2. Clear vocab_labs mode='context' to regenerate with higher quality
-    const { error: err2 } = await supabase.from('vocab_labs').delete().eq('mode', 'context');
-    if (err2) console.error("Error cleaning vocab_labs:", err2.message);
-    else console.log("✅ Cleared 'context' mode in vocab_labs for fresh start.");
+    // 2. Clear skills_labs
+    const { error: err2 } = await supabase.from('skills_labs').delete().gt('id', 0);
+    if (err2) console.error("❌ Error clearing skills_labs:", err2.message);
+    else console.log("✅ Cleared skills_labs");
 
-    // 3. Clear specific Skill topics to regenerate correctly
-    const topicsToClear = ["Cloze Test", "Irrelevant"];
-    for (const topic of topicsToClear) {
-        const { error } = await supabase.from('skills_labs').delete().eq('topic', topic);
-        if (error) console.error(`Error cleaning ${topic}:`, error.message);
-        else console.log(`✅ Cleared '${topic}' from skills_labs.`);
-    }
+    // 3. Clear vocab_labs
+    const { error: err3 } = await supabase.from('vocab_labs').delete().gt('id', 0);
+    if (err3) console.error("❌ Error clearing vocab_labs:", err3.message);
+    else console.log("✅ Cleared vocab_labs");
 
-    // 4. Clear reading_labs (optional but recommended if they are in Turkish)
-    const { error: err3 } = await supabase.from('reading_labs').delete().neq('id', '00000000-0000-0000-0000-000000000000'); // Delete all
-    if (err3) console.error("Error cleaning reading_labs:", err3.message);
-    else console.log("✅ Cleared all 'reading_labs' for fresh start.");
+    // 4. Clear reading_labs
+    const { error: err4 } = await supabase.from('reading_labs').delete().gt('id', 0);
+    if (err4) console.error("❌ Error clearing reading_labs:", err4.message);
+    else console.log("✅ Cleared reading_labs");
 
-    console.log("\n✨ Cleanup finished. Ready for high-quality regeneration.");
+    console.log("\n✨ All question tables cleared. Ready for fresh Gemini-only generation.");
 }
 
-cleanup().catch(console.error);
+clearAllQuestions().catch(console.error);

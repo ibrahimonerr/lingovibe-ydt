@@ -25,6 +25,12 @@ function VocabLabContent() {
     const { incrementProgress, prefetchedLabs } = useAppStore();
 
     useEffect(() => {
+        // Reset all state when mode changes
+        setCurrentIdx(0);
+        setSelectedOption(null);
+        setShowFeedback(false);
+        setIsFlipped(false);
+
         const fetchVocab = async () => {
             if (vocabSubMode === 'wordmap') {
                 setLoading(false);
@@ -32,11 +38,17 @@ function VocabLabContent() {
             }
 
             if (prefetchedLabs.vocab && prefetchedLabs.vocab.length > 0) {
-                // Use prefetched data for zero loading time
-                const prefetchedItems = prefetchedLabs.vocab.map(item => item.question || item);
-                setQuestions(prefetchedItems.slice(0, 5));
-                setLoading(false);
-                return;
+                // Filter prefetched data by the current mode
+                const matchingItems = prefetchedLabs.vocab.filter(
+                    (item: any) => item.mode === vocabSubMode
+                );
+                if (matchingItems.length > 0) {
+                    const prefetchedItems = matchingItems.map((item: any) => item.question || item);
+                    setQuestions(prefetchedItems.slice(0, 5));
+                    setLoading(false);
+                    return;
+                }
+                // If no matching items for this mode, fall through to Supabase fetch
             }
 
             setLoading(true);

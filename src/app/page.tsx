@@ -9,13 +9,25 @@ import {
 } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 
-const grammarTopics = ["Tenses & Aspect", "Modals", "Passive", "Conditionals", "Conjunctions", "Prepositions"];
+const grammarTopics = [
+  "Tenses & Aspect",
+  "Modals & Similar Expressions",
+  "The Passive",
+  "If & Wish Clauses",
+  "Noun Clauses & Reported Speech",
+  "Gerunds & Infinitives",
+  "Adjectives & Adverbs",
+  "Relative Clauses",
+  "Nouns, Pronouns & Articles",
+  "Conjunctions & Transitions"
+];
 const skillTopics = [
   "Cloze Test",
   "Sentence Completion",
   "Translation (EN-TR)",
   "Translation (TR-EN)",
   "Dialogue Completion",
+  "Situation",
   "Restatement",
   "Paragraph Completion",
   "Irrelevant"
