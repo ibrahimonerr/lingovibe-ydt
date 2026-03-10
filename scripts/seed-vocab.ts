@@ -156,19 +156,25 @@ CRITICAL:
           const { error } = await supabase.from('vocab_labs').insert(
             parsed.quiz.map((item: any) => ({
               mode,
-              question: item.question,
-              options: item.options || null,
-              correct: item.correct || null,
-              explanation: item.explanation
+              question: {
+                question: item.question,
+                options: item.options || null,
+                correct: item.correct || null,
+                explanation: item.explanation
+              }
             }))
           );
-          if (error) throw error;
+          if (error) {
+            console.error(`❌ [Vocab] Database Insert Error:`, error.message);
+            throw error;
+          }
           console.log(`✅ [Vocab] Saved ${mode} - Batch ${i + 1} (${parsed.quiz.length} items)`);
         } else {
           console.log(`❌ [Vocab] Invalid JSON shape.`);
         }
       } catch (e: any) {
         console.error(`❌ [Vocab] Error on ${mode} - batch ${i + 1}:`, e.message);
+        throw e; // Fail fast for seed-all.ts
       }
 
       await delay(3000);
@@ -178,9 +184,17 @@ CRITICAL:
 
 async function main() {
   console.log("🚀 Starting Vocabulary Seed Data Generation...");
-  await seedVocab();
-  console.log("\n✨ Vocabulary seeding tasks completed!");
-  process.exit(0);
+  try {
+    await seedVocab();
+    console.log("\n✨ Vocabulary seeding tasks completed!");
+    process.exit(0);
+  } catch (error) {
+    console.error("\n❌ Vocabulary seeding failed critical error.");
+    process.exit(1);
+  }
 }
 
-main().catch(console.error);
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

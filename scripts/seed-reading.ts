@@ -123,15 +123,22 @@ CRITICAL:
 
             if (parsed && parsed.passage && Array.isArray(parsed.quiz)) {
                 const { error } = await supabase.from('reading_labs').insert([
-                    { passage: parsed.passage, quiz: parsed.quiz }
+                    {
+                        passage: parsed.passage,
+                        questions: parsed.quiz // UI expects 'questions', not 'quiz'
+                    }
                 ]);
-                if (error) throw error;
+                if (error) {
+                    console.error(`❌ [Reading] Database Insert Error:`, error.message);
+                    throw error;
+                }
                 console.log(`✅ [Reading] Saved passage ${i + 1} (${parsed.quiz.length} questions)`);
             } else {
                 console.log(`❌ [Reading] Invalid JSON shape.`);
             }
         } catch (e: any) {
             console.error(`❌ [Reading] Error on batch ${i + 1}:`, e.message);
+            throw e; // Propagate error to seed-all.ts
         }
 
         await delay(5000);
@@ -140,9 +147,17 @@ CRITICAL:
 
 async function main() {
     console.log("🚀 Starting Reading Seed Data Generation...");
-    await seedReading();
-    console.log("\n✨ Reading seeding tasks completed!");
-    process.exit(0);
+    try {
+        await seedReading();
+        console.log("\n✨ Reading seeding tasks completed!");
+        process.exit(0);
+    } catch (err) {
+        console.error("\n❌ Reading seeding failed critical error.");
+        process.exit(1);
+    }
 }
 
-main().catch(console.error);
+main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+});

@@ -154,47 +154,94 @@ async function seedSkills() {
 
             try {
                 const topicPrompt = SKILLS_SPECIFIC_PROMPTS[topic] || `Generate 3 English ${topic} multiple-choice questions.`;
+                let promptStructure = "";
+
+                if (topic === 'Cloze Test') {
+                    promptStructure = `{
+  "passage": "The full passage with (1) ____, (2) ____, etc.",
+  "quiz": [
+    { "id": 1, "question": "Blank 1", "options": {"A": "...", ...}, "correct": "A", "hint": "...", "explanation": "..." },
+    ... (total 5)
+  ]
+}`;
+                } else if (topic === 'Irrelevant') {
+                    promptStructure = `{
+  "sentences": ["I. sentence", "II. sentence", "III. sentence", "IV. sentence", "V. sentence"],
+  "correct_answer": "C",
+  "hint": "...",
+  "explanation": "..."
+}`;
+                } else {
+                    promptStructure = `{
+  "quiz": [
+    {
+      "question": "The question text...",
+      "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
+      "correct": "Letter (e.g. A)",
+      "hint": "Türkçe ipucu.",
+      "explanation": "ANLAM: ... | TACTIC: ..."
+    }
+  ]
+}`;
+                }
 
                 const prompt = `Task: ${topicPrompt}
 Topic: ${topic}
 Level: YDT (Turkish university language exam - Advanced English)
-Quantity: EXACTLY 3 questions (If Cloze Test, 1 paragraph with 5 blanks and 5 questions. For others, standalone questions or paragraphs).
 Format: valid JSON only
 
 Structure:
-{
-  "quiz": [
-    {
-      "question": "The question text or passage with blank...",
-      "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
-      "correct": "Letter (e.g. A)",
-      "hint": "Türkçe ipucu. Soru tipine uygun olarak nereye dikkat edilmesi gerektiğini belirten ipucu.",
-      "explanation": "ANLAM: (Parçanın/cümlenin Türkçe çevirisi) | TACTIC: (Soru çözüm stratejisi - Türkçe)"
-    }
-  ]
-}
+${promptStructure}
 
 CRITICAL INSTRUCTIONS: 
-1. The 'quiz' array MUST contain the correct number of questions (3 for most, 5 for Cloze Test).
+1. The 'quiz' or 'sentences' array MUST contain the correct number of items.
 2. ALL question text, scenarios, passages, and options MUST be in ENGLISH.
 3. ONLY the 'explanation' and 'hint' fields MUST be 100% in TURKISH. No other languages allowed in the explanation.
-4. For Restatement: The question should ask for the 'closest meaning'.
-5. For Irrelevant: Put the Roman numerals in the text like (I) ... (II) ...
-6. Return ONLY the JSON object, starting with { and ending with }.`;
+4. Return ONLY the JSON object, starting with { and ending with }.`;
 
                 const parsed = await generateWithGPT4oMini(prompt);
 
-                if (parsed && parsed.quiz && Array.isArray(parsed.quiz)) {
-                    const { error } = await supabase.from('skills_labs').insert([
-                        { topic, question: parsed.quiz }
-                    ]);
-                    if (error) throw error;
-                    console.log(`✅ [Skills] Saved ${topic} - Set ${i + 1} (${parsed.quiz.length} questions)`);
+                if (parsed) {
+                    let payload: any = null;
+
+                    if (topic === 'Cloze Test') {
+                        // UI expects { passage, questions: [...] } inside 'question' column
+                        payload = {
+                            topic,
+                            question: {
+                                passage: parsed.passage,
+                                questions: parsed.quiz || parsed.questions
+                            }
+                        };
+                    } else if (topic === 'Irrelevant') {
+                        // UI expects { sentences, correct_answer } inside 'question' column
+                        payload = {
+                            topic,
+                            question: {
+                                sentences: parsed.sentences || parsed.quiz.map((q: any) => q.question),
+                                correct_answer: parsed.correct_answer || parsed.quiz[0]?.correct
+                            }
+                        };
+                    } else {
+                        // Default for other skills: an array of questions
+                        payload = {
+                            topic,
+                            question: parsed.quiz || parsed.questions
+                        };
+                    }
+
+                    const { error } = await supabase.from('skills_labs').insert([payload]);
+                    if (error) {
+                        console.error(`❌ [Skills] Database Insert Error:`, error.message);
+                        throw error;
+                    }
+                    console.log(`✅ [Skills] Saved ${topic} - Set ${i + 1}`);
                 } else {
                     console.log(`❌ [Skills] Invalid JSON shape.`);
                 }
             } catch (e: any) {
                 console.error(`❌ [Skills] Error on ${topic} - set ${i + 1}:`, e.message);
+                throw e; // Fail fast for seed-all.ts
             }
 
             await delay(3000);
@@ -204,9 +251,17 @@ CRITICAL INSTRUCTIONS:
 
 async function main() {
     console.log("🚀 Starting Skills Seed Data Generation...");
-    await seedSkills();
-    console.log("\n✨ Skills seeding tasks completed!");
-    process.exit(0);
+    try {
+        await seedSkills();
+        console.log("\n✨ Skills seeding tasks completed!");
+        process.exit(0);
+    } catch (error) {
+        console.error("\n❌ Skills seeding failed critical error.");
+        process.exit(1);
+    }
 }
 
-main().catch(console.error);
+main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+});

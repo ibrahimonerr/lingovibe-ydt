@@ -200,13 +200,17 @@ CRITICAL INSTRUCTIONS:
                     const { error } = await supabase.from('grammar_labs').insert([
                         { topic, question: parsed.quiz }
                     ]);
-                    if (error) throw error;
+                    if (error) {
+                        console.error(`❌ [Grammar] Database Insert Error:`, error.message);
+                        throw error;
+                    }
                     console.log(`✅ [Grammar] Saved ${topic} - Set ${i + 1} (${parsed.quiz.length} questions)`);
                 } else {
                     console.log(`❌ [Grammar] Invalid JSON shape.`);
                 }
             } catch (e: any) {
                 console.error(`❌ [Grammar] Error on ${topic} - set ${i + 1}:`, e.message);
+                throw e; // Propagate to fail-fast
             }
 
             await delay(3000);
@@ -216,9 +220,17 @@ CRITICAL INSTRUCTIONS:
 
 async function main() {
     console.log("🚀 Starting Grammar Seed Data Generation...");
-    await seedGrammar();
-    console.log("\n✨ Grammar seeding tasks completed!");
-    process.exit(0);
+    try {
+        await seedGrammar();
+        console.log("\n✨ Grammar seeding tasks completed!");
+        process.exit(0);
+    } catch (error) {
+        console.error("\n❌ Grammar seeding failed critical error.");
+        process.exit(1);
+    }
 }
 
-main().catch(console.error);
+main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+});
