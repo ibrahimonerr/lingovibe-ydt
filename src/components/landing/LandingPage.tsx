@@ -85,8 +85,8 @@ export function LandingPage() {
       <header className="py-6">
         <Container className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/8 ring-1 ring-white/10">
-              <span className="text-sm font-semibold tracking-tight">YH</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-rose-500 shadow-lg shadow-indigo-500/20">
+              <span className="text-sm font-black italic text-white drop-shadow-sm">Y</span>
             </div>
             <div className="leading-tight">
               <div className="text-sm font-semibold tracking-tight">
@@ -209,9 +209,9 @@ export function LandingPage() {
                     Ready to make language learning feel effortless?
                   </h3>
                   <p className="mt-2 text-sm leading-6 text-white/70 sm:text-base">
-                    This is a starter build — next we can add auth, a reading
-                    screen, and saved vocabulary. For now, you’ve got a polished
-                    landing page and clean structure to grow from.
+                    Master your YDT preparation with interactive labs and 
+                    AI-powered insights. Everything you need to succeed, 
+                    organized in one place.
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
@@ -231,13 +231,15 @@ export function LandingPage() {
       <footer className="border-t border-white/10 py-10">
         <Container className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3 text-sm text-white/70">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/8 ring-1 ring-white/10">
-              <span className="text-xs font-semibold">YH</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-rose-500 shadow-lg">
+              <span className="text-xs font-black italic text-white">Y</span>
             </div>
             <span>© {new Date().getFullYear()} YDTHub</span>
           </div>
-          <div className="text-sm text-white/60">
-            Custom text • Daily news • Grammar
+          <div className="flex items-center gap-6 text-sm text-white/60">
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+            <a href="/support" className="hover:text-white transition-colors">Support</a>
+            <span>Custom text • Daily news • Grammar</span>
           </div>
         </Container>
       </footer>

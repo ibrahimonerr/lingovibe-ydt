@@ -1,0 +1,88 @@
+"use client";
+
+import React from 'react';
+import { X, ShieldCheck, Mail, LogOut, ChevronRight, Settings as SettingsIcon } from 'lucide-react';
+
+interface SettingsMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onNavigate: (path: string) => void;
+}
+
+const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose, onNavigate }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div 
+      className="fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="w-full max-w-[380px] bg-white rounded-[2.5rem] p-6 shadow-2xl animate-in zoom-in-95 duration-200 border border-slate-100">
+        <div className="flex justify-between items-center mb-8 border-b pb-4">
+          <div className="flex items-center gap-2">
+            <div className="p-2 bg-slate-900 text-white rounded-xl">
+              <SettingsIcon size={18} />
+            </div>
+            <span className="font-black uppercase text-[12px] text-slate-900 tracking-tight">Settings & Account</span>
+          </div>
+          <button 
+            onClick={onClose} 
+            className="p-2 bg-slate-50 text-slate-400 rounded-full hover:bg-slate-100 transition-colors"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="space-y-4">
+          {/* LEGAL & SUPPORT SECTIONS */}
+          <div className="space-y-2">
+            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Preference & Legal</span>
+            
+            <button 
+              onClick={() => { onNavigate('/privacy'); onClose(); }}
+              className="w-full p-4 rounded-2xl bg-slate-50 hover:bg-indigo-50 border border-slate-100 flex items-center justify-between group transition-all"
+            >
+              <div className="flex items-center gap-3">
+                <ShieldCheck size={20} className="text-indigo-600" />
+                <span className="font-bold text-slate-700 text-sm">Privacy Policy</span>
+              </div>
+              <ChevronRight size={16} className="text-slate-300 group-hover:text-indigo-400 transition-colors" />
+            </button>
+
+            <button 
+              onClick={() => { onNavigate('/support'); onClose(); }}
+              className="w-full p-4 rounded-2xl bg-slate-50 hover:bg-amber-50 border border-slate-100 flex items-center justify-between group transition-all"
+            >
+              <div className="flex items-center gap-3">
+                <Mail size={20} className="text-amber-600" />
+                <span className="font-bold text-slate-700 text-sm">Support Center</span>
+              </div>
+              <ChevronRight size={16} className="text-slate-300 group-hover:text-amber-400 transition-colors" />
+            </button>
+          </div>
+
+          <div className="pt-6 mt-4 border-t border-slate-50">
+            <button 
+              onClick={() => {
+                // Placeholder for future logout logic
+                console.log("Logout triggered");
+                onClose();
+              }}
+              className="w-full p-4 rounded-2xl bg-rose-50 hover:bg-rose-100 border border-rose-100 flex items-center justify-center gap-2 text-rose-600 transition-all font-black uppercase text-[11px]"
+            >
+              <LogOut size={16} />
+              Sign Out
+            </button>
+            <p className="text-center text-[9px] text-slate-300 mt-4 uppercase font-bold tracking-widest">
+              YDTHub v0.1.0 • Built with Passion
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SettingsMenu;

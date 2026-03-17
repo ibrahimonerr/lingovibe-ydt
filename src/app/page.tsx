@@ -5,8 +5,10 @@ import { useRouter } from 'next/navigation';
 import YDTLogo from '@/components/YDTLogo';
 import {
   Layout, History, Zap, Languages, Trophy, BookOpen,
-  PenTool, Target, Eye, Repeat, X, ChevronRight, PlayCircle
+  PenTool, Target, Eye, Repeat, X, ChevronRight, PlayCircle,
+  Settings as SettingsIcon
 } from 'lucide-react';
+import SettingsMenu from '@/components/layout/SettingsMenu';
 import { useAppStore } from '@/store/useAppStore';
 
 const grammarTopics = [
@@ -39,6 +41,7 @@ export default function YDTHub() {
   const [mode, setMode] = useState('');
   const [activeMissions, setActiveMissions] = useState<any[]>([]);
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const lastActiveRoute = useAppStore((state) => state.lastActiveRoute);
 
   useEffect(() => {
@@ -83,9 +86,19 @@ export default function YDTHub() {
         {/* Spacer that pushes all content down */}
         <div className="flex-1" />
 
-        {/* LOGO SECTION */}
-        <header className="py-5 text-center border-b border-slate-100 bg-white">
-          <YDTLogo size="md" theme="dark" showSlogan={false} />
+        {/* LOGO SECTION & SETTINGS BUTTON */}
+        <header className="py-5 px-6 flex justify-between items-center border-b border-slate-100 bg-white relative">
+          {/* Invisible spacer for centering logo */}
+          <div className="w-10" />
+          
+          <YDTLogo size="md" theme="dark" showSlogan={false} hideIcon={true} />
+          
+          <button 
+            onClick={() => setIsSettingsOpen(true)}
+            className="w-10 h-10 flex items-center justify-center rounded-2xl bg-slate-50 text-slate-400 border border-slate-100 active:scale-90 transition-all shadow-sm"
+          >
+            <SettingsIcon size={20} />
+          </button>
         </header>
 
         <main className="flex flex-col px-5 pt-6 pb-28">
@@ -176,8 +189,18 @@ export default function YDTHub() {
 
         {/* BOTTOM NAV */}
         <nav className="absolute bottom-0 w-full bg-white border-t p-6 flex justify-center items-center rounded-t-[3rem] shadow-[0_-15px_40px_-15px_rgba(0,0,0,0.15)] z-50">
-          <button onClick={() => setIsNavMenuOpen(true)} className="w-16 h-16 rounded-[1.5rem] bg-indigo-900 flex items-center justify-center text-white shadow-xl -mt-16 border-[6px] border-white active:scale-90 transition-all z-50">
-            <span className="text-2xl font-black italic">Y</span>
+          <button 
+            onClick={() => setIsNavMenuOpen(true)} 
+            className="w-16 h-16 rounded-[1.5rem] bg-gradient-to-tr from-indigo-900 via-violet-900 to-slate-900 flex items-center justify-center text-white shadow-xl -mt-16 border-[6px] border-white active:scale-90 transition-all z-50 overflow-hidden relative group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-fuchsia-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <svg 
+              viewBox="0 0 100 100" 
+              className="w-1/2 h-1/2 text-white relative z-10 drop-shadow-md" 
+              fill="currentColor"
+            >
+              <path d="M20 20 L50 60 L80 20 L60 20 L50 35 L40 20 Z M45 65 L55 65 L55 85 L45 85 Z" />
+            </svg>
           </button>
         </nav>
 
@@ -231,6 +254,13 @@ export default function YDTHub() {
             </div>
           </div>
         )}
+
+        {/* SETTINGS MODAL */}
+        <SettingsMenu 
+          isOpen={isSettingsOpen} 
+          onClose={() => setIsSettingsOpen(false)} 
+          onNavigate={(path) => router.push(path)}
+        />
 
       </div>
 

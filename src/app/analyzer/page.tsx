@@ -54,6 +54,7 @@ export default function AnalyzerPage() {
                     <div className="p-6 bg-rose-50 rounded-[2rem] border border-rose-100">
                         <h2 className="text-rose-600 font-black text-lg mb-2">AI Text Analyzer</h2>
                         <p className="text-xs text-rose-500 font-medium">Paste any English text, and the AI will analyze it to generate vocabulary lists and questions for you.</p>
+                        <p className="mt-3 text-[10px] text-rose-400 italic">Note: AI-generated content may have inaccuracies. Please use as a learning aid alongside your course materials.</p>
                     </div>
 
                     <textarea
