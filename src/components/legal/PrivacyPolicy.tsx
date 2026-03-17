@@ -30,14 +30,14 @@ export const PrivacyPolicy = () => {
           <section>
             <h2 className="text-lg font-bold text-slate-800 mb-2 uppercase tracking-tight">3. Third Party Services</h2>
             <p>
-              We utilize Google's Generative AI services. Please refer to Google's privacy terms for information on how they handle processed data.
+              We utilize Google&apos;s Generative AI services. Please refer to Google&apos;s privacy terms for information on how they handle processed data.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-bold text-slate-800 mb-2 uppercase tracking-tight">4. Your Rights</h2>
             <p>
-              As your data is primarily stored locally, you have full control. You can clear your data by resetting the application or clearing your browser's local storage.
+              As your data is primarily stored locally, you have full control. You can clear your data by resetting the application or clearing your browser&apos;s local storage.
             </p>
           </section>
 

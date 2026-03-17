@@ -32,7 +32,7 @@ export default function SupportPage() {
                     </div>
                     <h2 className="text-xl font-black mb-2 tracking-tight">Email Support</h2>
                     <p className="text-slate-500 text-sm mb-6 leading-relaxed">
-                        Have a technical issue or account question? Send us an email and we'll get back to you within 24 hours.
+                        Have a technical issue or account question? Send us an email and we&apos;ll get back to you within 24 hours.
                     </p>
                     <a 
                         href="mailto:support@ydthub.com" 
