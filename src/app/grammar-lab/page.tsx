@@ -20,16 +20,25 @@ function GrammarLabContent() {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [showHint, setShowHint] = useState(false);
-    const { incrementProgress, prefetchedLabs } = useAppStore();
-
+    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed } = useAppStore();
+    
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const limit = isGuestMode ? 3 : 5;
 
     useEffect(() => {
         const fetchQuestions = async () => {
+            const seed = getDailySeed();
+            
             // Priority 1: Use prefetched grammar questions if no specific topic filter is enforced
             if ((!topic || topic === 'Mixed') && prefetchedLabs.grammar && prefetchedLabs.grammar.length > 0) {
                 const prefetchedItems = prefetchedLabs.grammar.map(item => item.question || item);
-                setQuestions(prefetchedItems.slice(0, 5));
+                // For guests, use seed for a stable selection
+                if (isGuestMode) {
+                    const stableIdx = seed % (prefetchedLabs.grammar.length - limit);
+                    setQuestions(prefetchedItems.slice(stableIdx, stableIdx + limit));
+                } else {
+                    setQuestions(prefetchedItems.slice(0, 5));
+                }
                 setLoading(false);
                 return;
             }
@@ -50,9 +59,11 @@ function GrammarLabContent() {
                 }
 
                 if (data && data.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * data.length);
-                    const selectedLab = data[randomIndex];
-                    setQuestions(selectedLab.question);
+                    // Use seed for guests to always pick the same lab for the day
+                    const index = isGuestMode ? (seed % data.length) : Math.floor(Math.random() * data.length);
+                    const selectedLab = data[index];
+                    const questionSet = isGuestMode ? selectedLab.question.slice(0, 3) : selectedLab.question;
+                    setQuestions(questionSet);
                 } else {
                     throw new Error("Veritabanında bu konuya ait soru bulunamadı. Lütfen Admin panelinden üretin.");
                 }
@@ -66,15 +77,20 @@ function GrammarLabContent() {
         };
 
         fetchQuestions();
-    }, [topic, prefetchedLabs.grammar]);
+    }, [topic, prefetchedLabs.grammar, isGuestMode, getDailySeed]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {
-            setCurrentIdx(c => c + 1);
+            setCurrentIdx(prev => prev + 1);
             setSelectedOption(null);
             setShowFeedback(false);
             setShowHint(false);
         } else {
+            // Finished
+            if (isGuestMode) {
+                const { markLabAsCompletedByGuest } = useAppStore.getState();
+                markLabAsCompletedByGuest('grammar');
+            }
             incrementProgress('grammar');
             router.push('/');
         }

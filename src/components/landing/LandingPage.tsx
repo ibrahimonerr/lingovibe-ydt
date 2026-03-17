@@ -92,7 +92,6 @@ export function LandingPage() {
               <div className="text-sm font-semibold tracking-tight">
                 YDTHub
               </div>
-              <div className="text-xs text-white/60">Learn with real content</div>
             </div>
           </div>
 
@@ -112,7 +111,7 @@ export function LandingPage() {
           <Container>
             <div className="mx-auto max-w-3xl text-center">
               <Badge className="mx-auto">
-                Built for consistency • delightful by default
+                Learn. Practice. Overcome.
               </Badge>
               <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
                 Learn a language with{" "}
@@ -239,7 +238,6 @@ export function LandingPage() {
           <div className="flex items-center gap-6 text-sm text-white/60">
             <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
             <a href="/support" className="hover:text-white transition-colors">Support</a>
-            <span>Custom text • Daily news • Grammar</span>
           </div>
         </Container>
       </footer>

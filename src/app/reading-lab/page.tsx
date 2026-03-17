@@ -11,7 +11,6 @@ import { supabase } from '@/lib/supabase';
 
 function ReadingLabContent() {
     const router = useRouter();
-    const { incrementProgress, prefetchedLabs } = useAppStore();
     const [loading, setLoading] = useState(true);
     const [questions, setQuestions] = useState<Question[]>([]);
     const [readingPassage, setReadingPassage] = useState<string | null>(null);
@@ -22,13 +21,17 @@ function ReadingLabContent() {
     const [isTextExpanded, setIsTextExpanded] = useState(true);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed } = useAppStore();
+
     useEffect(() => {
         const fetchReading = async () => {
+            const seed = getDailySeed();
+
             if (prefetchedLabs.reading && prefetchedLabs.reading.length > 0) {
-                const randomIndex = Math.floor(Math.random() * prefetchedLabs.reading.length);
-                const selectedLab = prefetchedLabs.reading[randomIndex];
+                const index = isGuestMode ? (seed % prefetchedLabs.reading.length) : Math.floor(Math.random() * prefetchedLabs.reading.length);
+                const selectedLab = prefetchedLabs.reading[index];
                 setReadingPassage(selectedLab.passage);
-                setQuestions(selectedLab.questions);
+                setQuestions(isGuestMode ? selectedLab.questions.slice(0, 3) : selectedLab.questions);
                 setLoading(false);
                 return;
             }
@@ -46,11 +49,11 @@ function ReadingLabContent() {
                 }
 
                 if (data && data.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * data.length);
-                    const selectedLab = data[randomIndex];
+                    const index = isGuestMode ? (seed % data.length) : Math.floor(Math.random() * data.length);
+                    const selectedLab = data[index];
 
                     setReadingPassage(selectedLab.passage);
-                    setQuestions(selectedLab.questions);
+                    setQuestions(isGuestMode ? selectedLab.questions.slice(0, 3) : selectedLab.questions);
                 } else {
                     throw new Error("No reading passages found in database. Please generate some from the Admin Panel.");
                 }
@@ -64,15 +67,20 @@ function ReadingLabContent() {
         };
 
         fetchReading();
-    }, [prefetchedLabs.reading]);
+    }, [prefetchedLabs.reading, isGuestMode, getDailySeed]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {
-            setCurrentIdx(c => c + 1);
+            setCurrentIdx(prev => prev + 1);
             setSelectedOption(null);
             setShowFeedback(false);
             setShowHint(false);
         } else {
+            // Finished
+            if (isGuestMode) {
+                const { markLabAsCompletedByGuest } = useAppStore.getState();
+                markLabAsCompletedByGuest('reading');
+            }
             incrementProgress('reading');
             router.push('/');
         }

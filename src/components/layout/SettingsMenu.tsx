@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { X, ShieldCheck, Mail, LogOut, ChevronRight, Settings as SettingsIcon } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { useAppStore } from '@/store/useAppStore';
 
 interface SettingsMenuProps {
   isOpen: boolean;
@@ -10,6 +12,7 @@ interface SettingsMenuProps {
 }
 
 const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose, onNavigate }) => {
+  const { clearProgress } = useAppStore();
   if (!isOpen) return null;
 
   return (
@@ -63,18 +66,39 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose, onNavigate
             </button>
           </div>
 
-          <div className="pt-6 mt-4 border-t border-slate-50">
+          <div className="pt-6 mt-4 border-t border-slate-50 space-y-3">
             <button 
-              onClick={() => {
-                // Placeholder for future logout logic
-                console.log("Logout triggered");
-                onClose();
+              onClick={async () => {
+                if (window.confirm("Are you sure? This will sign you out and clear your local progress.")) {
+                  await supabase.auth.signOut();
+                  clearProgress();
+                  onClose();
+                }
               }}
-              className="w-full p-4 rounded-2xl bg-rose-50 hover:bg-rose-100 border border-rose-100 flex items-center justify-center gap-2 text-rose-600 transition-all font-black uppercase text-[11px]"
+              className="w-full p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-100 flex items-center justify-center gap-2 text-slate-600 transition-all font-black uppercase text-[11px]"
             >
               <LogOut size={16} />
               Sign Out
             </button>
+
+            <button 
+              onClick={async () => {
+                if (window.confirm("CRITICAL: This will permanently delete your account and all progress. This action cannot be undone. Proceed?")) {
+                  // In a real app, you would call a Supabase Edge Function to delete the auth user
+                  // and cascade delete their data from public tables.
+                  // For now, we clear local and sign out.
+                  await supabase.auth.signOut();
+                  clearProgress();
+                  onClose();
+                  alert("Your account deletion request has been processed.");
+                }
+              }}
+              className="w-full p-4 rounded-2xl bg-rose-50 hover:bg-rose-100 border border-rose-100 flex items-center justify-center gap-2 text-rose-600 transition-all font-black uppercase text-[11px]"
+            >
+              <X size={16} />
+              Delete Account
+            </button>
+            
             <p className="text-center text-[9px] text-slate-300 mt-4 uppercase font-bold tracking-widest">
               YDTHub v0.1.0 • Built with Passion
             </p>

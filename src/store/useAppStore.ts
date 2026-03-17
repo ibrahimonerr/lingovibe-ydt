@@ -27,18 +27,28 @@ interface AppState {
         skills: any[];
     };
     lastActiveRoute: string | null;
+    isGuestMode: boolean;
+    session: any | null;
+    guestAiUsage: number;
+    lastAiUsageDate: string | null;
+    guestDailyCompletedLabs: string[];
     addMission: (mission: Mission) => void;
     completeMission: (id: string) => void;
     incrementProgress: (type: 'reading' | 'vocab' | 'grammar') => void;
     recordAnswer: (isCorrect: boolean, usedHint?: boolean) => void;
     setPrefetchedLabs: (type: 'reading' | 'vocab' | 'grammar' | 'skills', labs: any[]) => void;
     setLastActiveRoute: (route: string | null) => void;
+    setSession: (session: any | null) => void;
+    setGuestMode: (active: boolean) => void;
+    incrementGuestAiUsage: () => void;
+    markLabAsCompletedByGuest: (labType: string) => void;
+    getDailySeed: () => number;
     clearProgress: () => void;
 }
 
 export const useAppStore = create<AppState>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             activeMissions: [],
             userProgress: {
                 readingLabsCompleted: 0,
@@ -57,6 +67,11 @@ export const useAppStore = create<AppState>()(
                 skills: [],
             },
             lastActiveRoute: null,
+            isGuestMode: false,
+            session: null,
+            guestAiUsage: 0,
+            lastAiUsageDate: null,
+            guestDailyCompletedLabs: [],
             addMission: (mission) =>
                 set((state) => ({
                     activeMissions: [...state.activeMissions, mission],
@@ -96,6 +111,36 @@ export const useAppStore = create<AppState>()(
                 })),
             setLastActiveRoute: (route) =>
                 set({ lastActiveRoute: route }),
+            setSession: (session) => set({ session }),
+            setGuestMode: (active) => set({ isGuestMode: active }),
+            incrementGuestAiUsage: () => {
+                const today = new Date().toDateString();
+                set((state) => ({
+                    guestAiUsage: state.lastAiUsageDate === today ? state.guestAiUsage + 1 : 1,
+                    lastAiUsageDate: today
+                }));
+            },
+            markLabAsCompletedByGuest: (labType) => {
+                const today = new Date().toDateString();
+                set((state) => {
+                    // Reset list if it's a new day
+                    const isNewDay = state.lastAiUsageDate !== today;
+                    const list = isNewDay ? [] : state.guestDailyCompletedLabs;
+                    return {
+                        guestDailyCompletedLabs: list.includes(labType) ? list : [...list, labType],
+                        lastAiUsageDate: today
+                    };
+                });
+            },
+            getDailySeed: () => {
+                const today = new Date().toDateString();
+                let hash = 0;
+                for (let i = 0; i < today.length; i++) {
+                    hash = (hash << 5) - hash + today.charCodeAt(i);
+                    hash |= 0;
+                }
+                return Math.abs(hash);
+            },
             clearProgress: () =>
                 set({
                     activeMissions: [],
@@ -105,6 +150,8 @@ export const useAppStore = create<AppState>()(
                         grammarLabsCompleted: 0,
                     },
                     lastActiveRoute: null,
+                    isGuestMode: false,
+                    session: null,
                 }),
         }),
         {

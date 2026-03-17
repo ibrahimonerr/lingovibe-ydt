@@ -21,7 +21,7 @@ export default function GrammarLab({
   setShowHint: (v: boolean) => void
 }) {
 
-  const recordAnswer = useAppStore(state => state.recordAnswer);
+  const { recordAnswer, isGuestMode, guestDailyCompletedLabs } = useAppStore();
   if (!question) return null;
 
   const isSkills = mode === 'skills';
@@ -192,6 +192,26 @@ export default function GrammarLab({
             </div>
           </div>
           <button onClick={handleNext} className={`w-full ${isSkills ? 'bg-violet-900' : 'bg-slate-900'} text-white py-5 rounded-[2.2rem] font-black uppercase text-[12px] shadow-xl active:scale-95 transition-all tracking-widest`}>Next Challenge</button>
+        </div>
+      )}
+
+      {/* GUEST SIGNUP PROMPT */}
+      {isGuestMode && (
+        <div className={`p-4 rounded-[2rem] border-2 border-dashed ${isSkills ? 'bg-violet-50 border-violet-200' : 'bg-emerald-50 border-emerald-200'} animate-pulse mt-8`}>
+          <div className="flex items-center gap-3">
+            <Sparkles className={isSkills ? 'text-violet-600' : 'text-emerald-600'} size={20} />
+            <div className="text-[12.5px] font-bold text-slate-700 leading-tight">
+              {guestDailyCompletedLabs.includes('grammar') 
+                ? "Günlük demo hakkını bitirdin! Tüm laboratuvarlara ve 1000'lerce soruya erişmek için giriş yap."
+                : "Seviyeni korumak ve ilerlemeni kaydetmek için ücretsiz üye ol!"}
+            </div>
+            <button 
+              onClick={() => useAppStore.getState().setGuestMode(false)}
+              className={`ml-auto px-4 py-2 rounded-xl text-[10px] font-black uppercase text-white shadow-lg ${isSkills ? 'bg-violet-900' : 'bg-emerald-600'}`}
+            >
+              Sign Up
+            </button>
+          </div>
         </div>
       )}
     </div>

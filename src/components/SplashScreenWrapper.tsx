@@ -27,10 +27,9 @@ export default function SplashScreenWrapper({ children }: { children: React.Reac
     return (
         <>
             {showSplash && (
-                <div className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0f172a] transition-opacity duration-500 ease-in-out ${isAnimatingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                <div className={`fixed inset-0 z-[20000] flex flex-col items-center justify-center bg-[#0f172a] transition-opacity duration-500 ease-in-out ${isAnimatingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                     <div className={`flex flex-col items-center gap-3 transition-all duration-700 ease-in-out ${isAnimatingOut ? 'scale-110 opacity-0' : 'scale-100 opacity-100 zoom-in'}`}>
                         <YDTLogo size="lg" theme="light" showSlogan={true} />
-                        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-600 mt-2">Loading your lab...</p>
                     </div>
                 </div>
             )}

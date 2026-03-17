@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import SettingsMenu from '@/components/layout/SettingsMenu';
 import { useAppStore } from '@/store/useAppStore';
+import { supabase } from '@/lib/supabase';
+import LoginPage from '@/components/auth/LoginPage';
 
 const grammarTopics = [
   "Tenses & Aspect",
@@ -42,7 +44,20 @@ export default function YDTHub() {
   const [activeMissions, setActiveMissions] = useState<any[]>([]);
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const lastActiveRoute = useAppStore((state) => state.lastActiveRoute);
+  const { lastActiveRoute, session, isGuestMode, setSession } = useAppStore();
+
+  useEffect(() => {
+    // Listen for auth state changes
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [setSession]);
 
   useEffect(() => {
     const saved = localStorage.getItem('ydt_active_missions');
@@ -76,6 +91,10 @@ export default function YDTHub() {
     setMode('');
   };
 
+  if (!session && !isGuestMode) {
+    return <LoginPage />;
+  }
+
   return (
     <div
       className="h-dvh w-full overflow-hidden bg-slate-50 flex justify-center py-0 sm:py-8 font-sans text-slate-900 leading-normal"
@@ -91,7 +110,12 @@ export default function YDTHub() {
           {/* Invisible spacer for centering logo */}
           <div className="w-10" />
           
-          <YDTLogo size="md" theme="dark" showSlogan={false} hideIcon={true} />
+          <div className="flex flex-col items-center">
+            <YDTLogo size="md" theme="dark" showSlogan={false} hideIcon={true} />
+            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-indigo-400/60 -mt-1">
+              Learn Smarter. Score Higher.
+            </p>
+          </div>
           
           <button 
             onClick={() => setIsSettingsOpen(true)}

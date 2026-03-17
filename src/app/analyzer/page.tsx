@@ -17,15 +17,25 @@ export default function AnalyzerPage() {
     const [showFeedback, setShowFeedback] = useState(false);
 
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const { isGuestMode, guestAiUsage, lastAiUsageDate, incrementGuestAiUsage } = useAppStore();
+    const today = new Date().toDateString();
+    const currentUsage = lastAiUsageDate === today ? guestAiUsage : 0;
 
     const handleAnalyze = async () => {
         if (!inputText.trim()) return;
+        
+        if (isGuestMode && currentUsage >= 1) {
+            alert("Misafir olarak günlük AI kullanım limitine ulaştın. Daha fazla analiz ve yeni özellikler için giriş yap! 🚀");
+            return;
+        }
+
         setAnalyzing(true);
         setErrorMsg(null);
         try {
             const data = await aiService.analyzeText(inputText);
             if (data && data.questions && Array.isArray(data.questions)) {
                 setQuestions(data.questions);
+                if (isGuestMode) incrementGuestAiUsage();
             } else {
                 throw new Error("Invalid structure returned from analyzer");
             }

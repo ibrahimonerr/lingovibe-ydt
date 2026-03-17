@@ -25,7 +25,7 @@ export default function ReadingLab({
   setShowHint: (v: boolean) => void
 }) {
 
-  const recordAnswer = useAppStore(state => state.recordAnswer);
+  const { recordAnswer, isGuestMode, guestDailyCompletedLabs } = useAppStore();
   if (!questions || !questions[currentIdx]) return null;
   const question = questions[currentIdx];
 
@@ -322,6 +322,25 @@ export default function ReadingLab({
           >
             {currentIdx < questions.length - 1 ? 'Next Question' : 'Finish Lab Session'}
           </button>
+        </div>
+      )}
+      {/* GUEST SIGNUP PROMPT */}
+      {isGuestMode && (
+        <div className="p-4 rounded-[2rem] border-2 border-dashed bg-amber-50 border-amber-200 animate-pulse mt-8">
+          <div className="flex items-center gap-3">
+            <Sparkles className="text-amber-500" size={20} />
+            <div className="text-[12.5px] font-bold text-slate-700 leading-tight">
+              {guestDailyCompletedLabs.includes('reading') 
+                ? "Günlük demo hakkını bitirdin! Tüm okuma parçalarına ve 1000'lerce soruya erişmek için giriş yap."
+                : "Seviyeni korumak ve ilerlemeni kaydetmek için ücretsiz üye ol!"}
+            </div>
+            <button 
+              onClick={() => useAppStore.getState().setGuestMode(false)}
+              className="ml-auto px-4 py-2 rounded-xl text-[10px] font-black uppercase text-white bg-amber-600 shadow-lg shadow-amber-500/20"
+            >
+              Sign Up
+            </button>
+          </div>
         </div>
       )}
     </div>

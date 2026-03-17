@@ -22,7 +22,8 @@ function VocabLabContent() {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
-    const { incrementProgress, prefetchedLabs } = useAppStore();
+    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed } = useAppStore();
+    const limit = isGuestMode ? 3 : 5;
 
     useEffect(() => {
         // Reset all state when mode changes
@@ -32,6 +33,8 @@ function VocabLabContent() {
         setIsFlipped(false);
 
         const fetchVocab = async () => {
+            const seed = getDailySeed();
+            
             if (vocabSubMode === 'wordmap') {
                 setLoading(false);
                 return;
@@ -44,11 +47,15 @@ function VocabLabContent() {
                 );
                 if (matchingItems.length > 0) {
                     const prefetchedItems = matchingItems.map((item: any) => item.question || item);
-                    setQuestions(prefetchedItems.slice(0, 5));
+                    if (isGuestMode) {
+                        const stableIdx = seed % (matchingItems.length - limit);
+                        setQuestions(prefetchedItems.slice(stableIdx, stableIdx + limit));
+                    } else {
+                        setQuestions(prefetchedItems.slice(0, 5));
+                    }
                     setLoading(false);
                     return;
                 }
-                // If no matching items for this mode, fall through to Supabase fetch
             }
 
             setLoading(true);
@@ -62,31 +69,44 @@ function VocabLabContent() {
                 if (error) throw error;
 
                 if (data && data.length > 0) {
-                    const shuffled = data.sort(() => 0.5 - Math.random());
-                    const selectedModeQuestions = shuffled.slice(0, 5).map(item => item.question);
+                    // Stable shuffle for guests using seed
+                    const sortedData = [...data].sort((a, b) => {
+                        const valA = (a.id + seed) % 100;
+                        const valB = (b.id + seed) % 100;
+                        return valA - valB;
+                    });
+                    const selectedModeQuestions = sortedData.slice(0, limit).map(item => item.question);
                     setQuestions(selectedModeQuestions);
                 } else {
-                    generateLocalVocab();
+                    generateLocalVocab(seed);
                 }
             } catch (error) {
                 console.error("Supabase Fetch Error:", error);
-                generateLocalVocab();
+                generateLocalVocab(seed);
             } finally {
                 setLoading(false);
             }
         };
 
-        const generateLocalVocab = () => {
-            // ... (rest of local logic remains as fallback)
-            const numQuestions = 3;
+        const generateLocalVocab = (seed: number) => {
+            const numQuestions = limit;
             const generatedQuiz: Question[] = [];
-            const getRandomElements = (arr: any[], count: number) => {
-                const shuffled = [...arr].sort(() => 0.5 - Math.random());
-                return shuffled.slice(0, count);
+            
+            // Deterministic random for guests
+            const getDeterministicElements = (arr: any[], count: number, offset: number) => {
+                const result = [];
+                const tempArr = [...arr];
+                for (let i = 0; i < count; i++) {
+                    const idx = (seed + offset + i) % tempArr.length;
+                    result.push(tempArr[idx]);
+                    tempArr.splice(idx, 1);
+                }
+                return result;
             };
 
             for (let i = 0; i < numQuestions; i++) {
-                const randomWords = getRandomElements(YDT_VOCAB_DB, 4);
+                const randomWords = getDeterministicElements(YDT_VOCAB_DB, 4, i * 10);
+                // ... logic for different modes using randomWords continues similarly
                 const targetWord = randomWords[0];
                 const otherWords = randomWords.slice(1);
 
@@ -100,7 +120,7 @@ function VocabLabContent() {
                     });
                 } else if (vocabSubMode === 'synonym') {
                     const optionsObj: Record<string, string> = {};
-                    const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
+                    const correctLetter = 'ABCD'[Math.floor(((seed + i) % 4))]; // Deterministic correct answer
                     let wrongOptionIdx = 0;
                     for (let letter of 'ABCD') {
                         if (letter === correctLetter) {
@@ -120,8 +140,8 @@ function VocabLabContent() {
                 } else if (vocabSubMode === 'context') {
                     const blankedContext = targetWord.context.replace(new RegExp(targetWord.word, 'gi'), '_____');
                     const optionsObj: Record<string, string> = {};
-                    const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
-                    const contextDistractors = getRandomElements(YDT_VOCAB_DB.filter(w => w.id !== targetWord.id), 3);
+                    const correctLetter = 'ABCD'[((seed + i + 1) % 4)];
+                    const contextDistractors = getDeterministicElements(YDT_VOCAB_DB.filter(w => w.id !== targetWord.id), 3, i * 5);
                     let wrongOptionIdx = 0;
                     for (let letter of 'ABCD') {
                         if (letter === correctLetter) {
@@ -140,7 +160,7 @@ function VocabLabContent() {
                     });
                 } else if (vocabSubMode === 'odd') {
                     const optionsObj: Record<string, string> = {};
-                    const correctLetter = 'ABCD'[Math.floor(Math.random() * 4)];
+                    const correctLetter = 'ABCD'[((seed + i + 2) % 4)];
                     const oddWordOptions = [targetWord.word, targetWord.synonyms[0] || targetWord.meaning, targetWord.synonyms[1] || targetWord.meaning + ' (similar)'];
                     const oddWord = targetWord.antonyms.length > 0 ? targetWord.antonyms[0] : otherWords[0].word;
                     let relatedIdx = 0;
@@ -169,11 +189,16 @@ function VocabLabContent() {
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {
-            setCurrentIdx(c => c + 1);
+            setCurrentIdx(prev => prev + 1);
             setSelectedOption(null);
             setShowFeedback(false);
             setIsFlipped(false);
         } else {
+            // Finished
+            if (isGuestMode) {
+                const { markLabAsCompletedByGuest } = useAppStore.getState();
+                markLabAsCompletedByGuest('vocab');
+            }
             incrementProgress('vocab');
             router.push('/');
         }

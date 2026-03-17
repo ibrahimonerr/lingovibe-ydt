@@ -56,7 +56,7 @@ export default function YDTLogo({ size = 'md', theme = 'dark', showSlogan = fals
 
             {showSlogan && (
                 <span className={`${sizes[size].slogan} font-black uppercase tracking-[0.25em] ${sloganColor} mt-1`}>
-                    Learn. Practice. Overcome.
+                    Learn Smarter. Score Higher.
                 </span>
             )}
         </div>

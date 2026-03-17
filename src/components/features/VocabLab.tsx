@@ -22,7 +22,7 @@ export default function VocabMaster({
   setShowFeedback: (v: boolean) => void
 }) {
 
-  const recordAnswer = useAppStore(state => state.recordAnswer);
+  const { recordAnswer, isGuestMode, guestDailyCompletedLabs } = useAppStore();
   if (!questions || !questions[currentIdx]) return null;
   const q = questions[currentIdx];
 
@@ -132,6 +132,25 @@ export default function VocabMaster({
         >
           Confirm Answer
         </button>
+      )}
+      {/* GUEST SIGNUP PROMPT */}
+      {isGuestMode && (
+        <div className="p-4 rounded-[1.8rem] border-2 border-dashed bg-slate-800 border-indigo-500/30 animate-pulse mt-4">
+          <div className="flex items-center gap-3">
+            <Sparkles className="text-indigo-400" size={20} />
+            <div className="text-[12px] font-bold text-slate-300 leading-tight">
+              {guestDailyCompletedLabs.includes('vocab') 
+                ? "Günlük demo hakkını bitirdin! Tüm kelimelere ve 1000'lerce soruya erişmek için giriş yap."
+                : "Seviyeni korumak ve ilerlemeni kaydetmek için ücretsiz üye ol!"}
+            </div>
+            <button 
+              onClick={() => useAppStore.getState().setGuestMode(false)}
+              className="ml-auto px-4 py-2 rounded-xl text-[10px] font-black uppercase text-white bg-indigo-600 shadow-lg shadow-indigo-500/20"
+            >
+              Sign Up
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
