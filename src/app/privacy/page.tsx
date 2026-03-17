@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
                         <h2 className="text-lg font-black uppercase tracking-tight">Your Rights</h2>
                     </div>
                     <p>
-                        You have the right to access, modify, or delete your data at any time. You can use the "Delete Account" button in the Settings menu to permanently remove all your information from our servers.
+                        You have the right to access, modify, or delete your data at any time. You can use the &quot;Delete Account&quot; button in the Settings menu to permanently remove all your information from our servers.
                     </p>
                 </section>
 

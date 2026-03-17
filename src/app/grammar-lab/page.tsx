@@ -77,7 +77,7 @@ function GrammarLabContent() {
         };
 
         fetchQuestions();
-    }, [topic, prefetchedLabs.grammar, isGuestMode, getDailySeed]);
+    }, [topic, prefetchedLabs.grammar, isGuestMode, getDailySeed, limit]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {

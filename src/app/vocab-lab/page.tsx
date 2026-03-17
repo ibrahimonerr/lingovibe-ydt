@@ -185,7 +185,7 @@ function VocabLabContent() {
         };
 
         fetchVocab();
-    }, [vocabSubMode, prefetchedLabs.vocab]);
+    }, [vocabSubMode, prefetchedLabs.vocab, getDailySeed, isGuestMode, limit]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {
