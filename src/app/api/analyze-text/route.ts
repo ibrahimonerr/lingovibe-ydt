@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
 
     const result = await model.generateContent([
       SYSTEM_PROMPT,
-      '\\n\\nUser text:\\n',
+      '\n\nUser text:\n',
       text
     ]);
 
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
       parsed = JSON.parse(responseText);
     } catch {
       // Fallback in case the model ignored responseMimeType
-      const match = responseText.match(/\\{[\\s\\S]*\\}/);
+      const match = responseText.match(/\{[\s\S]*\}/);
       if (!match) {
         throw new Error('Model returned non-JSON response.');
       }

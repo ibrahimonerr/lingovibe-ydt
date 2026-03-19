@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
-import { Lightbulb, Target, BookOpen, Sparkles, ChevronRight, AlertCircle, RefreshCw } from 'lucide-react';
+import { Lightbulb, Sparkles, ChevronRight, RefreshCw } from 'lucide-react';
+import ExplanationRenderer from '@/components/features/ExplanationRenderer';
 
 import { Question, Feedback } from '@/types';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
@@ -28,61 +29,6 @@ export default function GrammarLab({
   const themeClass = isSkills ? 'violet' : 'emerald';
   const labTitle = isSkills ? 'Skills Strategy' : 'Grammar Focus';
 
-  const renderExplanation = (explanation: string, feedback?: Feedback) => {
-    if (feedback) {
-      const items = [
-        { label: "Analitik Doğrulama", type: "LOGIC", content: feedback.correct_logic, icon: <Target size={14} /> },
-        { label: "Sinsi Çeldirici", type: "TRAP", content: feedback.trap_analysis, icon: <AlertCircle size={14} /> },
-        { label: "YDT Taktiği", type: "TACTIC", content: feedback.exam_tactic, icon: <Sparkles size={14} /> },
-        { label: "Bağlamsal Çeviri", type: "ANLAM", content: feedback.contextual_translation || feedback.translation, icon: <BookOpen size={14} /> }
-      ];
-
-      return items.filter(item => item.content).map((item, i) => {
-        const styles: Record<string, { bg: string, text: string, labelColor: string }> = {
-          "LOGIC": { bg: "bg-indigo-600 shadow-indigo-200", text: "text-white", labelColor: "text-indigo-200" },
-          "TRAP": { bg: "bg-rose-50 border-rose-100 border-2", text: "text-rose-900", labelColor: "text-rose-600" },
-          "TACTIC": { bg: "bg-amber-50 border-amber-100 border-2", text: "text-amber-900", labelColor: "text-amber-600" },
-          "ANLAM": { bg: isSkills ? "bg-violet-50 border-violet-100 border-2" : "bg-emerald-50 border-emerald-100 border-2", text: isSkills ? "text-violet-900" : "text-emerald-900", labelColor: isSkills ? "text-violet-600" : "text-emerald-600" }
-        };
-
-        const style = styles[item.type] || { bg: "bg-slate-50 border-slate-100 border-2", text: "text-slate-700", labelColor: "text-slate-400" };
-
-        return (
-          <div key={i} className={`p-4 rounded-[1.8rem] mb-3 shadow-sm ${style.bg} ${style.text}`}>
-            <div className={`flex items-center gap-2 text-[9px] font-black uppercase mb-1 tracking-widest ${style.labelColor}`}>
-              {item.icon} {item.label}
-            </div>
-            <div className="text-[13px] font-bold leading-relaxed italic">{item.content}</div>
-          </div>
-        );
-      });
-    }
-
-    if (!explanation) return null;
-    const parts = explanation.split('|');
-
-    return parts.map((p, i) => {
-      const [label, ...content] = p.split(':');
-      const type = label?.trim().toUpperCase();
-
-      const styles: Record<string, { bg: string, text: string, labelColor: string, icon: React.ReactNode }> = {
-        "TACTIC": { bg: "bg-indigo-600 shadow-indigo-200", text: "text-white", labelColor: "text-indigo-200", icon: <Target size={14} /> },
-        "ANLAM": { bg: isSkills ? "bg-violet-50 border-violet-100 border-2" : "bg-emerald-50 border-emerald-100 border-2", text: isSkills ? "text-violet-900" : "text-emerald-900", labelColor: isSkills ? "text-violet-600" : "text-emerald-600", icon: <BookOpen size={14} /> },
-        "NOTE": { bg: "bg-amber-50 border-amber-100 border-2", text: "text-amber-900", labelColor: "text-amber-600", icon: <AlertCircle size={14} /> }
-      };
-
-      const style = styles[type] || { bg: "bg-slate-50 border-slate-100 border-2", text: "text-slate-700", labelColor: "text-slate-400", icon: <Sparkles size={14} /> };
-
-      return (
-        <div key={i} className={`p-4 rounded-[1.8rem] mb-3 shadow-sm ${style.bg} ${style.text}`}>
-          <div className={`flex items-center gap-2 text-[9px] font-black uppercase mb-1 tracking-widest ${style.labelColor}`}>
-            {style.icon} {label}
-          </div>
-          <div className="text-[13px] font-bold leading-relaxed italic">{content.join(':')}</div>
-        </div>
-      );
-    });
-  };
 
   return (
     <div className="space-y-6 animate-in slide-in-from-right-8 duration-500">
@@ -188,7 +134,7 @@ export default function GrammarLab({
                   Result: <span className={selectedOption === (question.correct_answer || question.correct) ? (isSkills ? 'text-violet-600' : 'text-emerald-600') : 'text-rose-600'}>{selectedOption === (question.correct_answer || question.correct) ? 'WELL SOLVED' : 'STRATEGY ERROR'}</span>
                 </div>
               </div>
-              <div className="space-y-1">{renderExplanation(question.explanation, question.feedback)}</div>
+              <div className="space-y-1"><ExplanationRenderer explanation={question.explanation} feedback={question.feedback} theme={isSkills ? 'violet' : 'emerald'} /></div>
             </div>
           </div>
           <button onClick={handleNext} className={`w-full ${isSkills ? 'bg-violet-900' : 'bg-slate-900'} text-white py-5 rounded-[2.2rem] font-black uppercase text-[12px] shadow-xl active:scale-95 transition-all tracking-widest`}>Next Challenge</button>

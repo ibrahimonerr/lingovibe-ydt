@@ -84,13 +84,33 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose, onNavigate
             <button 
               onClick={async () => {
                 if (window.confirm("CRITICAL: This will permanently delete your account and all progress. This action cannot be undone. Proceed?")) {
-                  // In a real app, you would call a Supabase Edge Function to delete the auth user
-                  // and cascade delete their data from public tables.
-                  // For now, we clear local and sign out.
-                  await supabase.auth.signOut();
-                  clearProgress();
-                  onClose();
-                  alert("Your account deletion request has been processed.");
+                  try {
+                    const { data: { session } } = await supabase.auth.getSession();
+                    if (!session?.access_token) {
+                      alert("No active session. Please sign in first.");
+                      return;
+                    }
+                    
+                    const res = await fetch('/api/delete-account', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ accessToken: session.access_token }),
+                    });
+
+                    if (!res.ok) {
+                      const errData = await res.json().catch(() => ({}));
+                      throw new Error(errData.error || 'Account deletion failed.');
+                    }
+
+                    // Server-side deletion succeeded — clear local state
+                    await supabase.auth.signOut();
+                    clearProgress();
+                    onClose();
+                    alert("Your account has been permanently deleted.");
+                  } catch (error) {
+                    console.error('Delete account error:', error);
+                    alert(error instanceof Error ? error.message : "Account deletion failed. Please contact support.");
+                  }
                 }
               }}
               className="w-full p-4 rounded-2xl bg-rose-50 hover:bg-rose-100 border border-rose-100 flex items-center justify-center gap-2 text-rose-600 transition-all font-black uppercase text-[11px]"

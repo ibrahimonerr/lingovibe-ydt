@@ -30,8 +30,9 @@ function ReadingLabContent() {
             if (prefetchedLabs.reading && prefetchedLabs.reading.length > 0) {
                 const index = isGuestMode ? (seed % prefetchedLabs.reading.length) : Math.floor(Math.random() * prefetchedLabs.reading.length);
                 const selectedLab = prefetchedLabs.reading[index];
-                setReadingPassage(selectedLab.passage);
-                setQuestions(isGuestMode ? selectedLab.questions.slice(0, 3) : selectedLab.questions);
+                setReadingPassage(selectedLab.passage ?? null);
+                const qs = (selectedLab.questions ?? []) as unknown as Question[];
+                setQuestions(isGuestMode ? qs.slice(0, 3) : qs);
                 setLoading(false);
                 return;
             }

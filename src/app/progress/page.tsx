@@ -37,7 +37,7 @@ export default function ProgressDashboard() {
         { name: 'Reading', completed: userProgress.readingLabsCompleted, fill: '#f59e0b' }, // amber-500
         { name: 'Vocab', completed: userProgress.vocabLabsCompleted, fill: '#4f46e5' }, // indigo-600
         { name: 'Grammar', completed: userProgress.grammarLabsCompleted, fill: '#10b981' }, // emerald-500
-        { name: 'Skills', completed: 0 /* Assuming skills is added later or derived separately */, fill: '#8b5cf6' } // violet-500
+        { name: 'Skills', completed: userProgress.skillsLabsCompleted, fill: '#8b5cf6' } // violet-500
     ];
 
     const handleClear = () => {

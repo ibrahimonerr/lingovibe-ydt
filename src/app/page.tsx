@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import YDTLogo from '@/components/YDTLogo';
 import {
-  Layout, History, Zap, Languages, Trophy, BookOpen,
-  PenTool, Target, Eye, Repeat, X, ChevronRight, PlayCircle,
+  Layout, Zap, Languages, Trophy, BookOpen,
+  PenTool, Target, Eye, Repeat, X, ChevronRight,
   Settings as SettingsIcon
 } from 'lucide-react';
 import SettingsMenu from '@/components/layout/SettingsMenu';
@@ -41,7 +41,6 @@ export default function YDTHub() {
   const router = useRouter();
   const [view, setView] = useState('home');
   const [mode, setMode] = useState('');
-  const [activeMissions, setActiveMissions] = useState<any[]>([]);
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const { lastActiveRoute, session, isGuestMode, setSession } = useAppStore();
@@ -59,10 +58,7 @@ export default function YDTHub() {
     return () => subscription.unsubscribe();
   }, [setSession]);
 
-  useEffect(() => {
-    const saved = localStorage.getItem('ydt_active_missions');
-    if (saved) setActiveMissions(JSON.parse(saved));
-  }, []);
+
 
   const handleLabSelection = (labType: string, subType?: string) => {
     switch (labType) {

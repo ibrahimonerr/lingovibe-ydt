@@ -31,13 +31,13 @@ function GrammarLabContent() {
             
             // Priority 1: Use prefetched grammar questions if no specific topic filter is enforced
             if ((!topic || topic === 'Mixed') && prefetchedLabs.grammar && prefetchedLabs.grammar.length > 0) {
-                const prefetchedItems = prefetchedLabs.grammar.map(item => item.question || item);
+                const prefetchedItems = prefetchedLabs.grammar.map(item => item.question || item) as unknown as Question[];
                 // For guests, use seed for a stable selection
                 if (isGuestMode) {
                     const stableIdx = seed % (prefetchedLabs.grammar.length - limit);
-                    setQuestions(prefetchedItems.slice(stableIdx, stableIdx + limit));
+                    setQuestions(prefetchedItems.slice(stableIdx, stableIdx + limit) as Question[]);
                 } else {
-                    setQuestions(prefetchedItems.slice(0, 5));
+                    setQuestions(prefetchedItems.slice(0, 5) as Question[]);
                 }
                 setLoading(false);
                 return;

@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
-import { BookOpen, Target, Lightbulb, ChevronRight, Maximize2, Minimize2, Sparkles, Zap, RefreshCw } from 'lucide-react';
+import { BookOpen, Target, Lightbulb, ChevronRight, Maximize2, Minimize2, Sparkles, RefreshCw } from 'lucide-react';
+import ExplanationRenderer from '@/components/features/ExplanationRenderer';
 
 import { Question, Feedback } from '@/types';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
@@ -29,86 +30,17 @@ export default function ReadingLab({
   if (!questions || !questions[currentIdx]) return null;
   const question = questions[currentIdx];
 
-  const renderExplanation = (explanation: string, feedback?: Feedback) => {
-    if (feedback) {
-      const items = [
-        { label: "Analitik Doğrulama", type: "LOGIC", content: feedback.correct_logic, icon: <Target size={14} /> },
-        { label: "Sinsi Çeldirici", type: "TRAP", content: feedback.trap_analysis, icon: <Lightbulb size={14} /> },
-        { label: "YDT Taktiği", type: "TACTIC", content: feedback.exam_tactic, icon: <Zap size={14} /> },
-        { label: "Bağlamsal Çeviri", type: "ANLAM", content: feedback.contextual_translation || feedback.translation, icon: <BookOpen size={14} /> }
-      ];
-
-      return items.filter(item => item.content).map((item, i) => {
-        const styles: Record<string, { bg: string, text: string, labelColor: string }> = {
-          "LOGIC": { bg: "bg-indigo-600 shadow-indigo-200", text: "text-white", labelColor: "text-indigo-200" },
-          "TRAP": { bg: "bg-rose-50 border-rose-100 border-2", text: "text-rose-900", labelColor: "text-rose-600" },
-          "TACTIC": { bg: "bg-amber-50 border-amber-100 border-2", text: "text-amber-900", labelColor: "text-amber-600" },
-          "ANLAM": { bg: "bg-teal-50 border-teal-100 border-2", text: "text-teal-900", labelColor: "text-teal-600" }
-        };
-
-        const style = styles[item.type] || { bg: "bg-slate-50 border-slate-100 border-2", text: "text-slate-700", labelColor: "text-slate-400" };
-
-        return (
-          <div key={i} className={`p-4 rounded-[1.8rem] mb-3 shadow-sm animate-in zoom-in-95 ${style.bg} ${style.text}`}>
-            <div className={`flex items-center gap-2 text-[9px] font-black uppercase mb-1 tracking-widest ${style.labelColor}`}>
-              {item.icon} {item.label}
-            </div>
-            <div className="text-[13px] font-bold leading-relaxed italic">{item.content}</div>
-          </div>
-        );
-      });
-    }
-
-    if (!explanation) return null;
-    const parts = explanation.split('|');
-
-    return parts.map((p, i) => {
-      const [label, ...content] = p.split(':');
-      const type = label?.trim().toUpperCase();
-
-      const styles: Record<string, { bg: string, text: string, labelColor: string, icon: React.ReactNode }> = {
-        "TACTIC": {
-          bg: "bg-indigo-600 shadow-indigo-200",
-          text: "text-white",
-          labelColor: "text-indigo-200",
-          icon: <Zap size={14} />
-        },
-        "ANLAM": {
-          bg: "bg-amber-50 border-amber-100 border-2",
-          text: "text-amber-900",
-          labelColor: "text-amber-600",
-          icon: <BookOpen size={14} />
-        }
-      };
-
-      const style = styles[type] || {
-        bg: "bg-slate-50 border-slate-100 border-2",
-        text: "text-slate-700",
-        labelColor: "text-slate-400",
-        icon: <Sparkles size={14} />
-      };
-
-      return (
-        <div key={i} className={`p-4 rounded-[1.8rem] mb-3 shadow-sm animate-in zoom-in-95 ${style.bg} ${style.text}`}>
-          <div className={`flex items-center gap-2 text-[9px] font-black uppercase mb-1 tracking-widest ${style.labelColor}`}>
-            {style.icon} {label}
-          </div>
-          <div className="text-[13px] font-bold leading-relaxed italic">
-            {content.join(':')}
-          </div>
-        </div>
-      );
-    });
-  };
 
   const renderPassage = () => {
     if (!readingPassage) return null;
 
     // Highlight both __N__ and (N) blank formats
-    // Split on blank markers first: __1__ ... __5__ or (1) ... (5)
-    const blankRegex = /(__\d+__|(?<!\w)\(\d+\)(?!\w))/g;
+    // Use a non-global regex for split (split handles /g internally)
+    const blankSplitRegex = /(__\d+__|(?<!\w)\(\d+\)(?!\w))/g;
+    // Separate non-global regex for testing individual parts (avoids lastIndex bug)
+    const blankTestRegex = /^__\d+__$|^\(\d+\)$/;
 
-    const parts = readingPassage.split(blankRegex);
+    const parts = readingPassage.split(blankSplitRegex);
 
     // If hint quote is active, we also want to highlight the quote
     const quoteRegex = showHint && question.quote
@@ -118,7 +50,7 @@ export default function ReadingLab({
     return (
       <>
         {parts.map((part: string, i: number) => {
-          if (blankRegex.test(part) || /^__\d+__$/.test(part) || /^\(\d+\)$/.test(part)) {
+          if (blankTestRegex.test(part)) {
             // Extract the number from __N__ or (N)
             const num = part.replace(/__/g, '').replace(/[()]/g, '');
             return (
@@ -311,7 +243,7 @@ export default function ReadingLab({
               </div>
 
               <div className="space-y-1">
-                {renderExplanation(question.explanation, question.feedback)}
+                <ExplanationRenderer explanation={question.explanation} feedback={question.feedback} theme="amber" />
               </div>
             </div>
           </div>

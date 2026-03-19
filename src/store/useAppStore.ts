@@ -1,6 +1,22 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { capacitorStorage } from '@/lib/capacitorStorage';
+import type { Session } from '@supabase/supabase-js';
+
+/**
+ * Supabase lab data structure.
+ * NOTE: Grammar/Skills labs use `question` (singular) field in DB,
+ * while Reading labs use `questions` (plural). This is a Supabase schema
+ * convention — not a bug. Handle both when reading lab entries.
+ */
+interface PrefetchedLab {
+    id?: number;
+    topic?: string;
+    passage?: string;
+    question?: Record<string, unknown> | Record<string, unknown>[];  // grammar_labs, skills_labs (singular)
+    questions?: Record<string, unknown>[];                           // reading_labs (plural)
+    [key: string]: unknown;  // Allow additional DB columns
+}
 
 interface Mission {
     id: string;
@@ -14,6 +30,7 @@ interface AppState {
         readingLabsCompleted: number;
         vocabLabsCompleted: number;
         grammarLabsCompleted: number;
+        skillsLabsCompleted: number;
     };
     labStats: {
         totalCorrect: number;
@@ -21,24 +38,24 @@ interface AppState {
         totalWrong: number;
     };
     prefetchedLabs: {
-        reading: any[];
-        vocab: any[];
-        grammar: any[];
-        skills: any[];
+        reading: PrefetchedLab[];
+        vocab: PrefetchedLab[];
+        grammar: PrefetchedLab[];
+        skills: PrefetchedLab[];
     };
     lastActiveRoute: string | null;
     isGuestMode: boolean;
-    session: any | null;
+    session: Session | null;
     guestAiUsage: number;
     lastAiUsageDate: string | null;
     guestDailyCompletedLabs: string[];
     addMission: (mission: Mission) => void;
     completeMission: (id: string) => void;
-    incrementProgress: (type: 'reading' | 'vocab' | 'grammar') => void;
+    incrementProgress: (type: 'reading' | 'vocab' | 'grammar' | 'skills') => void;
     recordAnswer: (isCorrect: boolean, usedHint?: boolean) => void;
-    setPrefetchedLabs: (type: 'reading' | 'vocab' | 'grammar' | 'skills', labs: any[]) => void;
+    setPrefetchedLabs: (type: 'reading' | 'vocab' | 'grammar' | 'skills', labs: PrefetchedLab[]) => void;
     setLastActiveRoute: (route: string | null) => void;
-    setSession: (session: any | null) => void;
+    setSession: (session: Session | null) => void;
     setGuestMode: (active: boolean) => void;
     incrementGuestAiUsage: () => void;
     markLabAsCompletedByGuest: (labType: string) => void;
@@ -54,6 +71,7 @@ export const useAppStore = create<AppState>()(
                 readingLabsCompleted: 0,
                 vocabLabsCompleted: 0,
                 grammarLabsCompleted: 0,
+                skillsLabsCompleted: 0,
             },
             labStats: {
                 totalCorrect: 0,
@@ -148,6 +166,7 @@ export const useAppStore = create<AppState>()(
                         readingLabsCompleted: 0,
                         vocabLabsCompleted: 0,
                         grammarLabsCompleted: 0,
+                        skillsLabsCompleted: 0,
                     },
                     lastActiveRoute: null,
                     isGuestMode: false,

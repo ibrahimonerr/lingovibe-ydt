@@ -383,6 +383,10 @@ export default function WordMap({ onComplete }: { onComplete?: () => void }) {
 
   const handleMapComplete = (score: number, errors: number) => {
     saveMapResult(today, { score, wrongAttempts: errors });
+    // Call the parent callback to navigate back after a delay
+    if (onComplete) {
+      setTimeout(() => onComplete(), 2500);
+    }
   };
 
   if (phase === 'loading') {

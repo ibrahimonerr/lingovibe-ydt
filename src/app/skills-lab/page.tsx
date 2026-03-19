@@ -13,7 +13,7 @@ import { Question } from '@/types';
 
 function SkillsLabContent() {
     const router = useRouter();
-    const { prefetchedLabs } = useAppStore();
+    const { prefetchedLabs, isGuestMode, getDailySeed, incrementProgress } = useAppStore();
     const searchParams = useSearchParams();
     const topic = searchParams.get('topic') || '';
 
@@ -30,15 +30,18 @@ function SkillsLabContent() {
 
     useEffect(() => {
         const fetchQuestions = async () => {
+            const seed = getDailySeed();
+            const limit = isGuestMode ? 3 : 5;
+
             if (!topic && prefetchedLabs.skills && prefetchedLabs.skills.length > 0) {
-                const randomIndex = Math.floor(Math.random() * prefetchedLabs.skills.length);
-                const selectedLab = prefetchedLabs.skills[randomIndex];
+                const index = isGuestMode ? (seed % prefetchedLabs.skills.length) : Math.floor(Math.random() * prefetchedLabs.skills.length);
+                const selectedLab = prefetchedLabs.skills[index];
 
                 if (selectedLab.passage) {
                     setPassage(selectedLab.passage);
-                    setQuestions(selectedLab.questions as Question[]);
+                    setQuestions((selectedLab.questions ?? []) as unknown as Question[]);
                 } else {
-                    setQuestions(selectedLab.question as Question[]);
+                    setQuestions([selectedLab.question].flat() as unknown as Question[]);
                 }
                 setLoading(false);
                 return;
@@ -59,8 +62,8 @@ function SkillsLabContent() {
                 if (error) throw error;
 
                 if (data && data.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * data.length);
-                    const selectedLab = data[randomIndex];
+                    const index = isGuestMode ? (seed % data.length) : Math.floor(Math.random() * data.length);
+                    const selectedLab = data[index];
                     const raw = selectedLab.question;
 
                     if (topic === 'Cloze Test') {
@@ -108,7 +111,7 @@ function SkillsLabContent() {
         };
 
         fetchQuestions();
-    }, [topic, prefetchedLabs.skills]);
+    }, [topic, prefetchedLabs.skills, isGuestMode, getDailySeed]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {
@@ -117,6 +120,12 @@ function SkillsLabContent() {
             setShowFeedback(false);
             setShowHint(false);
         } else {
+            // Finished
+            if (isGuestMode) {
+                const { markLabAsCompletedByGuest } = useAppStore.getState();
+                markLabAsCompletedByGuest('skills');
+            }
+            incrementProgress('skills');
             router.push('/');
         }
     };
