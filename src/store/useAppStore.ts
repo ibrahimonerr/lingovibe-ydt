@@ -37,6 +37,10 @@ interface AppState {
         totalHintsUsed: number;
         totalWrong: number;
     };
+    sessionStats: {
+        correct: number;
+        wrong: number;
+    };
     prefetchedLabs: {
         reading: PrefetchedLab[];
         vocab: PrefetchedLab[];
@@ -61,6 +65,7 @@ interface AppState {
     markLabAsCompletedByGuest: (labType: string) => void;
     getDailySeed: () => number;
     clearProgress: () => void;
+    resetSessionStats: () => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -77,6 +82,10 @@ export const useAppStore = create<AppState>()(
                 totalCorrect: 0,
                 totalHintsUsed: 0,
                 totalWrong: 0,
+            },
+            sessionStats: {
+                correct: 0,
+                wrong: 0,
             },
             prefetchedLabs: {
                 reading: [],
@@ -110,15 +119,18 @@ export const useAppStore = create<AppState>()(
             recordAnswer: (isCorrect, usedHint = false) =>
                 set((state) => {
                     const stats = { ...state.labStats };
+                    const sStats = { ...state.sessionStats };
                     if (isCorrect) {
                         stats.totalCorrect += 1;
+                        sStats.correct += 1;
                     } else {
                         stats.totalWrong += 1;
+                        sStats.wrong += 1;
                     }
                     if (usedHint) {
                         stats.totalHintsUsed += 1;
                     }
-                    return { labStats: stats };
+                    return { labStats: stats, sessionStats: sStats };
                 }),
             setPrefetchedLabs: (type, labs) =>
                 set((state) => ({
@@ -171,6 +183,11 @@ export const useAppStore = create<AppState>()(
                     lastActiveRoute: null,
                     isGuestMode: false,
                     session: null,
+                    sessionStats: { correct: 0, wrong: 0 }
+                }),
+            resetSessionStats: () =>
+                set({
+                    sessionStats: { correct: 0, wrong: 0 }
                 }),
         }),
         {

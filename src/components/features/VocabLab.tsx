@@ -77,7 +77,7 @@ export default function VocabMaster({
           onClick={(e) => { e.stopPropagation(); handleNext(); }}
           className="w-full mt-8 bg-indigo-600 text-white py-5 rounded-[2rem] font-black uppercase text-[11px] shadow-lg active:scale-95 transition-all"
         >
-          Next Word
+          {currentIdx < questions.length - 1 ? 'Next Word' : 'Finish Lab Session'}
         </button>
       </div>
     );
@@ -109,7 +109,9 @@ export default function VocabMaster({
             <p className="font-black mb-3 uppercase flex items-center gap-2 text-[10px] text-indigo-600 tracking-widest"><Lightbulb size={16} /> Correct: {q.correct}</p>
             <div className="space-y-3">{renderCardDetails(q.explanation)}</div>
           </div>
-          <button onClick={handleNext} className="w-full bg-indigo-600 text-white py-4 rounded-[2rem] font-black shadow-lg text-[13px] uppercase active:scale-95 transition-all">Continue Mission</button>
+          <button onClick={handleNext} className="w-full bg-indigo-600 text-white py-4 rounded-[2rem] font-black shadow-lg text-[13px] uppercase active:scale-95 transition-all">
+            {currentIdx < questions.length - 1 ? 'Continue Mission' : 'Finish Lab Session'}
+          </button>
         </div>
       )}
 

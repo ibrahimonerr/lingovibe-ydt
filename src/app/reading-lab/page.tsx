@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import ReadingLab from '@/components/features/ReadingLab';
+import LabResults from '@/components/features/LabResults';
 import MobileShell from '@/components/layout/MobileShell';
 import { Question } from '@/types';
 import { RefreshCw } from 'lucide-react';
@@ -19,12 +20,15 @@ function ReadingLabContent() {
     const [showFeedback, setShowFeedback] = useState(false);
     const [showHint, setShowHint] = useState(false);
     const [isTextExpanded, setIsTextExpanded] = useState(true);
+    const [isFinished, setIsFinished] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed } = useAppStore();
+    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed, resetSessionStats } = useAppStore();
 
     useEffect(() => {
         const fetchReading = async () => {
+            resetSessionStats();
+            setIsFinished(false);
             const seed = getDailySeed();
 
             if (prefetchedLabs.reading && prefetchedLabs.reading.length > 0) {
@@ -77,14 +81,18 @@ function ReadingLabContent() {
             setShowFeedback(false);
             setShowHint(false);
         } else {
-            // Finished
-            if (isGuestMode) {
-                const { markLabAsCompletedByGuest } = useAppStore.getState();
-                markLabAsCompletedByGuest('reading');
-            }
-            incrementProgress('reading');
-            router.push('/');
+            // End of lab questions
+            setIsFinished(true);
         }
+    };
+
+    const handleSessionComplete = () => {
+        if (isGuestMode) {
+            const { markLabAsCompletedByGuest } = useAppStore.getState();
+            markLabAsCompletedByGuest('reading');
+        }
+        incrementProgress('reading');
+        router.push('/');
     };
 
     if (errorMsg) {
@@ -104,6 +112,16 @@ function ReadingLabContent() {
                 <RefreshCw className="animate-spin text-indigo-600 mb-4" size={48} />
                 <p className="font-black text-indigo-600 uppercase text-[10px] tracking-widest">Lab Syncing...</p>
             </div>
+        );
+    }
+
+    if (isFinished) {
+        return (
+            <LabResults 
+                totalQuestions={questions.length} 
+                onFinish={handleSessionComplete} 
+                labTitle="Reading Score" 
+            />
         );
     }
 

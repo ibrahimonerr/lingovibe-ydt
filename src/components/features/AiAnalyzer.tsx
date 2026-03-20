@@ -4,16 +4,21 @@ import { Sparkles, Lightbulb, FileText } from 'lucide-react';
 
 import { Question } from '@/types';
 
+import { useAppStore } from '@/store/useAppStore';
+
 export default function AiAnalyzer({
-  question, handleNext, selectedOption, setSelectedOption, showFeedback, setShowFeedback
+  question, currentIdx = 0, totalQuestions = 1, handleNext, selectedOption, setSelectedOption, showFeedback, setShowFeedback
 }: {
   question: Question | null,
+  currentIdx?: number,
+  totalQuestions?: number,
   handleNext: () => void,
   selectedOption: string | null,
   setSelectedOption: (v: string | null) => void,
   showFeedback: boolean,
   setShowFeedback: (v: boolean) => void
 }) {
+  const { recordAnswer } = useAppStore();
 
   if (!question) return null;
 
@@ -65,14 +70,19 @@ export default function AiAnalyzer({
             onClick={handleNext}
             className="w-full bg-slate-900 text-white py-5 rounded-[2.2rem] font-black uppercase text-[12px] shadow-xl active:scale-95 transition-all tracking-widest"
           >
-            Next Question
+            {currentIdx < totalQuestions - 1 ? 'Next Question' : 'Finish Lab Session'}
           </button>
         </div>
       )}
 
       {!showFeedback && (
         <button
-          onClick={() => selectedOption && setShowFeedback(true)}
+          onClick={() => {
+            if (selectedOption) {
+              recordAnswer(selectedOption === question.correct);
+              setShowFeedback(true);
+            }
+          }}
           disabled={!selectedOption}
           className="w-full bg-rose-600 text-white py-5 rounded-[2.2rem] font-black shadow-lg uppercase text-[12px] active:scale-95 tracking-widest transition-all"
         >

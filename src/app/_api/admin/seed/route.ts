@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { exec } from 'child_process';
 import path from 'path';
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic'; // Removed for static export (Capacitor compat)
 
 export async function POST(request: NextRequest) {
     // Read token from Authorization header instead of query string

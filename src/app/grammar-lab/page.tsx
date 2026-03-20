@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import GrammarLab from '@/components/features/GrammarLab';
+import LabResults from '@/components/features/LabResults';
 import MobileShell from '@/components/layout/MobileShell';
 import { Question } from '@/types';
 import { RefreshCw } from 'lucide-react';
@@ -20,13 +21,16 @@ function GrammarLabContent() {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [showHint, setShowHint] = useState(false);
-    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed } = useAppStore();
+    const [isFinished, setIsFinished] = useState(false);
+    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed, resetSessionStats } = useAppStore();
     
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const limit = isGuestMode ? 3 : 5;
 
     useEffect(() => {
         const fetchQuestions = async () => {
+            resetSessionStats();
+            setIsFinished(false);
             const seed = getDailySeed();
             
             // Priority 1: Use prefetched grammar questions if no specific topic filter is enforced
@@ -86,14 +90,17 @@ function GrammarLabContent() {
             setShowFeedback(false);
             setShowHint(false);
         } else {
-            // Finished
-            if (isGuestMode) {
-                const { markLabAsCompletedByGuest } = useAppStore.getState();
-                markLabAsCompletedByGuest('grammar');
-            }
-            incrementProgress('grammar');
-            router.push('/');
+            setIsFinished(true);
         }
+    };
+
+    const handleSessionComplete = () => {
+        if (isGuestMode) {
+            const { markLabAsCompletedByGuest } = useAppStore.getState();
+            markLabAsCompletedByGuest('grammar');
+        }
+        incrementProgress('grammar');
+        router.push('/');
     };
 
     if (errorMsg) {
@@ -116,9 +123,21 @@ function GrammarLabContent() {
         );
     }
 
+    if (isFinished) {
+        return (
+            <LabResults 
+                totalQuestions={questions.length} 
+                onFinish={handleSessionComplete} 
+                labTitle="Grammar Score" 
+            />
+        );
+    }
+
     return (
         <GrammarLab
             question={questions[currentIdx]}
+            currentIdx={currentIdx}
+            totalQuestions={questions.length}
             mode="grammar"
             handleNext={handleNext}
             selectedOption={selectedOption}

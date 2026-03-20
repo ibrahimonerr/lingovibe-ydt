@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AiAnalyzer from '@/components/features/AiAnalyzer';
+import LabResults from '@/components/features/LabResults';
 import MobileShell from '@/components/layout/MobileShell';
 import { useAppStore } from '@/store/useAppStore';
 import { aiService } from '@/services/aiService';
@@ -15,9 +16,10 @@ export default function AnalyzerPage() {
     const [currentIdx, setCurrentIdx] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
+    const [isFinished, setIsFinished] = useState(false);
 
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const { isGuestMode, guestAiUsage, lastAiUsageDate, incrementGuestAiUsage } = useAppStore();
+    const { isGuestMode, guestAiUsage, lastAiUsageDate, incrementGuestAiUsage, resetSessionStats } = useAppStore();
     const today = new Date().toDateString();
     const currentUsage = lastAiUsageDate === today ? guestAiUsage : 0;
 
@@ -31,6 +33,8 @@ export default function AnalyzerPage() {
 
         setAnalyzing(true);
         setErrorMsg(null);
+        resetSessionStats();
+        setIsFinished(false);
         try {
             const data = await aiService.analyzeText(inputText);
             if (data && data.questions && Array.isArray(data.questions)) {
@@ -53,8 +57,12 @@ export default function AnalyzerPage() {
             setSelectedOption(null);
             setShowFeedback(false);
         } else {
-            router.push('/');
+            setIsFinished(true);
         }
+    };
+
+    const handleSessionComplete = () => {
+        router.push('/');
     };
 
     return (
@@ -87,9 +95,17 @@ export default function AnalyzerPage() {
                         </div>
                     )}
                 </div>
+            ) : isFinished ? (
+                <LabResults 
+                    totalQuestions={questions.length} 
+                    onFinish={handleSessionComplete} 
+                    labTitle="AI Analyzer Score" 
+                />
             ) : (
                 <AiAnalyzer
                     question={questions[currentIdx]}
+                    currentIdx={currentIdx}
+                    totalQuestions={questions.length}
                     handleNext={handleNext}
                     selectedOption={selectedOption}
                     setSelectedOption={setSelectedOption}

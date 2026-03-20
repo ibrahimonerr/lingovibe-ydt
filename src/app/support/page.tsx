@@ -35,31 +35,17 @@ export default function SupportPage() {
                         Have a technical issue or account question? Send us an email and we&apos;ll get back to you within 24 hours.
                     </p>
                     <a 
-                        href="mailto:support@ydthub.com" 
+                        href="mailto:hubydt@gmail.com" 
                         className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-2xl text-[12px] font-black uppercase tracking-widest hover:bg-black transition-colors"
                     >
                         Contact us <ExternalLink size={14} />
                     </a>
                 </div>
+            </div>
 
-                {/* Community Support */}
-                <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                    <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
-                        <MessageSquare size={24} />
-                    </div>
-                    <h2 className="text-xl font-black mb-2 tracking-tight">Community Hub</h2>
-                    <p className="text-slate-500 text-sm mb-6 leading-relaxed">
-                        Join our Discord community to discuss questions, share study tips, and get updates in real-time.
-                    </p>
-                    <button 
-                        className="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-2xl text-[12px] font-black uppercase tracking-widest hover:bg-indigo-700 transition-colors"
-                    >
-                        Join Discord <ArrowLeft className="rotate-180" size={14} />
-                    </button>
-                </div>
-
+            <div className="grid gap-6 max-w-4xl mt-6">
                 {/* FAQ Note */}
-                <div className="md:col-span-2 bg-amber-500/10 border-2 border-dashed border-amber-200 p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-6">
+                <div className="bg-amber-500/10 border-2 border-dashed border-amber-200 p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-6">
                    <div className="p-4 bg-white rounded-3xl shadow-sm">
                       <LifeBuoy className="text-amber-600" size={32} />
                    </div>

@@ -62,11 +62,13 @@ export default function MobileShell({ children }: { children: React.ReactNode })
     };
 
     return (
-        <div className="h-dvh w-full overflow-hidden bg-slate-50 flex justify-center py-0 sm:py-8 font-sans text-slate-900 leading-normal">
+        <div 
+            className="h-dvh w-full overflow-hidden bg-slate-50 flex justify-center py-0 sm:py-8 font-sans text-slate-900 leading-normal"
+            style={{ paddingTop: 'env(safe-area-inset-top)' }}
+        >
             <Suspense fallback={null}>
                 <RouteTracker />
-            </Suspense>
-            <div className="w-full max-w-[450px] bg-white h-full sm:rounded-[3rem] shadow-2xl flex flex-col relative border-x border-slate-200">
+            </Suspense>            <div className="w-full max-w-[450px] bg-white h-full sm:rounded-[3rem] shadow-2xl flex flex-col relative border-x border-slate-200">
 
                 {/* LOGO SECTION */}
                 <header className="pt-8 pb-3 text-center border-b border-slate-50 bg-white shrink-0">

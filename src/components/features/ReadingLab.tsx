@@ -42,10 +42,26 @@ export default function ReadingLab({
 
     const parts = readingPassage.split(blankSplitRegex);
 
-    // If hint quote is active, we also want to highlight the quote
-    const quoteRegex = showHint && question.quote
-      ? new RegExp(`(${question.quote.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'i')
-      : null;
+    // If hint or feedback is active, we also want to highlight the quote in the passage
+    let quoteRegex: RegExp | null = null;
+    if ((showHint || showFeedback) && question.quote) {
+      // Split quote into alphanumeric words (ignoring all punctuation, emojis, extra spaces, quotes, etc.)
+      const words = question.quote.trim().split(/[^a-zA-Z0-9çğıöşüÇĞİÖŞÜ]+/);
+      const validWords = words.filter(w => w.length > 0);
+      
+      if (validWords.length > 0) {
+        // Re-join words allowing ANY non-alphanumeric characters (like newlines, commas, smart quotes) between them
+        const flexibleQuote = validWords
+          .map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+          .join('[^a-zA-Z0-9çğıöşüÇĞİÖŞÜ]+');
+          
+        try {
+          quoteRegex = new RegExp(`(${flexibleQuote})`, 'i');
+        } catch (e) {
+          console.error("Invalid regex for quote:", flexibleQuote);
+        }
+      }
+    }
 
     return (
       <>

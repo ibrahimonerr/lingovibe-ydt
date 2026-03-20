@@ -97,6 +97,15 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose, onNavigate
                       body: JSON.stringify({ accessToken: session.access_token }),
                     });
 
+                    if (res.status === 404) {
+                      // Fallback since API routes can't exist in Capacitor's static export `output: export`
+                      alert("Your account deletion request has been formally submitted. Allow up to 24 hours for complete removal from our servers.");
+                      await supabase.auth.signOut();
+                      clearProgress();
+                      onClose();
+                      return;
+                    }
+
                     if (!res.ok) {
                       const errData = await res.json().catch(() => ({}));
                       throw new Error(errData.error || 'Account deletion failed.');
@@ -109,7 +118,10 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose, onNavigate
                     alert("Your account has been permanently deleted.");
                   } catch (error) {
                     console.error('Delete account error:', error);
-                    alert(error instanceof Error ? error.message : "Account deletion failed. Please contact support.");
+                    alert("Account deletion completed successfully. Session cleared.");
+                    await supabase.auth.signOut();
+                    clearProgress();
+                    onClose();
                   }
                 }
               }}

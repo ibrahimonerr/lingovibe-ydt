@@ -6,7 +6,7 @@ import YDTLogo from '@/components/YDTLogo';
 import {
   Layout, Zap, Languages, Trophy, BookOpen,
   PenTool, Target, Eye, Repeat, X, ChevronRight,
-  Settings as SettingsIcon
+  Settings as SettingsIcon, PieChart
 } from 'lucide-react';
 import SettingsMenu from '@/components/layout/SettingsMenu';
 import { useAppStore } from '@/store/useAppStore';
@@ -265,7 +265,11 @@ export default function YDTHub() {
                     <BookOpen size={20} className="text-violet-600" />
                     <span className="font-black text-[10px] uppercase">Skills</span>
                   </button>
-                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/analyzer'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-rose-50">
+                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/progress'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-slate-100">
+                    <PieChart size={20} className="text-slate-800" />
+                    <span className="font-black text-[10px] uppercase">Progress</span>
+                  </button>
+                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/analyzer'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-rose-50 col-span-2">
                     <PenTool size={20} className="text-rose-600" />
                     <span className="font-black text-[10px] uppercase">Analyzer</span>
                   </button>

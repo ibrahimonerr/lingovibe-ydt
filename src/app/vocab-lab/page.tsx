@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import VocabLab from '@/components/features/VocabLab';
+import LabResults from '@/components/features/LabResults';
 import WordMap from '@/components/features/WordMap';
 import MobileShell from '@/components/layout/MobileShell';
 import { RefreshCw } from 'lucide-react';
@@ -22,7 +23,8 @@ function VocabLabContent() {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
-    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed } = useAppStore();
+    const [isFinished, setIsFinished] = useState(false);
+    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed, resetSessionStats } = useAppStore();
     const limit = isGuestMode ? 3 : 5;
 
     useEffect(() => {
@@ -31,8 +33,10 @@ function VocabLabContent() {
         setSelectedOption(null);
         setShowFeedback(false);
         setIsFlipped(false);
+        setIsFinished(false);
 
         const fetchVocab = async () => {
+            resetSessionStats();
             const seed = getDailySeed();
             
             if (vocabSubMode === 'wordmap') {
@@ -194,14 +198,17 @@ function VocabLabContent() {
             setShowFeedback(false);
             setIsFlipped(false);
         } else {
-            // Finished
-            if (isGuestMode) {
-                const { markLabAsCompletedByGuest } = useAppStore.getState();
-                markLabAsCompletedByGuest('vocab');
-            }
-            incrementProgress('vocab');
-            router.push('/');
+            setIsFinished(true);
         }
+    };
+
+    const handleSessionComplete = () => {
+        if (isGuestMode) {
+            const { markLabAsCompletedByGuest } = useAppStore.getState();
+            markLabAsCompletedByGuest('vocab');
+        }
+        incrementProgress('vocab');
+        router.push('/');
     };
 
     if (loading) {
@@ -215,6 +222,16 @@ function VocabLabContent() {
 
     if (vocabSubMode === 'wordmap') {
         return <WordMap onComplete={() => router.push('/')} />;
+    }
+
+    if (isFinished) {
+        return (
+            <LabResults 
+                totalQuestions={questions.length} 
+                onFinish={handleSessionComplete} 
+                labTitle="Vocab Score" 
+            />
+        );
     }
 
     return (

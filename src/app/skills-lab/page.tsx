@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import GrammarLab from '@/components/features/GrammarLab';
+import LabResults from '@/components/features/LabResults';
 import MobileShell from '@/components/layout/MobileShell';
 import { RefreshCw } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
@@ -13,7 +14,7 @@ import { Question } from '@/types';
 
 function SkillsLabContent() {
     const router = useRouter();
-    const { prefetchedLabs, isGuestMode, getDailySeed, incrementProgress } = useAppStore();
+    const { prefetchedLabs, isGuestMode, getDailySeed, incrementProgress, resetSessionStats } = useAppStore();
     const searchParams = useSearchParams();
     const topic = searchParams.get('topic') || '';
 
@@ -25,11 +26,14 @@ function SkillsLabContent() {
     const [showFeedback, setShowFeedback] = useState(false);
     const [showHint, setShowHint] = useState(false);
     const [isTextExpanded, setIsTextExpanded] = useState(false);
+    const [isFinished, setIsFinished] = useState(false);
 
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchQuestions = async () => {
+            resetSessionStats();
+            setIsFinished(false);
             const seed = getDailySeed();
             const limit = isGuestMode ? 3 : 5;
 
@@ -120,14 +124,17 @@ function SkillsLabContent() {
             setShowFeedback(false);
             setShowHint(false);
         } else {
-            // Finished
-            if (isGuestMode) {
-                const { markLabAsCompletedByGuest } = useAppStore.getState();
-                markLabAsCompletedByGuest('skills');
-            }
-            incrementProgress('skills');
-            router.push('/');
+            setIsFinished(true);
         }
+    };
+
+    const handleSessionComplete = () => {
+        if (isGuestMode) {
+            const { markLabAsCompletedByGuest } = useAppStore.getState();
+            markLabAsCompletedByGuest('skills');
+        }
+        incrementProgress('skills');
+        router.push('/');
     };
 
     if (errorMsg) {
@@ -147,6 +154,16 @@ function SkillsLabContent() {
                 <RefreshCw className="animate-spin text-indigo-600 mb-4" size={48} />
                 <p className="font-black text-indigo-600 uppercase text-[10px] tracking-widest">Lab Syncing...</p>
             </div>
+        );
+    }
+
+    if (isFinished) {
+        return (
+            <LabResults 
+                totalQuestions={questions.length} 
+                onFinish={handleSessionComplete} 
+                labTitle="Skills Lab Score" 
+            />
         );
     }
 
@@ -175,6 +192,8 @@ function SkillsLabContent() {
     return (
         <GrammarLab
             question={currentQuestion}
+            currentIdx={currentIdx}
+            totalQuestions={questions.length}
             mode="skills"
             handleNext={handleNext}
             selectedOption={selectedOption}

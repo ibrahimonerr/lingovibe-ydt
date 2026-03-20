@@ -8,10 +8,12 @@ import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { useAppStore } from '@/store/useAppStore';
 
 export default function GrammarLab({
-  question, mode, handleNext, selectedOption, setSelectedOption, showFeedback, setShowFeedback,
+  question, currentIdx = 0, totalQuestions = 1, mode, handleNext, selectedOption, setSelectedOption, showFeedback, setShowFeedback,
   showHint, setShowHint
 }: {
   question: Question | null,
+  currentIdx?: number,
+  totalQuestions?: number,
   mode: string,
   handleNext: () => void,
   selectedOption: string | null,
@@ -137,7 +139,9 @@ export default function GrammarLab({
               <div className="space-y-1"><ExplanationRenderer explanation={question.explanation} feedback={question.feedback} theme={isSkills ? 'violet' : 'emerald'} /></div>
             </div>
           </div>
-          <button onClick={handleNext} className={`w-full ${isSkills ? 'bg-violet-900' : 'bg-slate-900'} text-white py-5 rounded-[2.2rem] font-black uppercase text-[12px] shadow-xl active:scale-95 transition-all tracking-widest`}>Next Challenge</button>
+          <button onClick={handleNext} className={`w-full ${isSkills ? 'bg-violet-900' : 'bg-slate-900'} text-white py-5 rounded-[2.2rem] font-black uppercase text-[12px] shadow-xl active:scale-95 transition-all tracking-widest`}>
+            {currentIdx < totalQuestions - 1 ? 'Next Challenge' : 'Finish Lab Session'}
+          </button>
         </div>
       )}
 

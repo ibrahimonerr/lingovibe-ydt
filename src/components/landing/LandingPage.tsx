@@ -81,7 +81,7 @@ function Feature({
 
 export function LandingPage() {
   return (
-    <div className="min-h-dvh">
+    <div className="min-h-dvh" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
       <header className="py-6">
         <Container className="flex items-center justify-between">
           <div className="flex items-center gap-3">
