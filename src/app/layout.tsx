@@ -6,6 +6,7 @@ import "./globals.css";
 import SplashScreenWrapper from "@/components/SplashScreenWrapper";
 import NetworkStatusTracker from "@/components/features/NetworkStatusTracker";
 import Prefetcher from "@/components/features/Prefetcher";
+import ThemeHandler from "@/components/layout/ThemeHandler";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -53,6 +54,7 @@ export default function RootLayout({
           <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.06),transparent_22%,transparent_78%,rgba(255,255,255,0.04))]" />
         </div>
         <SplashScreenWrapper>
+          <ThemeHandler />
           <NetworkStatusTracker />
           <Prefetcher />
           {children}

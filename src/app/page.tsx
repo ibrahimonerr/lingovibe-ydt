@@ -93,78 +93,70 @@ export default function YDTHub() {
 
   return (
     <div
-      className="h-dvh w-full overflow-hidden bg-slate-50 flex justify-center py-0 sm:py-8 font-sans text-slate-900 leading-normal"
+      className="h-dvh w-full overflow-hidden bg-slate-50 dark:bg-black flex justify-center py-0 sm:py-8 font-sans text-slate-900 dark:text-slate-100 leading-normal transition-colors duration-300"
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
-      <div className="w-full max-w-[450px] bg-white h-full sm:rounded-[3rem] shadow-2xl flex flex-col relative border-x border-slate-200">
+      <div className="w-full max-w-[450px] bg-white dark:bg-[#070812] h-full sm:rounded-[3rem] shadow-2xl flex flex-col relative border-x border-slate-200 dark:border-slate-800 overflow-y-auto custom-scrollbar">
 
-        {/* Spacer that pushes all content down */}
-        <div className="flex-1" />
 
-        {/* LOGO SECTION & SETTINGS BUTTON */}
-        <header className="py-5 px-6 flex justify-between items-center border-b border-slate-100 bg-white relative">
-          {/* Invisible spacer for centering logo */}
-          <div className="w-10" />
-          
-          <div className="flex flex-col items-center">
-            <YDTLogo size="md" theme="dark" showSlogan={false} hideIcon={true} />
-            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-indigo-400/60 -mt-1">
-              Learn Smarter. Score Higher.
-            </p>
+        {/* FLOATING HEADER ISLAND */}
+        <header className="z-40 sticky top-6 left-0 w-full px-4 flex justify-center pointer-events-none">
+          <div className="bg-white/70 dark:bg-[#070812]/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-full px-5 py-2.5 shadow-xl flex items-center justify-center w-full max-w-[420px] pointer-events-auto relative">
+            <YDTLogo size="sm" layout="horizontal" showSlogan={true} />
+            
+            <button 
+              onClick={() => setIsSettingsOpen(true)}
+              className="absolute right-3 w-10 h-10 flex items-center justify-center rounded-full bg-slate-100/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 border border-slate-200/50 dark:border-slate-700/50 active:scale-90 transition-all shadow-sm"
+            >
+              <SettingsIcon size={18} />
+            </button>
           </div>
-          
-          <button 
-            onClick={() => setIsSettingsOpen(true)}
-            className="w-10 h-10 flex items-center justify-center rounded-2xl bg-slate-50 text-slate-400 border border-slate-100 active:scale-90 transition-all shadow-sm"
-          >
-            <SettingsIcon size={20} />
-          </button>
         </header>
 
-        <main className="flex flex-col px-5 pt-6 pb-28">
+        <main className="flex flex-col px-5 pt-20 pb-28">
           {view === 'home' && (
             <div className="flex flex-col gap-3 animate-in fade-in duration-500">
               {/* READING LAB */}
-              <button onClick={() => handleLabSelection('reading')} className="w-full p-5 rounded-[2.2rem] border-2 border-amber-100 bg-amber-50/30 flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-white rounded-2xl text-amber-500 shadow-sm"><Zap size={20} /></div>
+              <button onClick={() => handleLabSelection('reading')} className="w-full p-5 rounded-[2.2rem] border-2 border-amber-100 dark:border-amber-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
+                <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-2xl text-amber-500 shadow-sm"><Zap size={20} /></div>
                 <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 leading-none mb-1">Reading Lab</span>
+                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Reading Lab</span>
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.15em] opacity-80">Daily Reading Comprehension</span>
                 </div>
               </button>
 
               {/* VOCAB LAB */}
-              <button onClick={() => setMode('vocab_select')} className="w-full p-5 rounded-[2.2rem] border-2 border-indigo-100 bg-indigo-50/30 flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-white rounded-2xl text-indigo-600 shadow-sm"><Languages size={20} /></div>
+              <button onClick={() => setMode('vocab_select')} className="w-full p-5 rounded-[2.2rem] border-2 border-indigo-100 dark:border-indigo-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
+                <div className="p-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl text-indigo-600 shadow-sm"><Languages size={20} /></div>
                 <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 leading-none mb-1">Vocab Lab</span>
+                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Vocab Lab</span>
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.15em] opacity-80">Retention & Recall</span>
                 </div>
               </button>
 
-              {/* GRAMMAR LAB */}
-              <button onClick={() => setMode('grammar')} className="w-full p-5 rounded-[2.2rem] border-2 border-emerald-100 bg-emerald-50/30 flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-white rounded-2xl text-emerald-600 shadow-sm"><Trophy size={20} /></div>
+               {/* GRAMMAR LAB */}
+              <button onClick={() => setView('grammar')} className="w-full p-5 rounded-[2.2rem] border-2 border-emerald-100 dark:border-emerald-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
+                <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl text-emerald-600 shadow-sm"><PenTool size={20} /></div>
                 <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 leading-none mb-1">Grammar Lab</span>
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.15em] opacity-80">Structural Logic</span>
+                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Grammar Lab</span>
+                  <span className="text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.15em] opacity-80">Structure & Sentence Rules</span>
                 </div>
               </button>
 
               {/* SKILLS LAB */}
-              <button onClick={() => setMode('skills')} className="w-full p-5 rounded-[2.2rem] border-2 border-violet-100 bg-violet-50/30 flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-white rounded-2xl text-violet-600 shadow-sm"><BookOpen size={20} /></div>
+              <button onClick={() => setView('skills')} className="w-full p-5 rounded-[2.2rem] border-2 border-violet-100 dark:border-violet-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
+                <div className="p-3 bg-violet-50 dark:bg-violet-900/20 rounded-2xl text-violet-600 shadow-sm"><Target size={20} /></div>
                 <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 leading-none mb-1">Skills Lab</span>
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.15em] opacity-80">Patterns & Logic</span>
+                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Skills Lab</span>
+                  <span className="text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.15em] opacity-80">Cloze, Dialogue & Paragraphs</span>
                 </div>
               </button>
 
               {/* AI ANALYZER */}
-              <button onClick={() => handleLabSelection('analyzer')} className="w-full p-5 rounded-[2.2rem] border-2 border-rose-100 bg-rose-50/30 flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-white rounded-2xl text-rose-600 shadow-sm"><PenTool size={20} /></div>
+              <button onClick={() => handleLabSelection('analyzer')} className="w-full p-5 rounded-[2.2rem] border-2 border-rose-100 dark:border-rose-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
+                <div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded-2xl text-rose-600 shadow-sm"><PenTool size={20} /></div>
                 <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 leading-none mb-1">AI Analyzer</span>
+                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">AI Analyzer</span>
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.15em] opacity-80">Scan & Generate</span>
                 </div>
               </button>
@@ -181,8 +173,8 @@ export default function YDTHub() {
               if (e.target === e.currentTarget) setMode('');
             }}
           >
-            <div className="w-full max-w-[380px] bg-white rounded-[2.5rem] p-6 shadow-2xl animate-in zoom-in-95 duration-200">
-              <div className="flex justify-between items-center mb-6 border-b pb-4">
+            <div className="w-full max-w-[380px] bg-white dark:bg-[#1a1c25] rounded-[2.5rem] p-6 shadow-2xl animate-in zoom-in-95 duration-200 border border-slate-100 dark:border-slate-800">
+              <div className="flex justify-between items-center mb-6 border-b dark:border-slate-800 pb-4">
                 <span className="font-black uppercase text-[11px] text-indigo-600 italic">Lab Selection</span>
                 <button onClick={() => setMode('')} className="p-2 bg-slate-50 text-slate-400 rounded-full hover:bg-slate-100 transition-colors">
                   <X size={18} />
@@ -208,10 +200,10 @@ export default function YDTHub() {
         )}
 
         {/* BOTTOM NAV */}
-        <nav className="absolute bottom-0 w-full bg-white border-t p-6 flex justify-center items-center rounded-t-[3rem] shadow-[0_-15px_40px_-15px_rgba(0,0,0,0.15)] z-50">
+        <nav className="absolute bottom-0 w-full bg-white dark:bg-[#070812] border-t dark:border-slate-800 p-6 flex justify-center items-center rounded-t-[3rem] shadow-[0_-15px_40px_-15px_rgba(0,0,0,0.15)] z-50">
           <button 
             onClick={() => setIsNavMenuOpen(true)} 
-            className="w-16 h-16 rounded-[1.5rem] bg-gradient-to-tr from-indigo-900 via-violet-900 to-slate-900 flex items-center justify-center text-white shadow-xl -mt-16 border-[6px] border-white active:scale-90 transition-all z-50 overflow-hidden relative group"
+            className="w-16 h-16 rounded-[1.5rem] bg-gradient-to-tr from-indigo-900 via-violet-900 to-slate-900 flex items-center justify-center text-white shadow-xl -mt-16 border-[6px] border-white dark:border-[#070812] active:scale-90 transition-all z-50 overflow-hidden relative group"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-fuchsia-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <svg 
@@ -245,8 +237,8 @@ export default function YDTHub() {
                 )}
 
                 <div className="grid grid-cols-2 gap-3">
-                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-slate-100">
-                    <Layout size={20} className="text-slate-500" />
+                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/'); }} className="p-4 rounded-2xl bg-indigo-50 border-2 border-indigo-100 flex flex-col items-center gap-2 text-indigo-700 active:scale-95 transition-all outline-none">
+                    <Layout size={20} className="text-indigo-600" />
                     <span className="font-black text-[10px] uppercase">Home</span>
                   </button>
                   <button onClick={() => { setIsNavMenuOpen(false); router.push('/reading-lab'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-amber-50">

@@ -5,6 +5,11 @@
       "source": "safaiyeh/app-store-review-skill",
       "sourceType": "github",
       "computedHash": "b853ae894c4d9fbdd4a075b2130e1eeff175090bf8b94d29947742b81369f2c6"
+    },
+    "app-store-screenshots": {
+      "source": "ParthJadhav/app-store-screenshots",
+      "sourceType": "github",
+      "computedHash": "dc42167e4da1b28105d1ab39d20919099cfdda7885004f5bdf0a1bf73ff9074e"
     }
   }
 }

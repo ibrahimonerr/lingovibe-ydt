@@ -52,6 +52,7 @@ interface AppState {
     session: Session | null;
     guestAiUsage: number;
     lastAiUsageDate: string | null;
+    theme: 'light' | 'dark' | 'system';
     guestDailyCompletedLabs: string[];
     addMission: (mission: Mission) => void;
     completeMission: (id: string) => void;
@@ -66,6 +67,7 @@ interface AppState {
     getDailySeed: () => number;
     clearProgress: () => void;
     resetSessionStats: () => void;
+    setTheme: (theme: 'light' | 'dark' | 'system') => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -98,6 +100,7 @@ export const useAppStore = create<AppState>()(
             session: null,
             guestAiUsage: 0,
             lastAiUsageDate: null,
+            theme: 'dark', // Burası varsayılanı dark olsun mu? Kullanıcı ana menü koyu dedi.
             guestDailyCompletedLabs: [],
             addMission: (mission) =>
                 set((state) => ({
@@ -189,6 +192,7 @@ export const useAppStore = create<AppState>()(
                 set({
                     sessionStats: { correct: 0, wrong: 0 }
                 }),
+            setTheme: (theme) => set({ theme }),
         }),
         {
             name: 'ydthub-storage', // name of item in the storage (must be unique)

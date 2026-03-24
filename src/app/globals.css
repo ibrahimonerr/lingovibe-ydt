@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light dark;
 }
 
 html,
@@ -12,7 +12,7 @@ body {
 }
 
 body {
-  @apply bg-[#070812] text-white antialiased;
+  @apply bg-slate-50 text-slate-900 antialiased dark:bg-[#070812] dark:text-white transition-colors duration-300;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;

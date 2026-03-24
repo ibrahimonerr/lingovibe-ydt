@@ -146,7 +146,7 @@ function ReadingLabContent() {
 export default function ReadingLabPage() {
     return (
         <MobileShell>
-            <Suspense fallback={<div className="flex justify-center py-20"><RefreshCw className="animate-spin text-indigo-600" /></div>}>
+            <Suspense fallback={<div className="flex flex-col items-center justify-center py-40 animate-pulse"><RefreshCw className="animate-spin text-indigo-600 mb-4" size={48} /><p className="font-black text-indigo-600 uppercase text-[10px] tracking-widest">Lab Syncing...</p></div>}>
                 <ReadingLabContent />
             </Suspense>
         </MobileShell>
