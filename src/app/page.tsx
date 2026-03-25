@@ -135,7 +135,7 @@ export default function YDTHub() {
               </button>
 
                {/* GRAMMAR LAB */}
-              <button onClick={() => setView('grammar')} className="w-full p-5 rounded-[2.2rem] border-2 border-emerald-100 dark:border-emerald-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
+              <button onClick={() => setMode('grammar')} className="w-full p-5 rounded-[2.2rem] border-2 border-emerald-100 dark:border-emerald-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
                 <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl text-emerald-600 shadow-sm"><PenTool size={20} /></div>
                 <div>
                   <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Grammar Lab</span>
@@ -144,7 +144,7 @@ export default function YDTHub() {
               </button>
 
               {/* SKILLS LAB */}
-              <button onClick={() => setView('skills')} className="w-full p-5 rounded-[2.2rem] border-2 border-violet-100 dark:border-violet-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
+              <button onClick={() => setMode('skills')} className="w-full p-5 rounded-[2.2rem] border-2 border-violet-100 dark:border-violet-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
                 <div className="p-3 bg-violet-50 dark:bg-violet-900/20 rounded-2xl text-violet-600 shadow-sm"><Target size={20} /></div>
                 <div>
                   <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Skills Lab</span>
@@ -165,33 +165,32 @@ export default function YDTHub() {
         </main>
 
         {/* MODALLAR */}
-        {['grammar', 'skills', 'vocab_select'].includes(mode) && view === 'home' && (
+        {['grammar', 'skills', 'vocab_select'].includes(mode) && (
           <div
             className="absolute inset-0 z-[120] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4"
             onClick={(e) => {
-              // Close if clicking directly on the backdrop (not inside the modal)
               if (e.target === e.currentTarget) setMode('');
             }}
           >
-            <div className="w-full max-w-[380px] bg-white dark:bg-[#1a1c25] rounded-[2.5rem] p-6 shadow-2xl animate-in zoom-in-95 duration-200 border border-slate-100 dark:border-slate-800">
-              <div className="flex justify-between items-center mb-6 border-b dark:border-slate-800 pb-4">
+            <div className="w-full max-w-[380px] bg-white/95 dark:bg-[#070812]/95 backdrop-blur-xl rounded-[2.5rem] p-6 shadow-2xl animate-in zoom-in-95 duration-200 border border-slate-100 dark:border-slate-800/50">
+              <div className="flex justify-between items-center mb-6 border-b dark:border-slate-800/50 pb-4">
                 <span className="font-black uppercase text-[11px] text-indigo-600 italic">Lab Selection</span>
-                <button onClick={() => setMode('')} className="p-2 bg-slate-50 text-slate-400 rounded-full hover:bg-slate-100 transition-colors">
+                <button onClick={() => setMode('')} className="p-2 bg-slate-50 dark:bg-slate-800 text-slate-400 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
                   <X size={18} />
                 </button>
               </div>
               <div className="space-y-2 max-h-[350px] overflow-y-auto custom-scrollbar">
                 {mode === 'vocab_select' ? (
                   <>
-                    <button onClick={() => handleLabSelection('vocab', 'synonym')} className="w-full p-4 rounded-2xl bg-indigo-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase"><Target size={18} className="text-indigo-600" /> Synonym & Antonym</button>
-                    <button onClick={() => handleLabSelection('vocab', 'context')} className="w-full p-4 rounded-2xl bg-amber-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase"><Eye size={18} className="text-amber-600" /> In-Context Lab</button>
-                    <button onClick={() => handleLabSelection('vocab', 'odd')} className="w-full p-4 rounded-2xl bg-emerald-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase"><X size={18} className="text-emerald-600" /> Odd-One Out</button>
-                    <button onClick={() => handleLabSelection('vocab', 'loop')} className="w-full p-4 rounded-2xl bg-rose-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase"><Repeat size={18} className="text-rose-600" /> Flashcard Lab</button>
-                    <button onClick={() => handleLabSelection('vocab', 'wordmap')} className="w-full p-4 rounded-2xl bg-blue-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase"><Zap size={18} className="text-blue-600" /> WordMap Game</button>
+                    <button onClick={() => handleLabSelection('vocab', 'synonym')} className="w-full p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><Target size={18} className="text-indigo-600" /> Synonym & Antonym</button>
+                    <button onClick={() => handleLabSelection('vocab', 'context')} className="w-full p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><Eye size={18} className="text-amber-600" /> In-Context Lab</button>
+                    <button onClick={() => handleLabSelection('vocab', 'odd')} className="w-full p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><X size={18} className="text-emerald-600" /> Odd-One Out</button>
+                    <button onClick={() => handleLabSelection('vocab', 'loop')} className="w-full p-4 rounded-2xl bg-rose-50 dark:bg-rose-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><Repeat size={18} className="text-rose-600" /> Flashcard Lab</button>
+                    <button onClick={() => handleLabSelection('vocab', 'wordmap')} className="w-full p-4 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><Zap size={18} className="text-blue-600" /> WordMap Game</button>
                   </>
                 ) : (
                   (mode === 'grammar' ? grammarTopics : skillTopics).map(t => (
-                    <button key={t} onClick={() => handleLabSelection(mode, t)} className="w-full p-3.5 text-left bg-slate-50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 hover:bg-indigo-50 transition-all">{t} <ChevronRight size={14} className="opacity-20" /></button>
+                    <button key={t} onClick={() => handleLabSelection(mode, t)} className={`w-full p-3.5 text-left bg-slate-50 dark:bg-slate-800/50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 dark:text-slate-300 hover:${mode === 'grammar' ? 'bg-emerald-50 dark:bg-emerald-900/20' : 'bg-violet-50 dark:bg-violet-900/20'} active:scale-95 transition-all`}>{t} <ChevronRight size={14} className="opacity-20" /></button>
                   ))
                 )}
               </div>
@@ -219,10 +218,10 @@ export default function YDTHub() {
         {/* Y NAVIGATION MODAL */}
         {isNavMenuOpen && (
           <div className="fixed inset-0 z-[120] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
-            <div className="w-full max-w-[380px] bg-white rounded-[2.5rem] p-6 shadow-2xl animate-in slide-in-from-bottom-10 border border-slate-100">
-              <div className="flex justify-between items-center mb-6 border-b pb-4">
+            <div className="w-full max-w-[380px] bg-white/95 dark:bg-[#070812]/95 backdrop-blur-xl rounded-[2.5rem] p-6 shadow-2xl animate-in slide-in-from-bottom-10 border border-slate-100 dark:border-slate-800/50">
+              <div className="flex justify-between items-center mb-6 border-b dark:border-slate-800/50 pb-4">
                 <span className="font-black uppercase text-[11px] text-indigo-600 italic">Navigation Hub</span>
-                <button onClick={() => setIsNavMenuOpen(false)} className="p-2 bg-slate-50 text-slate-400 rounded-full hover:bg-slate-100"><X size={18} /></button>
+                <button onClick={() => setIsNavMenuOpen(false)} className="p-2 bg-slate-50 dark:bg-slate-800 text-slate-400 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"><X size={18} /></button>
               </div>
 
               <div className="space-y-3">
@@ -237,33 +236,33 @@ export default function YDTHub() {
                 )}
 
                 <div className="grid grid-cols-2 gap-3">
-                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/'); }} className="p-4 rounded-2xl bg-indigo-50 border-2 border-indigo-100 flex flex-col items-center gap-2 text-indigo-700 active:scale-95 transition-all outline-none">
-                    <Layout size={20} className="text-indigo-600" />
+                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/'); }} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center gap-2 text-slate-700 dark:text-slate-300 active:scale-95 transition-all outline-none border border-slate-100 dark:border-slate-800/50">
+                    <Layout size={20} className="text-slate-500" />
                     <span className="font-black text-[10px] uppercase">Home</span>
                   </button>
-                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/reading-lab'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-amber-50">
+                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/reading-lab'); }} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center gap-2 text-slate-700 dark:text-slate-300 active:scale-95 transition-all outline-none border border-amber-50 dark:border-amber-900/20">
                     <Zap size={20} className="text-amber-500" />
                     <span className="font-black text-[10px] uppercase">Reading</span>
                   </button>
-                  <button onClick={() => { setIsNavMenuOpen(false); setMode('vocab_select'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-indigo-50">
+                  <button onClick={() => { setIsNavMenuOpen(false); setMode('vocab_select'); }} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center gap-2 text-slate-700 dark:text-slate-300 active:scale-95 transition-all outline-none border border-indigo-50 dark:border-indigo-900/20">
                     <Languages size={20} className="text-indigo-600" />
                     <span className="font-black text-[10px] uppercase">Vocab</span>
                   </button>
-                  <button onClick={() => { setIsNavMenuOpen(false); setMode('grammar'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-emerald-50">
+                  <button onClick={() => { setIsNavMenuOpen(false); setMode('grammar'); }} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center gap-2 text-slate-700 dark:text-slate-300 active:scale-95 transition-all outline-none border border-emerald-50 dark:border-emerald-900/20">
                     <Trophy size={20} className="text-emerald-600" />
                     <span className="font-black text-[10px] uppercase">Grammar</span>
                   </button>
-                  <button onClick={() => { setIsNavMenuOpen(false); setMode('skills'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-violet-50">
+                  <button onClick={() => { setIsNavMenuOpen(false); setMode('skills'); }} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center gap-2 text-slate-700 dark:text-slate-300 active:scale-95 transition-all outline-none border border-violet-50 dark:border-violet-900/20">
                     <BookOpen size={20} className="text-violet-600" />
                     <span className="font-black text-[10px] uppercase">Skills</span>
                   </button>
-                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/progress'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-slate-100">
-                    <PieChart size={20} className="text-slate-800" />
+                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/progress'); }} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center gap-2 text-slate-700 dark:text-slate-300 active:scale-95 transition-all outline-none border border-slate-100 dark:border-slate-800/50">
+                    <PieChart size={20} className="text-slate-800 dark:text-slate-400" />
                     <span className="font-black text-[10px] uppercase">Progress</span>
                   </button>
-                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/analyzer'); }} className="p-4 rounded-2xl bg-slate-50 flex flex-col items-center gap-2 text-slate-700 active:scale-95 transition-all outline-none border border-rose-50 col-span-2">
+                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/analyzer'); }} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center gap-2 text-slate-700 dark:text-slate-300 active:scale-95 transition-all outline-none border border-rose-50 dark:border-rose-900/20 col-span-2">
                     <PenTool size={20} className="text-rose-600" />
-                    <span className="font-black text-[10px] uppercase">Analyzer</span>
+                    <span className="font-black text-[10px] uppercase">AI Analyzer</span>
                   </button>
                 </div>
               </div>

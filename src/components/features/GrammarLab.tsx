@@ -129,11 +129,11 @@ export default function GrammarLab({
           <div className={`p-1 rounded-[2.5rem] ${selectedOption === question.correct ? (isSkills ? 'bg-violet-500' : 'bg-emerald-500') : 'bg-rose-500'}`}>
             <div className="bg-white dark:bg-slate-900 p-6 rounded-[2.4rem]">
               <div className="flex items-center gap-3 mb-4">
-                <div className={`p-2 rounded-xl ${selectedOption === question.correct ? (isSkills ? 'bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-400' : 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-400') : 'bg-rose-100 text-rose-600 dark:bg-rose-900/40 dark:text-rose-400'}`}>
+                <div className={`p-2 rounded-xl ${(selectedOption === question.correct_answer || selectedOption === question.correct) ? (isSkills ? 'bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-400' : 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/40 dark:text-emerald-400') : 'bg-rose-100 text-rose-600 dark:bg-rose-900/40 dark:text-rose-400'}`}>
                   <Lightbulb size={20} />
                 </div>
                 <div className="font-black text-[12px] uppercase tracking-tighter dark:text-slate-300">
-                  Result: <span className={selectedOption === (question.correct_answer || question.correct) ? (isSkills ? 'text-violet-600 dark:text-violet-400' : 'text-emerald-600 dark:text-emerald-400') : 'text-rose-600 dark:text-rose-400'}>{selectedOption === (question.correct_answer || question.correct) ? 'WELL SOLVED' : 'STRATEGY ERROR'}</span>
+                  Result: <span className={(selectedOption === (question.correct_answer || question.correct)) ? (isSkills ? 'text-violet-600 dark:text-violet-400' : 'text-emerald-600 dark:text-emerald-400') : 'text-rose-600 dark:text-rose-400'}>{(selectedOption === (question.correct_answer || question.correct)) ? 'WELL SOLVED' : 'STRATEGY ERROR'}</span>
                 </div>
               </div>
               <div className="space-y-1"><ExplanationRenderer explanation={question.explanation} feedback={question.feedback} theme={isSkills ? 'violet' : 'emerald'} /></div>
