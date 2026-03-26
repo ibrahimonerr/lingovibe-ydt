@@ -111,10 +111,11 @@ Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver.
   ]
 }
 CRITICAL: 
-1. Explanation and Hint MUST be in TURKISH.
-2. The 'quiz' array MUST have EXACTLY 5 questions.
-3. Each question must test a DIFFERENT skill.
-4. Return ONLY the JSON object, starting with { and ending with }.`;
+1. The 'passage', 'quiz' text, and 'options' MUST be in ENGLISH.
+2. The 'hint', 'quote' and 'feedback' fields MUST be in TURKISH.
+3. The 'quiz' array MUST have EXACTLY 5 questions.
+4. Each question must test a DIFFERENT skill.
+5. Return ONLY the JSON object, starting with { and ending with }.`;
 
             const parsed = await generateWithGPT4oMini(prompt);
 

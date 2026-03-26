@@ -130,8 +130,9 @@ Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver. Başka hiçbir me
 
 CRITICAL INSTRUCTIONS: 
 1. The 'quiz' array MUST contain EXACTLY 3 questions.
-2. The 'feedback' and 'hint' MUST be 100% in TURKISH. No other languages allowed in the explanation.
-3. Return ONLY the JSON object, starting with { and ending with }.`;
+2. ALL question text and options MUST be in ENGLISH.
+3. ONLY the 'feedback' and 'hint' fields MUST be 100% in TURKISH. No other languages allowed in the explanation.
+4. Return ONLY the JSON object, starting with { and ending with }.`;
 
                 const parsed = await generateWithGPT4oMini(prompt);
 

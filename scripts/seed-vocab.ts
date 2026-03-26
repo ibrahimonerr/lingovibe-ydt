@@ -131,7 +131,8 @@ async function seedVocab() {
 Structure: ${jsonStructure}
 Rules:
 - High-level academic context (B2-C1).
-- EXPLANATIONS, HINTS AND PITFALLS MUST BE IN TURKISH.
+- ALL English content (passages, targets, options, correct_word) MUST BE IN ENGLISH.
+- ALL EXPLANATIONS, HINTS AND PITFALLS MUST BE IN TURKISH.
 - Return ONLY valid JSON 'quiz' array.
 - DO NOT reveal the correct word/path in the hint.`;
 
