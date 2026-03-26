@@ -34,8 +34,8 @@ async function generateWithGPT4oMini(prompt: string, retries = 5): Promise<any> 
                     "Authorization": `Bearer ${githubToken}`
                 },
                 body: JSON.stringify({
-                    messages: [
-                        { role: "system", content: "Sen, 20 yıllık deneyime sahip bir YDT/YDS ölçme ve değerlendirme uzmanısın. ELS ve benzeri akademik yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin. MANDATORY: The question stem, scenarios, and options MUST be in ENGLISH. ONLY the explanation, hint, and feedback fields MUST be in TURKISH. Return ONLY valid JSON." },
+                messages: [
+                        { role: "system", content: "Rol Tanımı: Sen, kıdemli bir okuma anlama uzmanısın. Akademik derinliği olan (B2-C1) özgün İngilizce okuma parçaları ve bunlara bağlı 5 soru hazırla. Return ONLY valid JSON." },
                         { role: "user", content: prompt }
                     ],
                     model: "gpt-4o-mini",
@@ -79,17 +79,14 @@ async function seedReading() {
         console.log(`[Reading] Generating batch ${i + 1}/${COUNTS.PER_BATCH}...`);
 
         try {
-            const prompt = `Task: Sen, kıdemli bir ölçme ve değerlendirme uzmanı olarak akademik derinliği olan (B2-C1) özgün bir İngilizce okuma parçası ve buna bağlı 5 soru hazırla.
+            const prompt = `Task: Akademik derinliği olan (B2-C1) özgün İngilizce okuma parçası ve buna bağlı 5 soru hazırla.
  
-PASSAGE RULES:
-- Length: 150-250 words, single coherent passage.
-- Register: Academic, formal. B2-C1 vocabulary naturally embedded.
-- Topics (pick one randomly): Environmental Science, Psychology, History, Neuroscience, Sociology, Art History, Archaeology, Technology Ethics.
-- Include complex sentence structures: relative clauses, passive voice, conditionals, advanced conjunctions.
-- Must contain at least 3-4 B2-C1 vocabulary words used in context.
+Pasaj Kuralları:
+- Uzunluk: 150-250 kelime.
+- Kayıt: Akademik, resmi (Environmental Science, Psychology, Sociology, Neuroscience, History, Archaeology, Technology Ethics vb.).
+- Dil: Relative clauses, passive voice, advanced conjunctions içeren kompleks yapı.
 
-Soru Kriterleri:
-Her soru farklı bir beceriyi test etmeli:
+Soru Türleri:
 1. Ana Fikir / Başlık.
 2. Detay Sorgulama (Scanning).
 3. Çıkarım (Inference).
@@ -104,11 +101,11 @@ Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver.
       "question": "Soru metni...",
       "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
       "correct": "Letter (e.g. A)",
-      "hint": "🔍 Hint (Kritik İpucu): Parçadaki doğrudan referansı veya ipucu cümlesini belirt. ASLA doğru cevabı veya şıkkı içine yazma.",
+      "hint": "🔍 Hint: Parçadaki doğrudan referansı veya ipucu cümlesini belirt. ASLA doğru cevabı içine yazma.",
       "quote": "Cevabın dayanağı olan tam cümleyi metinden kopyala.",
       "feedback": {
-        "logic": "💡The Logic Flow: Sorunun çözüm yolunu ve doğru şıkka nasıl ulaşılacağını açıkla.",
-        "pitfall": "⚠️ \"Sakın Düşme!\" (The Pitfall): En güçlü çeldiricinin neden yanlış olduğunu teknik olarak açıkla."
+        "logic_flow": "💡 The Logic Flow: Sorunun çözüm yolunu ve doğru şıkka nasıl ulaşılacağını açıkla.",
+        "pitfall": "⚠️ \"Sakın Düşme!\" (The Pitfall): En güçlü çeldiricinin neden yanlış olduğunun teknik açıklaması."
       }
     }
   ]
@@ -116,7 +113,7 @@ Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver.
 CRITICAL: 
 1. Explanation and Hint MUST be in TURKISH.
 2. The 'quiz' array MUST have EXACTLY 5 questions.
-3. Each question must test a DIFFERENT skill (main idea, detail, inference, vocabulary, reference).
+3. Each question must test a DIFFERENT skill.
 4. Return ONLY the JSON object, starting with { and ending with }.`;
 
             const parsed = await generateWithGPT4oMini(prompt);

@@ -120,7 +120,7 @@ async function generateWithGPT4oMini(prompt: string, retries = 5): Promise<any> 
                 },
                 body: JSON.stringify({
                     messages: [
-                        { role: "system", content: "You are an expert YDT (English) exam question creator. Return ONLY valid JSON." },
+                        { role: "system", content: "Sen, 20 yıldır YDT, YDS ve TOEFL gibi üst düzey İngilizce sınavları için soru hazırlayan kıdemli bir ölçme ve değerlendirme uzmanısın. ELS (English Language Studies) ve benzeri saygın yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin. Return ONLY valid JSON." },
                         { role: "user", content: prompt }
                     ],
                     model: "gpt-4o-mini",
@@ -169,15 +169,18 @@ async function seedGrammar() {
 
                 const prompt = `
 Rol Tanımı: Sen, 20 yıldır YDT, YDS ve TOEFL gibi üst düzey İngilizce sınavları için soru hazırlayan kıdemli bir ölçme ve değerlendirme uzmanısın. ELS (English Language Studies) ve benzeri saygın yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin.
-
 Görev: Aşağıdaki kriterlere uygun olarak, [Hedef Konu: ${topic}] konularını test eden özgün, akademik ve zorluk derecesi yüksek (CEFR B2+ / C1 seviyesi) 3 adet soru hazırla.
 
 Soru Kriterleri:
 1. Cümle Yapısı: Cümleler basit olmamalı. Bilimsel bir makaleden, arkeolojik bir bulgudan veya sosyolojik bir analizden alınmış gibi duran kompleks cümleler (compound-complex sentences) kurmalısın.
 2. Boşluk Yapısı: Sorular tercihen "dual-gap" (iki boşluklu) olmalı ve her iki boşluk arasındaki zaman (tense) veya yapı uyumu öğrenciyi düşündürmeli.
 3. Kelime Dağarcığı: Cümle içerisinde akademik "keyword"ler (örn. mitigate, alleviate, underscore, notwithstanding) kullanılmalı.
-4. Çeldiriciler (Distractors): Çeldiriciler "saçma" olmamalı; gramer olarak mümkün görünse de anlamca veya sınav tekniği açısından (zaman uyumu, ipucu kelimeler) yanlış olmalı. Özellikle "yakın anlamlı" veya "yaygın yapılan öğrenci hataları" üzerine kurgulanmalı.
-5. Seçenek Sayısı: 5 seçenek (A-E).
+4. Çeldiriciler (Distractors): Çeldiriciler "saçma" olmamalı; gramer olarak mümkün görünse de anlamca veya sınav tekniği açısından (zaman uyumu, ipucu kelimeler) yanlış olmalı.
+
+Geri Bildirim Yapısı (JSON):
+- 🔍 Hint: Soruyu görür görmez öğrencinin araması gereken ipucu kelimesi/yapısal işaret. ASLA doğru cevabı içine yazma.
+- 💡 The Logic Flow: Çözüm yolunu adım adım anlatan teknik akıl yürütme.
+- ⚠️ "Sakın Düşme!" (The Pitfall): En güçlü çeldiricinin neden yanlış olduğunun teknik açıklaması.
 
 Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver. Başka hiçbir metin ekleme.
 
@@ -187,10 +190,10 @@ Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver. Başka hiçbir me
       "question": "Soru metni (boşluklar ___ ile belirtilmeli)",
       "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
       "correct": "Letter (e.g. A)",
-      "hint": "🔍 Hint: Soruyu görür görmez öğrencinin araması gereken ipucu kelimesi veya yapısal işaret. ASLA doğru cevabı veya şıkkı içine yazma.",
+      "hint": "🔍 Hint: ...",
       "feedback": {
-        "logic": "💡The Logic Flow: Sorunun çözüm yolunu adım adım anlatan akıl yürütme. 'Eğer boşluktan sonra şunu görüyorsan, şu yapıya gitmelisin' gibi bir akıl yürütme sun.",
-        "pitfall": "⚠️ \"Sakın Düşme!\" (The Pitfall): En güçlü çeldiricinin neden yanlış olduğunu ve öğrencilerin orada neden hata yaptığını teknik olarak açıkla."
+        "logic_flow": "💡 The Logic Flow: ...",
+        "pitfall": "⚠️ \"Sakın Düşme!\" (The Pitfall): ..."
       }
     }
   ]

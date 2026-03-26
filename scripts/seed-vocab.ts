@@ -86,33 +86,45 @@ async function seedVocab() {
                 let jsonStructure = "";
 
                 if (mode === "meaning_shifter") {
-                    segmentPrompt = `Role: Sen, YDT ve YDS seviyesinde İngilizce uzmanısın. Görevin, aynı fiilin farklı edatlarla (prepositions) nasıl anlam değiştirdiğini test eden "Meaning Shifter" (Yol Ayrımı) içeriği üretmektir.
-1. Cümle: Akademik, bilimsel veya felsefi bir bağlamda, kompleks (compound-complex) bir yapı kur.
-2. Yollar: Kelimenin yanına gelebilecek iki farklı edatı (Path A ve Path B) seçenek olarak sun.
-3. 🔍 Hint: Asla cevabı söyleme. Boşluktan sonraki kelimenin türüne veya cümlenin sebep-sonuç yönüne bakmasını söyle.
-4. ⚠️ Sakın Düşme!: Türkçedeki çeviri hatasına veya "kulağa hoş gelen" ama yanlış olan yapıya odaklan.`;
-                    jsonStructure = `{ "quiz": [ { "question": "The manager decided to ___ the proposal carefully before making a final decision.", "paths": { "A": "look into", "B": "look over" }, "correct_path": "B", "feedback": { "A": "Açıklama...", "B": "Açıklama...", "hint": "🔍 Hint: ...", "pitfall": "⚠️ Sakın Düşme!: ..." } } ] }`;
+                    segmentPrompt = `Role: YDT/YDS İngilizce uzmanı. Phrasal verb ve preposition nüansları testi. Boşluktan sonraki edatın veya kelimenin cümledeki işlevine odaklanan çeldiriciler kurgula.`;
+                    jsonStructure = `{
+  "question": "The manager decided to ___ the proposal carefully before making a final decision.",
+  "paths": { "A": "look into", "B": "look over" },
+  "correct_path": "B",
+  "feedback": {
+    "A": "Açıklama...",
+    "B": "Açıklama...",
+    "hint": "🔍 Hint: ...",
+    "pitfall": "⚠️ Sakın Düşme!: ..."
+  }
+}`;
                 } else if (mode === "definition_hunt") {
-                    segmentPrompt = `Role: Akademik kelime öğretimi uzmanı dil bilimci.
-1. Metin: İçinde en az 2-3 tane daha kaliteli akademik kelime barındıran, B2+/C1 seviyesinde bir paragraf (30-40 kelime) yaz.
-2. Target Definition: Hedef kelimenin sözlük tanımını (TÜRKÇE) "Görev" olarak ver.
-3. 🔍 Hint: Kelimenin kökenine (prefix/suffix), türüne veya yerel bağlamına işaret et; kelimeyi asla yazma.
-4. ⚠️ Sakın Düşme!: Metinde geçen diğer "yakışıklı" kelimeyi açıkla. "Seçtiğin [X] kelimesi de şu anlama gelir ancak..." şeklinde belirt.`;
-                    jsonStructure = `{ "quiz": [ { "passage": "Passage text containing the correct_word...", "target_definition": "Bir durumu daha da kötüleştirmek.", "correct_word": "exacerbate", "hint": "🔍 Hint: ...", "pitfall": "⚠️ Sakın Düşme!: Metindeki diğer..." } ] }`;
+                    segmentPrompt = `Role: Akademik kelime öğretimi uzmanı dil bilimci. B2+/C1 seviyesinde bir paragraf yaz ve içinden bir akademik kelimeyi 'tanımlar' üzerinden sorgula.`;
+                    jsonStructure = `{
+  "passage": "Passage text containing the correct_word...",
+  "target_definition": "Bir durumu daha da kötüleştirmek.",
+  "correct_word": "exacerbate",
+  "hint": "🔍 Hint: ...",
+  "pitfall": "⚠️ Sakın Düşme!: Metindeki diğer kelimeler..."
+}`;
                 } else if (mode === "synonym_hunt") {
-                    segmentPrompt = `Role: İngilizce eş anlamlılar (synonyms) ve nüanslar uzmanı.
-1. Metin: Hedef kelimenin eş anlamlısını (target synonym) içeren, kompleks bir akademik paragraf kurgula.
-2. Task: "[X] kelimesinin yerine geçebilecek en güçlü akademik alternatifi metinde bul" komutu.
-3. 🔍 Hint: Anlamsal benzerliğe veya kelimenin cümledeki işlevine odaklan.
-4. ⚠️ Sakın Düşme!: Metindeki bir zıt anlamlı (antonym) kelimeyi veya yakın anlamlı ama yanlış türdeki (isim vs fiil) bir kelimeyi açıkla.`;
-                    jsonStructure = `{ "quiz": [ { "passage": "Passage text containing the correct_synonym...", "target_word": "alleviate", "correct_synonym": "mitigate", "hint": "🔍 Hint: ...", "pitfall": "⚠️ Sakın Düşme!: Metindeki diğer..." } ] }`;
+                    segmentPrompt = `Role: İngilizce eş anlamlılar (synonyms) ve nüanslar uzmanı. Verilen 'target_word'ün eş anlamlısını metin içinde buldur.`;
+                    jsonStructure = `{
+  "passage": "Passage text containing the correct_synonym...",
+  "target_word": "alleviate",
+  "correct_synonym": "mitigate",
+  "hint": "🔍 Hint: ...",
+  "pitfall": "⚠️ Sakın Düşme!: Metindeki diğer kelimeler..."
+}`;
                 } else if (mode === "antonym_hunt") {
-                    segmentPrompt = `Role: Sen, İngilizcede anlamsal karşıtlıklar (contrasts) uzmanı eğitmen.
-1. Metin: Hedef kelimenin zıt anlamlısını içeren, içinde bir zıtlık bağlacı (örn: nonetheless) barındıran kompleks bir paragraf yaz.
-2. Task: "[X] kelimesinin metindeki tam zıt anlamlısını bul ve işaretle" komutu.
-3. 🔍 Hint: Cümledeki anlamsal "U dönüşünü" işaret et.
-4. ⚠️ Sakın Düşme!: Metindeki eş anlamlı (synonym) kelimeyi veya "yakın ama zıt olmayan" bir kelimeyi açıklayarak uyar.`;
-                    jsonStructure = `{ "quiz": [ { "passage": "Passage text containing the correct_antonym...", "target_word": "deteriorate", "correct_antonym": "improve", "hint": "🔍 Hint: ...", "pitfall": "⚠️ Sakın Düşme!: Metindeki diğer..." } ] }`;
+                    segmentPrompt = `Role: Anlamsal karşıtlıklar (contrasts) uzmanı eğitmen. Verilen 'target_word'ün zıt anlamlısını metin içinde buldur.`;
+                    jsonStructure = `{
+  "passage": "Passage text containing the correct_antonym...",
+  "target_word": "deteriorate",
+  "correct_antonym": "improve",
+  "hint": "🔍 Hint: ...",
+  "pitfall": "⚠️ Sakın Düşme!: Metindeki diğer kelimeler..."
+}`;
                 }
 
                 const prompt = `Task: Generate 3 academic YDT questions for the module [Mode: ${mode}].

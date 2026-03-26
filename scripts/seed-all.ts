@@ -36,6 +36,7 @@ async function main() {
         await runSeeder("Skills Seeder", "scripts/seed-skills.ts");
         await runSeeder("Vocabulary Seeder", "scripts/seed-vocab.ts");
         await runSeeder("Reading Seeder", "scripts/seed-reading.ts");
+        await runSeeder("Flashcards Seeder", "scripts/seed-flashcards.ts");
 
         console.log("\n🥳 ALL TASKS COMPLETED! Your database is now populated with GPT-4o quality questions.");
         process.exit(0);

@@ -108,7 +108,7 @@ async function generateWithGPT4oMini(prompt: string, retries = 5): Promise<any> 
                 },
                 body: JSON.stringify({
                     messages: [
-                        { role: "system", content: "Sen, 20 yıllık deneyime sahip bir YDT/YDS ölçme ve değerlendirme uzmanısın. ELS ve benzeri akademik yayınların soru hazırlama mantığına tamamen hakimsin. MANDATORY: The question stem, scenarios, passages, dialogues, and options MUST be in ENGLISH. ONLY the explanation, hint, and feedback fields MUST be in TURKISH. Return ONLY valid JSON." },
+                        { role: "system", content: "[ROLE]\nSen, 20 yıldır YDT, YDS ve TOEFL gibi sınavlar için \"Skills\" (Diyalog Tamamlama, Yakın Anlam, Paragraf Tamamlama, Akışı Bozan Cümle) soruları hazırlayan kıdemli bir ölçme uzmanısın. ELS ve benzeri yayınların mantıksal kurgusuna ve çeldirici kalitesine hakimsin. Return ONLY valid JSON." },
                         { role: "user", content: prompt }
                     ],
                     model: "gpt-4o-mini",
@@ -192,18 +192,29 @@ async function seedSkills() {
 }`;
                 }
 
-                const prompt = `Task: ${topicPrompt}
-Topic: ${topic}
-Level: YDT (Turkish university language exam - Advanced English)
-Format: valid JSON only
+                const prompt = `
+[TASK]
+Aşağıda belirtilen beceri kategorisinde, akademik derinliği olan ve zorluk derecesi yüksek (B2+/C1) 3 adet özgün soru hazırla ve "AI Analyzer" formatında geri bildirimlerini ekle.
+
+[SKILL CATEGORY]: ${topic}
+[QUESTION CRITERIA]
+Context: Konular bilimsel, felsefi, tarihsel veya teknolojik bir arka plana sahip olmalı.
+Complexity: Sorular sadece kelime bilgisini değil, cümleler arası mantıksal köprüleri (cohesion markers) test etmeli.
+Distractors: Çeldiriciler "konuyla ilgili" görünmeli ama "bağlamdan kopuk", "aşırı genelleme yapan" veya "mantıksal olarak eksik" kurgulanmalı.
+
+[FEEDBACK STRUCTURE]
+Her soru için şu 3 başlıkta analiz yap:
+🔍 Hint (Kritik İpucu): Sorudaki "Referans Kelime" (it, this, such), "Geçiş Kelimesi" (However, Thus) veya "Anahtar Kavram" (Key Concept) ipucunu vurgula.
+💡 Mantık Süzgeci (The Logic Flow): Cümleler arasındaki anlam köprüsünü adım adım kur. "Önceki cümlede X dendiği için, boşlukta Y aranmalı" şeklinde kurgula. ASLA doğru cevabı içine yazma.
+⚠️ "Sakın Düşme!" (The Pitfall): Öğrenciyi en çok çeken yanlış şıkkın neden elendiğini (örn. "konu dışı", "fazla keskin ifade") teknik olarak açıkla.
 
 Structure:
 ${promptStructure}
 
 CRITICAL INSTRUCTIONS: 
-1. The 'quiz' or 'sentences' array MUST contain the correct number of items.
+1. The 'quiz' or 'sentences' array MUST contain EXACTLY 3 items (unless it is a Cloze Test passage which requires 5 blanks).
 2. ALL question text, scenarios, passages, and options MUST be in ENGLISH.
-3. ONLY the 'explanation' and 'hint' fields MUST be 100% in TURKISH. No other languages allowed in the explanation.
+3. ONLY the hint and feedback fields MUST be 100% in TURKISH.
 4. Return ONLY the JSON object, starting with { and ending with }.`;
 
                 const parsed = await generateWithGPT4oMini(prompt);
