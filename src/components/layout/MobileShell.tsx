@@ -7,7 +7,8 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { Suspense } from 'react';
 import {
     Compass, Sparkles, Layout, History, Zap, Languages, Trophy, BookOpen,
-    PenTool, PieChart, X, Target, Eye, Repeat, ChevronRight, ChevronLeft
+    PenTool, PieChart, X, Target, Eye, Repeat, ChevronRight, ChevronLeft,
+    Split, Search, Copy, Flame, Map as MapIcon
 } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
@@ -218,21 +219,30 @@ export default function MobileShell({ children }: { children: React.ReactNode })
 
                             {/* VOCAB SUB-MENU */}
                             {navSubMenu === 'vocab' && (
-                                <div className="space-y-2 animate-in slide-in-from-right-5 duration-200">
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=synonym')} className="w-full p-4 rounded-2xl bg-indigo-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase active:scale-95 transition-all">
-                                        <Target size={18} className="text-indigo-600" /> Synonym & Antonym
+                                <div className="space-y-2.5 animate-in slide-in-from-right-5 duration-200">
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=loop')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-indigo-500/5 overflow-hidden text-left mb-1 border border-slate-100 dark:border-white/5">
+                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-500 to-fuchsia-500 opacity-20" />
+                                        <Repeat size={18} className="text-indigo-400" /> Vocab Loop
                                     </button>
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=context')} className="w-full p-4 rounded-2xl bg-amber-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase active:scale-95 transition-all">
-                                        <Eye size={18} className="text-amber-600" /> In-Context Lab
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=wordmap')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-rose-500/5 overflow-hidden text-left mb-1 border border-slate-100 dark:border-white/5">
+                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-rose-500 to-orange-500 opacity-20" />
+                                        <MapIcon size={18} className="text-rose-400" /> Word Map (Daily)
                                     </button>
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=odd')} className="w-full p-4 rounded-2xl bg-emerald-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase active:scale-95 transition-all">
-                                        <X size={18} className="text-emerald-600" /> Odd-One Out
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=meaning_shifter')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-indigo-500/5 overflow-hidden text-left">
+                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-20" />
+                                        <Split size={18} className="text-indigo-400" /> Meaning Shifter
                                     </button>
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=loop')} className="w-full p-4 rounded-2xl bg-rose-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase active:scale-95 transition-all">
-                                        <Repeat size={18} className="text-rose-600" /> Flashcard Lab
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=definition_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-amber-500/5 overflow-hidden text-left">
+                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-amber-600 to-yellow-500 opacity-20" />
+                                        <Search size={18} className="text-amber-400" /> Definition Hunt
                                     </button>
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=wordmap')} className="w-full p-4 rounded-2xl bg-blue-50 flex items-center gap-3 text-slate-700 font-black text-[11px] uppercase active:scale-95 transition-all">
-                                        <Zap size={18} className="text-blue-600" /> WordMap Game
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=synonym_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-emerald-500/5 overflow-hidden text-left">
+                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-emerald-600 to-teal-500 opacity-20" />
+                                        <Copy size={18} className="text-emerald-400" /> Synonym Hunt
+                                    </button>
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=antonym_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-rose-500/5 overflow-hidden text-left">
+                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-rose-600 to-red-500 opacity-20" />
+                                        <Flame size={18} className="text-rose-400" /> Antonym Hunt
                                     </button>
                                 </div>
                             )}

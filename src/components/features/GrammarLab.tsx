@@ -24,6 +24,8 @@ export default function GrammarLab({
   setShowHint: (v: boolean) => void
 }) {
 
+
+  const [forceShowAnalysis, setForceShowAnalysis] = React.useState(false);
   const { recordAnswer, isGuestMode, guestDailyCompletedLabs } = useAppStore();
   if (!question) return null;
 
@@ -31,16 +33,20 @@ export default function GrammarLab({
   const themeClass = isSkills ? 'violet' : 'emerald';
   const labTitle = isSkills ? 'Skills Strategy' : 'Grammar Focus';
 
+  const isCorrect = selectedOption === (question.correct_answer || question.correct);
+  const hintText = question.hint || (question.feedback as any)?.hint || "Farklı bir dil kuralları açısıyla bakmayı deneyin.";
+
 
   return (
-    <div className="space-y-4 animate-in slide-in-from-right-8 duration-500">
+    <div className="space-y-3 animate-in slide-in-from-right-8 duration-500">
       {/* DINAMIK SORU KARTI */}
       <div className="relative group">
         <div className={`absolute -inset-1 bg-gradient-to-r ${isSkills ? 'from-violet-500 to-purple-500' : 'from-emerald-500 to-teal-500'} rounded-[2.5rem] blur opacity-10 transition duration-1000`}></div>
-        <div className={`relative p-5 bg-white dark:bg-slate-900 border-2 ${isSkills ? 'border-violet-50 dark:border-violet-900/30' : 'border-emerald-50 dark:border-emerald-900/30'} rounded-[2rem] shadow-xl text-[16px] font-bold text-slate-800 dark:text-slate-200 leading-relaxed italic whitespace-pre-wrap`}>
-          <div className={`absolute -top-3 left-8 text-white text-[9px] font-black px-4 py-1 rounded-full uppercase tracking-tighter shadow-md ${isSkills ? 'bg-violet-600' : 'bg-emerald-500'}`}>
+        <div className={`relative p-4 bg-white dark:bg-slate-900 border-2 ${isSkills ? 'border-violet-50 dark:border-violet-900/30' : 'border-emerald-50 dark:border-emerald-900/30'} rounded-[2rem] shadow-xl text-[14px] font-bold text-slate-800 dark:text-slate-200 leading-relaxed italic whitespace-pre-wrap`}>
+          <div className={`absolute -top-3 left-8 text-white text-[8px] font-black px-4 py-1 rounded-full uppercase tracking-tighter shadow-md ${isSkills ? 'bg-violet-600' : 'bg-emerald-500'}`}>
             {labTitle}
           </div>
+          
           {question.question?.split(/(\*\*.*?\*\*)/g).map((part: string, i: number) =>
             part.startsWith('**') && part.endsWith('**')
               ? <span key={i} className={`${isSkills ? 'bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-900/40 dark:text-violet-300 dark:border-violet-800' : 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/40 dark:text-emerald-300 dark:border-emerald-800'} rounded px-2 mx-1 shadow-sm not-italic border-b-2`}>{part.replace(/\*\*/g, '')}</span>
@@ -53,14 +59,14 @@ export default function GrammarLab({
       <div className="grid gap-2">
         {question.options && Object.entries(question.options).map(([key, value]: [string, string]) => (
           <button key={key} disabled={showFeedback} onClick={() => setSelectedOption(key)}
-            className={`group relative p-3.5 text-left rounded-[1.2rem] border-2 transition-all duration-300 transform active:scale-[0.98]
+            className={`group relative p-2.5 text-left rounded-[1.2rem] border-2 transition-all duration-300 transform active:scale-[0.98]
               ${selectedOption === key
                 ? (isSkills ? 'border-violet-500 bg-violet-600 text-white' : 'border-emerald-500 bg-emerald-500 text-white')
                 : `border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 hover:${isSkills ? 'border-violet-200 dark:border-violet-800' : 'border-emerald-200 dark:border-emerald-800'} text-slate-700 dark:text-slate-300`}`}
           >
             <div className="flex items-center gap-3">
-              <span className={`w-7 h-7 rounded-xl flex items-center justify-center text-[11px] font-black ${selectedOption === key ? 'bg-white text-slate-900' : 'bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500'}`}>{key}</span>
-              <span className="font-bold text-[14px]">{value}</span>
+              <span className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-black ${selectedOption === key ? 'bg-white text-slate-900' : 'bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500'}`}>{key}</span>
+              <span className="font-bold text-[13px]">{value}</span>
             </div>
           </button>
         ))}
@@ -101,14 +107,14 @@ export default function GrammarLab({
                 </div>
               </div>
               <div className={`p-4 border-2 rounded-[1.8rem] text-[13px] font-bold italic leading-relaxed ${isSkills ? 'bg-fuchsia-50 border-fuchsia-100 text-fuchsia-900 dark:bg-fuchsia-900/20 dark:border-fuchsia-800 dark:text-fuchsia-200' : 'bg-orange-50 border-orange-100 text-orange-900 dark:bg-orange-900/20 dark:border-orange-800 dark:text-orange-200'}`}>
-                {question.hint || "Farklı bir dil kuralları açısıyla bakmayı deneyin."}
+                {hintText}
               </div>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <button
-              onClick={() => { setShowHint(false); setSelectedOption(null); }}
+              onClick={() => { setShowHint(false); setSelectedOption(null); setForceShowAnalysis(false); }}
               className={`w-full ${isSkills ? 'bg-violet-900' : 'bg-slate-900'} text-white py-4 rounded-[2.2rem] font-black uppercase text-[11px] shadow-xl active:scale-95 transition-all tracking-widest flex items-center justify-center gap-2`}
             >
               <RefreshCw size={16} /> Try Again
@@ -136,7 +142,31 @@ export default function GrammarLab({
                   Result: <span className={(selectedOption === (question.correct_answer || question.correct)) ? (isSkills ? 'text-violet-600 dark:text-violet-400' : 'text-emerald-600 dark:text-emerald-400') : 'text-rose-600 dark:text-rose-400'}>{(selectedOption === (question.correct_answer || question.correct)) ? 'WELL SOLVED' : 'STRATEGY ERROR'}</span>
                 </div>
               </div>
-              <div className="space-y-1"><ExplanationRenderer explanation={question.explanation} feedback={question.feedback} theme={isSkills ? 'violet' : 'emerald'} /></div>
+              <div className="space-y-1">
+                {(!isCorrect || forceShowAnalysis) ? (
+                  <ExplanationRenderer 
+                    explanation={question.explanation} 
+                    feedback={question.feedback} 
+                    hint={hintText} 
+                    correctAnswer={question.correct_answer || question.correct}
+                    correctAnswerText={question.options?.[question.correct_answer || question.correct]}
+                    isCorrect={isCorrect}
+                    theme={isSkills ? 'violet' : 'emerald'} 
+                  />
+                ) : (
+                  <div className="py-4 text-center">
+                    <p className={`text-[14px] font-bold mb-4 ${isSkills ? 'text-violet-700 dark:text-violet-300' : 'text-emerald-700 dark:text-emerald-300'}`}>
+                      Harika seçim! Bu soruyu ustalıkla çözdün.
+                    </p>
+                    <button 
+                      onClick={() => setForceShowAnalysis(true)}
+                      className={`text-[11px] font-black uppercase tracking-widest underline underline-offset-4 ${isSkills ? 'text-violet-500' : 'text-emerald-500'}`}
+                    >
+                      Analizi Görüntüle
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <button onClick={handleNext} className={`w-full ${isSkills ? 'bg-violet-900' : 'bg-slate-900'} text-white py-5 rounded-[2.2rem] font-black uppercase text-[12px] shadow-xl active:scale-95 transition-all tracking-widest`}>

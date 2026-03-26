@@ -1,0 +1,376 @@
+{
+  "paragraph_completions": [
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "The concept of 'Deep Time' is fundamental to understanding the history of our planet. While human history is measured in centuries, geological history spans millions of years. ----. Without this expanded perspective, it would be impossible to grasp the slow drift of tectonic plates or the gradual process of biological evolution.",
+        "options": {
+          "A": "Most people find it difficult to remember events from their own childhood accurately.",
+          "B": "This vast temporal scale allows scientists to observe changes that occur at an imperceptible pace.",
+          "C": "Modern technology has made it easier for us to document every moment of our daily lives.",
+          "D": "Geologists often disagree on the exact age of certain rock formations found in the Grand Canyon.",
+          "E": "Historical records from ancient civilizations provide limited information about the Earth's core."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "Boşluktan sonra gelen 'this expanded perspective' (bu genişletilmiş perspektif) ifadesine odaklan. Boşlukta bu perspektifi tanımlayan bir 'ölçek' (scale) ifadesi aranmalı.",
+          "logic": "Paragraf zaman ölçeklerini kıyaslıyor. Boşluk, milyonlarca yılı kapsayan bu ölçeğin neye yaradığını anlatmalı ki 'bu perspektif olmadan yapılamazdı' cümlesine bağlanabilsin.",
+          "pitfall": "D seçeneği 'geologists' kelimesiyle ilgili görünse de, boşluktan sonraki 'perspective' (bakış açısı) vurgusunu karşılamaz; sadece bir 'anlaşmazlıktan' bahseder."
+        }
+      }
+    },
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "Artificial Intelligence is no longer a futuristic concept; it is already deeply integrated into our daily routines. From personalized recommendations on streaming services to advanced medical diagnostics, AI algorithms process vast amounts of data to assist human decision-making. ----. Concerns regarding data privacy, algorithmic bias, and the potential for job displacement continue to spark intense public debate.",
+        "options": {
+          "A": "However, this rapid integration brings with it a host of ethical and societal challenges.",
+          "B": "In fact, many companies have seen a significant increase in productivity due to AI implementation.",
+          "C": "Therefore, students are encouraged to learn coding languages like Python at an early age.",
+          "D": "Moreover, AI has the potential to solve complex environmental issues like climate change.",
+          "E": "Similarly, the development of the internet revolutionized the way information is shared globally."
+        },
+        "correct_answer": "A",
+        "feedback": {
+          "hint": "Boşluktan sonra gelen 'Concerns' (Endişeler), 'Privacy' (Gizlilik) ve 'Debate' (Tartışma) kelimelerine dikkat. Cümlenin yönü olumsuza dönüyor.",
+          "logic": "Paragraf AI'nın faydalarıyla başlıyor ancak son cümle endişelerden bahsediyor. Boşluğa bu zıtlığı (positive to negative) kuracak bir geçiş cümlesi gelmeli.",
+          "pitfall": "B seçeneği 'In fact' diyerek olumlu akışı devam ettirir; ancak son cümledeki 'concerns' (endişeler) kısmıyla taban tabana zıt düşer."
+        }
+      }
+    },
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "The Great Library of Alexandria was once the largest and most significant repository of knowledge in the ancient world. It housed hundreds of thousands of papyrus scrolls covering subjects from mathematics to literature. ----. The loss of such a vast collection of ancient wisdom is still lamented by historians as a major setback for human civilization.",
+        "options": {
+          "A": "The library was founded during the reign of Ptolemy II Philadelphus in the 3rd century BC.",
+          "B": "Archaeologists are still searching for the exact location of the library's main building today.",
+          "C": "Unfortunately, much of its contents were destroyed in a series of fires and invasions over several centuries.",
+          "D": "Alexandria was a melting pot of different cultures and religions during the Hellenistic period.",
+          "E": "The scrolls were meticulously copied by hand by hundreds of specialized scribes."
+        },
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "Son cümledeki 'The loss of such a vast collection' (Böylesine geniş bir koleksiyonun kaybı) ifadesi, boşlukta bir 'yıkım/kayıp' olayının yaşandığını gösterir.",
+          "logic": "Kütüphanenin büyüklüğü anlatıldıktan sonra, bir 'yıkım' (destroyed) yaşanmalı ki son cümlede 'bu kayıptan dolayı üzüntü' duyulabilsin.",
+          "pitfall": "A seçeneği kütüphanenin kuruluşuyla ilgili 'doğru' bir bilgidir ancak son cümledeki 'kayıp' (loss) vurgusuyla mantıksal bir köprü kurmaz."
+        }
+      }
+    },
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "Photosynthesis is the process by which green plants transform light energy into chemical energy. During this process, plants take in carbon dioxide from the air and water from the soil. ----. This byproduct is not only essential for the survival of the plants themselves but also for all aerobic life forms on Earth.",
+        "options": {
+          "A": "Chlorophyll is the pigment responsible for capturing the energy from sunlight.",
+          "B": "The rate of photosynthesis can be affected by factors such as light intensity and temperature.",
+          "C": "As a result of this chemical reaction, oxygen is released as a byproduct into the atmosphere.",
+          "D": "Most plants store the energy they produce in the form of glucose or starch.",
+          "E": "Deforestation is significantly reducing the Earth's capacity to produce clean air."
+        },
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "Son cümledeki 'This byproduct' (Bu yan ürün) ifadesi, boşlukta üretilen bir 'yan üründen' bahsedildiğini kanıtlar.",
+          "logic": "Girdiler (CO2 ve su) sayıldı, boşlukta sonuç (oksijen) verilmeli ki son cümledeki 'bu yan ürün yaşam için gereklidir' açıklaması havada kalmasın.",
+          "pitfall": "A seçeneği klorofilden bahseder; klorofil bir 'yan ürün' (byproduct) değil, sürecin bir 'bileşeni'dir."
+        }
+      }
+    },
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "The Silk Road was not a single path but a network of trade routes connecting the East and the West. For centuries, it facilitated the exchange of goods like silk, spices, and precious metals. ----. Religions, philosophies, and even technological innovations like papermaking spread across continents through these interactions.",
+        "options": {
+          "A": "Traveling along these routes was often dangerous due to bandits and harsh weather conditions.",
+          "B": "However, the impact of the Silk Road went far beyond the mere movement of physical commodities.",
+          "C": "The Roman Empire was one of the major consumers of silk imported from ancient China.",
+          "D": "Many of these trade routes became obsolete after the discovery of direct sea routes to Asia.",
+          "E": "Caravanserais provided essential food and shelter for merchants traveling long distances."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "Boşluktan önceki cümle 'goods' (mallar) üzerineyken, sonraki cümle 'religions, philosophies' (dinler, felsefeler) gibi soyut kavramlar üzerinedir.",
+          "logic": "Malların ötesine geçildiğini anlatan 'went far beyond the mere movement of physical commodities' (fiziksel malların ötesine geçti) ifadesi iki cümle arasında köprü kurar.",
+          "pitfall": "A seçeneği 'tehlikelerden' bahseder; oysa metin İpek Yolu'nun 'etki alanının genişlemesiyle' (ticaretten kültüre) ilgilidir."
+        }
+      }
+    },
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "In economics, the 'law of supply and demand' dictates the price of goods and services in a free market. When the demand for a product exceeds its supply, the price typically rises. Conversely, when supply is greater than demand, the price tends to fall. ----. Factors such as government regulations, taxes, and production costs can also influence how prices are set.",
+        "options": {
+          "A": "This simple relationship is the foundation of modern capitalist economies.",
+          "B": "However, market prices are not solely determined by these two forces alone.",
+          "C": "Most consumers are unaware of how supply chain disruptions affect their daily expenses.",
+          "D": "Luxury goods often follow a different pricing logic compared to essential items.",
+          "E": "Monopolies can manipulate prices regardless of the current demand in the market."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "Boşluktan sonra gelen 'government regulations, taxes' (devlet düzenlemeleri, vergiler) gibi 'ek faktörler', boşlukta 'sadece arz-talep yeterli değildir' denildiğini gösterir.",
+          "logic": "Önce arz-talep anlatıldı, sonra 'ancak sadece bunlar belirlemez' (not solely determined by these two) denilerek diğer faktörlere kapı açıldı.",
+          "pitfall": "A seçeneği olumlu bir onaylama yapar; ancak devamındaki cümle 'diğer faktörleri' saydığı için 'However' ile bir kapsam genişletmesi gereklidir."
+        }
+      }
+    },
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "Urbanization has led to the development of 'urban heat islands,' where cities are significantly warmer than their surrounding rural areas. This phenomenon is caused by the concentration of concrete and asphalt, which absorb and retain heat. ----. This creates a feedback loop that further increases the temperature in densely populated areas.",
+        "options": {
+          "A": "Planting more trees and creating green rooftops can help mitigate this effect.",
+          "B": "Rural populations often enjoy much cleaner air and lower noise levels than city dwellers.",
+          "C": "Additionally, the lack of vegetation prevents natural cooling through evaporation.",
+          "D": "Electric vehicles are becoming more popular as a way to reduce urban pollution.",
+          "E": "Architects are now designing buildings that maximize natural light to save energy."
+        },
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "Boşluktan sonraki 'This creates a feedback loop' (Bu bir geri besleme döngüsü yaratır) ifadesi, boşlukta ısıyı artıran 'ek bir sorun' anlatıldığını gösterir.",
+          "logic": "Önce betonun ısıyı tuttuğu söylendi, 'ek olarak' (Additionally) bitki örtüsü eksikliğinin de soğumayı engellediği belirtilmeli ki 'döngü' tamamlansın.",
+          "pitfall": "A seçeneği bir 'çözüm' (mitigate) sunar; ancak metnin akışı ve 'loop' vurgusu hala 'sorunun nedenleri' (additional causes) üzerinedir."
+        }
+      }
+    },
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "The James Webb Space Telescope (JWST) is designed to look further into the universe than ever before. By using infrared technology, it can peer through dense clouds of cosmic dust that block the view of visible-light telescopes. ----. These images provide invaluable data about the formation of the first galaxies after the Big Bang.",
+        "options": {
+          "A": "Hubble, its predecessor, has already provided stunning images of our own solar system.",
+          "B": "This capability allows astronomers to capture high-resolution images of stars being born.",
+          "C": "The telescope was launched from French Guiana after several years of technical delays.",
+          "D": "Space agencies are planning to build even larger telescopes in the next few decades.",
+          "E": "Infrared light is invisible to the human eye but can be felt as heat."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "Son cümledeki 'These images' (Bu görüntüler) referansı, boşlukta bu görüntülerin 'nasıl/neden çekildiğinin' anlatıldığını gösterir.",
+          "logic": "Tozun içinden bakma yeteneğinden bahsedildi (capability), boşlukta bu yeteneğin görüntü çekmeyi sağladığı söylenmeli (capture images) ki 'bu görüntüler' diye devam edilebilsin.",
+          "pitfall": "E seçeneği kızılötesi ışığın tanımını yapar; ancak 'These images' referansına bir dayanak oluşturmaz."
+        }
+      }
+    },
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "Linguistic relativity, also known as the Sapir-Whorf hypothesis, suggests that the language a person speaks influences how they perceive the world. For instance, cultures with multiple words for 'snow' may notice subtle differences in weather that others overlook. ----. Whether our thoughts are truly limited by our vocabulary or merely influenced by it remains a subject of ongoing research.",
+        "options": {
+          "A": "Bilingual individuals often report feeling like a different person when speaking another language.",
+          "B": "Learning a new language is one of the best ways to improve cognitive flexibility in old age.",
+          "C": "However, the extent to which language actually shapes cognition is still a matter of debate.",
+          "D": "English has become the dominant language of science and international business today.",
+          "E": "Some languages do not have specific words for numbers larger than five."
+        },
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "Son cümledeki 'Whether... or...' (Öyle mi yoksa böyle mi) yapısı, konunun hala 'tartışmalı' olduğunu gösterir.",
+          "logic": "Teori sunuldu, örnek verildi, boşlukta bu durumun 'hala tartışıldığı' (matter of debate) söylenmeli ki son cümledeki 'vocabulary mi yoksa etki mi' sorusuna bağlansın.",
+          "pitfall": "A seçeneği 'bireysel' bir gözlem sunar; ancak metin 'bilişsel bilim' (cognition) ve 'tartışma' (research) odağındadır."
+        }
+      }
+    },
+    {
+      "topic": "Paragraph Completion",
+      "question": {
+        "passage": "Renewable energy technologies, such as solar and wind power, have seen a dramatic decrease in cost over the last decade. This shift has made green energy more competitive with fossil fuels in many parts of the world. ----. Without reliable battery storage, these energy sources cannot provide a constant supply of power during cloudy days or calm nights.",
+        "options": {
+          "A": "Many countries are now setting ambitious targets to become carbon-neutral by 2050.",
+          "B": "Government subsidies have played a crucial role in accelerating this technological transition.",
+          "C": "Nevertheless, the intermittent nature of sun and wind remains a significant technical hurdle.",
+          "D": "Investing in nuclear energy is another option for reducing carbon emissions globally.",
+          "E": "Coal and gas still account for a large portion of the world's total electricity production."
+        },
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "Boşluktan sonraki 'Without reliable battery storage' (Güvenilir batarya depolaması olmadan) uyarısı, boşlukta güneş ve rüzgarın 'süreklilik sorunu'ndan bahsedildiğini gösterir.",
+          "logic": "Önce maliyet düşüşü (olumlu) anlatıldı, 'Nevertheless' (Yine de) ile bir 'sorun/engel' (hurdle) anlatılmalı ki 'batarya gereksinimi' cümlesi anlam kazansın.",
+          "pitfall": "B seçeneği 'olumlu' akışı devam ettirir (subsidies); ancak devamındaki 'batarya sorunu' cümlesiyle bir zıtlık köprüsü kuramaz."
+        }
+      }
+    }
+  ],
+  "irrelevant_sentences": [
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) The Renaissance was a period of intense cultural and artistic rebirth in Europe.",
+          "(II) It marked the transition from the Middle Ages to modernity, emphasizing humanism and classical learning.",
+          "(III) During this time, artists like Leonardo da Vinci and Michelangelo created masterpieces that still inspire awe today.",
+          "(IV) Renaissance scholars also made significant advancements in the fields of anatomy and astronomy.",
+          "(V) Many modern European cities face high levels of air pollution due to their historical industrial zones."
+        ],
+        "correct_answer": "E",
+        "feedback": {
+          "hint": "Paragrafın 'Zaman' (Time) ve 'Konu' (Subject) odağına bak. Rönesans mı yoksa modern şehirler mi?",
+          "logic": "İlk 4 cümle Rönesans dönemi ve o dönemin başarılarını anlatırken, V. cümle aniden 'günümüzdeki hava kirliliği' gibi alakasız bir modern soruna geçiyor.",
+          "pitfall": "IV. cümle 'bilimsel ilerleme'den bahsettiği için bazı öğrenciler sanat dışı bir konu sanıp elenebilir; ancak o da Rönesans'ın bir parçasıdır."
+        }
+      }
+    },
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) Microplastics have become a pervasive environmental threat, found even in the most remote parts of the ocean.",
+          "(II) These tiny particles are often mistaken for food by marine organisms, leading to severe health issues.",
+          "(III) Some countries have successfully implemented bans on single-use plastics to reduce waste.",
+          "(IV) Once ingested, microplastics can travel up the food chain, eventually posing a risk to human health.",
+          "(V) The chemical additives in these plastics can also leach into the water, further contaminating the environment."
+        ],
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "Metnin odağı 'Microplastics'in (Mikroplastik) 'zararları' mı yoksa 'genel plastik yasakları' mı?",
+          "logic": "I, II, IV ve V. cümleler mikroplastiklerin doğadaki 'olumsuz etkilerini' ve 'zincirdeki yolculuğunu' anlatırken, III. cümle genel bir 'politika başarısı'ndan (bans) bahsederek akışı bozuyor.",
+          "pitfall": "III. cümle 'plastik' kelimesini içerdiği için konuyla ilgili sanılabilir; ancak o 'çözüm' odaklıdır, diğerleri 'tehdit/mekanizma' odaklıdır."
+        }
+      }
+    },
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) The scientific method is a systematic way of exploring the world and testing hypotheses.",
+          "(II) It begins with an observation that leads to a specific question about a phenomenon.",
+          "(III) Researchers then perform background research and formulate a tentative explanation known as a hypothesis.",
+          "(IV) Many universities provide substantial funding for students who wish to pursue a career in laboratory research.",
+          "(V) This hypothesis is subsequently tested through carefully designed experiments to gather data."
+        ],
+        "correct_answer": "D",
+        "feedback": {
+          "hint": "Paragraf bir 'Süreci' (Process) mi anlatıyor yoksa 'Finansal Teşvikleri' mi?",
+          "logic": "I, II, III ve V. cümleler Bilimsel Yöntemin 'adımlarını' (observation -> hypothesis -> experiment) sırayla anlatırken, IV. cümle 'üniversite bursları'ndan bahsederek süreci kesiyor.",
+          "pitfall": "V. cümledeki 'This hypothesis' ifadesi, III. cümleye doğrudan bağlıdır; araya giren IV. cümle bu bağı koparır."
+        }
+      }
+    },
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) Dark matter is one of the greatest mysteries of modern astrophysics.",
+          "(II) Although it cannot be seen directly, its presence is inferred from its gravitational effects on visible matter.",
+          "(III) Scientists estimate that it accounts for about 27% of the total energy-matter density of the universe.",
+          "(IV) The launch of the Hubble Space Telescope revolutionized our understanding of distant galaxies.",
+          "(V) Various experiments are currently underway in deep underground labs to detect dark matter particles."
+        ],
+        "correct_answer": "D",
+        "feedback": {
+          "hint": "Konu 'Dark Matter' (Karanlık Madde) mi yoksa 'Hubble Teleskobu' mu?",
+          "logic": "Diğer tüm cümleler karanlık maddenin ne olduğu, miktarı ve nasıl tespit edildiği üzerinedir. IV. cümle Hubble'ın başarısından bahseder; Hubble bir teleskoptur, karanlık maddenin kendisi değildir.",
+          "pitfall": "Hubble uzayla ilgili olduğu için ilgili sanılabilir; ancak metin 'Karanlık Madde'nin 'doğası' üzerinedir."
+        }
+      }
+    },
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) Behavioral economics studies how psychological, social, and emotional factors influence economic decisions.",
+          "(II) Traditional economic models often assume that individuals always act rationally to maximize their utility.",
+          "(III) However, real-world evidence shows that people frequently make choices based on biases and shortcuts.",
+          "(IV) Investing in the stock market requires a deep understanding of financial history and risk management.",
+          "(V) These irrational behaviors can lead to predictable patterns that contradict classical theories."
+        ],
+        "correct_answer": "D",
+        "feedback": {
+          "hint": "Odağımız 'Davranışsal Ekonomi' (Behavioral Economics) ve 'Rasyonellik' mi yoksa 'Borsa Yatırımı' mı?",
+          "logic": "Metin, insan psikolojisinin ekonomi üzerindeki etkisini ve rasyonaliteyi tartışıyor. IV. cümle 'borsada yatırım yapma tavsiyesi' vererek akademik tartışmadan uzaklaşıyor.",
+          "pitfall": "V. cümledeki 'These irrational behaviors' (Bu rasyonel olmayan davranışlar), III. cümlede bahsedilen 'biases' (önyargılar) kısmına atıfta bulunur; aradaki IV. cümle bu köprüyü yıkar."
+        }
+      }
+    },
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) The Roman Empire's road network was a masterpiece of engineering that connected distant provinces.",
+          "(II) These roads allowed for the rapid movement of armies and facilitated efficient trade across the empire.",
+          "(III) Most of these roads were constructed using layers of gravel, sand, and stone for durability.",
+          "(IV) Ancient Rome was also famous for its impressive aqueducts that carried water to the cities.",
+          "(V) Even today, some modern highways follow the original routes established by Roman engineers."
+        ],
+        "correct_answer": "D",
+        "feedback": {
+          "hint": "Konu 'Roma Yolları' mı yoksa 'Roma Su Kemerleri' mi?",
+          "logic": "Tüm paragraf Roma yolları (roads), yapısı ve etkisi üzerinedir. IV. cümle su kemerlerine (aqueducts) geçerek 'başka bir mühendislik harikasından' bahseder; bu da akışı bozar.",
+          "pitfall": "IV. cümledeki 'also famous for' (ayrıca şununla meşhurdur) ifadesi sinsi bir çeldiricidir; ancak konu 'Roma mühendisliği' değil, spesifik olarak 'yollar'dır."
+        }
+      }
+    },
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) Deforestation in the Amazon rainforest has reached critical levels, threatening global biodiversity.",
+          "(II) The rainforest acts as a massive 'carbon sink,' absorbing billions of tons of carbon dioxide from the atmosphere.",
+          "(III) Many indigenous communities have lived in harmony with the forest for thousands of years.",
+          "(IV) When trees are cut down, this stored carbon is released, accelerating the process of climate change.",
+          "(V) Furthermore, the loss of habitat leads to the extinction of countless plant and animal species."
+        ],
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "Odağımız 'Deforestation'ın (Ormansızlaşma) 'Ekolojik Zararları' mı yoksa 'Yerli Halkın Yaşamı' mı?",
+          "logic": "I, II, IV ve V. cümleler ormansızlaşmanın karbon döngüsü ve biyoçeşitlilik üzerindeki 'teknik/çevresel' etkilerini anlatırken, III. cümle 'yerli halkın tarihi'nden bahsederek odağı kaydırıyor.",
+          "pitfall": "I. cümlede biyoçeşitlilikten (biodiversity) bahsedilir, V. cümlede ise türlerin yok olmasından (extinction). Bu ikisi birbirini tamamlar; III. cümle aradaki 'zarar' zincirini bozar."
+        }
+      }
+    },
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) Quantum entanglement is a phenomenon where two particles become linked, regardless of the distance between them.",
+          "(II) Einstein famously referred to this counterintuitive behavior as 'spooky action at a distance.'",
+          "(III) When the state of one particle is measured, the state of the other changes instantaneously.",
+          "(IV) Modern computers rely on silicon chips and transistors to process information at high speeds.",
+          "(V) This instantaneous connection could potentially revolutionize the future of secure communication and cryptography."
+        ],
+        "correct_answer": "D",
+        "feedback": {
+          "hint": "Konu 'Quantum Entanglement' (Kuantum Dolanıklığı) mı yoksa 'Modern Bilgisayar Çipleri' mi?",
+          "logic": "Metin kuantum fiziğinin bu garip olgusunu ve geleceğini anlatıyor. IV. cümle ise 'mevcut/klasik bilgisayar teknolojisi'nden bahsederek alakasız bir teknik bilgi veriyor.",
+          "pitfall": "V. cümledeki 'future of communication' (iletişimin geleceği) ifadesi, dolanıklığın (entanglement) bir sonucudur; klasik bilgisayarlarla ilgisi yoktur."
+        }
+      }
+    },
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) The Gutenberg printing press is often cited as the most important invention of the second millennium.",
+          "(II) It allowed for the mass production of books, making knowledge accessible to a wider audience.",
+          "(III) Before its invention, books were meticulously copied by hand, a process that was both slow and expensive.",
+          "(IV) Johannes Gutenberg was a German goldsmith who lived in the city of Mainz during the 15th century.",
+          "(V) Consequently, literacy rates increased significantly across Europe, leading to profound social changes."
+        ],
+        "correct_answer": "D",
+        "feedback": {
+          "hint": "Odağımız 'Matbaanın Etkisi ve Süreç' mi yoksa 'Gutenberg'in Hayatı' mı?",
+          "logic": "I, II, III ve V. cümleler matbaanın icadı, kitap üretimi ve toplumsal sonuçlarını (literacy rates) anlatırken, IV. cümle 'Gutenberg'in kimliği ve yaşadığı yer' gibi biyografik bir bilgiye girerek akışı kesiyor.",
+          "pitfall": "V. cümledeki 'Consequently' (Sonuç olarak) ifadesi, II. cümledeki 'mass production' (seri üretim) sonucuna bağlanır; araya giren biyografik bilgi bu 'neden-sonuç' akışını bozar."
+        }
+      }
+    },
+    {
+      "topic": "Irrelevant",
+      "question": {
+        "sentences": [
+          "(I) Existentialism is a philosophical movement that emphasizes individual freedom and responsibility.",
+          "(II) It suggests that existence precedes essence, meaning humans are not born with a predetermined purpose.",
+          "(III) Jean-Paul Sartre and Albert Camus are considered two of the most influential thinkers of this movement.",
+          "(IV) Many people find that practicing mindfulness and meditation helps reduce their daily stress levels.",
+          "(V) Therefore, each individual is responsible for creating their own meaning in an otherwise indifferent universe."
+        ],
+        "correct_answer": "D",
+        "feedback": {
+          "hint": "Konu 'Varoluşçuluk' (Existentialism) mu yoksa 'Meditasyon/Stress Yönetimi' mi?",
+          "logic": "Diğer tüm cümleler felsefi bir akım olan varoluşçuluğun ilkelerini ve temsilcilerini anlatırken, IV. cümle 'günlük stres ve meditasyon' gibi tamamen alakasız bir kişisel gelişim konusuna geçiyor.",
+          "pitfall": "V. cümledeki 'Therefore' (Bu yüzden) ile başlayan sorumluluk vurgusu, II. cümledeki 'özgürlük/amaçsızlık' ilkesinin sonucudur; meditasyonun sonucu değildir."
+        }
+      }
+    }
+  ]
+}

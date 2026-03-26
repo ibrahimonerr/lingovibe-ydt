@@ -108,7 +108,7 @@ async function generateWithGPT4oMini(prompt: string, retries = 5): Promise<any> 
                 },
                 body: JSON.stringify({
                     messages: [
-                        { role: "system", content: "You are an expert YDT (English) exam question creator. MANDATORY: The question stem, scenarios, passages, dialogues, and options MUST be in ENGLISH. ONLY the explanation and hint fields MUST be in TURKISH. Return ONLY valid JSON." },
+                        { role: "system", content: "Sen, 20 yıllık deneyime sahip bir YDT/YDS ölçme ve değerlendirme uzmanısın. ELS ve benzeri akademik yayınların soru hazırlama mantığına tamamen hakimsin. MANDATORY: The question stem, scenarios, passages, dialogues, and options MUST be in ENGLISH. ONLY the explanation, hint, and feedback fields MUST be in TURKISH. Return ONLY valid JSON." },
                         { role: "user", content: prompt }
                     ],
                     model: "gpt-4o-mini",
@@ -160,7 +160,14 @@ async function seedSkills() {
                     promptStructure = `{
   "passage": "The full passage with (1) ____, (2) ____, etc.",
   "quiz": [
-    { "id": 1, "question": "Blank 1", "options": {"A": "...", ...}, "correct": "A", "hint": "...", "explanation": "..." },
+    { 
+      "id": 1, 
+      "question": "Blank 1", 
+      "options": {"A": "...", ...}, 
+      "correct": "A", 
+      "hint": "🔍 Hint (Kritik İpucu): ...", 
+      "feedback": { "pitfall": "⚠️ \\"Sakın Düşme!\\" (The Pitfall): ..." } 
+    },
     ... (total 5)
   ]
 }`;
@@ -168,8 +175,8 @@ async function seedSkills() {
                     promptStructure = `{
   "sentences": ["I. sentence", "II. sentence", "III. sentence", "IV. sentence", "V. sentence"],
   "correct_answer": "C",
-  "hint": "...",
-  "explanation": "..."
+  "hint": "🔍 Hint (Kritik İpucu): ...",
+  "feedback": { "pitfall": "⚠️ \\"Sakın Düşme!\\" (The Pitfall): ..." }
 }`;
                 } else {
                     promptStructure = `{
@@ -178,8 +185,8 @@ async function seedSkills() {
       "question": "The question text...",
       "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
       "correct": "Letter (e.g. A)",
-      "hint": "Türkçe ipucu.",
-      "explanation": "ANLAM: ... | TACTIC: ..."
+      "hint": "🔍 Hint (Kritik İpucu): Sorudaki 'Referans Kelime' (it, this, such), 'Geçiş Kelimesi' (However, Thus) veya 'Anahtar Kavram' ipucunu doğrudan belirt. ASLA doğru cevabı veya şıkkı içine yazma.",
+      "feedback": { "pitfall": "⚠️ \\"Sakın Düşme!\\" (The Pitfall): ..." }
     }
   ]
 }`;

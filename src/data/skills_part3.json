@@ -1,0 +1,386 @@
+{
+  "situations": [
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "A colleague of yours has been consistently taking credit for the innovative ideas you've developed for a team project. You want to address this issue firmly but professionally during a meeting, ensuring everyone knows the origin of the work without creating a scene.",
+        "options": {
+          "A": "I really don't appreciate how you keep stealing my ideas and presenting them as your own in front of everyone.",
+          "B": "Since I spent weeks developing the core framework of this project, I'd like to elaborate on how those initial concepts evolved into our current strategy.",
+          "C": "It’s great that we are all contributing, but perhaps next time you could mention that I was the one who came up with the main idea.",
+          "D": "If you keep doing this, I will have no choice but to report your behavior to the senior management immediately.",
+          "E": "I am glad my suggestions are being received so well; it makes the long hours I spent researching them feel truly worthwhile."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "Hedefimiz 'firm but professional' (kararlı ama profesyonel). Sorumluluğu üstlenirken çatışmadan kaçınan bir yapı bulmalısın.",
+          "logic": "B şıkkında 'I spent weeks developing' diyerek emeğin sahibini kibarca ilan ediyor ve 'I'd like to elaborate' (detaylandırmak isterim) diyerek konuya hakimiyetini gösteriyor.",
+          "pitfall": "E şıkkı çok pasif-agresif kalıyor ve 'emeğin kime ait olduğunu' net bir şekilde tescillemiyor; B şıkkı ise iş akışı üzerinden otorite kuruyor."
+        }
+      }
+    },
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "You are attending an academic conference and a speaker makes a claim about a historical event that you know is factually incorrect based on recent archaeological findings. You want to point this out during the Q&A session in a way that is respectful to their expertise but clear about the new evidence.",
+        "options": {
+          "A": "Your entire argument is based on outdated information, and you should really check the latest findings before presenting.",
+          "B": "I was wondering if you had the chance to consider the recent excavations in Göbeklitepe, as they seem to provide a different perspective on your claim.",
+          "C": "Actually, you are wrong about that event because everyone in the field knows that the latest evidence contradicts what you just said.",
+          "D": "That was an interesting talk, but I think I have more accurate data than you do regarding the timeline of that specific period.",
+          "E": "Could you please explain why you chose to ignore the most recent archaeological discoveries that disprove your thesis?"
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "Akademik nezaket (respectful) ve yeni kanıt (new evidence) dengesini kuran 'dolaylı' bir soru yapısı ara.",
+          "logic": "B şıkkı 'I was wondering if...' (acaba ... şansınız oldu mu) diyerek karşı tarafı köşeye sıkıştırmadan yeni bilgiyi masaya koyuyor.",
+          "pitfall": "E şıkkı 'why you chose to ignore' (neden görmezden gelmeyi seçtiniz) diyerek konuşmacıyı art niyetle suçlar, bu da akademik nezakete aykırıdır."
+        }
+      }
+    },
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "A friend is constantly complaining about being exhausted and having no time for themselves, yet you notice they spend hours on social media every day. You want to give them some honest, albeit tough-love, advice to help them realize where their time is actually going.",
+        "options": {
+          "A": "Maybe if you weren't so lazy and actually managed your time, you wouldn't be complaining all the time.",
+          "B": "I understand you're busy, but perhaps tracking your screen time would reveal that you have more free hours than you think.",
+          "C": "It’s hard to feel sorry for you when I see you online for five hours straight every single night.",
+          "D": "You should probably delete all your social media apps if you really want to have a productive life.",
+          "E": "Everyone feels exhausted these days; you just need to get more sleep and stop worrying so much."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "Hedef 'tough-love' (dürüst ama yapıcı). Arkadaşına doğrudan hakaret etmeden gerçeği fark ettirmelisin.",
+          "logic": "B şıkkı önce empati yapıyor ('I understand'), sonra somut bir çözüm ('tracking screen time') sunarak sorunun kaynağını nazikçe işaret ediyor.",
+          "pitfall": "C şıkkı fazla suçlayıcı ve saldırgan bir tonda; 'tough-love' dürüstlüktür, saldırı değil."
+        }
+      }
+    },
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "You are a teacher and a student has submitted an essay that is clearly written by an AI tool. You want to confront them privately, encouraging them to redo the work using their own voice while explaining why academic integrity is crucial for their personal growth.",
+        "options": {
+          "A": "I know you used AI for this, and I'm giving you a zero unless you rewrite it immediately.",
+          "B": "This essay doesn't sound like you. I'd like you to try again because the real value of this assignment is developing your own critical thinking.",
+          "C": "AI is a great tool, but using it to write your entire essay is just a lazy way to get through school.",
+          "D": "Do you think I'm unable to distinguish between a machine's writing and a student's work?",
+          "E": "Your essay was perfect, but unfortunately, it was too perfect to be written by a student of your level."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "Bir eğitimci olarak 'teşvik edici' (encouraging) ve 'gelişim odaklı' (personal growth) bir ton seçmelisin.",
+          "logic": "B şıkkı öğrencinin sesini (voice) önemsediğini hissettiriyor ve ödevin asıl amacının (critical thinking) altını çiziyor.",
+          "pitfall": "E şıkkı 'öğrenciyi küçümseyen' (senin seviyen için fazla iyi) bir alt metin içerir, bu da öğrencinin motivasyonunu kırabilir."
+        }
+      }
+    },
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "You’ve been waiting for over an hour for your food at a high-end restaurant. You decide to complain to the manager, wanting to express your disappointment without being rude, but making it clear that the delay is unacceptable for the price you are paying.",
+        "options": {
+          "A": "This is ridiculous! I've been here for ages and still have no food. I want a full refund right now.",
+          "B": "We’ve been waiting for over an hour, and frankly, we expected much better service and efficiency from an establishment of this caliber.",
+          "C": "Is there a problem in the kitchen? Because we are very hungry and it's taking a bit too long.",
+          "D": "If our food doesn't arrive in the next five minutes, we are leaving without paying for our drinks.",
+          "E": "I am sure you are busy, but could you please check on our order when you have a moment?"
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "'Disappointment' (hayal kırıklığı) ve 'unacceptable' (kabul edilemez) dengesini, restoranın prestijine atıfta bulunarak kur.",
+          "logic": "B şıkkı 'establishment of this caliber' (bu kalibrede bir mekan) diyerek beklentinin neden yüksek olduğunu profesyonelce vurguluyor.",
+          "pitfall": "E şıkkı fazla yumuşak kalıyor ve durumun 'unacceptable' (kabul edilemez) olduğu mesajını vermiyor."
+        }
+      }
+    },
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "Your sibling is planning to quit their stable job to start a risky business without any market research. You want to warn them to be more cautious and urge them to have a solid plan before making a final decision.",
+        "options": {
+          "A": "Quitting your job now is the worst mistake you could ever make; you'll regret it for the rest of your life.",
+          "B": "It’s exciting to start something new, but I strongly advise you to conduct some market research and have a back-up plan first.",
+          "C": "Do you even have any idea how many small businesses fail in their first year? You're being very impulsive.",
+          "D": "I think you should just stay where you are; at least you have a guaranteed salary at the end of every month.",
+          "E": "If you are so sure about this, then go ahead, but don't come to me when things go wrong."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "'Urge them' (onları teşvik et/ısrar et) ve 'solid plan' (sağlam plan) vurgusu aranmalı.",
+          "logic": "B şıkkı 'strongly advise' (şiddetle tavsiye ederim) diyerek uyarının ciddiyetini belirtiyor ama 'exciting' diyerek desteğini de gösteriyor.",
+          "pitfall": "A şıkkı çok dramatik ve 'felaket tellallığı' yapıyor; B şıkkı ise daha rasyonel bir 'plan' odaklılık sunuyor."
+        }
+      }
+    },
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "You are working on a group project and one member is not doing their share of the work. You want to talk to them privately to remind them of their responsibilities and how their lack of participation is affecting the entire team.",
+        "options": {
+          "A": "If you don't start working, we will tell the teacher to remove your name from the final report.",
+          "B": "We've noticed you're falling behind on your tasks, and since our final grade depends on everyone's input, we really need you to step up.",
+          "C": "Why are you always so lazy while the rest of us are working hard to get a good grade?",
+          "D": "Don't worry about the work; we will finish it for you, but you should try to be more helpful next time.",
+          "E": "Is there anything we can do to help you? Because you haven't contributed anything at all so far."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "Ekip çalışmasının ortak sonucuna ('everyone's input') vurgu yapan profesyonel bir uyarı seç.",
+          "logic": "B şıkkı sorunu ('falling behind') ve sonucunu ('final grade depends on...') net bir şekilde bağlayarak sorumluluk çağrısı yapıyor.",
+          "pitfall": "E şıkkı 'yardım teklifi' ile başlasa da 'nothing at all' diyerek iğneleyici bir tona bürünüyor; B şıkkı daha doğrudan ve profesyonel."
+        }
+      }
+    },
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "You accidentally broke a valuable vase while visiting a friend's house. You feel terrible and want to apologize sincerely, offering to either pay for it or find an exact replacement.",
+        "options": {
+          "A": "I'm so sorry! I'll buy you a new one tomorrow, or I can just give you the money for it right now.",
+          "B": "I am devastated about the vase. Please let me make it up to you by either replacing it or covering the cost of a new one.",
+          "C": "Oh, I didn't mean to do that. It was just an accident, so I hope you're not too upset with me.",
+          "D": "That vase was quite old anyway, wasn't it? Maybe it's time for a more modern one.",
+          "E": "I'll see if I can find a similar vase online later, but I can't promise anything."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "'Devastated' (kahrolmuş) gibi güçlü bir duygu ve 'make it up to you' (telafi etmek) teklifi ara.",
+          "logic": "B şıkkı hem samimiyeti ('devastated') hem de somut telafi yollarını ('replacing or covering cost') en şık şekilde birleştiriyor.",
+          "pitfall": "A şıkkı biraz fazla 'aceleci/mekanik' bir tonda; B şıkkı arkadaşlık bağını daha çok önemsiyor."
+        }
+      }
+    },
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "Your neighbor’s dog barks loudly late at night, preventing you from sleeping. You want to discuss this with your neighbor politely, suggesting they keep the dog inside at night to solve the noise issue.",
+        "options": {
+          "A": "Your dog is keeping me awake all night! Do something about it or I'll call the police.",
+          "B": "I'm having some trouble sleeping due to the barking lately; would it be possible to keep the dog indoors after 10 PM?",
+          "C": "I love dogs, but yours is way too loud for this neighborhood, and you should really train him better.",
+          "D": "Why do you leave your dog outside at night when you know he barks at everything that moves?",
+          "E": "I am sure you are also bothered by the noise, so maybe we can find a solution together soon."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "'Politely' (nazikçe) ve 'suggesting' (önererek) kriterlerine uy; sorunu kişiselleştirmeden çözüme odaklan.",
+          "logic": "B şıkkı 'I'm having trouble' diyerek şikayetini yumuşatıyor ve 'would it be possible' diyerek nazikçe önerisini sunuyor.",
+          "pitfall": "E şıkkı fazla belirsiz ve 'together soon' diyerek çözümün netliğini bozuyor; B şıkkı ise doğrudan çözüm öneriyor (keep indoors)."
+        }
+      }
+    },
+    {
+      "topic": "Situation",
+      "question": {
+        "question": "A travel agency has significantly changed your flight itinerary without informing you, causing you to miss an important business meeting. You call the agency to express your anger and demand a full refund plus compensation for the lost opportunity.",
+        "options": {
+          "A": "You changed my flight and didn't even tell me! I'm so angry that I'll never use your agency again.",
+          "B": "Due to your failure to inform me of the changes, I've missed a vital meeting; therefore, I require a full refund and compensation for the damages.",
+          "C": "I am very disappointed with the service I received and I would appreciate it if you could give me some of my money back.",
+          "D": "How could you be so irresponsible? My business meeting was very important and now it's ruined because of you.",
+          "E": "I'd like to talk to your manager because the person I spoke to earlier was very unhelpful regarding my flight change."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "'Anger' (öfke) ama 'demanding' (talepkar) bir resmiyet. 'Therefore' (bu yüzden) ile sonuç-talep ilişkisi kur.",
+          "logic": "B şıkkı hatayı ('failure to inform'), sonucu ('missed meeting') ve talebi ('refund and compensation') net bir hukuksal tonda birleştiriyor.",
+          "pitfall": "C şıkkı 'would appreciate it' diyerek çok yumuşak kalıyor; durumun ciddiyeti ve 'angarya' (anger) karşılanmıyor."
+        }
+      }
+    }
+  ],
+  "restatements": [
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "Rarely have scientific discoveries had such an immediate and profound impact on global policy as the identification of the ozone hole in the 1980s.",
+        "options": {
+          "A": "Scientific discoveries in the 1980s, especially the ozone hole, were often used to change global policies immediately.",
+          "B": "The identification of the ozone hole in the 1980s was a unique discovery because it was the only one that affected global policy profoundly.",
+          "C": "It is not often that a scientific discovery, like the 1980s ozone hole identification, influences international policy so quickly and deeply.",
+          "D": "Before the 1980s, scientific discoveries rarely influenced global policy, but the ozone hole changed this trend completely.",
+          "E": "The ozone hole discovery in the 1980s had a much greater impact on global policy than any other scientific finding in history."
+        },
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "Cümledeki 'Rarely' (Nadir olarak) devrik yapısına ve 'immediate and profound' (ani ve derin) nitelemesine odaklan.",
+          "logic": "Orijinal cümle 'nadirdir' diyor. C şıkkındaki 'It is not often' (Sık rastlanmaz) ifadesi bu nadirliği tam olarak karşılar.",
+          "pitfall": "B şıkkı 'it was the only one' (tek olandı) diyerek anlamı aşırı kısıtlıyor. 'Rarely' demek 'tek' demek değildir."
+        }
+      }
+    },
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "Had it not been for the timely intervention of the central bank, the country's economy would almost certainly have collapsed during the financial crisis.",
+        "options": {
+          "A": "The central bank intervened just in time, but the country's economy still faced a significant risk of collapse during the crisis.",
+          "B": "The financial crisis was so severe that even the central bank's timely intervention could barely save the economy from collapsing.",
+          "C": "The country's economy was saved from an inevitable collapse during the financial crisis only because the central bank acted at the right moment.",
+          "D": "If the central bank hadn't intervened during the financial crisis, there was a slight possibility that the economy might have survived.",
+          "E": "The collapse of the economy during the financial crisis was prevented by the central bank despite its late intervention."
+        },
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "'Had it not been for...' (Eğer ... olmasaydı) kalıbı, bir şeyin tek bir sebeple kurtulduğunu anlatır.",
+          "logic": "Merkez bankası 'doğru zamanda' (timely / right moment) müdahale etmeseydi ekonomi çökecekti. Yani ekonomi 'sadece bu sayede' (only because) kurtuldu.",
+          "pitfall": "D şıkkı 'slight possibility' diyerek orijinal cümledeki 'almost certainly' (neredeyse kesinlikle -çökecekti-) vurgusunu yumuşatıyor."
+        }
+      }
+    },
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "Whether the new educational reform will actually improve student performance remains to be seen, despite the optimistic claims made by the ministry.",
+        "options": {
+          "A": "Although the ministry is hopeful, it is not yet clear if the new educational reform will result in better student performance.",
+          "B": "The ministry claims that the new educational reform has already improved student performance, but many people are still skeptical.",
+          "C": "It is certain that student performance will improve once the ministry's new educational reform is fully implemented.",
+          "D": "Even if the new educational reform improves student performance, the ministry's optimistic claims are considered exaggerated.",
+          "E": "The ministry's optimism regarding the new educational reform is based on the fact that student performance is already improving."
+        },
+        "correct_answer": "A",
+        "feedback": {
+          "hint": "'Remains to be seen' (Henüz belli değil) ve 'Despite' (Rağmen) zıtlığına odaklan.",
+          "logic": "Bakanlık umutlu ama durum net değil. A şıkkındaki 'not yet clear' (henüz net değil) ve 'Although' (Rağmen) bu anlamı mükemmel verir.",
+          "pitfall": "B şıkkı 'has already improved' (zaten geliştirdi) diyor, oysa orijinal cümlede 'gelecekte geliştirip geliştirmeyeceği' tartışılıyor."
+        }
+      }
+    },
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "No sooner had the peacekeeping force arrived in the conflict zone than the opposing factions agreed to a temporary ceasefire.",
+        "options": {
+          "A": "The opposing factions had already agreed to a ceasefire by the time the peacekeeping force reached the conflict zone.",
+          "B": "As soon as the peacekeeping force reached the area of conflict, a temporary ceasefire was accepted by the rival groups.",
+          "C": "The peacekeeping force arrived just after the opposing factions had decided to start a temporary ceasefire.",
+          "D": "If the peacekeeping force hadn't arrived so quickly, the opposing factions would never have agreed to a ceasefire.",
+          "E": "The rival groups were reluctant to agree to a ceasefire despite the arrival of the peacekeeping force in the conflict zone."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "'No sooner... than' yapısı 'yapar yapmaz / tam o anda' (as soon as) anlamı katar.",
+          "logic": "Barış gücü geldi ve 'hemen ardından' ateşkes oldu. B şıkkındaki 'As soon as' bu zamanlamayı tam karşılar.",
+          "pitfall": "A şıkkı 'zaten ateşkes yapmışlardı' (had already agreed) diyerek olayların sırasını değiştiriyor."
+        }
+      }
+    },
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "The assumption that all technological progress is inherently beneficial to society is increasingly being questioned by contemporary philosophers.",
+        "options": {
+          "A": "Contemporary philosophers have always argued that technological progress is more harmful than beneficial to society.",
+          "B": "More and more modern philosophers are starting to doubt the idea that every technological advancement is naturally good for society.",
+          "C": "Society is now realizing that technological progress is not as beneficial as contemporary philosophers once claimed.",
+          "D": "It is a fact that technological progress is beneficial, even though some philosophers continue to question its necessity.",
+          "E": "The benefits of technological progress are so obvious that only a few contemporary philosophers dare to question them."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "'Inherently' (doğuştan/özünde), 'Increasingly' (Giderek artan şekilde) ve 'Questioned' (Sorgulanan).",
+          "logic": "Felsefeciler 'teknolojinin doğası gereği iyi olduğu' fikrinden 'şüphe etmeye' (doubt) başlıyorlar. B şıkkı bu süreci çok iyi özetliyor.",
+          "pitfall": "A şıkkı 'always argued' (her zaman savundular) diyerek 'giderek artan' (increasingly) değişim vurgusunu yok sayıyor."
+        }
+      }
+    },
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "Despite the fierce criticism from the opposition, the prime minister refused to deviate from the economic plan he had outlined earlier.",
+        "options": {
+          "A": "The prime minister changed his economic plan slightly because of the intense criticism he received from the opposition.",
+          "B": "Although the opposition criticized him severely, the prime minister stuck to the economic strategy he had previously described.",
+          "C": "The prime minister's economic plan was so controversial that the opposition had no choice but to criticize it fiercely.",
+          "D": "If the opposition hadn't criticized the economic plan so much, the prime minister would have implemented it much sooner.",
+          "E": "The prime minister refused to outline a new economic plan even though the opposition demanded a complete change in strategy."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "'Refused to deviate' (sapmayı reddetti) = 'Stuck to' (sadık kaldı/bağlı kaldı).",
+          "logic": "Eleştiriye rağmen plana sadık kalındı. B şıkkındaki 'stuck to' ve 'previously described' (önceden tanımlanmış) ifadeleri birebir örtüşür.",
+          "pitfall": "A şıkkı 'changed slightly' (biraz değiştirdi) diyerek anlamı bozuyor; orijinal cümle 'sapmayı reddetti' diyor."
+        }
+      }
+    },
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "Given the complexity of the human brain, it is hardly surprising that neuroscientists have yet to fully understand the mechanisms of consciousness.",
+        "options": {
+          "A": "It is very surprising that neuroscientists still don't understand how the human brain works despite its simple structure.",
+          "B": "Neuroscientists will never be able to understand consciousness because the human brain is too complex to be studied.",
+          "C": "Since the human brain is so intricate, we shouldn't be amazed that its consciousness processes are still not completely understood by scientists.",
+          "D": "If the human brain were less complex, neuroscientists would have already discovered everything about the mechanisms of consciousness.",
+          "E": "The fact that neuroscientists don't understand consciousness is the main reason why they find the human brain so complex."
+        },
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "'Hardly surprising' (Pek şaşırtıcı değil) = 'Shouldn't be amazed' (Hayret etmemeliyiz).",
+          "logic": "Beyin karmaşık olduğu için tam anlaşılamaması 'normaldir'. C şıkkı bu mantığı 'Since... intricate' (Karmaşık olduğu için) ile kuruyor.",
+          "pitfall": "B şıkkı 'will never be able to' (asla yapamayacaklar) diyerek çok kesin ve umutsuz bir yargıya varıyor."
+        }
+      }
+    },
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "Only by analyzing ancient DNA have researchers been able to reconstruct the migratory patterns of early human populations with such precision.",
+        "options": {
+          "A": "Researchers could have reconstructed early human migration patterns even without the help of ancient DNA analysis.",
+          "B": "Ancient DNA analysis is one of the many ways that researchers use to precisely understand early human migrations.",
+          "C": "Early human migration patterns have been reconstructed accurately solely through the examination of ancient DNA.",
+          "D": "The precision in reconstructing early human migrations is due to the fact that researchers ignored other types of evidence except for DNA.",
+          "E": "If researchers hadn't analyzed ancient DNA, they would still have some idea about early human migration, but not very accurately."
+        },
+        "correct_answer": "C",
+        "feedback": {
+          "hint": "'Only by...' (Sadece ... yaparak) kalıbı, o eylemin 'tek yol' veya 'temel şart' olduğunu belirtir.",
+          "logic": "Hassas (precision) bir sonuç 'sadece' (solely) DNA analiziyle mümkün oldu. C şıkkı bu sınırlamayı tam veriyor.",
+          "pitfall": "B şıkkı 'one of the many ways' (birçok yoldan biri) diyerek 'Only by' (Sadece) kurgusunu bozuyor."
+        }
+      }
+    },
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "So far-reaching was the impact of the French Revolution that its ideals continue to shape modern democratic societies to this day.",
+        "options": {
+          "A": "The French Revolution's impact was so extensive that today's democratic systems are still influenced by its principles.",
+          "B": "Modern democratic societies are shaped by many revolutions, but the French Revolution was the most far-reaching one.",
+          "C": "If the French Revolution hadn't occurred, modern democratic societies would have developed very different ideals.",
+          "D": "The ideals of the French Revolution are only relevant to modern democratic societies because of their historical significance.",
+          "E": "To this day, the French Revolution is considered the only event that had a lasting impact on modern democratic ideals."
+        },
+        "correct_answer": "A",
+        "feedback": {
+          "hint": "'So... that' (O kadar ... ki) yapısı sebep-sonuç ilişkisi kurar.",
+          "logic": "Devrim o kadar etkiliydi ki, idealleri 'hala' (still) etkili. A şıkkı bu sürekliliği 'so extensive... still influenced' ile karşılıyor.",
+          "pitfall": "E şıkkı 'the only event' (tek olay) diyerek anlamı daraltıyor ve genelliyor."
+        }
+      }
+    },
+    {
+      "topic": "Restatement",
+      "question": {
+        "question": "The manager's decision to promote Sarah was based not so much on her seniority as on her exceptional performance during the last quarter.",
+        "options": {
+          "A": "Sarah was promoted because she had been working at the company longer than anyone else in her department.",
+          "B": "Sarah's promotion was due more to her outstanding work in the past three months than to the length of her service.",
+          "C": "The manager decided to promote Sarah although her performance during the last quarter was not as good as her seniority.",
+          "D": "If Sarah hadn't performed so well during the last quarter, her seniority wouldn't have been enough to get her a promotion.",
+          "E": "The manager promoted Sarah primarily because of her seniority, but her performance in the last quarter also played a role."
+        },
+        "correct_answer": "B",
+        "feedback": {
+          "hint": "'Not so much X as Y' (X'ten ziyade Y) yapısı, Y'nin X'ten daha önemli olduğunu vurgular.",
+          "logic": "Kıdeminden (seniority) ziyade performansı önemliydi. B şıkkındaki 'due more to her outstanding work... than to the length of her service' bu kıyası tam yapar.",
+          "pitfall": "E şıkkı 'primarily because of her seniority' (öncelikle kıdeminden dolayı) diyerek anlamı tam tersine çeviriyor."
+        }
+      }
+    }
+  ]
+}

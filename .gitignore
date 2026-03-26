@@ -12,3 +12,6 @@ build/
 *.pdf
 *.txt
 *.js
+
+# Local AI Prompts
+PROMPTS.md

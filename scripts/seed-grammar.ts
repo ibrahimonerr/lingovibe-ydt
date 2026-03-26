@@ -33,78 +33,76 @@ const GRAMMAR_TOPICS = [
 ];
 
 const GRAMMAR_SPECIFIC_PROMPTS: Record<string, string> = {
-    "Tenses & Aspect": `Generate 3 YDT-level multiple-choice grammar questions on English Tenses & Aspect.
+    "Tenses & Aspect": `Generate 3 high-difficulty grammar questions on English Tenses & Aspect.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register (science, history, psychology topics).
-- Use complex structures with time conjunctions: by the time, hardly...when, no sooner...than, since, until, while, as soon as.
-- Test temporal relationships between clauses (e.g., Past Perfect vs. Simple Past, Future Perfect vs. Future Simple).
-- All 5 options (A-E) must be grammatically plausible tense forms. Only ONE is contextually correct.
-- Avoid everyday/simple sentences. Use academic contexts like research findings, historical events, environmental studies.`,
+- Each sentence must be complex (compound-complex), academic/formal register (science, history, archaeology, sociology).
+- Use dual-gap structures that test temporal/structural harmony.
+- Test: Past Perfect vs. Simple Past, Future Perfect vs. Future Simple, and nuances of aspects (continuous vs. simple).
+- Include academic keywords (mitigate, underscore, etc.).
+- Distractors must be plausible (grammatically possible but contextually wrong) and focused on common student errors.`,
 
-    "Modals & Similar Expressions": `Generate 3 YDT-level multiple-choice grammar questions on Modals & Similar Expressions.
+    "Modals & Similar Expressions": `Generate 3 high-difficulty grammar questions on Modals & Similar Expressions.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register.
-- Test: must/can't (deduction), should have/needn't have/could have (past regret/unnecessary action), may/might (possibility), had better, be supposed to, be able to.
-- Include modal perfects: must have done, should have done, needn't have done, could have done.
-- Context must clearly dictate which modal meaning is required (obligation vs. deduction vs. possibility).
-- All 5 options must be different modal expressions. Distractors should be semantically close but contextually wrong.`,
+- Academic/formal register, complex sentences.
+- Test: must/can't (deduction), modal perfects (should have/needn't have/could have) in nuanced contexts.
+- Dual-gap structure where possible to test modal + tense harmony.
+- Use academic keywords. Distractors should be semantically close but contextually wrong.`,
 
-    "The Passive": `Generate 3 YDT-level multiple-choice grammar questions on The Passive Voice.
+    "The Passive": `Generate 3 high-difficulty grammar questions on The Passive Voice.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register.
-- Include: passive with modals (should be done), causative (have/get something done), passive gerunds/infinitives (being done, to be done, to have been done), impersonal passives (It is said that... / He is said to...).
-- Use academic contexts: scientific discoveries, policy changes, historical events.
-- Options should mix active and passive forms to test whether the student identifies the correct voice and tense.`,
+- Academic/formal register, complex sentences.
+- Include: passive with modals, causative (have/get something done), passive gerunds/infinitives, impersonal passives.
+- Dual-gap structure where one gap might be active and the other passive to test voice identification.
+- Use academic keywords and high-quality distractors.`,
 
-    "If & Wish Clauses": `Generate 3 YDT-level multiple-choice grammar questions on If Clauses & Wish Clauses.
+    "If & Wish Clauses": `Generate 3 high-difficulty grammar questions on If Clauses & Wish Clauses.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register.
-- Test: Type 0, 1, 2, 3 conditionals, mixed conditionals (If + Past Perfect → would + V1), wish + Past Simple / Past Perfect / could.
-- Include inversions: Had I known..., Were he to..., Should it rain...
-- Include alternative conditional conjunctions: unless, provided that, as long as, supposing, on condition that.
-- Context must clearly indicate real vs. unreal condition and time frame.`,
+- Academic/formal register, complex sentences.
+- Test: Type 2/3, mixed conditionals, wish clauses, and inverted conditionals (Had I known, Were I to, etc.).
+- Dual-gap structure to test tense harmony across clauses.
+- Use academic keywords. Distractors should test specific conditional rules.`,
 
-    "Noun Clauses & Reported Speech": `Generate 3 YDT-level multiple-choice grammar questions on Noun Clauses & Reported Speech.
+    "Noun Clauses & Reported Speech": `Generate 3 high-difficulty grammar questions on Noun Clauses & Reported Speech.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register.
-- Test: that-clauses, whether/if-clauses, wh-clauses as subject/object, reported speech tense shifts, reporting verbs (suggest, insist, recommend + subjunctive).
-- Include: The fact that..., It is essential that he go (subjunctive), She wondered whether...
-- Use academic contexts like conference reports, research findings, official statements.`,
+- Academic/formal register, complex sentences.
+- Test: that-clauses, whether/if-clauses, wh-clauses, subjunctive (It is essential that he go), and complex reporting verbs.
+- Dual-gap structures to test reporting verb + clause structure harmony.
+- Use academic keywords and high-quality distractors.`,
 
-    "Gerunds & Infinitives": `Generate 3 YDT-level multiple-choice grammar questions on Gerunds & Infinitives.
+    "Gerunds & Infinitives": `Generate 3 high-difficulty grammar questions on Gerunds & Infinitives.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register.
-- Test: verbs followed by gerund vs. infinitive with meaning change (stop doing vs. stop to do, remember doing vs. remember to do, try doing vs. try to do).
-- Include: perfect gerund (having done), passive gerund (being done), verb + object + infinitive (advise sb to do), adjective + infinitive (difficult to understand).
-- Use academic/professional contexts.`,
+- Academic/formal register, complex sentences.
+- Test: perfect gerund/infinitive (having done, to have done), passive forms, and verbs with meaning changes.
+- Dual-gap structures to test multiple verb structures in one sentence.
+- Use academic keywords and high-quality distractors.`,
 
-    "Adjectives & Adverbs": `Generate 3 YDT-level multiple-choice grammar questions on Adjectives & Adverbs.
+    "Adjectives & Adverbs": `Generate 3 high-difficulty grammar questions on Adjectives & Adverbs.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register.
-- Test: comparative/superlative structures (the more...the more, by far the most), adverb placement, adjective order, adjective vs. adverb confusion (hard/hardly, late/lately, near/nearly).
-- Include: so...that, such...that, too...to, enough to, as...as.
-- Use academic contexts with nuanced meaning distinctions.`,
+- Academic/formal register, complex sentences.
+- Test: complex comparatives (the more...the more, by far the most), adverb placement, and nuanced adverbial meanings.
+- Dual-gap structure to test adjective vs. adverb usage.
+- Use academic keywords and high-quality distractors.`,
 
-    "Relative Clauses": `Generate 3 YDT-level multiple-choice grammar questions on Relative Clauses.
+    "Relative Clauses": `Generate 3 high-difficulty grammar questions on Relative Clauses.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register.
-- Test: defining vs. non-defining relative clauses, relative pronouns (who, which, that, whose, whom, where, when), reduced relative clauses (the book written by...), preposition + relative pronoun (in which, for whom).
-- Include complex embedding: "The theory, which was proposed by a team whose research had been funded by..."
-- Distractors should test pronoun choice and clause type.`,
+- Academic/formal register, complex sentences.
+- Test: defining/non-defining, reduced relatives (participle clauses), and preposition + relative pronoun (in which, for whom).
+- Dual-gap structure where one gap is a relative pronoun and the other is a verb form.
+- Use academic keywords.`,
 
-    "Nouns, Pronouns & Articles": `Generate 3 YDT-level multiple-choice grammar questions on Nouns, Pronouns & Articles.
+    "Nouns, Pronouns & Articles": `Generate 3 high-difficulty grammar questions on Nouns, Pronouns & Articles.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register.
-- Test: countable/uncountable distinctions, quantifiers (a few/few, a little/little, each/every, either/neither), reflexive/reciprocal pronouns, definite/indefinite/zero article usage.
-- Include: abstract noun usage (the importance of...), generic reference (The cheetah is... vs. Cheetahs are...).
-- Use academic contexts with precise quantifier meanings.`,
+- Academic/formal register, complex sentences.
+- Test: abstract nouns, complex quantifiers (each/every, either/neither), and nuanced article usage in academic contexts.
+- Dual-gap structure to test quantifier + noun harmony.
+- Use academic keywords and high-quality distractors.`,
 
-    "Conjunctions & Transitions": `Generate 3 YDT-level multiple-choice grammar questions on Conjunctions & Transitions.
+    "Conjunctions & Transitions": `Generate 3 high-difficulty grammar questions on Conjunctions & Transitions.
 RULES:
-- Each sentence must be 25-40 words, academic/formal register.
-- Test: subordinating conjunctions (although, whereas, while, even though, in case, so that), adverbial transitions (nevertheless, furthermore, consequently, on the other hand, in contrast).
-- Two clauses/sentences with a specific logical relationship: contrast, cause-effect, addition, concession, purpose.
-- Options should contain conjunctions from DIFFERENT categories (contrast vs. cause-effect vs. addition) to test logical understanding.`
+- Academic/formal register, complex sentences.
+- Test: subordinating conjunctions and adverbial transitions in complex logical relationships (contrast, concession, cause-effect).
+- Dual-gap structure to test two related logical links.
+- Use academic keywords and high-quality distractors.`
 };
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -169,30 +167,39 @@ async function seedGrammar() {
             try {
                 const topicPrompt = GRAMMAR_SPECIFIC_PROMPTS[topic] || `Generate 3 English grammar multiple-choice questions for YDT level.`;
 
-                const prompt = `Task: ${topicPrompt}
-Topic: ${topic}
-Level: YDT (Turkish university language exam - Advanced English)
-Quantity: EXACTLY 3 questions
-Format: valid JSON only
+                const prompt = `
+Rol Tanımı: Sen, 20 yıldır YDT, YDS ve TOEFL gibi üst düzey İngilizce sınavları için soru hazırlayan kıdemli bir ölçme ve değerlendirme uzmanısın. ELS (English Language Studies) ve benzeri saygın yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin.
 
-Structure:
+Görev: Aşağıdaki kriterlere uygun olarak, [Hedef Konu: ${topic}] konularını test eden özgün, akademik ve zorluk derecesi yüksek (CEFR B2+ / C1 seviyesi) 3 adet soru hazırla.
+
+Soru Kriterleri:
+1. Cümle Yapısı: Cümleler basit olmamalı. Bilimsel bir makaleden, arkeolojik bir bulgudan veya sosyolojik bir analizden alınmış gibi duran kompleks cümleler (compound-complex sentences) kurmalısın.
+2. Boşluk Yapısı: Sorular tercihen "dual-gap" (iki boşluklu) olmalı ve her iki boşluk arasındaki zaman (tense) veya yapı uyumu öğrenciyi düşündürmeli.
+3. Kelime Dağarcığı: Cümle içerisinde akademik "keyword"ler (örn. mitigate, alleviate, underscore, notwithstanding) kullanılmalı.
+4. Çeldiriciler (Distractors): Çeldiriciler "saçma" olmamalı; gramer olarak mümkün görünse de anlamca veya sınav tekniği açısından (zaman uyumu, ipucu kelimeler) yanlış olmalı. Özellikle "yakın anlamlı" veya "yaygın yapılan öğrenci hataları" üzerine kurgulanmalı.
+5. Seçenek Sayısı: 5 seçenek (A-E).
+
+Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver. Başka hiçbir metin ekleme.
+
 {
   "quiz": [
     {
-      "question": "The question text, with '_____' for the blank if necessary...",
+      "question": "Soru metni (boşluklar ___ ile belirtilmeli)",
       "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
       "correct": "Letter (e.g. A)",
-      "hint": "Türkçe ipucu. Sorunun çözümüne giden yolu gösteren kısa bir ipucu.",
-      "explanation": "ANLAM: (Cümlenin Türkçe çevirisi) | TACTIC: (Dilbilgisi kuralının ve doğru şıkkın neden doğru olduğunun Türkçe açıklaması)"
+      "hint": "🔍 Hint: Soruyu görür görmez öğrencinin araması gereken ipucu kelimesi veya yapısal işaret. ASLA doğru cevabı veya şıkkı içine yazma.",
+      "feedback": {
+        "logic": "💡The Logic Flow: Sorunun çözüm yolunu adım adım anlatan akıl yürütme. 'Eğer boşluktan sonra şunu görüyorsan, şu yapıya gitmelisin' gibi bir akıl yürütme sun.",
+        "pitfall": "⚠️ \"Sakın Düşme!\" (The Pitfall): En güçlü çeldiricinin neden yanlış olduğunu ve öğrencilerin orada neden hata yaptığını teknik olarak açıkla."
+      }
     }
   ]
 }
 
 CRITICAL INSTRUCTIONS: 
 1. The 'quiz' array MUST contain EXACTLY 3 questions.
-2. The 'explanation' and 'hint' MUST be 100% in TURKISH. No other languages allowed in the explanation.
-3. Include clear context in sentences, they should be advanced/academic.
-4. Return ONLY the JSON object, starting with { and ending with }.`;
+2. The 'feedback' and 'hint' MUST be 100% in TURKISH. No other languages allowed in the explanation.
+3. Return ONLY the JSON object, starting with { and ending with }.`;
 
                 const parsed = await generateWithGPT4oMini(prompt);
 

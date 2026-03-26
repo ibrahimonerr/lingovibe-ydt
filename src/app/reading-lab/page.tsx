@@ -19,7 +19,6 @@ function ReadingLabContent() {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [showHint, setShowHint] = useState(false);
-    const [isTextExpanded, setIsTextExpanded] = useState(true);
     const [isFinished, setIsFinished] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -130,8 +129,7 @@ function ReadingLabContent() {
             questions={questions}
             currentIdx={currentIdx}
             readingPassage={readingPassage || ''}
-            isTextExpanded={isTextExpanded}
-            setIsTextExpanded={setIsTextExpanded}
+            canCollapse={true}
             handleNext={handleNext}
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}

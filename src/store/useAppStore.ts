@@ -54,8 +54,13 @@ interface AppState {
     lastAiUsageDate: string | null;
     theme: 'light' | 'dark' | 'system';
     guestDailyCompletedLabs: string[];
+    learnedWordIds: string[];
+    dailyVocabCount: number;
+    lastVocabDate: string | null;
     addMission: (mission: Mission) => void;
     completeMission: (id: string) => void;
+    toggleLearnedWord: (id: string) => void;
+    incrementDailyVocabCount: () => void;
     incrementProgress: (type: 'reading' | 'vocab' | 'grammar' | 'skills') => void;
     recordAnswer: (isCorrect: boolean, usedHint?: boolean) => void;
     setPrefetchedLabs: (type: 'reading' | 'vocab' | 'grammar' | 'skills', labs: PrefetchedLab[]) => void;
@@ -100,8 +105,11 @@ export const useAppStore = create<AppState>()(
             session: null,
             guestAiUsage: 0,
             lastAiUsageDate: null,
-            theme: 'dark', // Burası varsayılanı dark olsun mu? Kullanıcı ana menü koyu dedi.
+            theme: 'system',
             guestDailyCompletedLabs: [],
+            learnedWordIds: [],
+            dailyVocabCount: 0,
+            lastVocabDate: null,
             addMission: (mission) =>
                 set((state) => ({
                     activeMissions: [...state.activeMissions, mission],
@@ -112,6 +120,19 @@ export const useAppStore = create<AppState>()(
                         m.id === id ? { ...m, completed: true } : m
                     ),
                 })),
+            toggleLearnedWord: (id) =>
+                set((state) => ({
+                    learnedWordIds: state.learnedWordIds.includes(id)
+                        ? state.learnedWordIds.filter(wid => wid !== id)
+                        : [...state.learnedWordIds, id]
+                })),
+            incrementDailyVocabCount: () => {
+                const today = new Date().toDateString();
+                set((state) => ({
+                    dailyVocabCount: state.lastVocabDate === today ? state.dailyVocabCount + 1 : 1,
+                    lastVocabDate: today
+                }));
+            },
             incrementProgress: (type) =>
                 set((state) => ({
                     userProgress: {

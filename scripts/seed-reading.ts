@@ -35,7 +35,7 @@ async function generateWithGPT4oMini(prompt: string, retries = 5): Promise<any> 
                 },
                 body: JSON.stringify({
                     messages: [
-                        { role: "system", content: "You are an expert YDT (English) exam question creator. Return ONLY valid JSON." },
+                        { role: "system", content: "Sen, 20 yıllık deneyime sahip bir YDT/YDS ölçme ve değerlendirme uzmanısın. ELS ve benzeri akademik yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin. MANDATORY: The question stem, scenarios, and options MUST be in ENGLISH. ONLY the explanation, hint, and feedback fields MUST be in TURKISH. Return ONLY valid JSON." },
                         { role: "user", content: prompt }
                     ],
                     model: "gpt-4o-mini",
@@ -73,14 +73,14 @@ async function generateWithGPT4oMini(prompt: string, retries = 5): Promise<any> 
 }
 
 async function seedReading() {
-    console.log(`\n📖 Generating Reading Labs (${COUNTS.PER_BATCH} passages with 5 questions each)...\n`);
+    console.log(`\n📖 Generating Reading Labs (${COUNTS.PER_BATCH} passages with 5 questions each)....\n`);
 
     for (let i = 0; i < COUNTS.PER_BATCH; i++) {
         console.log(`[Reading] Generating batch ${i + 1}/${COUNTS.PER_BATCH}...`);
 
         try {
-            const prompt = `Task: Generate a high-quality academic English reading passage suitable for YDT (Advanced level).
-
+            const prompt = `Task: Sen, kıdemli bir ölçme ve değerlendirme uzmanı olarak akademik derinliği olan (B2-C1) özgün bir İngilizce okuma parçası ve buna bağlı 5 soru hazırla.
+ 
 PASSAGE RULES:
 - Length: 150-250 words, single coherent passage.
 - Register: Academic, formal. B2-C1 vocabulary naturally embedded.
@@ -88,31 +88,31 @@ PASSAGE RULES:
 - Include complex sentence structures: relative clauses, passive voice, conditionals, advanced conjunctions.
 - Must contain at least 3-4 B2-C1 vocabulary words used in context.
 
-Then generate EXACTLY 5 multiple-choice questions based on this passage. Each question tests a DIFFERENT reading skill:
-1. Main idea / Best title for the passage.
-2. Specific detail (Scanning — "According to the passage...").
-3. Inference (What is implied? What can be inferred?).
-4. Vocabulary in context (What does the word 'X' in paragraph Y most likely mean?).
-5. Reference (What does 'it/they/this/these' in line X refer to?).
+Soru Kriterleri:
+Her soru farklı bir beceriyi test etmeli:
+1. Ana Fikir / Başlık.
+2. Detay Sorgulama (Scanning).
+3. Çıkarım (Inference).
+4. Bağlamdan Kelime Anlamı.
+5. Referans Kelime (it/they/this).
 
-Level: YDT/Advanced
-Format: valid JSON only
-
-Structure:
+Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver.
 {
-  "passage": "Full passage text here...",
+  "passage": "Pasaj metni...",
   "quiz": [
     {
-      "question": "Question text...",
+      "question": "Soru metni...",
       "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
       "correct": "Letter (e.g. A)",
-      "hint": "Türkçe ipucu. Parçanın neresine bakılmalı? Hangi paragraf veya cümle?",
-      "quote": "The exact sentence from the passage that justifies the answer.",
-      "explanation": "ANLAM: (Sorunun/ilgili kısmın Türkçe çevirisi) | TACTIC: (Türkçe teknik analiz — neden o şık doğru, diğerleri neden yanlış)"
+      "hint": "🔍 Hint (Kritik İpucu): Parçadaki doğrudan referansı veya ipucu cümlesini belirt. ASLA doğru cevabı veya şıkkı içine yazma.",
+      "quote": "Cevabın dayanağı olan tam cümleyi metinden kopyala.",
+      "feedback": {
+        "logic": "💡The Logic Flow: Sorunun çözüm yolunu ve doğru şıkka nasıl ulaşılacağını açıkla.",
+        "pitfall": "⚠️ \"Sakın Düşme!\" (The Pitfall): En güçlü çeldiricinin neden yanlış olduğunu teknik olarak açıkla."
+      }
     }
   ]
 }
-
 CRITICAL: 
 1. Explanation and Hint MUST be in TURKISH.
 2. The 'quiz' array MUST have EXACTLY 5 questions.

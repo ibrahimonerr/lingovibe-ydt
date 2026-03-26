@@ -1,9 +1,13 @@
 export interface Feedback {
     correct_logic: string;
     trap_analysis: string;
-    exam_tactic: string;
+    exam_tactic?: string;
     contextual_translation?: string;
     translation?: string;
+    // New expert structure support
+    hint?: string;
+    logic?: string;
+    pitfall?: string;
 }
 
 export interface Question {

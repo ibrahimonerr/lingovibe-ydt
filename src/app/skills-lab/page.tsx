@@ -25,7 +25,6 @@ function SkillsLabContent() {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showFeedback, setShowFeedback] = useState(false);
     const [showHint, setShowHint] = useState(false);
-    const [isTextExpanded, setIsTextExpanded] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
 
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -78,29 +77,53 @@ function SkillsLabContent() {
                         setPassage(clozeData.passage || null);
                         const qs = (clozeData.questions || []).map((q: any) => ({
                             ...q,
-                            question: `Choose the best option for blank (${q.id}):`,
+                            question: `Choose the best option:`,
                         })) as Question[];
                         setQuestions(qs);
 
                     } else if (topic === 'Irrelevant') {
-                        // Has: sentences[], correct_answer (Roman numeral letter like 'C'),
-                        // hint, feedback. NO options field — build options from sentences.
-                        const letters = ['A', 'B', 'C', 'D', 'E'];
+                        const romanNumerals = ['I', 'II', 'III', 'IV', 'V'];
                         const sentences: string[] = raw.sentences || [];
+                        const formattedPassage = sentences.map((s, i) => {
+                            // Order is critical (matching longest first) to avoid partial stripping (like II -> I)
+                            const cleanS = s.replace(/^\s*[\(\[]?\s*(VIII|VII|VI|III|II|IV|V|I)\s*[\)\]]?[\.\s]*\s*/i, '').trim();
+                            return `(${romanNumerals[i]}) ${cleanS}`;
+                        }).join(' ');
+                        
+                        const letters = ['A', 'B', 'C', 'D', 'E'];
                         const opts: Record<string, string> = {};
-                        sentences.forEach((s: string, i: number) => {
-                            opts[letters[i]] = s;
+                        sentences.forEach((s, i) => {
+                            opts[letters[i]] = `Sentence ${romanNumerals[i]}`;
                         });
-                        const normalized: Question = {
+
+                        setPassage(formattedPassage);
+                        setQuestions([{
                             ...raw,
                             question: 'Which sentence breaks the flow of the paragraph?',
-                            options: opts,
-                            correct_answer: raw.correct_answer, // e.g. 'C'
-                        } as Question;
-                        setQuestions([normalized]);
+                            options: opts
+                        } as Question]);
+
+                    } else if (topic === 'Paragraph Completion') {
+                        const q = Array.isArray(raw) ? raw[0] : raw;
+                        setPassage(q.passage || null);
+                        setQuestions([q]);
 
                     } else {
-                        setQuestions(Array.isArray(raw) ? raw : [raw]);
+                        const qArray = (Array.isArray(raw) ? raw : [raw]).map((q: any) => {
+                            const combinedPassage = q.passage || q.scenario || q.situation || q.dialogue || q.sentence || null;
+                            const isSpecialCategory = ['Dialogue Completion', 'Situation', 'Restatement'].includes(topic);
+                            
+                            return {
+                                ...q,
+                                passage: combinedPassage || (isSpecialCategory ? q.question : null),
+                                question: isSpecialCategory ? 'Choose the best option:' : q.question
+                            };
+                        });
+
+                        if (qArray[0]?.passage) {
+                            setPassage(qArray[0].passage);
+                        }
+                        setQuestions(qArray);
                     }
                 } else {
                     throw new Error("Veritabanında bu yeteneğe ait soru bulunamadı.");
@@ -167,14 +190,19 @@ function SkillsLabContent() {
         );
     }
 
-    if (topic === 'Cloze Test') {
         return (
             <ReadingLab
                 questions={questions}
                 currentIdx={currentIdx}
                 readingPassage={passage || ''}
-                isTextExpanded={true}
-                setIsTextExpanded={setIsTextExpanded}
+                canCollapse={[
+                    'Cloze Test',
+                    'Dialogue Completion',
+                    'Situation',
+                    'Restatement',
+                    'Paragraph Completion',
+                    'Irrelevant'
+                ].includes(topic)}
                 handleNext={handleNext}
                 selectedOption={selectedOption}
                 setSelectedOption={setSelectedOption}
@@ -182,9 +210,9 @@ function SkillsLabContent() {
                 setShowFeedback={setShowFeedback}
                 showHint={showHint}
                 setShowHint={setShowHint}
+                theme="violet"
             />
         );
-    }
 
     const currentQuestion = questions[currentIdx];
     if (!currentQuestion) return null;

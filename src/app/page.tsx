@@ -6,7 +6,7 @@ import YDTLogo from '@/components/YDTLogo';
 import {
   Layout, Zap, Languages, Trophy, BookOpen,
   PenTool, Target, Eye, Repeat, X, ChevronRight,
-  Settings as SettingsIcon, PieChart
+  Settings as SettingsIcon, PieChart, Split, Search, Copy, Flame, Map as MapIcon
 } from 'lucide-react';
 import SettingsMenu from '@/components/layout/SettingsMenu';
 import { useAppStore } from '@/store/useAppStore';
@@ -181,13 +181,32 @@ export default function YDTHub() {
               </div>
               <div className="space-y-2 max-h-[350px] overflow-y-auto custom-scrollbar">
                 {mode === 'vocab_select' ? (
-                  <>
-                    <button onClick={() => handleLabSelection('vocab', 'synonym')} className="w-full p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><Target size={18} className="text-indigo-600" /> Synonym & Antonym</button>
-                    <button onClick={() => handleLabSelection('vocab', 'context')} className="w-full p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><Eye size={18} className="text-amber-600" /> In-Context Lab</button>
-                    <button onClick={() => handleLabSelection('vocab', 'odd')} className="w-full p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><X size={18} className="text-emerald-600" /> Odd-One Out</button>
-                    <button onClick={() => handleLabSelection('vocab', 'loop')} className="w-full p-4 rounded-2xl bg-rose-50 dark:bg-rose-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><Repeat size={18} className="text-rose-600" /> Flashcard Lab</button>
-                    <button onClick={() => handleLabSelection('vocab', 'wordmap')} className="w-full p-4 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center gap-3 text-slate-700 dark:text-slate-200 font-black text-[11px] uppercase active:scale-95 transition-all"><Zap size={18} className="text-blue-600" /> WordMap Game</button>
-                  </>
+                  <div className="grid grid-cols-1 gap-2.5">
+                    <button onClick={() => handleLabSelection('vocab', 'loop')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-indigo-500/5 overflow-hidden text-left mb-1 border border-slate-100 dark:border-white/5">
+                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-500 to-fuchsia-500 opacity-20" />
+                        <Repeat size={18} className="text-indigo-400" /> Vocab Loop
+                    </button>
+                    <button onClick={() => handleLabSelection('vocab', 'wordmap')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-rose-500/5 overflow-hidden text-left mb-1 border border-slate-100 dark:border-white/5">
+                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-rose-500 to-orange-500 opacity-20" />
+                        <MapIcon size={18} className="text-rose-400" /> Word Map (Daily)
+                    </button>
+                    <button onClick={() => handleLabSelection('vocab', 'meaning_shifter')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-indigo-500/5 overflow-hidden text-left">
+                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-20" />
+                        <Split size={18} className="text-blue-400" /> Meaning Shifter
+                    </button>
+                    <button onClick={() => handleLabSelection('vocab', 'definition_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-amber-500/5 overflow-hidden text-left">
+                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-amber-600 to-yellow-500 opacity-20" />
+                        <Search size={18} className="text-amber-400" /> Definition Hunt
+                    </button>
+                    <button onClick={() => handleLabSelection('vocab', 'synonym_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-emerald-500/5 overflow-hidden text-left">
+                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-emerald-600 to-teal-500 opacity-20" />
+                        <Copy size={18} className="text-emerald-400" /> Synonym Hunt
+                    </button>
+                    <button onClick={() => handleLabSelection('vocab', 'antonym_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-rose-500/5 overflow-hidden text-left">
+                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-rose-600 to-red-500 opacity-20" />
+                        <Flame size={18} className="text-rose-400" /> Antonym Hunt
+                    </button>
+                  </div>
                 ) : (
                   (mode === 'grammar' ? grammarTopics : skillTopics).map(t => (
                     <button key={t} onClick={() => handleLabSelection(mode, t)} className={`w-full p-3.5 text-left bg-slate-50 dark:bg-slate-800/50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 dark:text-slate-300 hover:${mode === 'grammar' ? 'bg-emerald-50 dark:bg-emerald-900/20' : 'bg-violet-50 dark:bg-violet-900/20'} active:scale-95 transition-all`}>{t} <ChevronRight size={14} className="opacity-20" /></button>
