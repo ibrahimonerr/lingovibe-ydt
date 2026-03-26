@@ -16,7 +16,7 @@ if (!supabaseUrl || !supabaseKey || !githubToken) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const COUNTS = {
-    PER_TOPIC: 1 // Günlük 50 hak olduğu için 1-2 set idealdir
+    PER_TOPIC: 1 // Daily generation limit
 };
 
 const GRAMMAR_TOPICS = [
@@ -31,79 +31,6 @@ const GRAMMAR_TOPICS = [
     "Nouns, Pronouns & Articles",
     "Conjunctions & Transitions"
 ];
-
-const GRAMMAR_SPECIFIC_PROMPTS: Record<string, string> = {
-    "Tenses & Aspect": `Generate 3 high-difficulty grammar questions on English Tenses & Aspect.
-RULES:
-- Each sentence must be complex (compound-complex), academic/formal register (science, history, archaeology, sociology).
-- Use dual-gap structures that test temporal/structural harmony.
-- Test: Past Perfect vs. Simple Past, Future Perfect vs. Future Simple, and nuances of aspects (continuous vs. simple).
-- Include academic keywords (mitigate, underscore, etc.).
-- Distractors must be plausible (grammatically possible but contextually wrong) and focused on common student errors.`,
-
-    "Modals & Similar Expressions": `Generate 3 high-difficulty grammar questions on Modals & Similar Expressions.
-RULES:
-- Academic/formal register, complex sentences.
-- Test: must/can't (deduction), modal perfects (should have/needn't have/could have) in nuanced contexts.
-- Dual-gap structure where possible to test modal + tense harmony.
-- Use academic keywords. Distractors should be semantically close but contextually wrong.`,
-
-    "The Passive": `Generate 3 high-difficulty grammar questions on The Passive Voice.
-RULES:
-- Academic/formal register, complex sentences.
-- Include: passive with modals, causative (have/get something done), passive gerunds/infinitives, impersonal passives.
-- Dual-gap structure where one gap might be active and the other passive to test voice identification.
-- Use academic keywords and high-quality distractors.`,
-
-    "If & Wish Clauses": `Generate 3 high-difficulty grammar questions on If Clauses & Wish Clauses.
-RULES:
-- Academic/formal register, complex sentences.
-- Test: Type 2/3, mixed conditionals, wish clauses, and inverted conditionals (Had I known, Were I to, etc.).
-- Dual-gap structure to test tense harmony across clauses.
-- Use academic keywords. Distractors should test specific conditional rules.`,
-
-    "Noun Clauses & Reported Speech": `Generate 3 high-difficulty grammar questions on Noun Clauses & Reported Speech.
-RULES:
-- Academic/formal register, complex sentences.
-- Test: that-clauses, whether/if-clauses, wh-clauses, subjunctive (It is essential that he go), and complex reporting verbs.
-- Dual-gap structures to test reporting verb + clause structure harmony.
-- Use academic keywords and high-quality distractors.`,
-
-    "Gerunds & Infinitives": `Generate 3 high-difficulty grammar questions on Gerunds & Infinitives.
-RULES:
-- Academic/formal register, complex sentences.
-- Test: perfect gerund/infinitive (having done, to have done), passive forms, and verbs with meaning changes.
-- Dual-gap structures to test multiple verb structures in one sentence.
-- Use academic keywords and high-quality distractors.`,
-
-    "Adjectives & Adverbs": `Generate 3 high-difficulty grammar questions on Adjectives & Adverbs.
-RULES:
-- Academic/formal register, complex sentences.
-- Test: complex comparatives (the more...the more, by far the most), adverb placement, and nuanced adverbial meanings.
-- Dual-gap structure to test adjective vs. adverb usage.
-- Use academic keywords and high-quality distractors.`,
-
-    "Relative Clauses": `Generate 3 high-difficulty grammar questions on Relative Clauses.
-RULES:
-- Academic/formal register, complex sentences.
-- Test: defining/non-defining, reduced relatives (participle clauses), and preposition + relative pronoun (in which, for whom).
-- Dual-gap structure where one gap is a relative pronoun and the other is a verb form.
-- Use academic keywords.`,
-
-    "Nouns, Pronouns & Articles": `Generate 3 high-difficulty grammar questions on Nouns, Pronouns & Articles.
-RULES:
-- Academic/formal register, complex sentences.
-- Test: abstract nouns, complex quantifiers (each/every, either/neither), and nuanced article usage in academic contexts.
-- Dual-gap structure to test quantifier + noun harmony.
-- Use academic keywords and high-quality distractors.`,
-
-    "Conjunctions & Transitions": `Generate 3 high-difficulty grammar questions on Conjunctions & Transitions.
-RULES:
-- Academic/formal register, complex sentences.
-- Test: subordinating conjunctions and adverbial transitions in complex logical relationships (contrast, concession, cause-effect).
-- Dual-gap structure to test two related logical links.
-- Use academic keywords and high-quality distractors.`
-};
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -120,7 +47,10 @@ async function generateWithGPT4oMini(prompt: string, retries = 5): Promise<any> 
                 },
                 body: JSON.stringify({
                     messages: [
-                        { role: "system", content: "Sen, 20 yıldır YDT, YDS ve TOEFL gibi üst düzey İngilizce sınavları için soru hazırlayan kıdemli bir ölçme ve değerlendirme uzmanısın. ELS (English Language Studies) ve benzeri saygın yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin. Return ONLY valid JSON." },
+                        { 
+                            role: "system", 
+                            content: "Sen, 20 yıldır YDT, YDS ve TOEFL gibi üst düzey İngilizce sınavları için soru hazırlayan kıdemli bir ölçme ve değerlendirme uzmanısın. ELS (English Language Studies) ve benzeri saygın yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin. Return ONLY valid JSON." 
+                        },
                         { role: "user", content: prompt }
                     ],
                     model: "gpt-4o-mini",
@@ -165,11 +95,10 @@ async function seedGrammar() {
             console.log(`[Grammar - ${topic}] Generating set ${i + 1}/${COUNTS.PER_TOPIC}...`);
 
             try {
-                const topicPrompt = GRAMMAR_SPECIFIC_PROMPTS[topic] || `Generate 3 English grammar multiple-choice questions for YDT level.`;
-
                 const prompt = `
 Rol Tanımı: Sen, 20 yıldır YDT, YDS ve TOEFL gibi üst düzey İngilizce sınavları için soru hazırlayan kıdemli bir ölçme ve değerlendirme uzmanısın. ELS (English Language Studies) ve benzeri saygın yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin.
-Görev: Aşağıdaki kriterlere uygun olarak, [Hedef Konu: ${topic}] konularını test eden özgün, akademik ve zorluk derecesi yüksek (CEFR B2+ / C1 seviyesi) 3 adet soru hazırla.
+
+Görev: Aşağıdaki kriterlere uygun olarak, [Hedef Konu: ${topic}] konularını test eden özgün, akademik ve zorluk derecesi yüksek (Ösym'nin YKS-Dil (ydt) düzeyinde olması gerektiğini unutmadan çok teknik olmayan ve 17-18 yaş grubunun ilgisini çekebilecek konuları öncelikleyelim) (CEFR B2+ / C1 seviyesi) 3 adet soru hazırla.
 
 Soru Kriterleri:
 1. Cümle Yapısı: Cümleler basit olmamalı. Bilimsel bir makaleden, arkeolojik bir bulgudan veya sosyolojik bir analizden alınmış gibi duran kompleks cümleler (compound-complex sentences) kurmalısın.
@@ -187,13 +116,13 @@ Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver. Başka hiçbir me
 {
   "quiz": [
     {
-      "question": "Soru metni (boşluklar ___ ile belirtilmeli)",
-      "options": {"A": "...", "B": "...", "C": "...", "D": "...", "E": "..."},
-      "correct": "Letter (e.g. A)",
-      "hint": "🔍 Hint: ...",
+      "question": "---- the immense pressure from the stakeholders, the CEO refused to step down, ---- proving her commitment to the company's long-term vision.",
+      "options": ["A) Despite / thereby", "B) Because of / however", "C) In spite of / whereas", "D) Although / furthermore", "E) Nevertheless / as if"],
+      "correct_answer": "A",
       "feedback": {
-        "logic_flow": "💡 The Logic Flow: ...",
-        "pitfall": "⚠️ \"Sakın Düşme!\" (The Pitfall): ..."
+        "hint": "'Baskıya rağmen' (Despite + noun) ve sonuç bildiren '-ing' (thereby) yapısını gör.",
+        "logic": "İsim öbeği (pressure) ile 'Despite' kullanılır. 'Thereby' ise eylemin sonucunu açıklar.",
+        "pitfall": "D şıkkındaki 'Although' arkasından isim öbeği alamaz; cümle bekler."
       }
     }
   ]
@@ -207,14 +136,39 @@ CRITICAL INSTRUCTIONS:
                 const parsed = await generateWithGPT4oMini(prompt);
 
                 if (parsed && parsed.quiz && Array.isArray(parsed.quiz)) {
+                    // Map the array options to object format for UI compatibility
+                    const formattedQuestions = parsed.quiz.map((q: any) => {
+                        const optionsObj: Record<string, string> = {};
+                        if (Array.isArray(q.options)) {
+                            q.options.forEach((opt: string) => {
+                                const match = opt.match(/^([A-E])\)\s*(.*)/);
+                                if (match) {
+                                    optionsObj[match[1]] = match[2];
+                                } else {
+                                    // Fallback for unexpected formats
+                                    optionsObj[opt.substring(0, 1)] = opt.substring(3).trim();
+                                }
+                            });
+                        } else {
+                            // Fallback if AI returns object anyway
+                            Object.assign(optionsObj, q.options);
+                        }
+
+                        return {
+                            ...q,
+                            options: optionsObj,
+                            correct: q.correct_answer || q.correct // Ensure compatibility
+                        };
+                    });
+
                     const { error } = await supabase.from('grammar_labs').insert([
-                        { topic, question: parsed.quiz }
+                        { topic, question: formattedQuestions }
                     ]);
                     if (error) {
                         console.error(`❌ [Grammar] Database Insert Error:`, error.message);
                         throw error;
                     }
-                    console.log(`✅ [Grammar] Saved ${topic} - Set ${i + 1} (${parsed.quiz.length} questions)`);
+                    console.log(`✅ [Grammar] Saved ${topic} - Set ${i + 1} (${formattedQuestions.length} questions)`);
                 } else {
                     console.log(`❌ [Grammar] Invalid JSON shape.`);
                 }
