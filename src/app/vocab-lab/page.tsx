@@ -124,7 +124,7 @@ function VocabLabContent() {
         };
 
         fetchVocab();
-    }, [vocabSubMode, getDailySeed, isGuestMode, solvedIds, learnedWordIds, canSolveMore]);
+    }, [vocabSubMode, getDailySeed, isGuestMode, solvedIds, learnedWordIds, canSolveMore, resetSessionStats]);
 
     if (limitReached) {
         return <LimitReachedModal type="vocab" isGuest={isGuestMode} />;
@@ -237,7 +237,7 @@ function VocabLabContent() {
                     <Skull className="text-slate-400" size={40} />
                 </div>
                 <h2 className="text-xl font-black text-slate-800 dark:text-white mb-2 uppercase">No Content Found</h2>
-                <p className="text-slate-500 text-[13px] font-medium mb-8">This module hasn't been populated with expert questions yet.</p>
+                <p className="text-slate-500 text-[13px] font-medium mb-8">This module hasn&apos;t been populated with expert questions yet.</p>
                 <button onClick={() => router.push('/vocab-lab')} className="px-8 py-3 bg-indigo-600 text-white rounded-2xl font-black uppercase text-[12px]">Back to Selection</button>
             </div>
         );

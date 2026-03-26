@@ -344,9 +344,9 @@ export default function VocabLab({
             <p className="text-[14px] font-bold opacity-90 leading-tight tracking-tight">{instructionText}</p>
             <h3 className={`${targetFontSize} drop-shadow-lg`}>
               {isDefinition ? (
-                <span className="opacity-100 italic tracking-tight">"{targetInfo}"</span>
+                <span className="opacity-100 italic tracking-tight">&quot;{targetInfo}&quot;</span>
               ) : (
-                `"${targetInfo}"`
+                `&quot;${targetInfo}&quot;`
               )}
             </h3>
           </div>
@@ -434,7 +434,7 @@ export default function VocabLab({
 
                     {feedbackLogic && (
                       <div className="p-5 rounded-[2rem] bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-white/5 mb-6 text-center relative z-10">
-                          <p className="text-[14px] text-slate-700 dark:text-slate-300 font-bold leading-relaxed italic">"{feedbackLogic}"</p>
+                          <p className="text-[14px] text-slate-700 dark:text-slate-300 font-bold leading-relaxed italic">&quot;{feedbackLogic}&quot;</p>
                       </div>
                     )}
 

@@ -164,7 +164,7 @@ function SkillsLabContent() {
         };
 
         fetchQuestions();
-    }, [topic, prefetchedLabs.skills, isGuestMode, getDailySeed]);
+    }, [topic, prefetchedLabs.skills, isGuestMode, getDailySeed, canSolveMore, resetSessionStats, solvedIds]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {

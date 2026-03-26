@@ -138,16 +138,19 @@ CRITICAL INSTRUCTIONS:
 
                 if (parsed && parsed.quiz && Array.isArray(parsed.quiz)) {
                     // Map the array options to object format for UI compatibility
-                    const formattedQuestions = parsed.quiz.map((q: any) => {
+                    const formattedQuestions = parsed.quiz.map((q: any, idx: number) => {
                         const optionsObj: Record<string, string> = {};
                         if (Array.isArray(q.options)) {
                             q.options.forEach((opt: string) => {
-                                const match = opt.match(/^([A-E])\)\s*(.*)/);
+                                const match = opt.match(/^([A-E])[\)\.]\s*(.*)/);
                                 if (match) {
                                     optionsObj[match[1]] = match[2];
                                 } else {
-                                    // Fallback for unexpected formats
-                                    optionsObj[opt.substring(0, 1)] = opt.substring(3).trim();
+                                    // Fallback if AI skips letter prefix
+                                    const first = opt.substring(0, 1).toUpperCase();
+                                    if (['A','B','C','D','E'].includes(first)) {
+                                        optionsObj[first] = opt.substring(3).trim();
+                                    }
                                 }
                             });
                         } else {
@@ -155,14 +158,18 @@ CRITICAL INSTRUCTIONS:
                             Object.assign(optionsObj, q.options);
                         }
 
+                        // Generate a unique ID for each question
+                        const qId = `grammar_${topic.toLowerCase().replace(/\s+/g, '_')}_${Date.now()}_${idx}`;
+
                         return {
                             ...q,
+                            id: qId,
                             options: optionsObj,
                             correct: q.correct_answer || q.correct // Ensure compatibility
                         };
                     });
 
-                    const insertData = formattedQuestions.map(q => ({
+                    const insertData = formattedQuestions.map((q: any) => ({
                         topic,
                         question: q
                     }));
@@ -172,7 +179,7 @@ CRITICAL INSTRUCTIONS:
                         console.error(`❌ [Grammar] Database Insert Error:`, error.message);
                         throw error;
                     }
-                    console.log(`✅ [Grammar] Saved ${topic} - ${formattedQuestions.length} individual questions`);
+                    console.log(`✅ [Grammar] Saved ${topic} - ${formattedQuestions.length} questions added`);
                 } else {
                     console.log(`❌ [Grammar] Invalid JSON shape.`);
                 }

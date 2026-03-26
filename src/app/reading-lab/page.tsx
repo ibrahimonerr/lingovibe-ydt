@@ -88,7 +88,7 @@ function ReadingLabContent() {
         };
 
         fetchReading();
-    }, [prefetchedLabs.reading, isGuestMode, getDailySeed]);
+    }, [prefetchedLabs.reading, isGuestMode, getDailySeed, canSolveMore, resetSessionStats, solvedIds]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {
