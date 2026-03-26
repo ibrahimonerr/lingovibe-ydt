@@ -9,6 +9,7 @@ import { Question } from '@/types';
 import { RefreshCw } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { supabase } from '@/lib/supabase';
+import LimitReachedModal from '@/components/ui/LimitReachedModal';
 
 function GrammarLabContent() {
     const router = useRouter();
@@ -22,66 +23,89 @@ function GrammarLabContent() {
     const [showFeedback, setShowFeedback] = useState(false);
     const [showHint, setShowHint] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
-    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed, resetSessionStats } = useAppStore();
+    const { 
+        incrementProgress, prefetchedLabs, isGuestMode, getDailySeed, 
+        resetSessionStats, canSolveMore, markAsSolved, solvedIds 
+    } = useAppStore();
     
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const limit = isGuestMode ? 3 : 5;
+    const [limitReached, setLimitReached] = useState(false);
 
     useEffect(() => {
         const fetchQuestions = async () => {
-            resetSessionStats();
-            setIsFinished(false);
-            const seed = getDailySeed();
-            
-            // Priority 1: Use prefetched grammar questions if no specific topic filter is enforced
-            if ((!topic || topic === 'Mixed') && prefetchedLabs.grammar && prefetchedLabs.grammar.length > 0) {
-                const prefetchedItems = prefetchedLabs.grammar.flatMap(item => item.question || item) as unknown as Question[];
-                // For guests, use seed for a stable selection
-                if (isGuestMode) {
-                    const stableIdx = seed % Math.max(1, prefetchedItems.length - limit);
-                    setQuestions(prefetchedItems.slice(stableIdx, stableIdx + limit) as Question[]);
-                } else {
-                    setQuestions(prefetchedItems.slice(0, 5) as Question[]);
-                }
+            if (!canSolveMore('grammar', topic)) {
+                setLimitReached(true);
                 setLoading(false);
                 return;
             }
 
+            resetSessionStats();
+            setIsFinished(false);
+            const seed = getDailySeed();
+            
             setLoading(true);
             setErrorMsg(null);
             try {
-                let query = supabase.from('grammar_labs').select('*').limit(50);
+                // If we have prefetched labs, use them but filter out solved ones
+                if ((!topic || topic === 'Mixed') && prefetchedLabs.grammar && prefetchedLabs.grammar.length > 0) {
+                    const allQs = prefetchedLabs.grammar.flatMap(item => item.question || item) as unknown as Question[];
+                    const availableQs = allQs.filter(q => !solvedIds.includes(q.id));
+                    
+                    if (availableQs.length > 0) {
+                        const count = isGuestMode ? 3 : 20;
+                        setQuestions(availableQs.slice(0, count));
+                        setLoading(false);
+                        return;
+                    }
+                }
+
+                let query = supabase.from('grammar_labs').select('*');
 
                 if (topic && topic !== 'Mixed') {
                     query = query.eq('topic', topic);
                 }
 
+                // Exclude solved IDs if possible via query or filter locally
+                // For simplicity and since ids are in JSONB in some old designs, we filter locally for now
+                // but for the new 'one row per question' design in skills, we'll do it better.
+                // Grammar labs still uses sets in some cases.
                 const { data, error } = await query;
 
-                if (error) {
-                    throw error;
-                }
+                if (error) throw error;
 
                 if (data && data.length > 0) {
-                    // Use seed for guests to always pick the same lab for the day
-                    const index = isGuestMode ? (seed % data.length) : Math.floor(Math.random() * data.length);
-                    const selectedLab = data[index];
-                    const questionSet = isGuestMode ? selectedLab.question.slice(0, 3) : selectedLab.question;
-                    setQuestions(questionSet);
+                    // Filter out rows where all questions are solved
+                    const availableLabs = data.filter(lab => {
+                        const qs = (Array.isArray(lab.question) ? lab.question : [lab.question]) as Question[];
+                        return qs.some(q => !solvedIds.includes(q.id));
+                    });
+
+                    if (availableLabs.length === 0) {
+                        throw new Error("Tüm soruları çözdünüz! Yeni sorular yakında eklenecek.");
+                    }
+
+                    const index = isGuestMode ? (seed % availableLabs.length) : Math.floor(Math.random() * availableLabs.length);
+                    const selectedLab = availableLabs[index];
+                    const qs = (Array.isArray(selectedLab.question) ? selectedLab.question : [selectedLab.question]) as Question[];
+                    
+                    // Filter out already solved questions from this set
+                    const filteredQs = qs.filter(q => !solvedIds.includes(q.id));
+                    const count = isGuestMode ? 3 : 20;
+                    setQuestions(filteredQs.slice(0, count));
                 } else {
-                    throw new Error("Veritabanında bu konuya ait soru bulunamadı. Lütfen Admin panelinden üretin.");
+                    throw new Error("Veritabanında bu konuya ait soru bulunamadı.");
                 }
 
             } catch (error) {
                 console.error("Supabase Fetch Error:", error);
-                setErrorMsg(error instanceof Error ? error.message : "Sorular yüklenemedi. Bağlantıyı kontrol edin.");
+                setErrorMsg(error instanceof Error ? error.message : "Sorular yüklenemedi.");
             } finally {
                 setLoading(false);
             }
         };
 
         fetchQuestions();
-    }, [topic, prefetchedLabs.grammar, isGuestMode, getDailySeed, limit]);
+    }, [topic, prefetchedLabs.grammar, isGuestMode, getDailySeed]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {
@@ -95,6 +119,10 @@ function GrammarLabContent() {
     };
 
     const handleSessionComplete = () => {
+        // Mark these questions as solved
+        const solvedIdsInSession = questions.map(q => q.id);
+        markAsSolved(solvedIdsInSession, 'grammar', topic);
+
         if (isGuestMode) {
             const { markLabAsCompletedByGuest } = useAppStore.getState();
             markLabAsCompletedByGuest('grammar');
@@ -102,6 +130,10 @@ function GrammarLabContent() {
         incrementProgress('grammar');
         router.push('/');
     };
+
+    if (limitReached) {
+        return <LimitReachedModal type="grammar" isGuest={isGuestMode} />;
+    }
 
     if (errorMsg) {
         return (

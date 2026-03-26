@@ -9,6 +9,7 @@ import { Question } from '@/types';
 import { RefreshCw } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { supabase } from '@/lib/supabase';
+import LimitReachedModal from '@/components/ui/LimitReachedModal';
 
 function ReadingLabContent() {
     const router = useRouter();
@@ -21,50 +22,66 @@ function ReadingLabContent() {
     const [showHint, setShowHint] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-    const { incrementProgress, prefetchedLabs, isGuestMode, getDailySeed, resetSessionStats } = useAppStore();
+    const [limitReached, setLimitReached] = useState(false);
+    const { 
+        incrementProgress, prefetchedLabs, isGuestMode, getDailySeed, 
+        resetSessionStats, canSolveMore, markAsSolved, solvedIds 
+    } = useAppStore();
 
     useEffect(() => {
         const fetchReading = async () => {
-            resetSessionStats();
-            setIsFinished(false);
-            const seed = getDailySeed();
-
-            if (prefetchedLabs.reading && prefetchedLabs.reading.length > 0) {
-                const index = isGuestMode ? (seed % prefetchedLabs.reading.length) : Math.floor(Math.random() * prefetchedLabs.reading.length);
-                const selectedLab = prefetchedLabs.reading[index];
-                setReadingPassage(selectedLab.passage ?? null);
-                const qs = (selectedLab.questions ?? []) as unknown as Question[];
-                setQuestions(isGuestMode ? qs.slice(0, 3) : qs);
+            if (!canSolveMore('reading')) {
+                setLimitReached(true);
                 setLoading(false);
                 return;
             }
 
+            resetSessionStats();
+            setIsFinished(false);
+            const seed = getDailySeed();
+
             setLoading(true);
             setErrorMsg(null);
             try {
-                const { data, error } = await supabase
-                    .from('reading_labs')
-                    .select('*')
-                    .limit(50);
-
-                if (error) {
-                    throw error;
+                // Check prefetched
+                if (prefetchedLabs.reading && prefetchedLabs.reading.length > 0) {
+                    const availableLabs = prefetchedLabs.reading.filter(lab => !solvedIds.includes(String(lab.id)));
+                    if (availableLabs.length > 0) {
+                        const index = isGuestMode ? (seed % availableLabs.length) : Math.floor(Math.random() * availableLabs.length);
+                        const selectedLab = availableLabs[index];
+                        setReadingPassage(selectedLab.passage ?? null);
+                        const qs = (selectedLab.questions ?? []) as unknown as Question[];
+                        setQuestions(isGuestMode ? qs.slice(0, 3) : qs);
+                        setLoading(false);
+                        return;
+                    }
                 }
 
+                const { data, error } = await supabase
+                    .from('reading_labs')
+                    .select('*');
+
+                if (error) throw error;
+
                 if (data && data.length > 0) {
-                    const index = isGuestMode ? (seed % data.length) : Math.floor(Math.random() * data.length);
-                    const selectedLab = data[index];
+                    const availableLabs = data.filter(lab => !solvedIds.includes(String(lab.id)));
+                    if (availableLabs.length === 0) {
+                        throw new Error("Tüm okuma parçalarını bitirdiniz!");
+                    }
+
+                    const index = isGuestMode ? (seed % availableLabs.length) : Math.floor(Math.random() * availableLabs.length);
+                    const selectedLab = availableLabs[index];
 
                     setReadingPassage(selectedLab.passage);
-                    setQuestions(isGuestMode ? selectedLab.questions.slice(0, 3) : selectedLab.questions);
+                    const qs = selectedLab.questions as unknown as Question[];
+                    setQuestions(isGuestMode ? qs.slice(0, 3) : qs);
                 } else {
-                    throw new Error("No reading passages found in database. Please generate some from the Admin Panel.");
+                    throw new Error("Okuma parçası bulunamadı.");
                 }
 
             } catch (error) {
                 console.error("Supabase Fetch Error:", error);
-                setErrorMsg(error instanceof Error ? error.message : "Okuma parçası yüklenemedi. Veritabanı bağlantısını kontrol edin.");
+                setErrorMsg(error instanceof Error ? error.message : "Okuma parçası yüklenemedi.");
             } finally {
                 setLoading(false);
             }
@@ -86,6 +103,15 @@ function ReadingLabContent() {
     };
 
     const handleSessionComplete = () => {
+        // Mark the current passage as solved (using its passage content or a unique marker)
+        // Ideally reading_labs has an ID we can use.
+        // Let's assume we can get the ID from questions or state.
+        // For now, if we don't have a direct ID in local state, we'll mark based on passage snippet
+        // or just track that ONE session was completed for daily limits.
+        // Actually, ReadingLab should have IDs for questions.
+        const passageId = questions[0]?.id ? String(questions[0].id).split('_')[0] : 'reading_session';
+        markAsSolved([passageId], 'reading');
+
         if (isGuestMode) {
             const { markLabAsCompletedByGuest } = useAppStore.getState();
             markLabAsCompletedByGuest('reading');
@@ -93,6 +119,10 @@ function ReadingLabContent() {
         incrementProgress('reading');
         router.push('/');
     };
+
+    if (limitReached) {
+        return <LimitReachedModal type="reading" isGuest={isGuestMode} />;
+    }
 
     if (errorMsg) {
         return (

@@ -14,6 +14,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { supabase } from '@/lib/supabase';
 import { Question } from '@/types';
 import { YDT_VOCAB_DB } from '@/data/ydtVocab';
+import LimitReachedModal from '@/components/ui/LimitReachedModal';
 
 function VocabLabContent() {
     const router = useRouter();
@@ -30,15 +31,9 @@ function VocabLabContent() {
     const { 
         incrementProgress, isGuestMode, getDailySeed, 
         resetSessionStats, learnedWordIds, toggleLearnedWord,
-        dailyVocabCount, lastVocabDate, incrementDailyVocabCount
+        canSolveMore, markAsSolved, solvedIds
     } = useAppStore();
-    const limit = isGuestMode 
-        ? (vocabSubMode === 'loop' ? 10 : 5) 
-        : 20;
-
-    const isDailyLimitReached = isGuestMode && vocabSubMode === 'loop' && 
-        lastVocabDate === new Date().toDateString() && 
-        dailyVocabCount >= 10;
+    const [limitReached, setLimitReached] = useState(false);
 
     useEffect(() => {
         if (!vocabSubMode) {
@@ -54,6 +49,11 @@ function VocabLabContent() {
         setIsFinished(false);
 
         const fetchVocab = async () => {
+            if (vocabSubMode && !canSolveMore('vocab', vocabSubMode)) {
+                setLimitReached(true);
+                return;
+            }
+
             resetSessionStats();
             const seed = getDailySeed();
             
@@ -64,33 +64,46 @@ function VocabLabContent() {
 
             setLoading(true);
             try {
+                const countLimit = isGuestMode ? (vocabSubMode === 'loop' ? 10 : 5) : (vocabSubMode === 'loop' ? 10 : 20);
+
                 const { data, error } = await supabase
                     .from('vocab_labs')
                     .select('*')
-                    .eq('mode', vocabSubMode)
-                    .limit(50);
+                    .eq('mode', vocabSubMode);
 
                 if (error) throw error;
 
                 if (data && data.length > 0) {
+                    // Filter out already solved words/questions
+                    const availableData = data.filter(item => !solvedIds.includes(String(item.id)));
+                    
+                    if (availableData.length === 0) {
+                        // If everything is solved, and it's flashcards, maybe reset or show message
+                        if (vocabSubMode === 'loop') {
+                            setQuestions([]); // Will show "No Content"
+                        } else {
+                            throw new Error("Bu modüldeki tüm soruları çözdünüz!");
+                        }
+                    }
+
                     // Stable shuffle for guests using seed
-                    const sortedData = [...data].sort((a, b) => {
+                    const sortedData = [...availableData].sort((a, b) => {
                         const valA = (String(a.id).charCodeAt(0) + seed) % 1000;
                         const valB = (String(b.id).charCodeAt(0) + seed) % 1000;
                         return valA - valB;
                     });
                     
-                    const selectedModeQuestions = sortedData.slice(0, limit).map(item => ({
+                    const selectedModeQuestions = sortedData.slice(0, countLimit).map(item => ({
                         ...item.question,
                         id: item.id
                     }));
                     setQuestions(selectedModeQuestions);
                 } else if (vocabSubMode === 'loop') {
-                    // Fallback to local DB for LOOP if Supabase is empty, filtering out learned words
+                    // Fallback to local DB for LOOP if Supabase is empty, filtering out learned words AND solved IDs
                     const localItems = YDT_VOCAB_DB
-                        .filter(item => !learnedWordIds.includes(item.id))
+                        .filter(item => !learnedWordIds.includes(item.id) && !solvedIds.includes(item.id))
                         .sort((a,b) => (Number(a.id) + seed) % 100 - (Number(b.id) + seed) % 100)
-                        .slice(0, limit);
+                        .slice(0, countLimit);
                         
                     const loopQuestions = localItems.map(item => ({
                         id: item.id,
@@ -111,28 +124,10 @@ function VocabLabContent() {
         };
 
         fetchVocab();
-    }, [vocabSubMode, getDailySeed, isGuestMode, limit]);
+    }, [vocabSubMode, getDailySeed, isGuestMode, solvedIds, learnedWordIds, canSolveMore]);
 
-    if (isDailyLimitReached && !isFinished) {
-        return (
-            <div className="p-8 text-center pt-24 animate-in fade-in zoom-in duration-500">
-                <div className="w-24 h-24 bg-indigo-600 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-indigo-500/20 rotate-12">
-                    <Target className="text-white" size={48} />
-                </div>
-                <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-4 italic tracking-tighter uppercase">Daily Limit Reached!</h2>
-                <div className="bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl p-6 mb-8">
-                    <p className="text-slate-600 dark:text-slate-400 font-bold text-[13px] leading-relaxed">
-                        Bugün için 10 flashcard hedefini tamamladın. Yarın yeni kelimelerle görüşmek üzere!
-                    </p>
-                </div>
-                <button 
-                    onClick={() => router.push('/')} 
-                    className="w-full py-5 bg-slate-900 text-white rounded-[1.8rem] font-black uppercase text-[12px] tracking-widest shadow-xl active:scale-[0.98] transition-all"
-                >
-                    Back to Dashboard
-                </button>
-            </div>
-        );
+    if (limitReached) {
+        return <LimitReachedModal type="vocab" isGuest={isGuestMode} />;
     }
 
     if (!vocabSubMode) {
@@ -191,6 +186,11 @@ function VocabLabContent() {
     };
 
     const handleSessionComplete = () => {
+        if (vocabSubMode !== 'loop') {
+            const solvedIdsInSession = questions.map(q => q.id).filter(id => !!id);
+            markAsSolved(solvedIdsInSession, 'vocab', vocabSubMode || undefined);
+        }
+
         if (isGuestMode) {
             const { markLabAsCompletedByGuest } = useAppStore.getState();
             markLabAsCompletedByGuest('vocab');
@@ -200,10 +200,14 @@ function VocabLabContent() {
     };
 
     const handleSwipe = (learned: boolean) => {
-        if (learned && questions[currentIdx]) {
-            toggleLearnedWord(questions[currentIdx].id);
+        if (questions[currentIdx]) {
+            const wordId = questions[currentIdx].id;
+            if (learned) {
+                toggleLearnedWord(wordId);
+            }
+            // Mark as solved for daily limits
+            markAsSolved([String(wordId)], 'vocab', 'loop');
         }
-        incrementDailyVocabCount();
         handleNext();
     };
 

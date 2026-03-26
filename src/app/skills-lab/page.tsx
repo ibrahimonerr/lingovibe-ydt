@@ -11,10 +11,10 @@ import { supabase } from '@/lib/supabase';
 import ReadingLab from '@/components/features/ReadingLab';
 import { useAppStore } from '@/store/useAppStore';
 import { Question } from '@/types';
+import LimitReachedModal from '@/components/ui/LimitReachedModal';
 
 function SkillsLabContent() {
     const router = useRouter();
-    const { prefetchedLabs, isGuestMode, getDailySeed, incrementProgress, resetSessionStats } = useAppStore();
     const searchParams = useSearchParams();
     const topic = searchParams.get('topic') || '';
 
@@ -26,114 +26,140 @@ function SkillsLabContent() {
     const [showFeedback, setShowFeedback] = useState(false);
     const [showHint, setShowHint] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
+    const { 
+        prefetchedLabs, isGuestMode, getDailySeed, incrementProgress, 
+        resetSessionStats, canSolveMore, markAsSolved, solvedIds 
+    } = useAppStore();
 
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const [limitReached, setLimitReached] = useState(false);
 
     useEffect(() => {
         const fetchQuestions = async () => {
-            resetSessionStats();
-            setIsFinished(false);
-            const seed = getDailySeed();
-            const limit = isGuestMode ? 3 : 5;
-
-            if (!topic && prefetchedLabs.skills && prefetchedLabs.skills.length > 0) {
-                const index = isGuestMode ? (seed % prefetchedLabs.skills.length) : Math.floor(Math.random() * prefetchedLabs.skills.length);
-                const selectedLab = prefetchedLabs.skills[index];
-
-                if (selectedLab.passage) {
-                    setPassage(selectedLab.passage);
-                    setQuestions((selectedLab.questions ?? []) as unknown as Question[]);
-                } else {
-                    setQuestions([selectedLab.question].flat() as unknown as Question[]);
-                }
+            if (!canSolveMore('skills', topic)) {
+                setLimitReached(true);
                 setLoading(false);
                 return;
             }
 
+            resetSessionStats();
+            setIsFinished(false);
+            const seed = getDailySeed();
+            
             setLoading(true);
             setErrorMsg(null);
             setPassage(null);
             try {
-                let query = supabase.from('skills_labs').select('*').limit(50);
+                // Check prefetched first
+                if (!topic && prefetchedLabs.skills && prefetchedLabs.skills.length > 0) {
+                    const availableLabs = prefetchedLabs.skills.filter(lab => {
+                        const qs = (Array.isArray(lab.question) ? lab.question : [lab.question]) as any[];
+                        return qs.some(q => !solvedIds.includes(q.id));
+                    });
 
-                if (topic) {
-                    query = query.eq('topic', topic);
+                    if (availableLabs.length > 0) {
+                        const index = isGuestMode ? (seed % availableLabs.length) : Math.floor(Math.random() * availableLabs.length);
+                        const selectedLab = availableLabs[index];
+                        processSelectedLab(selectedLab);
+                        setLoading(false);
+                        return;
+                    }
                 }
 
+                let query = supabase.from('skills_labs').select('*');
+                if (topic) query = query.eq('topic', topic);
                 const { data, error } = await query;
-
                 if (error) throw error;
 
                 if (data && data.length > 0) {
-                    const index = isGuestMode ? (seed % data.length) : Math.floor(Math.random() * data.length);
-                    const selectedLab = data[index];
-                    const raw = selectedLab.question;
-
-                    if (topic === 'Cloze Test') {
-                        // seed-cloze-skills.ts saved the whole parsed object.
-                        // Due to a serialization quirk it may be stored as { '0': { passage, questions } }
-                        // or directly as { passage, questions }. Handle both.
-                        const clozeData = raw['0'] ?? raw;
-                        setPassage(clozeData.passage || null);
-                        const qs = (clozeData.questions || []).map((q: any) => ({
-                            ...q,
-                            question: `Choose the best option:`,
-                        })) as Question[];
-                        setQuestions(qs);
-
-                    } else if (topic === 'Irrelevant') {
-                        const romanNumerals = ['I', 'II', 'III', 'IV', 'V'];
-                        const sentences: string[] = raw.sentences || [];
-                        const formattedPassage = sentences.map((s, i) => {
-                            // Order is critical (matching longest first) to avoid partial stripping (like II -> I)
-                            const cleanS = s.replace(/^\s*[\(\[]?\s*(VIII|VII|VI|III|II|IV|V|I)\s*[\)\]]?[\.\s]*\s*/i, '').trim();
-                            return `(${romanNumerals[i]}) ${cleanS}`;
-                        }).join(' ');
-                        
-                        const letters = ['A', 'B', 'C', 'D', 'E'];
-                        const opts: Record<string, string> = {};
-                        sentences.forEach((s, i) => {
-                            opts[letters[i]] = `Sentence ${romanNumerals[i]}`;
-                        });
-
-                        setPassage(formattedPassage);
-                        setQuestions([{
-                            ...raw,
-                            question: 'Which sentence breaks the flow of the paragraph?',
-                            options: opts
-                        } as Question]);
-
-                    } else if (topic === 'Paragraph Completion') {
-                        const q = Array.isArray(raw) ? raw[0] : raw;
-                        setPassage(q.passage || null);
-                        setQuestions([q]);
-
-                    } else {
-                        const qArray = (Array.isArray(raw) ? raw : [raw]).map((q: any) => {
-                            const combinedPassage = q.passage || q.scenario || q.situation || q.dialogue || q.sentence || null;
-                            const isSpecialCategory = ['Dialogue Completion', 'Situation', 'Restatement'].includes(topic);
-                            
-                            return {
-                                ...q,
-                                passage: combinedPassage || (isSpecialCategory ? q.question : null),
-                                question: isSpecialCategory ? 'Choose the best option:' : q.question
-                            };
-                        });
-
-                        if (qArray[0]?.passage) {
-                            setPassage(qArray[0].passage);
+                    const availableLabs = data.filter(lab => {
+                        const raw = lab.question;
+                        if (topic === 'Cloze Test') {
+                            const clozeData = raw['0'] ?? raw;
+                            return (clozeData.questions || []).some((q: any) => !solvedIds.includes(q.id));
                         }
-                        setQuestions(qArray);
-                    }
-                } else {
-                    throw new Error("Veritabanında bu yeteneğe ait soru bulunamadı.");
-                }
+                        if (topic === 'Irrelevant') {
+                            return !solvedIds.includes(raw.id || lab.id);
+                        }
+                        const qs = (Array.isArray(raw) ? raw : [raw]);
+                        return qs.some((q: any) => !solvedIds.includes(q.id));
+                    });
 
+                    if (availableLabs.length === 0) {
+                        throw new Error("Tüm soruları çözdünüz!");
+                    }
+
+                    const index = isGuestMode ? (seed % availableLabs.length) : Math.floor(Math.random() * availableLabs.length);
+                    const selectedLab = availableLabs[index];
+                    processSelectedLab(selectedLab);
+                } else {
+                    throw new Error("Soru bulunamadı.");
+                }
             } catch (error) {
                 console.error("Supabase Fetch Error:", error);
                 setErrorMsg(error instanceof Error ? error.message : "Sorular yüklenemedi.");
             } finally {
                 setLoading(false);
+            }
+        };
+
+        const processSelectedLab = (selectedLab: any) => {
+            const raw = selectedLab.question;
+            const count = isGuestMode ? 3 : 20;
+
+            if (topic === 'Cloze Test') {
+                const clozeData = raw['0'] ?? raw;
+                setPassage(clozeData.passage || null);
+                const qs = (clozeData.questions || [])
+                    .filter((q: any) => !solvedIds.includes(q.id))
+                    .map((q: any) => ({ ...q, question: `Choose the best option:` })) as Question[];
+                setQuestions(qs.slice(0, 5)); // Cloze Test always 5
+
+            } else if (topic === 'Irrelevant') {
+                const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+                const sentences: string[] = raw.sentences || [];
+                const formattedPassage = sentences.map((s, i) => {
+                    const cleanS = s.replace(/^\s*[\(\[]?\s*(VIII|VII|VI|III|II|IV|V|I)\s*[\)\]]?[\.\s]*\s*/i, '').trim();
+                    return `(${romanNumerals[i]}) ${cleanS}`;
+                }).join(' ');
+                
+                const letters = ['A', 'B', 'C', 'D', 'E'];
+                const opts: Record<string, string> = {};
+                sentences.forEach((s, i) => {
+                    opts[letters[i]] = `Sentence ${romanNumerals[i]}`;
+                });
+
+                setPassage(formattedPassage);
+                setQuestions([{
+                    ...raw,
+                    id: raw.id || selectedLab.id,
+                    question: 'Which sentence breaks the flow of the paragraph?',
+                    options: opts
+                } as Question]);
+
+            } else if (topic === 'Paragraph Completion') {
+                const q = Array.isArray(raw) ? raw[0] : raw;
+                setPassage(q.passage || null);
+                setQuestions([q]);
+
+            } else {
+                const qArray = (Array.isArray(raw) ? raw : [raw])
+                    .filter((q: any) => !solvedIds.includes(q.id))
+                    .map((q: any) => {
+                        const combinedPassage = q.passage || q.scenario || q.situation || q.dialogue || q.sentence || null;
+                        const isSpecialCategory = ['Dialogue Completion', 'Situation', 'Restatement'].includes(topic);
+                        
+                        return {
+                            ...q,
+                            passage: combinedPassage || (isSpecialCategory ? q.question : null),
+                            question: isSpecialCategory ? 'Choose the best option:' : q.question
+                        };
+                    });
+
+                if (qArray[0]?.passage) {
+                    setPassage(qArray[0].passage);
+                }
+                setQuestions(qArray.slice(0, count));
             }
         };
 
@@ -152,6 +178,9 @@ function SkillsLabContent() {
     };
 
     const handleSessionComplete = () => {
+        const solvedIdsInSession = questions.map(q => q.id).filter(id => !!id);
+        markAsSolved(solvedIdsInSession, 'skills', topic);
+
         if (isGuestMode) {
             const { markLabAsCompletedByGuest } = useAppStore.getState();
             markLabAsCompletedByGuest('skills');
@@ -159,6 +188,10 @@ function SkillsLabContent() {
         incrementProgress('skills');
         router.push('/');
     };
+
+    if (limitReached) {
+        return <LimitReachedModal type="skills" isGuest={isGuestMode} />;
+    }
 
     if (errorMsg) {
         return (

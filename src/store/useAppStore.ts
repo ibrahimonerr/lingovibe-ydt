@@ -54,6 +54,8 @@ interface AppState {
     lastAiUsageDate: string | null;
     theme: 'light' | 'dark' | 'system';
     guestDailyCompletedLabs: string[];
+    solvedIds: string[];
+    dailyUsage: Record<string, { count: number, date: string }>;
     learnedWordIds: string[];
     dailyVocabCount: number;
     lastVocabDate: string | null;
@@ -63,6 +65,8 @@ interface AppState {
     incrementDailyVocabCount: () => void;
     incrementProgress: (type: 'reading' | 'vocab' | 'grammar' | 'skills') => void;
     recordAnswer: (isCorrect: boolean, usedHint?: boolean) => void;
+    canSolveMore: (type: 'reading' | 'vocab' | 'grammar' | 'skills', subTopic?: string) => boolean;
+    markAsSolved: (ids: string[], type: 'reading' | 'vocab' | 'grammar' | 'skills', subTopic?: string) => void;
     setPrefetchedLabs: (type: 'reading' | 'vocab' | 'grammar' | 'skills', labs: PrefetchedLab[]) => void;
     setLastActiveRoute: (route: string | null) => void;
     setSession: (session: Session | null) => void;
@@ -107,6 +111,8 @@ export const useAppStore = create<AppState>()(
             lastAiUsageDate: null,
             theme: 'system',
             guestDailyCompletedLabs: [],
+            solvedIds: [],
+            dailyUsage: {},
             learnedWordIds: [],
             dailyVocabCount: 0,
             lastVocabDate: null,
@@ -140,6 +146,47 @@ export const useAppStore = create<AppState>()(
                         [`${type}LabsCompleted`]: state.userProgress[`${type}LabsCompleted`] + 1,
                     },
                 })),
+            canSolveMore: (type, subTopic) => {
+                const state = get();
+                const today = new Date().toDateString();
+                const key = subTopic ? `${type}:${subTopic}` : type;
+                const usage = state.dailyUsage[key];
+                const currentCount = (usage && usage.date === today) ? usage.count : 0;
+
+                // Limits based on Guest vs. Registered
+                if (state.isGuestMode) {
+                    if (type === 'reading') return currentCount < 1;
+                    if (type === 'vocab') {
+                        if (subTopic === 'loop') return currentCount < 10; // 10 flashcards
+                        return currentCount < 5; // 5 questions per other sub-modules
+                    }
+                    return currentCount < 3; // 3 for Grammar/Skills
+                } else {
+                    // Registered Users
+                    if (type === 'reading') return currentCount < 5;
+                    if (type === 'vocab') {
+                        if (subTopic === 'loop') return currentCount < 10; // Still 10 flashcards?
+                        return currentCount < 20;
+                    }
+                    return currentCount < 20;
+                }
+            },
+            markAsSolved: (ids, type, subTopic) => {
+                const today = new Date().toDateString();
+                const key = subTopic ? `${type}:${subTopic}` : type;
+                set((state) => {
+                    const usage = state.dailyUsage[key];
+                    const currentCount = (usage && usage.date === today) ? usage.count : 0;
+                    
+                    return {
+                        solvedIds: Array.from(new Set([...state.solvedIds, ...ids])),
+                        dailyUsage: {
+                            ...state.dailyUsage,
+                            [key]: { count: currentCount + ids.length, date: today }
+                        }
+                    };
+                });
+            },
             recordAnswer: (isCorrect, usedHint = false) =>
                 set((state) => {
                     const stats = { ...state.labStats };
