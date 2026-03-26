@@ -176,7 +176,7 @@ function VocabLabContent() {
 
     const handleSessionComplete = () => {
         if (vocabSubMode !== 'loop') {
-            const solvedIdsInSession = questions.map(q => q.id).filter(id => !!id);
+            const solvedIdsInSession = questions.map(q => String(q.id)).filter(id => !!id);
             markAsSolved(solvedIdsInSession, 'vocab', vocabSubMode || undefined);
         }
 

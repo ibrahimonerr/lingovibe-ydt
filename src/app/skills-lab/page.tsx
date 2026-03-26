@@ -54,7 +54,7 @@ function SkillsLabContent() {
                 if (!topic && prefetchedLabs.skills && prefetchedLabs.skills.length > 0) {
                     const availableLabs = prefetchedLabs.skills.filter(lab => {
                         const qs = (Array.isArray(lab.question) ? lab.question : [lab.question]) as any[];
-                        return qs.some(q => !solvedIds.includes(q.id));
+                        return qs.some(q => !solvedIds.includes(String(q.id)));
                     });
 
                     if (availableLabs.length > 0) {
@@ -76,13 +76,13 @@ function SkillsLabContent() {
                         const raw = lab.question;
                         if (topic === 'Cloze Test') {
                             const clozeData = raw['0'] ?? raw;
-                            return (clozeData.questions || []).some((q: any) => !solvedIds.includes(q.id));
+                            return (clozeData.questions || []).some((q: any) => !solvedIds.includes(String(q.id)));
                         }
                         if (topic === 'Irrelevant') {
-                            return !solvedIds.includes(raw.id || lab.id);
+                            return !solvedIds.includes(String(raw.id || lab.id));
                         }
                         const qs = (Array.isArray(raw) ? raw : [raw]);
-                        return qs.some((q: any) => !solvedIds.includes(q.id));
+                        return qs.some((q: any) => !solvedIds.includes(String(q.id)));
                     });
 
                     if (availableLabs.length === 0) {
@@ -111,7 +111,7 @@ function SkillsLabContent() {
                 const clozeData = raw['0'] ?? raw;
                 setPassage(clozeData.passage || null);
                 const qs = (clozeData.questions || [])
-                    .filter((q: any) => !solvedIds.includes(q.id))
+                    .filter((q: any) => !solvedIds.includes(String(q.id)))
                     .map((q: any) => ({ ...q, question: `Choose the best option:` })) as Question[];
                 setQuestions(qs.slice(0, 5)); // Cloze Test always 5
 
@@ -144,7 +144,7 @@ function SkillsLabContent() {
 
             } else {
                 const qArray = (Array.isArray(raw) ? raw : [raw])
-                    .filter((q: any) => !solvedIds.includes(q.id))
+                    .filter((q: any) => !solvedIds.includes(String(q.id)))
                     .map((q: any) => {
                         const combinedPassage = q.passage || q.scenario || q.situation || q.dialogue || q.sentence || null;
                         const isSpecialCategory = ['Dialogue Completion', 'Situation', 'Restatement'].includes(topic);
@@ -178,7 +178,7 @@ function SkillsLabContent() {
     };
 
     const handleSessionComplete = () => {
-        const solvedIdsInSession = questions.map(q => q.id).filter(id => !!id);
+        const solvedIdsInSession = questions.map(q => String(q.id)).filter(id => !!id);
         markAsSolved(solvedIdsInSession, 'skills', topic);
 
         if (isGuestMode) {

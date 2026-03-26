@@ -23,6 +23,7 @@ function ReadingLabContent() {
     const [isFinished, setIsFinished] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [limitReached, setLimitReached] = useState(false);
+    const [currentLabId, setCurrentLabId] = useState<string | null>(null);
     const { 
         incrementProgress, prefetchedLabs, isGuestMode, getDailySeed, 
         resetSessionStats, canSolveMore, markAsSolved, solvedIds 
@@ -49,6 +50,7 @@ function ReadingLabContent() {
                     if (availableLabs.length > 0) {
                         const index = isGuestMode ? (seed % availableLabs.length) : Math.floor(Math.random() * availableLabs.length);
                         const selectedLab = availableLabs[index];
+                        setCurrentLabId(String(selectedLab.id));
                         setReadingPassage(selectedLab.passage ?? null);
                         const qs = (selectedLab.questions ?? []) as unknown as Question[];
                         setQuestions(isGuestMode ? qs.slice(0, 3) : qs);
@@ -71,6 +73,7 @@ function ReadingLabContent() {
 
                     const index = isGuestMode ? (seed % availableLabs.length) : Math.floor(Math.random() * availableLabs.length);
                     const selectedLab = availableLabs[index];
+                    setCurrentLabId(String(selectedLab.id));
 
                     setReadingPassage(selectedLab.passage);
                     const qs = selectedLab.questions as unknown as Question[];
@@ -103,14 +106,10 @@ function ReadingLabContent() {
     };
 
     const handleSessionComplete = () => {
-        // Mark the current passage as solved (using its passage content or a unique marker)
-        // Ideally reading_labs has an ID we can use.
-        // Let's assume we can get the ID from questions or state.
-        // For now, if we don't have a direct ID in local state, we'll mark based on passage snippet
-        // or just track that ONE session was completed for daily limits.
-        // Actually, ReadingLab should have IDs for questions.
-        const passageId = questions[0]?.id ? String(questions[0].id).split('_')[0] : 'reading_session';
-        markAsSolved([passageId], 'reading');
+        // Mark the current passage as solved
+        if (currentLabId) {
+            markAsSolved([currentLabId], 'reading');
+        }
 
         if (isGuestMode) {
             const { markLabAsCompletedByGuest } = useAppStore.getState();

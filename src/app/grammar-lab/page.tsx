@@ -49,7 +49,7 @@ function GrammarLabContent() {
                 // If we have prefetched labs, use them but filter out solved ones
                 if ((!topic || topic === 'Mixed') && prefetchedLabs.grammar && prefetchedLabs.grammar.length > 0) {
                     const allQs = prefetchedLabs.grammar.flatMap(item => item.question || item) as unknown as Question[];
-                    const availableQs = allQs.filter(q => !solvedIds.includes(q.id));
+                    const availableQs = allQs.filter(q => !solvedIds.includes(String(q.id)));
                     
                     if (availableQs.length > 0) {
                         const count = isGuestMode ? 3 : 20;
@@ -77,7 +77,7 @@ function GrammarLabContent() {
                     // Filter out rows where all questions are solved
                     const availableLabs = data.filter(lab => {
                         const qs = (Array.isArray(lab.question) ? lab.question : [lab.question]) as Question[];
-                        return qs.some(q => !solvedIds.includes(q.id));
+                        return qs.some(q => !solvedIds.includes(String(q.id)));
                     });
 
                     if (availableLabs.length === 0) {
@@ -89,7 +89,7 @@ function GrammarLabContent() {
                     const qs = (Array.isArray(selectedLab.question) ? selectedLab.question : [selectedLab.question]) as Question[];
                     
                     // Filter out already solved questions from this set
-                    const filteredQs = qs.filter(q => !solvedIds.includes(q.id));
+                    const filteredQs = qs.filter(q => !solvedIds.includes(String(q.id)));
                     const count = isGuestMode ? 3 : 20;
                     setQuestions(filteredQs.slice(0, count));
                 } else {
@@ -105,7 +105,7 @@ function GrammarLabContent() {
         };
 
         fetchQuestions();
-    }, [topic, prefetchedLabs.grammar, isGuestMode, getDailySeed]);
+    }, [topic, prefetchedLabs.grammar, isGuestMode, getDailySeed, solvedIds]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {
@@ -120,7 +120,7 @@ function GrammarLabContent() {
 
     const handleSessionComplete = () => {
         // Mark these questions as solved
-        const solvedIdsInSession = questions.map(q => q.id);
+        const solvedIdsInSession = questions.map(q => String(q.id));
         markAsSolved(solvedIdsInSession, 'grammar', topic);
 
         if (isGuestMode) {
