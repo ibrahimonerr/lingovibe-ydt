@@ -4,11 +4,10 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import VocabLab from '@/components/features/VocabLab';
 import LabResults from '@/components/features/LabResults';
-import WordMap from '@/components/features/WordMap';
 import MobileShell from '@/components/layout/MobileShell';
 import { 
     Repeat, Split, Search, Copy, Flame, ChevronRight, 
-    RefreshCw, Target, Sparkles, Skull, Map as MapIcon 
+    RefreshCw, Target, Sparkles, Skull 
 } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { supabase } from '@/lib/supabase';
@@ -56,11 +55,6 @@ function VocabLabContent() {
 
             resetSessionStats();
             const seed = getDailySeed();
-            
-            if (vocabSubMode === 'wordmap') {
-                setLoading(false);
-                return;
-            }
 
             setLoading(true);
             try {
@@ -167,10 +161,6 @@ function VocabLabContent() {
                 </div>
             </div>
         );
-    }
-
-    if (vocabSubMode === 'wordmap') {
-        return <WordMap onComplete={() => router.push('/vocab-lab')} />;
     }
 
     const handleNext = () => {

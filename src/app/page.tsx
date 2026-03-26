@@ -186,10 +186,6 @@ export default function YDTHub() {
                         <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-500 to-fuchsia-500 opacity-20" />
                         <Repeat size={18} className="text-indigo-400" /> Vocab Loop
                     </button>
-                    <button onClick={() => handleLabSelection('vocab', 'wordmap')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-rose-500/5 overflow-hidden text-left mb-1 border border-slate-100 dark:border-white/5">
-                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-rose-500 to-orange-500 opacity-20" />
-                        <MapIcon size={18} className="text-rose-400" /> Word Map (Daily)
-                    </button>
                     <button onClick={() => handleLabSelection('vocab', 'meaning_shifter')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-indigo-500/5 overflow-hidden text-left">
                         <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-20" />
                         <Split size={18} className="text-blue-400" /> Meaning Shifter
