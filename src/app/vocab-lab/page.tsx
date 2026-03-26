@@ -141,7 +141,6 @@ function VocabLabContent() {
                 <div className="grid grid-cols-1 gap-4">
                     {[
                         { title: 'Vocab Loop', desc: 'Sonsuz Döngü: Flashcard Etüt Modu', mode: 'loop', icon: <Repeat />, color: 'from-violet-600 to-fuchsia-600', bg: 'bg-white dark:bg-[#1a1c25]', iconColor: 'text-indigo-600 dark:text-indigo-400' },
-                        { title: 'Word Map', desc: 'Kelime Haritası: İlişki Avı (Daily)', mode: 'wordmap', icon: <MapIcon />, color: 'from-rose-500 to-orange-500', bg: 'bg-white dark:bg-[#1a1c25]', iconColor: 'text-rose-600 dark:text-rose-400' },
                         { title: 'Meaning Shifter', desc: 'Yol Ayrımı: Phrasal Verbs & Prepositions', mode: 'meaning_shifter', icon: <Split />, color: 'from-blue-500 to-cyan-600', bg: 'bg-white dark:bg-[#1a1c25]', iconColor: 'text-blue-600 dark:text-blue-400' },
                         { title: 'Definition Hunt', desc: 'Tanım Avı: Find the target lexical unit', mode: 'definition_hunt', icon: <Search />, color: 'from-amber-500 to-orange-600', bg: 'bg-white dark:bg-[#1a1c25]', iconColor: 'text-amber-600 dark:text-amber-400' },
                         { title: 'Synonym Hunt', desc: 'Eş Anlam Avı: Hunt for structural synonyms', mode: 'synonym_hunt', icon: <Copy />, color: 'from-emerald-500 to-teal-600', bg: 'bg-white dark:bg-[#1a1c25]', iconColor: 'text-emerald-600 dark:text-emerald-400' },
