@@ -162,14 +162,17 @@ CRITICAL INSTRUCTIONS:
                         };
                     });
 
-                    const { error } = await supabase.from('grammar_labs').insert([
-                        { topic, question: formattedQuestions }
-                    ]);
+                    const insertData = formattedQuestions.map(q => ({
+                        topic,
+                        question: q
+                    }));
+
+                    const { error } = await supabase.from('grammar_labs').insert(insertData);
                     if (error) {
                         console.error(`❌ [Grammar] Database Insert Error:`, error.message);
                         throw error;
                     }
-                    console.log(`✅ [Grammar] Saved ${topic} - Set ${i + 1} (${formattedQuestions.length} questions)`);
+                    console.log(`✅ [Grammar] Saved ${topic} - ${formattedQuestions.length} individual questions`);
                 } else {
                     console.log(`❌ [Grammar] Invalid JSON shape.`);
                 }

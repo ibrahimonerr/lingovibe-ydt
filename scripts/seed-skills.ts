@@ -220,40 +220,48 @@ CRITICAL INSTRUCTIONS:
                 const parsed = await generateWithGPT4oMini(prompt);
 
                 if (parsed) {
-                    let payload: any = null;
+                    let rows: any[] = [];
 
                     if (topic === 'Cloze Test') {
-                        // UI expects { passage, questions: [...] } inside 'question' column
-                        payload = {
+                        // Inherently bundled: 1 passage + 5 questions
+                        rows = [{
                             topic,
                             question: {
                                 passage: parsed.passage,
                                 questions: parsed.quiz || parsed.questions
                             }
-                        };
+                        }];
                     } else if (topic === 'Irrelevant') {
-                        // UI expects { sentences, correct_answer } inside 'question' column
-                        payload = {
+                        // Inherently bundled: 5 sentences + 1 correct answer
+                        const sentences = parsed.sentences || (parsed.quiz ? parsed.quiz.map((q: any) => q.question) : []);
+                        const correct_answer = parsed.correct_answer || (parsed.quiz ? (parsed.quiz[0]?.correct || parsed.quiz[0]?.correct_answer) : 'A');
+                        
+                        rows = [{
                             topic,
                             question: {
-                                sentences: parsed.sentences || parsed.quiz.map((q: any) => q.question),
-                                correct_answer: parsed.correct_answer || parsed.quiz[0]?.correct
+                                sentences,
+                                correct_answer
                             }
-                        };
+                        }];
                     } else {
-                        // Default for other skills: an array of questions
-                        payload = {
+                        // Others (Dialogue, Restatement, etc.): 1 row per question
+                        const questions = parsed.quiz || parsed.questions || [];
+                        rows = questions.map((q: any) => ({
                             topic,
-                            question: parsed.quiz || parsed.questions
-                        };
+                            question: q
+                        }));
                     }
 
-                    const { error } = await supabase.from('skills_labs').insert([payload]);
-                    if (error) {
-                        console.error(`❌ [Skills] Database Insert Error:`, error.message);
-                        throw error;
+                    if (rows.length > 0) {
+                        const { error } = await supabase.from('skills_labs').insert(rows);
+                        if (error) {
+                            console.error(`❌ [Skills] Database Insert Error:`, error.message);
+                            throw error;
+                        }
+                        console.log(`✅ [Skills] Saved ${topic} - ${rows.length} records added`);
+                    } else {
+                        console.log(`❌ [Skills] No valid questions found in AI response.`);
                     }
-                    console.log(`✅ [Skills] Saved ${topic} - Set ${i + 1}`);
                 } else {
                     console.log(`❌ [Skills] Invalid JSON shape.`);
                 }
