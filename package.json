@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "tsx scripts/seed-all.ts"
+    "seed": "tsx scripts/seed-all.ts",
+    "seed:grammar": "tsx scripts/seed-grammar-data.ts"
   },
   "dependencies": {
     "@capacitor/cli": "^8.1.0",

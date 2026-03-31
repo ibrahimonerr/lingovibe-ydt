@@ -1,0 +1,1082 @@
+[
+  {
+    "topic": "Gerunds & Infinitives",
+    "id": 11,
+    "question": "The board of directors considered ---- the project altogether, but the CEO insisted on ---- it one last chance to prove its viability.",
+    "options": [
+      "A) to cancel / giving",
+      "B) cancelling / giving",
+      "C) cancelling / to give",
+      "D) to cancel / to give",
+      "E) having cancelled / give"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 'Consider' fiili Gerund (-ing), 'insist on' (preposition) ise Gerund (-ing) alır.",
+      "logic": "💡 Projeyi iptal etmeyi düşünmek (cancelling). Şans vermekte ısrar etmek (insisting on giving).",
+      "pitfall": "⚠️ A şıkkında 'consider'dan sonra 'to cancel' kullanımı yaygın bir hatadır; bu fiil sadece -ing alır."
+    }
+  },
+  {
+    "topic": "Gerunds & Infinitives",
+    "id": 12,
+    "question": "It is not worth ---- so much time ---- to convince someone who has already made up their mind.",
+    "options": [
+      "A) to spend / to try",
+      "B) spending / trying",
+      "C) to spend / trying",
+      "D) spending / to try",
+      "E) spend / try"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 'It is (not) worth' yapısı ve 'spend time'dan sonra gelen fiil yapısına odaklan.",
+      "logic": "💡 'It is not worth spending' (harcamaya değmez). 'Spend time trying' (deneyerek vakit harcamak). Her iki boşluk da -ing gerektirir.",
+      "pitfall": "⚠️ D şıkkındaki 'to try' kullanımı hatalıdır; 'spend time' kalıbından sonra gelen eylem -ing ile verilir."
+    }
+  },
+  {
+    "topic": "Relative Clauses",
+    "id": 11,
+    "question": "The laboratory, ---- several groundbreaking experiments were conducted last year, has finally received the funding ---- it needs for future research.",
+    "options": [
+      "A) which / that",
+      "B) where / that",
+      "C) in that / whose",
+      "D) whose / which",
+      "E) where / what"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Yer nitelemesi (where) ve nesne nitelemesi (that).",
+      "logic": "💡 Laboratuvar ki orada (where). Finansman ki ona (that/which) ihtiyacı var.",
+      "pitfall": "⚠️ E şıkkındaki 'what' bir Relative Clause yapısında ismi nitelemek için kullanılamaz."
+    }
+  },
+  {
+    "topic": "Relative Clauses",
+    "id": 12,
+    "question": "The professor ---- theories we are discussing is world-renowned for his work on climate change, ---- is a topic of great concern today.",
+    "options": [
+      "A) whose / which",
+      "B) who / that",
+      "C) whom / whose",
+      "D) whose / what",
+      "E) that / which"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 İyelik (Profesörün teorileri) ve tüm cümleye atıf (haliyle bir endişe konusu olan bu durum).",
+      "logic": "💡 'Whose theories' (teorileri ... olan). Virgülden sonra gelen 'which' ise konunun endişe verici olmasına atıfta bulunur.",
+      "pitfall": "⚠️ B şıkkındaki 'that' virgülden sonra açıklama (non-defining) için kullanılamaz."
+    }
+  },
+  {
+    "topic": "Nouns, Pronouns & Articles",
+    "id": 11,
+    "question": "The survey revealed that ---- majority of ---- participants were dissatisfied with ---- service they received at the clinic.",
+    "options": [
+      "A) a / the / the",
+      "B) the / - / a",
+      "C) the / the / the",
+      "D) a / a / a",
+      "E) - / the / -"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 Belirli bir çoğunluk, belirli katılımcılar ve belirli bir hizmet (üçlü spesifiklik).",
+      "logic": "💡 'The majority' (çoğunluk), 'the participants' (belirli bir grubun üyeleri) ve 'the service' (alınan o hizmet) hepsi belirlidir.",
+      "pitfall": "⚠️ A şıkkındaki 'a majority' bir genel ifade olsa da, 'the' ile spesifik bir anket grubuna atıf yapmak daha doğrudur."
+    }
+  },
+  {
+    "topic": "Nouns, Pronouns & Articles",
+    "id": 12,
+    "question": "While ---- experts believe that artificial intelligence will replace humans, ---- argue that it will merely enhance our capabilities.",
+    "options": [
+      "A) many / others",
+      "B) much / another",
+      "C) some / the other",
+      "D) every / others",
+      "E) each / other"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 Sayılabilen uzmanlar (many) ve belirsiz bir 'diğerleri' (others) grubu.",
+      "logic": "💡 'Many experts' (birçok uzman). 'Others' (başkaları/diğerleri) ise karşıt görüşteki grubu temsil eden zamirdir.",
+      "pitfall": "⚠️ B şıkkındaki 'much' sayılamayan isimlerle kullanılır; uzmanlar sayılabilir."
+    }
+  },
+  {
+    "topic": "Conjunctions & Transitions",
+    "id": 11,
+    "question": "---- the massive investment in the new infrastructure, the project failed to meet its deadline, ---- causing significant frustration among the stakeholders.",
+    "options": [
+      "A) Despite / thereby",
+      "B) Although / furthermore",
+      "C) Because of / however",
+      "D) Nevertheless / thus",
+      "E) In spite of / whereas"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 İsim öbeği (investment) ve sonuç bildiren '-ing' (thereby) yapısını yakala.",
+      "logic": "💡 'Despite' (rağmen) arkasından isim alır. 'Thereby' ise eylemin sonucunu 'bu yolla/bu yüzden' anlamıyla bağlar.",
+      "pitfall": "⚠️ B şıkkındaki 'Although' tam cümle (S+V) bekler; 'the massive investment' bir isim öbeğidir."
+    }
+  },
+  {
+    "topic": "Conjunctions & Transitions",
+    "id": 12,
+    "question": "The researchers faced numerous setbacks during the experiment; ----, they remained committed to proving their hypothesis.",
+    "options": [
+      "A) therefore",
+      "B) consequently",
+      "C) nevertheless",
+      "D) moreover",
+      "E) for instance"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 Noktalı virgül (;) ve virgül (,) arasında bir 'zıtlık' (ancak/yine de) geçişi aranıyor.",
+      "logic": "💡 Aksiliklere (setbacks) rağmen kararlı kalmak bir zıtlık belirtir. 'Nevertheless' (yine de) bu akışı sağlar.",
+      "pitfall": "⚠️ B şıkkındaki 'consequently' sebep-sonuç bildirir; aksiliklerin 'sonucu' kararlılık olamaz, aksine engelidir."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 14,
+    "question": "Since the beginning of the digital revolution, the way information ---- globally ---- profoundly, leading to the emergence of entirely new industries.",
+    "options": [
+      "A) is shared / changes",
+      "B) has been shared / has changed",
+      "C) was shared / changed",
+      "D) is being shared / was changing",
+      "E) had been shared / has been changing"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 'Since' yapısı, eylemin geçmişte başlayıp günümüze kadar etkisini sürdürdüğünü (Present Perfect) işaret eder.",
+      "logic": "💡 Bilginin paylaşılma şekli (has been shared) ve değişimi (has changed) dijital devrimden bu yana süregelen bir süreçtir.",
+      "pitfall": "⚠️ C şıkkı eylemi geçmişte bitmiş gibi gösterir; ancak 'since' etkisi bugünü kapsar."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 15,
+    "question": "By the end of the current decade, most developed nations ---- their carbon emissions by at least 40 percent, provided that the current policies ----.",
+    "options": [
+      "A) will have reduced / are maintained",
+      "B) will reduce / will be maintained",
+      "C) are reducing / were maintained",
+      "D) have reduced / are being maintained",
+      "E) reduce / will have been maintained"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 'By the end of...' (sonuna kadar) gelecekte tamamlanacak bir eylemi (Future Perfect) bekler.",
+      "logic": "💡 On yılın sonuna kadar azaltmış olacaklar (will have reduced). Koşul cümlesinde 'provided that' ile Simple Present (are maintained) kullanılır.",
+      "pitfall": "⚠️ B şıkkında zaman bağlacı/koşul yapısı içinde 'will' kullanılması gramer hatasıdır."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 16,
+    "question": "The researchers ---- the experiment for months when they finally ---- a breakthrough that changed the course of their study.",
+    "options": [
+      "A) have been conducting / achieved",
+      "B) were conducting / were achieving",
+      "C) had been conducting / achieved",
+      "D) conducted / have achieved",
+      "E) had conducted / have been achieving"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 Geçmişte gerçekleşen bir başarıdan (achieved) önce süregelen bir eylemi (had been conducting) ara.",
+      "logic": "💡 Başarı anına kadar aylardır süren bir deney süreci vardır (Past of the Past + Duration).",
+      "pitfall": "⚠️ A şıkkı zaman uyumuna uymaz; Present Perfect Continuous geçmişteki bir V2 (achieved) ile bağlanmaz."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 17,
+    "question": "Currently, a team of international experts ---- the structural integrity of the bridge, which ---- significantly during the last storm.",
+    "options": [
+      "A) is assessing / was weakened",
+      "B) assesses / had been weakened",
+      "C) has been assessing / is weakened",
+      "D) was assessing / was being weakened",
+      "E) are assessing / has weakened"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 'Currently' (şu an) ve 'during the last storm' (geçmiş olay) arasındaki zaman farkına odaklan.",
+      "logic": "💡 Değerlendirme şu an yapılıyor (is assessing). Köprü ise son fırtınada zayıfladı (was weakened).",
+      "pitfall": "⚠️ E şıkkındaki 'has weakened' aktiftir; 'köprü zayıflattı' gibi yanlış bir anlam verir."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 18,
+    "question": "Historical data suggests that whenever a major civilization ---- a period of rapid expansion, it ---- inevitably into social fragmentation.",
+    "options": [
+      "A) entered / led",
+      "B) enters / has led",
+      "C) enters / leads",
+      "D) had entered / was leading",
+      "E) is entering / will lead"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 'Whenever' (her ne zaman) yapısı genellikle genel geçer bir kuralı veya alışkanlığı (Simple Present) anlatır.",
+      "logic": "💡 Tarihsel bir 'örünütü' (pattern) anlatıldığı için her iki tarafın da geniş zaman olması en uygundur.",
+      "pitfall": "⚠️ A şıkkı sadece geçmişteki tekil olayları anlatır; oysa 'whenever' bir genelleme bildirmektedir."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 19,
+    "question": "At this time next year, the pharmaceutical company ---- the results of the final phase of clinical trials, which ---- for over three years.",
+    "options": [
+      "A) will be evaluating / will have lasted",
+      "B) evaluates / lasted",
+      "C) will have evaluated / have been lasting",
+      "D) will be evaluating / will have been lasting",
+      "E) are evaluating / had lasted"
+    ],
+    "correct_answer": "D",
+    "feedback": {
+      "hint": "🔍 'At this time next year' (gelecek yıl bu vakitler) süreci ve 'for over three years' (süreç vurgusu) ipucudur.",
+      "logic": "💡 Belirli bir gelecek anında eylem devam ediyor olacak (will be evaluating) ve o ana kadar 3 yıldır sürüyor olacak (will have been lasting).",
+      "pitfall": "⚠️ C şıkkındaki 'have been lasting' şimdiki zamanla ilgilidir; oysa durum gelecek yıl için kurgulanmıştır."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 20,
+    "question": "Before the invention of the printing press, books ---- so expensive that only ---- wealthy elite could afford to own them.",
+    "options": [
+      "A) were / the",
+      "B) had been / -",
+      "C) have been / an",
+      "D) were / a",
+      "E) are / the"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 Tarihsel bir gerçek (Simple Past) ve belirli bir sosyal gruptan (the wealthy elite) bahsediliyor.",
+      "logic": "💡 Matbaadan önceki durum geçmişte bir gerçektir (were). Zengin elitler belirli bir grup olduğu için 'the' alır.",
+      "pitfall": "⚠️ E şıkkındaki 'are' günümüzü anlatır; ancak cümle matbaadan önceki döneme aittir."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 13,
+    "question": "The security guards ---- the premises more carefully, as the intruders ---- the building through an unlocked basement window.",
+    "options": [
+      "A) must have patrolled / should have entered",
+      "B) should have patrolled / must have entered",
+      "C) could patrol / might enter",
+      "D) would have patrolled / can't have entered",
+      "E) had to patrol / may enter"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişe dair bir eleştiri (should have V3) ve geçmişe dair güçlü bir çıkarım (must have V3).",
+      "logic": "💡 Daha dikkatli gezmeliydiler (ama gezmediler). Hırsızlar pencereden girmiş olmalı (çıkarım).",
+      "pitfall": "⚠️ A şıkkındaki 'must have patrolled' (devriye gezmiş olmalılar) anlamı cümlenin eleştirel tonuyla çelişir."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 14,
+    "question": "In the 18th century, a simple infection ---- fatal, but today, most bacterial diseases ---- easily with antibiotics.",
+    "options": [
+      "A) could be / are to be treated",
+      "B) used to be / can be treated",
+      "C) must be / should be treated",
+      "D) would be / must have been treated",
+      "E) might have been / have been treated"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişteki bir durum (used to be) ve günümüzdeki yetenek/olasılık (can be treated).",
+      "logic": "💡 Eskiden öyleydi (eskiden olan durum). Bugün tedavi edilebilir (yetenek).",
+      "pitfall": "⚠️ E şıkkındaki 'have been treated' günümüzdeki genel yeteneği değil, bitmiş bir eylemi anlatır."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 15,
+    "question": "The diplomat ---- the meeting earlier if he ---- the importance of the initial negotiations regarding the border dispute.",
+    "options": [
+      "A) might join / understood",
+      "B) would have joined / had understood",
+      "C) should join / has understood",
+      "D) could join / would understand",
+      "E) must have joined / had been understanding"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişe dair gerçekleşmemiş bir olasılık (Type 3 Conditional / Modal).",
+      "logic": "💡 Eğer anlasaydı (had understood), katılabilirdi (would have joined - ama katılmadı).",
+      "pitfall": "⚠️ A şıkkı Type 2 yapısıdır ve günümüz varsayımıdır; ancak olay geçmişteki müzakerelerle ilgilidir."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 16,
+    "question": "You ---- the laboratory without wearing a protective suit, as the chemicals ---- toxic fumes that are harmful to your health.",
+    "options": [
+      "A) mustn't enter / might emit",
+      "B) don't have to enter / should emit",
+      "C) shouldn't have entered / can emit",
+      "D) can't enter / must have emitted",
+      "E) needn't enter / will emit"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 Güçlü bir yasak (mustn't) ve genel bir tehlike olasılığı (might).",
+      "logic": "💡 Girmemelisin (yasak). Kimyasallar duman yayabilir (olasılık).",
+      "pitfall": "⚠️ B şıkkındaki 'don't have to' (zorunda değilsin) tehlike durumunu karşılamayacak kadar zayıf bir ifadedir."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 17,
+    "question": "Archaeologists ---- the site for years, yet they ---- find any evidence of a settled civilization until now.",
+    "options": [
+      "A) must be excavating / couldn't",
+      "B) may have been excavating / haven't been able to",
+      "C) should have excavated / can't",
+      "D) could be excavating / shouldn't",
+      "E) had to excavate / weren't able to"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişten bugüne süregelen bir olasılık ve bugüne kadar (until now) gerçekleşmeyen bir yetenek.",
+      "logic": "💡 Yıllardır kazıyor olabilirler (olasılık). Ama şimdiye kadar bulamadılar (yetenek/yetersizlik).",
+      "pitfall": "⚠️ E şıkkındaki 'weren't able to' geçmişte bitmiş bir durumu anlatır; ancak 'until now' süreci bugüne bağlar."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 18,
+    "question": "If we want to avoid future conflicts, we ---- more transparent about the terms of the agreement from the very beginning.",
+    "options": [
+      "A) would have been",
+      "B) had to be",
+      "C) should have been",
+      "D) could be",
+      "E) must be"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 'From the very beginning' (en başından beri) yapılmış olması gereken bir eleştiri (should have V3).",
+      "logic": "💡 En başından beri şeffaf olmalıydık (ama olmadık - pişmanlık/eleştiri).",
+      "pitfall": "⚠️ E şıkkındaki 'must be' şu anki zorunluluktur; ancak cümle geçmişteki başlangıca atıfta bulunur."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 19,
+    "question": "The witness ---- the suspect at the scene because he was in a completely different city when the crime ----.",
+    "options": [
+      "A) shouldn't have seen / had committed",
+      "B) couldn't have seen / was committed",
+      "C) mustn't see / is committed",
+      "D) can't have seen / committed",
+      "E) might not see / was being committed"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişe dair kesin bir imkansızlık (couldn't have V3) ve pasif bir suç işleme eylemi.",
+      "logic": "💡 Görmüş olamaz (çünkü orada değildi). Suç işlendiği zaman (was committed - pasif).",
+      "pitfall": "⚠️ D şıkkındaki 'committed' aktiftir; 'suçun kendisinin bir şey işlediği' anlamı çıkar."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 20,
+    "question": "Students ---- all the sources they use in their research papers, or they ---- of plagiarism by their professors.",
+    "options": [
+      "A) are to cite / could be accused",
+      "B) had better cite / were accused",
+      "C) should have cited / are accused",
+      "D) used to cite / would be accused",
+      "E) must cite / has been accused"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 Resmi bir kural (be to V1) ve gelecekteki bir suçlanma ihtimali (pasif).",
+      "logic": "💡 Kaynak göstermeliler (kural). Suçlanabilirler (olasılık/pasif).",
+      "pitfall": "⚠️ B şıkkındaki 'were accused' geçmiş zaman olduğu için genel bir kural-sonuç ilişkisine uymaz."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 13,
+    "question": "It is widely believed that the secret documents ---- during the fire, but recent evidence suggests they ---- to another location.",
+    "options": [
+      "A) were destroyed / were being moved",
+      "B) destroyed / had been moved",
+      "C) were destroyed / had been moved",
+      "D) have been destroyed / were moved",
+      "E) had destroyed / have been moved"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 Geçmişteki bir yok olma (V2 Passive) ve ondan daha önce gerçekleşen bir taşınma (Past Perfect Passive).",
+      "logic": "💡 Yok edildiler (were destroyed). Ama daha önce taşınmışlardı (had been moved).",
+      "pitfall": "⚠️ B şıkkındaki 'destroyed' aktiftir; 'belgelerin bir şeyi yok ettiği' anlamı çıkar."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 14,
+    "question": "The city's infrastructure ---- to be outdated, and it ---- by a team of engineers next year.",
+    "options": [
+      "A) is considered / will be renovated",
+      "B) considers / is going to renovate",
+      "C) has considered / was renovated",
+      "D) was considered / has been renovated",
+      "E) is considering / will renovate"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 Genel bir kanı (Present Passive) ve gelecek yıl yapılacak bir plan (Future Passive).",
+      "logic": "💡 Altyapı 'kabul ediliyor' (is considered). 'Yenilenecek' (will be renovated).",
+      "pitfall": "⚠️ E şıkkındaki 'will renovate' aktiftir; 'altyapının bir şeyi yenileyeceği' anlamı çıkar."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 15,
+    "question": "The suspect is known ---- the country, but he is thought ---- in a neighboring nation under a false identity.",
+    "options": [
+      "A) to leave / to hide",
+      "B) to have left / to be hiding",
+      "C) having left / to have hidden",
+      "D) being left / hiding",
+      "E) to have been left / to hide"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişte bitmiş bir eylem (to have V3) ve şu an devam ettiği düşünülen bir durum (to be Ving).",
+      "logic": "💡 Ülkeden ayrıldığı (geçmişte - to have left) biliniyor. Şu an saklandığı (süreç - to be hiding) düşünülüyor.",
+      "pitfall": "⚠️ E şıkkındaki 'to have been left' pasiftir; 'onun bir yerde bırakıldığı' anlamı verir ki bağlama uymaz."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 16,
+    "question": "Before the structural flaws ---- by the inspectors, the building ---- as safe for residential use.",
+    "options": [
+      "A) identified / had been certified",
+      "B) were identified / had been certified",
+      "C) had been identified / was certified",
+      "D) were being identified / certified",
+      "E) have been identified / is certified"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Kusurların bulunması (V2 Passive) ve ondan önce verilen sertifika (Past Perfect Passive).",
+      "logic": "💡 Hatalar bulundu (were identified). Önceden onaylanmıştı (had been certified).",
+      "pitfall": "⚠️ A şıkkındaki 'identified' aktiftir; 'kusurların müfettişleri bulduğu' anlamı çıkar."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 17,
+    "question": "Having ---- as a masterpiece of modern architecture, the museum ---- millions of visitors every year.",
+    "options": [
+      "A) been recognized / attracts",
+      "B) recognized / is attracted",
+      "C) been recognizing / has attracted",
+      "D) recognized / attracts",
+      "E) being recognized / is attracting"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 'Tanınmış olan' (Pasif - Having been V3) ve genel bir sonuç (Geniş Zaman).",
+      "logic": "💡 Kabul edilmiş olan müze (been recognized - pasif), turist çeker (attracts - aktif).",
+      "pitfall": "⚠️ B şıkkındaki 'is attracted' pasiftir; 'müzenin turistler tarafından çekildiği' gibi saçma bir anlam verir."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 18,
+    "question": "The project ---- due to a lack of funding, but it ---- as soon as new investors are found.",
+    "options": [
+      "A) was suspended / will be resumed",
+      "B) suspended / will resume",
+      "C) had been suspended / is resumed",
+      "D) is suspended / was resumed",
+      "E) was being suspended / had resumed"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 Geçmişte durdurulan bir iş (V2 Passive) ve gelecekteki bir umut (Future Passive).",
+      "logic": "💡 Proje durduruldu (was suspended). Tekrar başlatılacak (will be resumed).",
+      "pitfall": "⚠️ B şıkkındaki 'will resume' aktiftir; 'projenin kendi kendini başlatacağı' gibi bir anlam verir."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 19,
+    "question": "It is essential that all data ---- before any final decision ---- by the board members.",
+    "options": [
+      "A) is verified / is made",
+      "B) be verified / is made",
+      "C) was verified / was made",
+      "D) being verified / are made",
+      "E) be verified / made"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 'Essential that' (Subjunctive) yapısı ve pasif bir süreç.",
+      "logic": "💡 Verilerin doğrulanması (be verified - subjunctive passive). Kararın alınması (is made - present passive).",
+      "pitfall": "⚠️ A şıkkındaki 'is verified' akademik Subjunctive kuralına uymaz."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 20,
+    "question": "The results of the study ---- in a prestigious journal, which ---- by thousands of researchers worldwide.",
+    "options": [
+      "A) were published / read",
+      "B) published / was read",
+      "C) was published / were read",
+      "D) were published / is read",
+      "E) published / are read"
+    ],
+    "correct_answer": "D",
+    "feedback": {
+      "hint": "🔍 Sonuçlar 'yayınlandı' (geçmiş olay) ve dergi 'okunuyor' (genel durum).",
+      "logic": "💡 Sonuçlar (results - çoğul) yayınlandı (were published). Dergi (journal - tekil) okunur (is read).",
+      "pitfall": "⚠️ A şıkkındaki 'read' aktiftir; 'derginin araştırmacıları okuduğu' anlamı çıkar."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 13,
+    "question": "If the government ---- stricter environmental laws years ago, the river ---- so heavily contaminated today.",
+    "options": [
+      "A) passed / wouldn't be",
+      "B) had passed / wouldn't be",
+      "C) has passed / wouldn't have been",
+      "D) had passed / wouldn't have been",
+      "E) passed / won't be"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişteki bir pişmanlık (had passed) ve günümüzdeki sonuç (today - wouldn't be). Mixed 3/2.",
+      "logic": "💡 Eğer yasalar geçseydi (had passed - geçmiş), nehir bugün kirli olmazdı (wouldn't be - şu an).",
+      "pitfall": "⚠️ D şıkkı sonucun da geçmişte bittiğini varsayar; ancak 'today' bizi Type 2 sonuca götürür."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 14,
+    "question": "I wish I ---- more attention to the details of the contract before I ---- it yesterday.",
+    "options": [
+      "A) paid / signed",
+      "B) had paid / signed",
+      "C) have paid / signed",
+      "D) would pay / had signed",
+      "E) could pay / was signing"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişe dair bir keşke (Wish + Past Perfect) ve geçmişte bitmiş bir eylem (V2).",
+      "logic": "💡 Keşke dikkat etseydim (had paid). İmzalamadan önce (signed).",
+      "pitfall": "⚠️ A şıkkı şu anki bir duruma dair dilektir; ancak olay 'yesterday' gerçekleşmiştir."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 15,
+    "question": "---- you require any further assistance during the setup process, please do not hesitate ---- the support team.",
+    "options": [
+      "A) Should / to contact",
+      "B) Had / contacting",
+      "C) Were / to contact",
+      "D) Should / contact",
+      "E) If / contacting"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 'If you should require' (Type 1 Inversion) yapısı ve 'hesitate to V1' kalıbı.",
+      "logic": "💡 Yardıma ihtiyacınız olursa (Should you require). İletişime geçmekten çekinmeyin (hesitate to contact).",
+      "pitfall": "⚠️ D şıkkındaki 'contact' yalın gelmez; 'hesitate' fiili Infinitive (to V1) ile kullanılır."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 16,
+    "question": "If the sun ---- to stop shining tomorrow, life on Earth ---- to exist within a very short period.",
+    "options": [
+      "A) ceases / would cease",
+      "B) were to cease / would cease",
+      "C) had ceased / ceased",
+      "D) ceases / will cease",
+      "E) was to cease / will cease"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 İmkansız veya çok düşük ihtimalli gelecek varsayımı (Type 2 - were to V1).",
+      "logic": "💡 Yarın güneş sönse (imkansız varsayım - were to cease), yaşam dururdu (would cease).",
+      "pitfall": "⚠️ D şıkkı gerçekleşmesi muhtemel bir durum gibi (Type 1) kurgular; oysa güneşin sönmesi bilimsel bir varsayımdır."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 17,
+    "question": "---- it not been for the prompt intervention of the firefighters, the entire warehouse ---- to the ground.",
+    "options": [
+      "A) Were / would burn",
+      "B) Had / would have burned",
+      "C) Should / might burn",
+      "D) Had / was burning",
+      "E) If / burned"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 'Had it not been for...' (Geçmişte olmasaydı) kalıbı ve geçmişteki sonuç.",
+      "logic": "💡 Müdahale olmasaydı (Had it not been for), yanıp kül olacaktı (would have burned).",
+      "pitfall": "⚠️ A şıkkındaki 'Were it not for' şu anki varsayımlar içindir; oysa olay geçmişte yaşanmıştır."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 18,
+    "question": "Many world leaders wish that the global pandemic ---- more effectively before it ---- to every continent.",
+    "options": [
+      "A) was handled / spread",
+      "B) had been handled / spread",
+      "C) has been handled / spread",
+      "D) would handle / had spread",
+      "E) is handled / was spreading"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişteki bir durumun pasif şekilde yönetilmesi (had been handled) ve yayılma eylemi (spread - V2).",
+      "logic": "💡 Keşke yönetilseydi (had been handled). Yayılmadan önce (spread - V2).",
+      "pitfall": "⚠️ C şıkkı zaman uyumuna aykırıdır; 'wish' ile 'present perfect' kullanılmaz."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 19,
+    "question": "If you ---- to the instructions more carefully, you ---- such a costly mistake during the assembly of the machine.",
+    "options": [
+      "A) listened / wouldn't make",
+      "B) had listened / wouldn't have made",
+      "C) listen / won't make",
+      "D) were listening / wouldn't make",
+      "E) had listened / wouldn't make"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişteki bir hata ve onun geçmişteki sonucu (Type 3).",
+      "logic": "💡 Dinleseydin (had listened), yapmazdın (wouldn't have made). İkisi de geçmişte kalmış eylemlerdir.",
+      "pitfall": "⚠️ E şıkkı 'bugünkü sonucu' anlatır (Mixed); ancak hata montaj anında (during assembly) yapılıp bitmiştir."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 20,
+    "question": "I would rather you ---- me the truth earlier instead of ---- such an elaborate excuse for your absence.",
+    "options": [
+      "A) told / making",
+      "B) have told / to make",
+      "C) had told / making",
+      "D) would tell / make",
+      "E) told / having made"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 'I would rather + Subject' geçmişe (earlier) atıf yapıyorsa Past Perfect alır; 'instead of' (preposition) ise Gerund (-ing) alır.",
+      "logic": "💡 Keşke daha önce söyleseydin (had told). Bahane üretmek yerine (making).",
+      "pitfall": "⚠️ A şıkkındaki 'told' şu anki bir durum için tercih belirtir; 'earlier' bizi geçmişe (had told) iter."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 11,
+    "question": "The manager insisted that every employee ---- the new security training session before the end of the month.",
+    "options": [
+      "A) attends",
+      "B) attend",
+      "C) should have attended",
+      "D) attended",
+      "E) to attend"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 'Insisted that' (Subjunctive) yapısı fiilin her zaman yalın halini (V1) gerektirir.",
+      "logic": "💡 Subjunctive mood gereği, özne ne olursa olsun fiil takısız ve yardımcı fiilsiz gelir (attend).",
+      "pitfall": "⚠️ A şıkkındaki 'attends' (s takısı) akademik subjunctive kuralına göre yanlıştır."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 12,
+    "question": "The witness stated that she ---- the suspect near the bank just minutes before the alarm ----.",
+    "options": [
+      "A) saw / had gone off",
+      "B) has seen / went off",
+      "C) had seen / went off",
+      "D) was seeing / goes off",
+      "E) sees / was going off"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 Bir aktarım (stated) ve alarmın çalmasından (went off) daha önce gerçekleşen bir görme eylemi (Past Perfect).",
+      "logic": "💡 Gördüğünü söyledi (had seen). Alarm çalmadan önce (went off).",
+      "pitfall": "⚠️ A şıkkında zaman dizimi yanlıştır; alarmın çalması görme eyleminden sonradır."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 13,
+    "question": "Scientists are still investigating ---- the new virus ---- to humans through direct contact or airborne particles.",
+    "options": [
+      "A) that / spreads",
+      "B) whether / spreads",
+      "C) if / has spread",
+      "D) how / was spreading",
+      "E) what / is spreading"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 'Investigating' (araştırmak) fiili bir belirsizlik ve seçenekler (or) arası 'ıp ıpmadığı' (whether) anlamı bekler.",
+      "logic": "💡 Virüsün yayılıp yayılmadığı (whether) araştırılıyor. Genel bir durumdur (spreads).",
+      "pitfall": "⚠️ A şıkkındaki 'that' kesinlik bildirir; 'araştırmak' kelimesiyle anlamca uyuşmaz."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 14,
+    "question": "It is recommended that the patient ---- a specialized doctor if the symptoms ---- for more than a week.",
+    "options": [
+      "A) see / persist",
+      "B) sees / persist",
+      "C) should see / had persisted",
+      "D) saw / persisted",
+      "E) see / are persisting"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 'It is recommended that' (Subjunctive) yalın fiil ister (see) ve genel durum (persist).",
+      "logic": "💡 Doktora görünmesi öneriliyor (see - subjunctive). Semptomlar devam ederse (persist - present).",
+      "pitfall": "⚠️ B şıkkındaki 'sees' (s takısı) Subjunctive yapısında kullanılmaz."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 15,
+    "question": "The journalist wondered ---- the government ---- about the hidden costs of the new infrastructure project.",
+    "options": [
+      "A) what / knew",
+      "B) that / knows",
+      "C) whether / has known",
+      "D) if / had known",
+      "E) why / will know"
+    ],
+    "correct_answer": "D",
+    "feedback": {
+      "hint": "🔍 'Wondered' (merak etti) geçmişe yönelik bir belirsizlik (if) ve daha önceki bir durum (had known).",
+      "logic": "💡 Hükümetin haberi olup olmadığını (if) merak etti. Merak anından önceki durumu sorguladığı için 'had known'.",
+      "pitfall": "⚠️ B şıkkındaki 'that' merak içeren bir noun clause için uygun değildir."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 16,
+    "question": "The defense attorney argued ---- the evidence ---- by the police without a proper search warrant.",
+    "options": [
+      "A) whether / was obtained",
+      "B) that / had been obtained",
+      "C) if / was being obtained",
+      "D) how / is obtained",
+      "E) that / has been obtained"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Bir iddia (argued that) ve geçmişte yapılmış olan pasif bir eylem (had been obtained).",
+      "logic": "💡 Kanıtların alındığını iddia etti (that). Alınma eylemi iddiadan öncedir ve pasiftir (had been obtained).",
+      "pitfall": "⚠️ E şıkkındaki 'has been' zaman uyumuna aykırıdır; 'argued' (V2) varsa süreç 'had been'e kayar."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 17,
+    "question": "We are not sure ---- the results of the experiment ---- our hypothesis until we perform a final analysis.",
+    "options": [
+      "A) whether / will support",
+      "B) that / support",
+      "C) if / has supported",
+      "D) how / would support",
+      "E) why / were supporting"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 'Not sure' (emin değiliz) belirsizlik (whether) ve gelecek (will support) vurgusu.",
+      "logic": "💡 Destekleyip desteklemeyeceği (whether) belli değil. Analiz henüz yapılmadığı için 'will support'.",
+      "pitfall": "⚠️ B şıkkındaki 'that' emin olunan bir durumu belirtir; ancak burada belirsizlik var."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 18,
+    "question": "The report suggested ---- the company ---- more funds to research and development next year.",
+    "options": [
+      "A) that / allocates",
+      "B) whether / allocate",
+      "C) that / allocate",
+      "D) if / allocated",
+      "E) how / is allocating"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 'Suggested that' (Subjunctive) yapısı ve yalın fiil (allocate).",
+      "logic": "💡 Şirketin fon ayırması önerildi (that ... allocate). Gelecek yıl için bir öneridir.",
+      "pitfall": "⚠️ A şıkkındaki 'allocates' Subjunctive kuralına uymaz."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 19,
+    "question": "The detective asked ---- the suspect ---- the victim before the night of the crime.",
+    "options": [
+      "A) whether / met",
+      "B) that / has met",
+      "C) if / had met",
+      "D) how / was meeting",
+      "E) whether / will meet"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 Soru (asked) ve olay gecesinden önceki (before) bir durum (had met).",
+      "logic": "💡 Tanışıp tanışmadığını (if) sordu. Soru anından önceki bir eylem olduğu için 'had met'.",
+      "pitfall": "⚠️ A şıkkındaki 'met' (V2) zaman diziminde yeterince geriye gitmez."
+    }
+  },
+  {
+    "topic": "Noun Clauses & Reported Speech",
+    "id": 20,
+    "question": "It remains unclear ---- the new technology ---- to solve the current energy crisis in the long term.",
+    "options": [
+      "A) how / will help",
+      "B) that / helps",
+      "C) whether / has helped",
+      "D) if / would help",
+      "E) why / helps"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 'Unclear how' (nasıl olacağı belirsiz) ve gelecek (will help) vurgusu.",
+      "logic": "💡 Teknolojinin 'nasıl' yardım edeceği (how) belirsizdir. Uzun vade olduğu için 'will help'.",
+      "pitfall": "⚠️ B şıkkındaki 'that' bir belirsizlik (unclear) ile bağdaşmaz."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 11,
+    "question": "By the time the global summit on climate change ---- next month, the member nations ---- on the final draft of the carbon reduction treaty for over a year.",
+    "options": [
+      "A) convenes / will have been negotiating",
+      "B) will convene / have negotiated",
+      "C) is convening / will negotiate",
+      "D) has convened / negotiate",
+      "E) convened / will be negotiating"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 'By the time + Present' yapısı ana cümlede Future Perfect Continuous (will have been Ving) gerektirir; özellikle 'for over a year' vurgusuna dikkat.",
+      "logic": "💡 Gelecekte bir nokta (next month) belirtilmiş ve o noktaya kadar süregelen bir eylem (negotiating) vurgulanmıştır. 'By the time'lı yan cümlede 'will' kullanılmaz.",
+      "pitfall": "⚠️ B şıkkında zaman bağlacı içinde 'will' kullanılması YDT'nin en temel eleme tuzağıdır."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 12,
+    "question": "Astronomers ---- that the star ---- most of its hydrogen fuel long before it finally exploded into a supernova.",
+    "options": [
+      "A) have confirmed / was exhausting",
+      "B) confirmed / has exhausted",
+      "C) had confirmed / exhausted",
+      "D) confirmed / had exhausted",
+      "E) confirm / is exhausting"
+    ],
+    "correct_answer": "D",
+    "feedback": {
+      "hint": "🔍 İki geçmiş eylem arasındaki 'öncelik-sonralık' (Past of the Past) ilişkisini gör.",
+      "logic": "💡 Yıldızın hidrojenini tüketmesi (had exhausted), patlamasından (exploded) ve astronomların bunu onaylamasından (confirmed) daha eskidir.",
+      "pitfall": "⚠️ B şıkkında 'confirmed' (V2) ile 'has exhausted' (Present Perfect) zaman uyumu kuralına aykırıdır."
+    }
+  },
+  {
+    "topic": "Tenses & Aspect",
+    "id": 13,
+    "question": "Currently, neuroscientists ---- to determine how deep-brain stimulation ---- patients with severe clinical depression.",
+    "options": [
+      "A) strive / was helping",
+      "B) have striven / helped",
+      "C) are striving / helps",
+      "D) strove / will help",
+      "E) had striven / is helping"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 'Currently' (Şu an) şimdiki zamana (are striving), genel tıbbi işleyiş ise geniş zamana (helps) işaret eder.",
+      "logic": "💡 Süregiden bir araştırma (are striving) ve bir yöntemin genel etkisi (helps) söz konusudur.",
+      "pitfall": "⚠️ A şıkkındaki 'was helping' (geçmiş süreç), 'currently' (şu an) zarfı ile çelişir."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 11,
+    "question": "The excavation team ---- the site much earlier, but they ---- due to the lack of sufficient funding and political instability.",
+    "options": [
+      "A) could have started / weren't able to",
+      "B) must have started / shouldn't",
+      "C) should start / couldn't",
+      "D) might start / wouldn't",
+      "E) were to start / didn't need to"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 Geçmişe dair 'yapılabilirdi ama yapılmadı' (could have V3) imasını yakala.",
+      "logic": "💡 Daha erken başlayabilirlerdi (could have started) ama fon eksikliği yüzünden yapamadılar (weren't able to).",
+      "pitfall": "⚠️ B şıkkındaki 'must have started' (başlamış olmalılar) bir çıkarımdır; ancak burada bir engel/yetersizlik anlatılmaktadır."
+    }
+  },
+  {
+    "topic": "Modals & Similar Expressions",
+    "id": 12,
+    "question": "You ---- a visa for this country if you hold a European passport, but you ---- still check the official government site for updates.",
+    "options": [
+      "A) shouldn't have / could",
+      "B) can't have / might",
+      "C) needn't have / would",
+      "D) don't need to / had better",
+      "E) mustn't have / should"
+    ],
+    "correct_answer": "D",
+    "feedback": {
+      "hint": "🔍 Gereklilik yoksunluğu (don't need to) ve güçlü bir tavsiye (had better) uyumunu gör.",
+      "logic": "💡 Vizeye ihtiyacın yok (don't need to). Ancak kontrol etsen iyi olur (had better).",
+      "pitfall": "⚠️ E şıkkındaki 'mustn't' yasak bildirir; oysa vizenin zorunlu olmaması bir yasak değil, bir muafiyettir."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 11,
+    "question": "The ancient scrolls are reported ---- by a shepherd in a cave near the Dead Sea, but they ---- officially by experts until several years later.",
+    "options": [
+      "A) to be found / aren't examined",
+      "B) having been found / weren't being examined",
+      "C) to have been found / weren't examined",
+      "D) to have found / hadn't been examined",
+      "E) being found / shouldn't have examined"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 'Reporting passive' yapısında geçmişe atıf (to have been V3) ve geçmişte bitmiş eylem (V2 Passive).",
+      "logic": "💡 Bulundukları (geçmişte) şimdi rapor ediliyor (to have been found). Uzmanlarca incelenmedi (weren't examined).",
+      "pitfall": "⚠️ D şıkkındaki 'to have found' aktiftir; 'tomarların birini bulduğu' gibi saçma bir anlam verir."
+    }
+  },
+  {
+    "topic": "The Passive",
+    "id": 12,
+    "question": "Unless the safety protocols ---- strictly by everyone in the laboratory, the entire facility ---- to prevent hazardous leaks.",
+    "options": [
+      "A) follow / will be closed",
+      "B) are followed / will be closed",
+      "C) were followed / is closed",
+      "D) have been followed / was closed",
+      "E) are following / has been closed"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 'Unless' (olmazsa) koşulunda edilgen yapı (are followed) ve gelecekteki sonuç (will be closed).",
+      "logic": "💡 Protokoller takip edilmezse (pasif), tesis kapatılacak (pasif).",
+      "pitfall": "⚠️ A şıkkında 'follow' aktiftir; 'protokoller takip etmezse' gibi yanlış bir anlam oluşturur."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 11,
+    "question": "---- the CEO not intervened so decisively during the merger talks, the company ---- into a state of total financial chaos today.",
+    "options": [
+      "A) Were / would have fallen",
+      "B) Had / would fall",
+      "C) Should / might fall",
+      "D) If / fell",
+      "E) Had / would have fallen"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Geçmişteki bir müdahale (Had + V3) ve 'today' (bugün) vurgusuyla Mixed Conditional (3/2) yapısını gör.",
+      "logic": "💡 Geçmişte müdahale etmeseydi (Had not intervened), bugün kaos içinde olurdu (would fall).",
+      "pitfall": "⚠️ E şıkkındaki 'would have fallen' sonucun da geçmişte bittiğini varsayar; ancak 'today' bizi Type 2 sonuca götürür."
+    }
+  },
+  {
+    "topic": "If & Wish Clauses",
+    "id": 12,
+    "question": "I'd rather the committee ---- the proposal more thoroughly yesterday, as their hasty decision ---- significant problems for the project now.",
+    "options": [
+      "A) evaluates / causes",
+      "B) evaluated / is causing",
+      "C) had evaluated / is causing",
+      "D) has evaluated / was causing",
+      "E) would evaluate / will cause"
+    ],
+    "correct_answer": "C",
+    "feedback": {
+      "hint": "🔍 'I'd rather + subject' yapısında geçmişe (yesterday) atıf Past Perfect (had V3) gerektirir.",
+      "logic": "💡 Dün değerlendirmelerini tercih ederdim (had evaluated). Karar şu an sorun yaratıyor (is causing).",
+      "pitfall": "⚠️ B şıkkındaki 'evaluated' şu anki bir duruma dair tercihtir; 'yesterday' için bir derece daha geçmişe gidilmelidir."
+    }
+  },
+  {
+    "topic": "Relative Clauses",
+    "id": 11,
+    "question": "The conference, ---- several world-renowned scientists are expected to attend, will focus on the ethical implications of genetic editing, a topic ---- is highly controversial.",
+    "options": [
+      "A) where / that",
+      "B) at which / that",
+      "C) in which / who",
+      "D) that / which",
+      "E) whose / where"
+    ],
+    "correct_answer": "B",
+    "feedback": {
+      "hint": "🔍 Konferansa katılım 'at the conference' olduğu için 'at which' ve cansız varlık nitelemesi 'that'.",
+      "logic": "💡 Konferans ki orada (at which). Konu ki o (that) tartışmalıdır.",
+      "pitfall": "⚠️ D şıkkındaki 'that' virgülden sonra (non-defining) bu şekilde kullanılamaz; 'at which' ise tam bir yer/durum nitelemesi yapar."
+    }
+  },
+  {
+    "topic": "Relative Clauses",
+    "id": 12,
+    "question": "The researchers have finally identified the gene ---- mutation causes the rare skin disorder, a discovery ---- could lead to a permanent cure.",
+    "options": [
+      "A) whose / which",
+      "B) of which / that",
+      "C) which / whom",
+      "D) whose / where",
+      "E) that / which"
+    ],
+    "correct_answer": "A",
+    "feedback": {
+      "hint": "🔍 İyelik bildiren 'whose' (genin mutasyonu) ve bir keşfi nitelen 'which' (ki bu keşif).",
+      "logic": "💡 'Whose mutation' (mutasyonu ... olan). 'Discovery which' (keşif ki o).",
+      "pitfall": "⚠️ B şıkkındaki 'of which' isimden sonra gelmelidir (the gene the mutation of which...)."
+    }
+  }
+]

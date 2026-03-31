@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>ydt-hub</string>
+	<string>YDTHub</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,6 +24,12 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Bu uygulama, profil resmi çekmek için kameranıza erişmek ister.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Bu uygulama, çalışma kartlarını galerinize kaydetmek için fotoğraf kütüphanenize erişmek ister.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Bu uygulama, profil resmi seçmek için fotoğraf kütüphanenize erişmek ister.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

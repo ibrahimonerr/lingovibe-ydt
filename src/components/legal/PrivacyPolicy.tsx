@@ -18,21 +18,14 @@ export const PrivacyPolicy = () => {
           <section>
             <h2 className="text-lg font-bold text-slate-800 mb-2 uppercase tracking-tight">2. Data Collection</h2>
             <p>
-              YDTHub currently operates as an AI-powered learning aid. We use:
+              YDTHub is an offline-first learning application. We use:
             </p>
             <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li><strong>Local Storage:</strong> To save your progress and active missions directly on your device.</li>
-              <li><strong>Supabase:</strong> For future cloud synchronization and secure data management.</li>
-              <li><strong>Google Gemini AI:</strong> To analyze texts and generate learning content. Your input texts are processed by the AI to provide you with insights.</li>
+              <li><strong>Local Storage:</strong> To save your progress, active missions, and preferences directly on your device.</li>
+              <li><strong>Supabase:</strong> For secure user authentication (sign in/sign out) and to serve question bank data. We do not sell or share your personal data with third parties.</li>
             </ul>
           </section>
 
-          <section>
-            <h2 className="text-lg font-bold text-slate-800 mb-2 uppercase tracking-tight">3. Third Party Services</h2>
-            <p>
-              We utilize Google&apos;s Generative AI services. Please refer to Google&apos;s privacy terms for information on how they handle processed data.
-            </p>
-          </section>
 
           <section>
             <h2 className="text-lg font-bold text-slate-800 mb-2 uppercase tracking-tight">4. Your Rights</h2>

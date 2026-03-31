@@ -47,9 +47,9 @@ async function generateWithGPT4oMini(prompt: string, retries = 5): Promise<any> 
                 },
                 body: JSON.stringify({
                     messages: [
-                        { 
-                            role: "system", 
-                            content: "Sen, 20 yıldır YDT, YDS ve TOEFL gibi üst düzey İngilizce sınavları için soru hazırlayan kıdemli bir ölçme ve değerlendirme uzmanısın. ELS (English Language Studies) ve benzeri saygın yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin. Return ONLY valid JSON." 
+                        {
+                            role: "system",
+                            content: "Sen, 20 yıldır YDT, YDS ve TOEFL gibi üst düzey İngilizce sınavları için soru hazırlayan kıdemli bir ölçme ve değerlendirme uzmanısın. ELS (English Language Studies) ve benzeri saygın yayınların soru hazırlama mantığına (mantık silsilesi, akademik dil ve çeldirici kalitesi) tamamen hakimsin. Return ONLY valid JSON."
                         },
                         { role: "user", content: prompt }
                     ],
@@ -107,22 +107,22 @@ Soru Kriterleri:
 4. Çeldiriciler (Distractors): Çeldiriciler "saçma" olmamalı; gramer olarak mümkün görünse de anlamca veya sınav tekniği açısından (zaman uyumu, ipucu kelimeler) yanlış olmalı.
 
 Geri Bildirim Yapısı (JSON):
-- 🔍 Hint: Soruyu görür görmez öğrencinin araması gereken ipucu kelimesi/yapısal işaret. ASLA doğru cevabı içine yazma.
-- 💡 The Logic Flow: Çözüm yolunu adım adım anlatan teknik akıl yürütme.
-- ⚠️ "Sakın Düşme!" (The Pitfall): En güçlü çeldiricinin neden yanlış olduğunun teknik açıklaması.
+KRİTİK KURAL 1: Boşluklar (----) MUTLAKA [Hedef Konu: ${topic}] ile ilgili olmalıdır. Boşlukları "Vocabulary" (kelime bilgisi) ölçmek için kullanma, sadece gramer yapısını ölç.
+
+KRİTİK KURAL 2 (ÇEŞİTLİLİK): "Thus", "Thereby", "However", "Mitigate" gibi kelimeleri sürekli kullanma. YDT/YDS skalasındaki tüm yapıları kullanmaya özen göster. Her soru farklı bir mantık ve farklı bir kelime grubu üzerine kurulu olmalı.
 
 Format: Çıktıyı MUTLAKA aşağıdaki JSON formatında ver. Başka hiçbir metin ekleme.
 
 {
   "quiz": [
     {
-      "question": "---- the immense pressure from the stakeholders, the CEO refused to step down, ---- proving her commitment to the company's long-term vision.",
-      "options": ["A) Despite / thereby", "B) Because of / however", "C) In spite of / whereas", "D) Although / furthermore", "E) Nevertheless / as if"],
+      "question": "[Sample Context Related to ${topic}]",
+      "options": ["A) Opt1", "B) Opt2", "C) Opt3", "D) Opt4", "E) Opt5"],
       "correct_answer": "A",
       "feedback": {
-        "hint": "'Baskıya rağmen' (Despite + noun) ve sonuç bildiren '-ing' (thereby) yapısını gör.",
-        "logic": "İsim öbeği (pressure) ile 'Despite' kullanılır. 'Thereby' ise eylemin sonucunu açıklar.",
-        "pitfall": "D şıkkındaki 'Although' arkasından isim öbeği alamaz; cümle bekler."
+        "hint": "Turkish hint here...",
+        "logic": "Turkish logic explanation here...",
+        "pitfall": "Turkish pitfall explanation here..."
       }
     }
   ]
@@ -148,7 +148,7 @@ CRITICAL INSTRUCTIONS:
                                 } else {
                                     // Fallback if AI skips letter prefix
                                     const first = opt.substring(0, 1).toUpperCase();
-                                    if (['A','B','C','D','E'].includes(first)) {
+                                    if (['A', 'B', 'C', 'D', 'E'].includes(first)) {
                                         optionsObj[first] = opt.substring(3).trim();
                                     }
                                 }
@@ -159,7 +159,8 @@ CRITICAL INSTRUCTIONS:
                         }
 
                         // Generate a unique ID for each question
-                        const qId = `grammar_${topic.toLowerCase().replace(/\s+/g, '_')}_${Date.now()}_${idx}`;
+                        const sanitizedTopic = topic.toLowerCase().replace(/[&]/g, 'and').replace(/\s+/g, '_');
+                        const qId = `grammar_${sanitizedTopic}_${Date.now()}_${idx}`;
 
                         return {
                             ...q,

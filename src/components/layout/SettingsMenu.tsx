@@ -115,38 +115,24 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isOpen, onClose, onNavigate
                       alert("No active session. Please sign in first.");
                       return;
                     }
-                    
-                    const res = await fetch('/api/delete-account', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ accessToken: session.access_token }),
+
+                    // Call Supabase Edge Function — works in static/Capacitor builds
+                    const { error } = await supabase.functions.invoke('delete-user', {
+                      body: { accessToken: session.access_token },
                     });
 
-                    if (res.status === 404) {
-                      // Fallback since API routes can't exist in Capacitor's static export `output: export`
-                      alert("Your account deletion request has been formally submitted. Allow up to 24 hours for complete removal from our servers.");
-                      await supabase.auth.signOut();
-                      clearProgress();
-                      onClose();
-                      return;
+                    if (error) {
+                      throw new Error(error.message || 'Account deletion failed.');
                     }
 
-                    if (!res.ok) {
-                      const errData = await res.json().catch(() => ({}));
-                      throw new Error(errData.error || 'Account deletion failed.');
-                    }
-
-                    // Server-side deletion succeeded — clear local state
+                    // Deletion confirmed — clear local state and sign out
                     await supabase.auth.signOut();
                     clearProgress();
                     onClose();
                     alert("Your account has been permanently deleted.");
-                  } catch (error) {
+                  } catch (error: any) {
                     console.error('Delete account error:', error);
-                    alert("Account deletion completed successfully. Session cleared.");
-                    await supabase.auth.signOut();
-                    clearProgress();
-                    onClose();
+                    alert(`Account deletion failed: ${error.message || 'Please try again or contact support.'}`);
                   }
                 }
               }}
