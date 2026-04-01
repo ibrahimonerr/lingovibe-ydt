@@ -42,7 +42,7 @@ export default function GrammarLab({
       {/* DINAMIK SORU KARTI */}
       <div className="relative group">
         <div className={`absolute -inset-1 bg-gradient-to-r ${isSkills ? 'from-violet-500 to-purple-500' : 'from-emerald-500 to-teal-500'} rounded-[2.5rem] blur opacity-10 transition duration-1000`}></div>
-        <div className={`relative p-4 bg-white dark:bg-slate-900 border-2 ${isSkills ? 'border-violet-50 dark:border-violet-900/30' : 'border-emerald-50 dark:border-emerald-900/30'} rounded-[2rem] shadow-xl text-[14px] font-bold text-slate-800 dark:text-slate-200 leading-relaxed italic whitespace-pre-wrap`}>
+        <div className={`relative p-4 bg-white dark:bg-slate-900 border-2 ${isSkills ? 'border-violet-50 dark:border-violet-900/30' : 'border-emerald-50 dark:border-emerald-900/30'} rounded-[2rem] shadow-xl text-[15px] ${isSkills ? 'font-medium' : 'font-bold'} text-slate-800 dark:text-slate-200 leading-relaxed italic whitespace-pre-wrap`}>
           <div className={`absolute -top-3 left-8 text-white text-[8px] font-black px-4 py-1 rounded-full uppercase tracking-tighter shadow-md ${isSkills ? 'bg-violet-600' : 'bg-emerald-500'}`}>
             {labTitle}
           </div>
@@ -66,7 +66,7 @@ export default function GrammarLab({
           >
             <div className="flex items-center gap-3">
               <span className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-black ${selectedOption === key ? 'bg-white text-slate-900' : 'bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500'}`}>{key}</span>
-              <span className="font-bold text-[13px]">{value}</span>
+              <span className="font-medium text-[13px] not-italic">{value}</span>
             </div>
           </button>
         ))}

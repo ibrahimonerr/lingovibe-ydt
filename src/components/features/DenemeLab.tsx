@@ -249,7 +249,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
             <div className={`text-[10px] font-black uppercase mb-1.5 tracking-widest ${isReading ? 'text-amber-600 dark:text-amber-400' : 'text-indigo-600 dark:text-indigo-400'}`}>
                {isReading ? 'Question Details' : 'Question Context'}
             </div>
-            <div className="text-[15px] font-medium text-slate-700 dark:text-slate-300 leading-relaxed italic whitespace-pre-wrap">
+            <div className={`text-[15px] leading-relaxed italic whitespace-pre-wrap ${currentQuestion?.labType === 'grammar' ? 'font-bold text-slate-800 dark:text-slate-100' : 'font-medium text-slate-700 dark:text-slate-300'}`}>
                {typeof currentQuestion?.question === 'string'
                  ? currentQuestion.question.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n\n$2')
                  : (currentQuestion?.question || 'Question text not available.')}
@@ -294,7 +294,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
                     ${isSelected && markingMode !== 'manual' ? 'bg-white text-indigo-600' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
                     {key}
                   </span>
-                  <span className="font-bold text-[14px]">{value}</span>
+                  <span className="font-medium text-[14px] not-italic">{value}</span>
                   {isAnalysisMode && isCorrect && <CheckCircle2 size={18} className="ml-auto text-emerald-500" />}
                 </button>
               );

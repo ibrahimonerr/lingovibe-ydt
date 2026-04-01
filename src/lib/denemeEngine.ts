@@ -47,7 +47,7 @@ function normalizeQuestion(q: any, topic?: string): DenemeQuestion {
 
     // 3. Re-format with I-V numerals
     const romaNumerals = ['I', 'II', 'III', 'IV', 'V'];
-    normalized.question = cleanSentences.slice(0, 5).map((s: string, i: number) => `(${romaNumerals[i]}) ${s}`).join('\n\n');
+    normalized.question = cleanSentences.slice(0, 5).map((s: string, i: number) => `(${romaNumerals[i]}) ${s}`).join(' ');
     
     normalized.options = {
       'A': 'I',

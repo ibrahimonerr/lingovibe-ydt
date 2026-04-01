@@ -224,7 +224,7 @@ export default function ReadingLab({
             <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${themeStyles.bg} ${themeStyles.bgDark}`} />
             Question {currentIdx + 1}
           </div>
-          <h3 className="text-[14px] font-black text-slate-800 dark:text-slate-100 leading-snug">
+          <h3 className="text-[14px] font-medium italic text-slate-700 dark:text-slate-300 leading-relaxed">
             {question.question}
           </h3>
         </div>
@@ -247,7 +247,7 @@ export default function ReadingLab({
                 ${selectedOption === key ? 'bg-white ' + themeStyles.text : `bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 group-hover:${themeStyles.lightBg} dark:group-hover:${themeStyles.lightBgDark}`}`}>
                 {key}
               </span>
-              <span className="font-bold text-[13px]">{value}</span>
+              <span className="font-medium text-[13px] not-italic">{value}</span>
             </div>
           </button>
         ))}
