@@ -89,7 +89,7 @@ export default function ReadingLab({
     const romanNumeralRegex = /^\(\s*(?:VIII|VII|VI|III|II|IV|V|I)\s*\)$/i;
     
     // Automatically line-break dialog-like scenarios
-    const processedPassage = readingPassage.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n\n$2');
+    const processedPassage = readingPassage.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n$2');
     const parts = processedPassage.split(blankSplitRegex);
 
     let quoteRegex: RegExp | null = null;
@@ -203,7 +203,7 @@ export default function ReadingLab({
           </div>
 
           <div className={`p-4 transition-all duration-500 overflow-y-auto custom-scrollbar ${isTextExpanded ? 'max-h-[300px]' : 'max-h-[75px] opacity-70'}`}>
-            <p className={`text-[14px] font-medium leading-relaxed text-slate-700 dark:text-slate-300 italic whitespace-pre-wrap ${theme === 'amber' && !readingPassage?.trim().startsWith('(') ? 'first-letter:text-3xl first-letter:font-black first-letter:mr-1 first-letter:' + themeStyles.text : ''}`}>
+            <p className={`text-[15px] ${theme === 'violet' ? 'font-bold text-slate-800 dark:text-slate-100' : 'font-medium text-slate-700 dark:text-slate-300'} leading-relaxed italic whitespace-pre-wrap ${theme === 'amber' && !readingPassage?.trim().startsWith('(') ? 'first-letter:text-3xl first-letter:font-black first-letter:mr-1 first-letter:' + themeStyles.text : ''}`}>
               {readingPassage ? renderPassage() : question.question}
             </p>
           </div>
@@ -224,7 +224,7 @@ export default function ReadingLab({
             <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${themeStyles.bg} ${themeStyles.bgDark}`} />
             Question {currentIdx + 1}
           </div>
-          <h3 className="text-[14px] font-medium italic text-slate-700 dark:text-slate-300 leading-relaxed">
+          <h3 className={`text-[14px] ${theme === 'violet' ? 'font-bold text-slate-800 dark:text-slate-100' : 'font-medium text-slate-700 dark:text-slate-300'} italic leading-relaxed`}>
             {question.question}
           </h3>
         </div>

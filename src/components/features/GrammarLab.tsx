@@ -42,12 +42,12 @@ export default function GrammarLab({
       {/* DINAMIK SORU KARTI */}
       <div className="relative group">
         <div className={`absolute -inset-1 bg-gradient-to-r ${isSkills ? 'from-violet-500 to-purple-500' : 'from-emerald-500 to-teal-500'} rounded-[2.5rem] blur opacity-10 transition duration-1000`}></div>
-        <div className={`relative p-4 bg-white dark:bg-slate-900 border-2 ${isSkills ? 'border-violet-50 dark:border-violet-900/30' : 'border-emerald-50 dark:border-emerald-900/30'} rounded-[2rem] shadow-xl text-[15px] ${isSkills ? 'font-medium' : 'font-bold'} text-slate-800 dark:text-slate-200 leading-relaxed italic whitespace-pre-wrap`}>
+        <div className={`relative p-4 bg-white dark:bg-slate-900 border-2 ${isSkills ? 'border-violet-50 dark:border-violet-900/30' : 'border-emerald-50 dark:border-emerald-900/30'} rounded-[2rem] shadow-xl text-[15px] font-bold text-slate-800 dark:text-slate-200 leading-relaxed italic whitespace-pre-wrap`}>
           <div className={`absolute -top-3 left-8 text-white text-[8px] font-black px-4 py-1 rounded-full uppercase tracking-tighter shadow-md ${isSkills ? 'bg-violet-600' : 'bg-emerald-500'}`}>
             {labTitle}
           </div>
           
-          {question.question?.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n\n$2').split(/(\*\*.*?\*\*)/g).map((part: string, i: number) =>
+          {question.question?.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n$2').split(/(\*\*.*?\*\*)/g).map((part: string, i: number) =>
             part.startsWith('**') && part.endsWith('**')
               ? <span key={i} className={`${isSkills ? 'bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-900/40 dark:text-violet-300 dark:border-violet-800' : 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/40 dark:text-emerald-300 dark:border-emerald-800'} rounded px-2 mx-1 shadow-sm not-italic border-b-2`}>{part.replace(/\*\*/g, '')}</span>
               : part

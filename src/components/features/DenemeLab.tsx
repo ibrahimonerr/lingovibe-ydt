@@ -168,6 +168,18 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
     );
   }
 
+  const renderFormattedText = (text: string) => {
+    if (!text) return 'Question text not available.';
+    let processed = text.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n$2');
+    const parts = processed.split(/(\(\s*(?:VIII|VII|VI|III|II|IV|V|I)\s*\))/gi);
+    return parts.map((part, i) => {
+      if (/^(\(\s*(?:VIII|VII|VI|III|II|IV|V|I)\s*\))$/i.test(part)) {
+        return <strong key={i} className="font-extrabold mr-1">{part}</strong>;
+      }
+      return part;
+    });
+  };
+
   return (
     <div className="min-h-dvh bg-slate-50 dark:bg-[#070812] flex flex-col font-sans selection:bg-indigo-500/30">
       {/* HEADER - Focus Mode */}
@@ -249,9 +261,9 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
             <div className={`text-[10px] font-black uppercase mb-1.5 tracking-widest ${isReading ? 'text-amber-600 dark:text-amber-400' : 'text-indigo-600 dark:text-indigo-400'}`}>
                {isReading ? 'Question Details' : 'Question Context'}
             </div>
-            <div className={`text-[15px] leading-relaxed italic whitespace-pre-wrap ${currentQuestion?.labType === 'grammar' ? 'font-bold text-slate-800 dark:text-slate-100' : 'font-medium text-slate-700 dark:text-slate-300'}`}>
+            <div className={`text-[15px] leading-relaxed italic whitespace-pre-wrap ${currentQuestion?.labType !== 'reading' ? 'font-bold text-slate-800 dark:text-slate-100' : 'font-medium text-slate-700 dark:text-slate-300'}`}>
                {typeof currentQuestion?.question === 'string'
-                 ? currentQuestion.question.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n\n$2')
+                 ? renderFormattedText(currentQuestion.question)
                  : (currentQuestion?.question || 'Question text not available.')}
             </div>
           </div>
