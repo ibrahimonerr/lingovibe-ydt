@@ -212,7 +212,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
 
       {/* MAIN CONTENT */}
       <main className="flex-1 pt-28 pb-32 px-6 overflow-y-auto custom-scrollbar">
-        <div className="max-w-2xl mx-auto space-y-6">
+        <div className="max-w-2xl mx-auto space-y-4">
           
           {/* ANALYSIS / FEEDBACK (ONLY IN ANALYSIS MODE) */}
           {isAnalysisMode && (
@@ -257,7 +257,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
           </div>
 
           {/* OPTIONS */}
-          <div className="grid gap-3">
+          <div className="grid gap-2">
             {Object.entries(currentQuestion?.options || {}).map(([key, value]) => {
               // In manual mode, we show visual selection. In auto, we show official selection.
               const isSelected = (markingMode === 'manual' ? visualAnswers[currentIdx] : answers[currentIdx]) === key;
@@ -288,7 +288,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
                     }
                     await Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
                   }}
-                  className={`p-4 text-left rounded-2xl border-2 transition-all duration-300 flex items-center gap-4 active:scale-[0.98] ${style}`}
+                  className={`p-3 text-left rounded-2xl border-2 transition-all duration-300 flex items-center gap-3 active:scale-[0.98] ${style}`}
                 >
                   <span className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-black uppercase transition-colors
                     ${isSelected && markingMode !== 'manual' ? 'bg-white text-indigo-600' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
