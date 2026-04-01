@@ -4,14 +4,16 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import YDTLogo from '@/components/YDTLogo';
 import {
-  Layout, Zap, Languages, Trophy, BookOpen,
-  PenTool, Target, Eye, Repeat, X, ChevronRight,
-  Settings as SettingsIcon, PieChart, Split, Search, Copy, Flame, Map as MapIcon
+  Zap, Languages, PenTool, Target, Sparkles, Layout,
+  ChevronRight, Trophy, BookOpen,
+  Settings as SettingsIcon, PieChart, Split, Search, Copy, Flame,
+  ClipboardCheck, Lock, X, Repeat, Eye
 } from 'lucide-react';
 import SettingsMenu from '@/components/layout/SettingsMenu';
 import { useAppStore } from '@/store/useAppStore';
 import { supabase } from '@/lib/supabase';
 import LoginPage from '@/components/auth/LoginPage';
+import DenemeAuthModal from '@/components/ui/DenemeAuthModal';
 
 const grammarTopics = [
   "Tenses & Aspect",
@@ -41,6 +43,7 @@ export default function YDTHub() {
   const router = useRouter();
   const [view, setView] = useState('home');
   const [mode, setMode] = useState('');
+  const [isDenemeModalOpen, setIsDenemeModalOpen] = useState(false);
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const { lastActiveRoute, session, isGuestMode, setSession } = useAppStore();
@@ -73,9 +76,6 @@ export default function YDTHub() {
         break;
       case 'vocab':
         router.push(`/vocab-lab?mode=${subType}`);
-        break;
-      case 'analyzer':
-        router.push('/analyzer');
         break;
       default:
         break;
@@ -115,56 +115,80 @@ export default function YDTHub() {
 
         <main className="flex flex-col px-5 pt-20 pb-28">
           {view === 'home' && (
-            <div className="flex flex-col gap-3 animate-in fade-in duration-500">
-              {/* READING LAB */}
-              <button onClick={() => handleLabSelection('reading')} className="w-full p-5 rounded-[2.2rem] border-2 border-amber-100 dark:border-amber-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-2xl text-amber-500 shadow-sm"><Zap size={20} /></div>
-                <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Reading Lab</span>
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.15em] opacity-80">Daily Reading Comprehension</span>
-                </div>
-              </button>
+            <div className="flex flex-col gap-5 animate-in fade-in duration-700">
+              
+              {/* MAIN LABS GRID */}
+              <div className="grid grid-cols-2 gap-3.5">
+                {/* READING LAB */}
+                <button onClick={() => handleLabSelection('reading')} className="p-5 rounded-[2.2rem] border-2 border-amber-100 dark:border-amber-900/30 bg-white dark:bg-[#1a1c25] flex flex-col items-center text-center gap-3 active:scale-95 transition-all shadow-sm group">
+                  <div className="p-3.5 bg-amber-50 dark:bg-amber-900/20 rounded-2xl text-amber-500 shadow-sm group-hover:scale-110 transition-transform"><Zap size={22} /></div>
+                  <div>
+                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Reading</span>
+                    <span className="text-[7px] font-bold text-slate-400 uppercase tracking-widest opacity-60">Comprehension</span>
+                  </div>
+                </button>
 
-              {/* VOCAB LAB */}
-              <button onClick={() => setMode('vocab_select')} className="w-full p-5 rounded-[2.2rem] border-2 border-indigo-100 dark:border-indigo-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl text-indigo-600 shadow-sm"><Languages size={20} /></div>
-                <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Vocab Lab</span>
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.15em] opacity-80">Retention & Recall</span>
-                </div>
-              </button>
+                {/* VOCAB LAB */}
+                <button onClick={() => setMode('vocab_select')} className="p-5 rounded-[2.2rem] border-2 border-indigo-100 dark:border-indigo-900/30 bg-white dark:bg-[#1a1c25] flex flex-col items-center text-center gap-3 active:scale-95 transition-all shadow-sm group">
+                  <div className="p-3.5 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl text-indigo-600 shadow-sm group-hover:scale-110 transition-transform"><Languages size={22} /></div>
+                  <div>
+                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Vocab</span>
+                    <span className="text-[7px] font-bold text-slate-400 uppercase tracking-widest opacity-60">Recall & Retention</span>
+                  </div>
+                </button>
 
-               {/* GRAMMAR LAB */}
-              <button onClick={() => setMode('grammar')} className="w-full p-5 rounded-[2.2rem] border-2 border-emerald-100 dark:border-emerald-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl text-emerald-600 shadow-sm"><PenTool size={20} /></div>
-                <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Grammar Lab</span>
-                  <span className="text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.15em] opacity-80">Structure & Sentence Rules</span>
-                </div>
-              </button>
+                {/* GRAMMAR LAB */}
+                <button onClick={() => setMode('grammar')} className="p-5 rounded-[2.2rem] border-2 border-emerald-100 dark:border-emerald-900/30 bg-white dark:bg-[#1a1c25] flex flex-col items-center text-center gap-3 active:scale-95 transition-all shadow-sm group">
+                  <div className="p-3.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl text-emerald-600 shadow-sm group-hover:scale-110 transition-transform"><PenTool size={22} /></div>
+                  <div>
+                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Grammar</span>
+                    <span className="text-[7px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest opacity-60">Structure Rules</span>
+                  </div>
+                </button>
 
-              {/* SKILLS LAB */}
-              <button onClick={() => setMode('skills')} className="w-full p-5 rounded-[2.2rem] border-2 border-violet-100 dark:border-violet-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-violet-50 dark:bg-violet-900/20 rounded-2xl text-violet-600 shadow-sm"><Target size={20} /></div>
-                <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Skills Lab</span>
-                  <span className="text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.15em] opacity-80">Cloze, Dialogue & Paragraphs</span>
-                </div>
-              </button>
+                {/* SKILLS LAB */}
+                <button onClick={() => setMode('skills')} className="p-5 rounded-[2.2rem] border-2 border-violet-100 dark:border-violet-900/30 bg-white dark:bg-[#1a1c25] flex flex-col items-center text-center gap-3 active:scale-95 transition-all shadow-sm group">
+                  <div className="p-3.5 bg-violet-50 dark:bg-violet-900/20 rounded-2xl text-violet-600 shadow-sm group-hover:scale-110 transition-transform"><Target size={22} /></div>
+                  <div>
+                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Skills</span>
+                    <span className="text-[7px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest opacity-60">Strategy & Speed</span>
+                  </div>
+                </button>
+              </div>
 
-              {/* AI ANALYZER */}
-              <button onClick={() => handleLabSelection('analyzer')} className="w-full p-5 rounded-[2.2rem] border-2 border-rose-100 dark:border-rose-900/30 bg-white dark:bg-[#1a1c25] flex items-center gap-4 active:scale-95 transition-all text-left shadow-sm">
-                <div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded-2xl text-rose-600 shadow-sm"><PenTool size={20} /></div>
-                <div>
-                  <span className="font-black uppercase text-[13px] block text-slate-800 dark:text-slate-100 leading-none mb-1">AI Analyzer</span>
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.15em] opacity-80">Scan & Generate</span>
+              {/* MINI DENEME - FEATURED CARD (MOVED TO BOTTOM) */}
+              <button 
+                onClick={() => {
+                  router.push('/mini-deneme-lab');
+                }}
+                className="w-full p-6 rounded-[2.5rem] bg-gradient-to-br from-indigo-900 via-violet-900 to-slate-900 relative overflow-hidden group shadow-2xl shadow-indigo-500/20 active:scale-95 transition-all mt-2 border border-white/10"
+              >
+                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600/20 via-fuchsia-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Sparkles size={100} className="text-white" />
+                </div>
+                
+                <div className="relative z-10 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="p-3.5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-white shadow-xl">
+                      <ClipboardCheck size={24} className="text-indigo-300" />
+                    </div>
+                    <div className="text-left">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-black uppercase text-[15px] text-white tracking-tight">Mini Deneme</span>
+                        <span className="px-2 py-0.5 rounded-full bg-indigo-500/30 border border-indigo-400/30 text-[8px] font-black text-indigo-200 uppercase tracking-widest">Master</span>
+                      </div>
+                      <span className="text-[9px] font-bold text-indigo-300/80 uppercase tracking-[0.1em]">22 Soru • 30 Dakika • Günlük 1 Hak</span>
+                    </div>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/40 group-hover:translate-x-1 group-hover:text-white transition-all">
+                    <ChevronRight size={20} />
+                  </div>
                 </div>
               </button>
             </div>
           )}
         </main>
-
-        {/* MODALLAR */}
         {['grammar', 'skills', 'vocab_select'].includes(mode) && (
           <div
             className="absolute inset-0 z-[120] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4"
@@ -181,26 +205,41 @@ export default function YDTHub() {
               </div>
               <div className="space-y-2 max-h-[350px] overflow-y-auto custom-scrollbar">
                 {mode === 'vocab_select' ? (
-                  <div className="grid grid-cols-1 gap-2.5">
-                    <button onClick={() => handleLabSelection('vocab', 'loop')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-indigo-500/5 overflow-hidden text-left mb-1 border border-slate-100 dark:border-white/5">
-                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-500 to-fuchsia-500 opacity-20" />
-                        <Repeat size={18} className="text-indigo-400" /> Vocab Loop
+                  <div className="space-y-2">
+                    <button onClick={() => handleLabSelection('vocab', 'loop')} className="w-full p-3.5 text-left bg-slate-50 dark:bg-slate-800/50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 active:scale-95 transition-all">
+                        <div className="flex items-center gap-2.5">
+                            <Repeat size={16} className="text-indigo-600 dark:text-indigo-400" />
+                            Vocab Loop
+                        </div>
+                        <ChevronRight size={14} className="opacity-20" />
                     </button>
-                    <button onClick={() => handleLabSelection('vocab', 'meaning_shifter')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-indigo-500/5 overflow-hidden text-left">
-                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-20" />
-                        <Split size={18} className="text-blue-400" /> Meaning Shifter
+                    <button onClick={() => handleLabSelection('vocab', 'meaning_shifter')} className="w-full p-3.5 text-left bg-slate-50 dark:bg-slate-800/50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 active:scale-95 transition-all">
+                        <div className="flex items-center gap-2.5">
+                            <Split size={16} className="text-indigo-500 dark:text-indigo-400" />
+                            Meaning Shifter
+                        </div>
+                        <ChevronRight size={14} className="opacity-20" />
                     </button>
-                    <button onClick={() => handleLabSelection('vocab', 'definition_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-amber-500/5 overflow-hidden text-left">
-                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-amber-600 to-yellow-500 opacity-20" />
-                        <Search size={18} className="text-amber-400" /> Definition Hunt
+                    <button onClick={() => handleLabSelection('vocab', 'definition_hunt')} className="w-full p-3.5 text-left bg-slate-50 dark:bg-slate-800/50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 dark:text-slate-300 hover:bg-amber-50 dark:hover:bg-amber-900/20 active:scale-95 transition-all">
+                        <div className="flex items-center gap-2.5">
+                            <Search size={16} className="text-amber-500 dark:text-amber-400" />
+                            Definition Hunt
+                        </div>
+                        <ChevronRight size={14} className="opacity-20" />
                     </button>
-                    <button onClick={() => handleLabSelection('vocab', 'synonym_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-emerald-500/5 overflow-hidden text-left">
-                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-emerald-600 to-teal-500 opacity-20" />
-                        <Copy size={18} className="text-emerald-400" /> Synonym Hunt
+                    <button onClick={() => handleLabSelection('vocab', 'synonym_hunt')} className="w-full p-3.5 text-left bg-slate-50 dark:bg-slate-800/50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 active:scale-95 transition-all">
+                        <div className="flex items-center gap-2.5">
+                            <Copy size={16} className="text-emerald-500 dark:text-emerald-400" />
+                            Synonym Hunt
+                        </div>
+                        <ChevronRight size={14} className="opacity-20" />
                     </button>
-                    <button onClick={() => handleLabSelection('vocab', 'antonym_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-rose-500/5 overflow-hidden text-left">
-                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-rose-600 to-red-500 opacity-20" />
-                        <Flame size={18} className="text-rose-400" /> Antonym Hunt
+                    <button onClick={() => handleLabSelection('vocab', 'antonym_hunt')} className="w-full p-3.5 text-left bg-slate-50 dark:bg-slate-800/50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 dark:text-slate-300 hover:bg-rose-50 dark:hover:bg-rose-900/20 active:scale-95 transition-all">
+                        <div className="flex items-center gap-2.5">
+                            <Flame size={16} className="text-rose-500 dark:text-rose-400" />
+                            Antonym Hunt
+                        </div>
+                        <ChevronRight size={14} className="opacity-20" />
                     </button>
                   </div>
                 ) : (
@@ -275,10 +314,6 @@ export default function YDTHub() {
                     <PieChart size={20} className="text-slate-800 dark:text-slate-400" />
                     <span className="font-black text-[10px] uppercase">Progress</span>
                   </button>
-                  <button onClick={() => { setIsNavMenuOpen(false); router.push('/analyzer'); }} className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 flex flex-col items-center gap-2 text-slate-700 dark:text-slate-300 active:scale-95 transition-all outline-none border border-rose-50 dark:border-rose-900/20 col-span-2">
-                    <PenTool size={20} className="text-rose-600" />
-                    <span className="font-black text-[10px] uppercase">AI Analyzer</span>
-                  </button>
                 </div>
               </div>
             </div>
@@ -298,6 +333,10 @@ export default function YDTHub() {
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
       `}</style>
+      <DenemeAuthModal 
+        isOpen={isDenemeModalOpen} 
+        onClose={() => setIsDenemeModalOpen(false)} 
+      />
     </div>
   );
 }

@@ -219,26 +219,41 @@ export default function MobileShell({ children }: { children: React.ReactNode })
 
                             {/* VOCAB SUB-MENU */}
                             {navSubMenu === 'vocab' && (
-                                <div className="space-y-2.5 animate-in slide-in-from-right-5 duration-200">
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=loop')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-indigo-500/5 overflow-hidden text-left mb-1 border border-slate-100 dark:border-white/5">
-                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-500 to-fuchsia-500 opacity-20" />
-                                        <Repeat size={18} className="text-indigo-400" /> Vocab Loop
+                                <div className="space-y-2 max-h-[350px] overflow-y-auto custom-scrollbar animate-in slide-in-from-right-5 duration-200">
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=loop')} className="w-full p-3.5 text-left bg-slate-50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 hover:bg-indigo-50 active:scale-95 transition-all">
+                                        <div className="flex items-center gap-2.5">
+                                            <Repeat size={16} className="text-indigo-600" />
+                                            Vocab Loop
+                                        </div>
+                                        <ChevronRight size={14} className="opacity-20" />
                                     </button>
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=meaning_shifter')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-indigo-500/5 overflow-hidden text-left">
-                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-20" />
-                                        <Split size={18} className="text-indigo-400" /> Meaning Shifter
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=meaning_shifter')} className="w-full p-3.5 text-left bg-slate-50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 hover:bg-indigo-50 active:scale-95 transition-all">
+                                        <div className="flex items-center gap-2.5">
+                                            <Split size={16} className="text-indigo-500" />
+                                            Meaning Shifter
+                                        </div>
+                                        <ChevronRight size={14} className="opacity-20" />
                                     </button>
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=definition_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-amber-500/5 overflow-hidden text-left">
-                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-amber-600 to-yellow-500 opacity-20" />
-                                        <Search size={18} className="text-amber-400" /> Definition Hunt
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=definition_hunt')} className="w-full p-3.5 text-left bg-slate-50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 hover:bg-amber-50 active:scale-95 transition-all">
+                                        <div className="flex items-center gap-2.5">
+                                            <Search size={16} className="text-amber-500" />
+                                            Definition Hunt
+                                        </div>
+                                        <ChevronRight size={14} className="opacity-20" />
                                     </button>
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=synonym_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-emerald-500/5 overflow-hidden text-left">
-                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-emerald-600 to-teal-500 opacity-20" />
-                                        <Copy size={18} className="text-emerald-400" /> Synonym Hunt
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=synonym_hunt')} className="w-full p-3.5 text-left bg-slate-50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 hover:bg-emerald-50 active:scale-95 transition-all">
+                                        <div className="flex items-center gap-2.5">
+                                            <Copy size={16} className="text-emerald-500" />
+                                            Synonym Hunt
+                                        </div>
+                                        <ChevronRight size={14} className="opacity-20" />
                                     </button>
-                                    <button onClick={() => navigateTo('/vocab-lab?mode=antonym_hunt')} className="group relative w-full p-4 rounded-2xl bg-slate-900 flex items-center gap-3 text-white font-black text-[11px] uppercase active:scale-95 transition-all shadow-xl shadow-rose-500/5 overflow-hidden text-left">
-                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-rose-600 to-red-500 opacity-20" />
-                                        <Flame size={18} className="text-rose-400" /> Antonym Hunt
+                                    <button onClick={() => navigateTo('/vocab-lab?mode=antonym_hunt')} className="w-full p-3.5 text-left bg-slate-50 rounded-xl text-[10px] font-black uppercase flex justify-between items-center text-slate-600 hover:bg-rose-50 active:scale-95 transition-all">
+                                        <div className="flex items-center gap-2.5">
+                                            <Flame size={16} className="text-rose-500" />
+                                            Antonym Hunt
+                                        </div>
+                                        <ChevronRight size={14} className="opacity-20" />
                                     </button>
                                 </div>
                             )}

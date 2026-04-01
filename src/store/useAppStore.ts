@@ -31,6 +31,7 @@ interface AppState {
         vocabLabsCompleted: number;
         grammarLabsCompleted: number;
         skillsLabsCompleted: number;
+        mini_denemeLabsCompleted: number;
     };
     labStats: {
         totalCorrect: number;
@@ -63,10 +64,10 @@ interface AppState {
     completeMission: (id: string) => void;
     toggleLearnedWord: (id: string) => void;
     incrementDailyVocabCount: () => void;
-    incrementProgress: (type: 'reading' | 'vocab' | 'grammar' | 'skills') => void;
+    incrementProgress: (type: 'reading' | 'vocab' | 'grammar' | 'skills' | 'mini_deneme') => void;
     recordAnswer: (isCorrect: boolean, usedHint?: boolean) => void;
-    canSolveMore: (type: 'reading' | 'vocab' | 'grammar' | 'skills', subTopic?: string) => boolean;
-    markAsSolved: (ids: string[], type: 'reading' | 'vocab' | 'grammar' | 'skills', subTopic?: string) => void;
+    canSolveMore: (type: 'reading' | 'vocab' | 'grammar' | 'skills' | 'mini_deneme', subTopic?: string) => boolean;
+    markAsSolved: (ids: string[], type: 'reading' | 'vocab' | 'grammar' | 'skills' | 'mini_deneme', subTopic?: string) => void;
     setPrefetchedLabs: (type: 'reading' | 'vocab' | 'grammar' | 'skills', labs: PrefetchedLab[]) => void;
     setLastActiveRoute: (route: string | null) => void;
     setSession: (session: Session | null) => void;
@@ -88,6 +89,7 @@ export const useAppStore = create<AppState>()(
                 vocabLabsCompleted: 0,
                 grammarLabsCompleted: 0,
                 skillsLabsCompleted: 0,
+                mini_denemeLabsCompleted: 0,
             },
             labStats: {
                 totalCorrect: 0,
@@ -155,6 +157,7 @@ export const useAppStore = create<AppState>()(
 
                 // Limits based on Guest vs. Registered
                 if (state.isGuestMode) {
+                    if (type === 'mini_deneme') return currentCount < 1; // Allow 1 for testing
                     if (type === 'reading') return currentCount < 1;
                     if (type === 'vocab') {
                         if (subTopic === 'loop') return currentCount < 10; // 10 flashcards
@@ -163,6 +166,7 @@ export const useAppStore = create<AppState>()(
                     return currentCount < 3; // 3 for Grammar/Skills
                 } else {
                     // Registered Users
+                    if (type === 'mini_deneme') return currentCount < 1; // 1 deneme per day
                     if (type === 'reading') return currentCount < 5;
                     if (type === 'vocab') {
                         if (subTopic === 'loop') return currentCount < 10; // Still 10 flashcards?
@@ -250,6 +254,7 @@ export const useAppStore = create<AppState>()(
                         vocabLabsCompleted: 0,
                         grammarLabsCompleted: 0,
                         skillsLabsCompleted: 0,
+                        mini_denemeLabsCompleted: 0,
                     },
                     lastActiveRoute: null,
                     isGuestMode: false,
