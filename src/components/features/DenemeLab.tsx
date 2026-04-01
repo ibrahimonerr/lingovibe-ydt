@@ -187,7 +187,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
   return (
     <div className="min-h-dvh bg-slate-50 dark:bg-[#070812] flex flex-col font-sans selection:bg-indigo-500/30">
       {/* HEADER - Focus Mode */}
-      <header className="fixed top-0 inset-x-0 bg-white/80 dark:bg-[#070812]/80 backdrop-blur-xl border-b dark:border-slate-800/50 px-6 py-4 flex items-center justify-between z-[100]">
+      <header className="fixed top-0 inset-x-0 bg-white/80 dark:bg-[#070812]/80 backdrop-blur-xl border-b dark:border-slate-800/50 px-6 pb-4 pt-[calc(env(safe-area-inset-top)+1rem)] flex items-center justify-between z-[100]">
         <button 
           onClick={() => setShowExitConfirm(true)}
           className="p-2 text-slate-400 hover:text-rose-500 transition-colors"
@@ -218,7 +218,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
       </header>
 
       {/* PROGRESS BAR */}
-      <div className="fixed top-[72px] inset-x-0 h-1 bg-slate-100 dark:bg-white/5 z-[100]">
+      <div className="fixed top-[calc(env(safe-area-inset-top)+72px)] inset-x-0 h-1 bg-slate-100 dark:bg-white/5 z-[100]">
         <motion.div 
             initial={{ width: 0 }}
             animate={{ width: `${((currentIdx + 1) / questions.length) * 100}%` }}
@@ -227,7 +227,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
       </div>
 
       {/* MAIN CONTENT */}
-      <main className="flex-1 pt-28 pb-32 px-6 overflow-y-auto custom-scrollbar">
+      <main className="flex-1 pt-[calc(env(safe-area-inset-top)+90px)] pb-[calc(env(safe-area-inset-bottom)+100px)] px-6 overflow-y-auto custom-scrollbar">
         <div className="max-w-2xl mx-auto space-y-4">
           
           {/* ANALYSIS / FEEDBACK (ONLY IN ANALYSIS MODE) */}
@@ -320,7 +320,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
       </main>
 
       {/* FOOTER NAV */}
-      <footer className="fixed bottom-0 inset-x-0 bg-white/80 dark:bg-[#070812]/80 backdrop-blur-xl border-t dark:border-slate-800/50 p-6 flex items-center justify-between z-[100]">
+      <footer className="fixed bottom-0 inset-x-0 bg-white/80 dark:bg-[#070812]/80 backdrop-blur-xl border-t dark:border-slate-800/50 px-6 pt-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] flex items-center justify-between z-[100]">
         <button 
           onClick={() => currentIdx > 0 && setCurrentIdx(prev => prev - 1)}
           disabled={currentIdx === 0}
@@ -362,9 +362,9 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
-            className="fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-md flex items-end justify-center p-4"
+            className="fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-md flex items-end justify-center p-4 pb-[env(safe-area-inset-bottom)]"
           >
-            <div className="w-full max-w-md bg-white dark:bg-[#1a1c2e] rounded-[3rem] p-6 shadow-2xl relative">
+            <div className="w-full max-w-md bg-white dark:bg-[#1a1c2e] rounded-t-[3rem] p-6 pb-[calc(env(safe-area-inset-bottom)+2rem)] shadow-2xl relative">
                 <button 
                     onClick={() => setIsOpticOpen(false)}
                     className="absolute top-6 right-6 p-2 text-slate-400 hover:text-slate-600 transition-colors"
