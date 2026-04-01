@@ -18,8 +18,10 @@ interface DenemeLabProps {
 }
 
 export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
+  const [markingMode, setMarkingMode] = useState<'auto' | 'manual' | null>(null);
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, string>>({}); // { questionIdx: selectedOption }
+  const [answers, setAnswers] = useState<Record<number, string>>({}); // Official answers (bubbled)
+  const [visualAnswers, setVisualAnswers] = useState<Record<number, string>>({}); // Booklet selections
   const [timeLeft, setTimeLeft] = useState(30 * 60); // 30 minutes in seconds
   const [isOpticOpen, setIsOpticOpen] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
@@ -32,7 +34,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
     setIsFinished(true);
     if (timerRef.current) clearInterval(timerRef.current);
     
-    // Calculate total correct/score
+    // Calculate total correct/score using OFFICIAL answers
     const totalCorrect = questions.reduce((acc, q, idx) => {
       const isCorrect = answers[idx] === (q.correct_answer || q.correct);
       return acc + (isCorrect ? 1 : 0);
@@ -43,7 +45,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
 
   // Timer logic
   useEffect(() => {
-    if (isFinished) return;
+    if (isFinished || markingMode === null) return;
     
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
@@ -59,7 +61,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isFinished, handleFinish]);
+  }, [isFinished, handleFinish, markingMode]);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -71,6 +73,57 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
   const isReading = currentQuestion?.labType === 'reading';
 
   if (!currentQuestion && !isFinished) return null;
+
+  // MODE SELECTION OVERLAY
+  if (markingMode === null) {
+     return (
+        <div className="min-h-dvh bg-[#070812] flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-700">
+            <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="w-full max-w-md bg-white/5 border border-white/10 rounded-[3rem] p-10 backdrop-blur-xl relative overflow-hidden"
+            >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-3xl -mr-16 -mt-16 rounded-full" />
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-violet-500/10 blur-3xl -ml-16 -mb-16 rounded-full" />
+
+                <div className="w-20 h-20 bg-indigo-600 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 shadow-2xl shadow-indigo-500/20 rotate-6">
+                    <Target size={40} />
+                </div>
+                
+                <h2 className="text-3xl font-black text-white mb-2 uppercase tracking-tighter italic">DENEME MODU</h2>
+                <p className="text-slate-400 font-bold mb-10 text-[13px] px-4">İşaretleme tarzına göre sınav deneyimini özelleştir.</p>
+
+                <div className="grid gap-4">
+                    <button 
+                        onClick={() => setMarkingMode('auto')}
+                        className="group p-6 bg-white rounded-3xl text-left transition-all active:scale-95 flex items-center gap-4 border-2 border-white"
+                    >
+                        <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Sparkles size={24} />
+                        </div>
+                        <div>
+                            <span className="block font-black text-slate-900 text-sm uppercase tracking-tight">Otomatik İşaretleme</span>
+                            <span className="block text-[10px] font-bold text-slate-500">Seçeneklere tıklandığında hemen optiğe geçer.</span>
+                        </div>
+                    </button>
+
+                    <button 
+                        onClick={() => setMarkingMode('manual')}
+                        className="group p-6 bg-white/5 border border-white/10 rounded-3xl text-left transition-all hover:bg-white/10 active:scale-95 flex items-center gap-4"
+                    >
+                        <div className="w-12 h-12 bg-white/10 text-white rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <ClipboardCheck size={24} />
+                        </div>
+                        <div>
+                            <span className="block font-black text-white text-sm uppercase tracking-tight">Manuel Kodlama</span>
+                            <span className="block text-[10px] font-bold text-slate-500 italic text-indigo-400/80">Tam Deneyim: Cevapları optikte elle işaretlersiniz.</span>
+                        </div>
+                    </button>
+                </div>
+            </motion.div>
+        </div>
+     );
+  }
 
   if (isFinished && !isAnalysisMode) {
     const totalCorrect = questions.reduce((acc, q, idx) => {
@@ -137,7 +190,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
             </div>
             {currentQuestion?.topic && (
                 <span className="text-[9px] font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest">
-                    {currentQuestion.topic}
+                    {currentQuestion?.topic || 'Deneme Sorusu'}
                 </span>
             )}
         </div>
@@ -166,13 +219,13 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
             <div className={`p-1 rounded-[2.5rem] ${answers[currentIdx] === (currentQuestion.correct_answer || currentQuestion.correct) ? 'bg-emerald-500' : 'bg-rose-500'} mb-6`}>
                 <div className="bg-white dark:bg-slate-900 p-6 rounded-[2.4rem]">
                     <ExplanationRenderer 
-                        explanation={currentQuestion.explanation || ''} 
-                        feedback={currentQuestion.feedback}
-                        hint={currentQuestion.hint || (currentQuestion.feedback as any)?.hint}
-                        correctAnswer={currentQuestion.correct_answer || currentQuestion.correct}
-                        correctAnswerText={currentQuestion.options?.[currentQuestion.correct_answer || currentQuestion.correct]}
-                        isCorrect={answers[currentIdx] === (currentQuestion.correct_answer || currentQuestion.correct)}
-                        theme={currentQuestion.labType === 'grammar' ? 'emerald' : currentQuestion.labType === 'reading' ? 'amber' : 'violet'}
+                        explanation={currentQuestion?.explanation || ''} 
+                        feedback={currentQuestion?.feedback}
+                        hint={currentQuestion?.hint || (currentQuestion?.feedback as any)?.hint}
+                        correctAnswer={currentQuestion?.correct_answer || currentQuestion?.correct || ''}
+                        correctAnswerText={currentQuestion?.options?.[currentQuestion?.correct_answer || currentQuestion?.correct || ''] || ''}
+                        isCorrect={answers[currentIdx] === (currentQuestion?.correct_answer || currentQuestion?.correct)}
+                        theme={currentQuestion?.labType === 'grammar' ? 'emerald' : currentQuestion?.labType === 'reading' ? 'amber' : 'violet'}
                     />
                 </div>
             </div>
@@ -182,7 +235,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
           {isReading && currentQuestion.passage && (
             <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800/50 rounded-[2.5rem] p-6 shadow-sm mb-6">
               <div className="flex items-center gap-2 mb-4 text-amber-600 dark:text-amber-400">
-                <BookOpen size={18} />
+                < BookOpen size={18} />
                 <span className="text-[10px] font-black uppercase tracking-widest">Reading Passage</span>
               </div>
               <p className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed italic text-[15px] whitespace-pre-wrap">
@@ -197,15 +250,16 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
                {isReading ? 'Question Details' : 'Question Context'}
             </div>
             <h3 className="text-xl font-black text-slate-800 dark:text-slate-100 leading-snug">
-               {currentQuestion.question}
+               {currentQuestion?.question || 'Question text not available.'}
             </h3>
           </div>
 
           {/* OPTIONS */}
           <div className="grid gap-3">
-            {Object.entries(currentQuestion.options).map(([key, value]) => {
-              const isSelected = answers[currentIdx] === key;
-              const isCorrect = key === (currentQuestion.correct_answer || currentQuestion.correct);
+            {Object.entries(currentQuestion?.options || {}).map(([key, value]) => {
+              // In manual mode, we show visual selection. In auto, we show official selection.
+              const isSelected = (markingMode === 'manual' ? visualAnswers[currentIdx] : answers[currentIdx]) === key;
+              const isCorrect = key === (currentQuestion?.correct_answer || currentQuestion?.correct);
               
               let style = "border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300";
               
@@ -213,7 +267,11 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
                 if (isCorrect) style = "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400";
                 else if (isSelected) style = "border-rose-500 bg-rose-50 dark:bg-rose-900/20 text-rose-700 dark:text-rose-400";
               } else if (isSelected) {
-                style = "border-indigo-500 bg-indigo-500 text-white shadow-lg shadow-indigo-500/20";
+                if (markingMode === 'manual') {
+                    style = "border-indigo-400 bg-indigo-50 border-dashed dark:bg-indigo-900/10 text-indigo-600 dark:text-indigo-400";
+                } else {
+                    style = "border-indigo-500 bg-indigo-500 text-white shadow-lg shadow-indigo-500/20";
+                }
               }
 
               return (
@@ -221,13 +279,17 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
                   key={key}
                   disabled={isAnalysisMode}
                   onClick={async () => {
-                    setAnswers(prev => ({ ...prev, [currentIdx]: key }));
+                    if (markingMode === 'manual') {
+                        setVisualAnswers(prev => ({ ...prev, [currentIdx]: key }));
+                    } else {
+                        setAnswers(prev => ({ ...prev, [currentIdx]: key }));
+                    }
                     await Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
                   }}
                   className={`p-4 text-left rounded-2xl border-2 transition-all duration-300 flex items-center gap-4 active:scale-[0.98] ${style}`}
                 >
                   <span className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-black uppercase transition-colors
-                    ${isSelected ? 'bg-white text-indigo-600' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
+                    ${isSelected && markingMode !== 'manual' ? 'bg-white text-indigo-600' : 'bg-slate-100 dark:bg-white/5 text-slate-400'}`}>
                     {key}
                   </span>
                   <span className="font-bold text-[14px]">{value}</span>
@@ -296,35 +358,76 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
                     Sınav Optik Formu
                 </h4>
 
-                <div className="grid grid-cols-4 gap-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar mb-8">
+                <div className="flex flex-col gap-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar mb-8">
                   {questions.map((q, idx) => {
                     const isSelected = !!answers[idx];
                     const isCurrent = currentIdx === idx;
-                    const isCorrect = answers[idx] === (q.correct_answer || q.correct);
+                    const options = ['A', 'B', 'C', 'D', 'E'];
                     
-                    let style = "bg-slate-50 dark:bg-white/5 text-slate-400 border-slate-100 dark:border-white/10";
-                    if (isSelected) style = "bg-slate-900 text-white border-slate-900";
-                    if (isCurrent) style = "ring-2 ring-indigo-500 bg-indigo-50 text-indigo-600 border-indigo-200";
-                    
-                    if (isAnalysisMode) {
-                        if (isCorrect) style = "bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/20";
-                        else style = "bg-rose-500 text-white border-rose-500 shadow-lg shadow-rose-500/20";
-                    }
-
                     return (
-                      <button 
+                      <div 
                         key={idx}
                         onClick={() => {
-                          setCurrentIdx(idx);
-                          setIsOpticOpen(false);
+                          if (!isCurrent) {
+                            setCurrentIdx(idx);
+                            // We don't close the optic automatically here so they can see they moved.
+                          }
                         }}
-                        className={`p-3 rounded-2xl border-2 flex flex-col items-center gap-1 transition-all active:scale-95 ${style}`}
+                        className={`flex items-center gap-3 p-3 rounded-2xl border-2 transition-all cursor-pointer 
+                          ${isCurrent 
+                            ? 'bg-indigo-50/80 border-indigo-300 dark:bg-indigo-900/20 dark:border-indigo-700 shadow-sm' 
+                            : 'border-transparent hover:bg-slate-50 dark:hover:bg-white/5'}`}
                       >
-                        <span className="text-[8px] font-black opacity-50 uppercase tracking-tighter">{idx + 1}</span>
-                        <span className="font-black text-[13px] uppercase tracking-widest">
-                          {answers[idx] || '—'}
+                        <span className={`w-8 text-[11px] font-black text-center ${isCurrent ? 'text-indigo-600' : 'text-slate-400'}`}>
+                          {idx + 1}
                         </span>
-                      </button>
+                        
+                        <div className="flex-1 flex justify-between px-2" onClick={(e) => e.stopPropagation()}>
+                           {options.map(opt => {
+                             const isActive = answers[idx] === opt;
+                             const isVisualSelected = visualAnswers[idx] === opt;
+                             
+                             return (
+                               <button
+                                 key={opt}
+                                 disabled={isAnalysisMode || !isCurrent}
+                                 onClick={async (e) => {
+                                   if (isAnalysisMode || !isCurrent) return;
+                                   e.stopPropagation();
+                                   
+                                   // Toggle or set answer
+                                   setAnswers(prev => ({
+                                     ...prev,
+                                     [idx]: prev[idx] === opt ? '' : opt
+                                   }));
+                                   
+                                   await Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
+                                 }}
+                                 className={`w-10 h-10 rounded-full border-2 font-black text-[12px] flex items-center justify-center transition-all 
+                                   ${isActive 
+                                     ? 'bg-slate-900 border-slate-900 text-white dark:bg-white dark:border-white dark:text-slate-900 scale-105 shadow-md' 
+                                     : isVisualSelected && markingMode === 'manual'
+                                       ? 'border-indigo-300 text-indigo-600 border-dashed dark:border-indigo-700 dark:text-indigo-400'
+                                       : 'border-slate-100 text-slate-300 dark:border-white/5 dark:text-slate-600'}
+                                   ${!isCurrent ? 'opacity-40 cursor-not-allowed' : 'active:scale-90 shadow-sm'}`}
+                               >
+                                 {opt}
+                               </button>
+                             );
+                           })}
+                        </div>
+
+                        {!isAnalysisMode && !isCurrent && (
+                           <div className="p-2 text-indigo-400">
+                             <ArrowRight size={16} />
+                           </div>
+                        )}
+                        {isCurrent && (
+                            <div className="p-2 text-indigo-600 animate-pulse">
+                                <Target size={16} />
+                            </div>
+                        )}
+                      </div>
                     )
                   })}
                 </div>
@@ -358,7 +461,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
                    onClick={() => window.location.href = '/'}
                    className="w-full py-4 bg-rose-500 text-white rounded-2xl font-black uppercase text-[11px] tracking-widest shadow-xl shadow-rose-500/20"
                 >
-                  Evet, Çıkış Yap
+                   Evet, Çıkış Yap
                 </button>
                 <button 
                   onClick={() => setShowExitConfirm(false)}

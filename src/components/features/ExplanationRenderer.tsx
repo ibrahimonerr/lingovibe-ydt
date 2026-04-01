@@ -29,25 +29,31 @@ export default function ExplanationRenderer({
     violet: { bg: "bg-violet-50 border-violet-100 dark:bg-violet-900/20 dark:border-violet-800 border-2", text: "text-violet-900 dark:text-violet-200", labelColor: "text-violet-600 dark:text-violet-400" },
   };
 
-  if (feedback) {
+  if (feedback || (explanation && !explanation.includes('|'))) {
     const isSkills = theme === 'violet';
     const items = [
       { 
         label: isSkills ? "🔍 Hint (Kritik İpucu)" : "🔍 Hint", 
         type: "HINT", 
-        content: hint || feedback.hint, 
+        content: hint || feedback?.hint, 
         icon: null 
+      },
+      {
+        label: isSkills ? "🧠 Yapısal Analiz" : "📖 Grammar Explanation",
+        type: "EXPLANATION",
+        content: explanation && !explanation.includes('|') ? explanation : null,
+        icon: null
       },
       { 
         label: "💡The Logic Flow", 
         type: "LOGIC", 
-        content: feedback.correct_logic || feedback.logic, 
+        content: feedback?.correct_logic || feedback?.logic, 
         icon: null 
       },
       { 
         label: "⚠️ \"Sakın Düşme!\" (The Pitfall)", 
         type: "TRAP", 
-        content: feedback.trap_analysis || feedback.pitfall, 
+        content: feedback?.trap_analysis || feedback?.pitfall, 
         icon: null 
       },
     ];
@@ -70,6 +76,11 @@ export default function ExplanationRenderer({
         {items.filter(item => item.content).map((item, i) => {
           const styles: Record<string, { bg: string; text: string; labelColor: string }> = {
             "HINT": { bg: "bg-orange-50 border-orange-100 dark:bg-orange-900/20 dark:border-orange-800 border-2", text: "text-orange-900 dark:text-orange-200", labelColor: "text-orange-600 dark:text-orange-400" },
+            "EXPLANATION": { 
+              bg: isSkills ? "bg-violet-50 border-violet-100 dark:bg-violet-900/20 dark:border-violet-800 border-2" : "bg-emerald-50 border-emerald-100 dark:bg-emerald-900/20 dark:border-emerald-800 border-2", 
+              text: isSkills ? "text-violet-900 dark:text-violet-200" : "text-emerald-900 dark:text-emerald-200", 
+              labelColor: isSkills ? "text-violet-600 dark:text-violet-400" : "text-emerald-600 dark:text-emerald-400" 
+            },
             "LOGIC": { bg: "bg-indigo-600 shadow-indigo-200 dark:shadow-none", text: "text-white", labelColor: "text-indigo-200" },
             "TRAP": { bg: "bg-rose-50 border-rose-100 dark:bg-rose-900/20 dark:border-rose-800 border-2", text: "text-rose-900 dark:text-rose-200", labelColor: "text-rose-600 dark:text-rose-400" },
           };

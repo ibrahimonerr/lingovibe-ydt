@@ -18,6 +18,64 @@ export interface DenemeQuestion extends Question {
   passage?: string; // For reading
 }
 
+function normalizeQuestion(q: any, topic?: string): DenemeQuestion {
+  // Common normalization
+  const normalized: any = { 
+    ...q,
+    correct_answer: q.correct_answer || q.correct || q.correct_option || 'A',
+    options: q.options || {}
+  };
+
+  // Topic specific normalization
+  if (topic === 'Irrelevant' && Array.isArray(q.sentences)) {
+    // 1. Filter out sentences that look like prompts (contain "irrelevant", "bozmaktadır", "which of the following")
+    const cleanSentences = q.sentences
+      .map((s: string) => s.trim())
+      .filter((s: string) => {
+        const lower = s.toLowerCase();
+        const isPrompt = lower.includes("irrelevant") || 
+                        lower.includes("akışı bozmaktadır") || 
+                        lower.includes("which of the following") ||
+                        lower.includes("parça okunduğunda") ||
+                        s.length < 5;
+        return !isPrompt;
+      })
+      .map((s: string) => {
+        // 2. Remove existing numbering like (I), (II), (1), 1., etc.
+        return s.replace(/^(\([A-Z0-9]+\)|[A-Z0-9]+\.|\d+\))\s*/i, '').trim();
+      });
+
+    // 3. Re-format with I-V numerals
+    const romaNumerals = ['I', 'II', 'III', 'IV', 'V'];
+    normalized.question = cleanSentences.slice(0, 5).map((s: string, i: number) => `(${romaNumerals[i]}) ${s}`).join('\n\n');
+    
+    normalized.options = {
+      'A': 'I',
+      'B': 'II',
+      'C': 'III',
+      'D': 'IV',
+      'E': 'V'
+    };
+  }
+
+  // Ensure question text exists
+  if (!normalized.question) {
+    normalized.question = q.text || q.content || q.passage || 'Soru içeriği yüklenemedi.';
+  }
+
+  // Ensure options is an object
+  if (Array.isArray(normalized.options)) {
+    const optsObj: any = {};
+    const labels = ['A', 'B', 'C', 'D', 'E'];
+    normalized.options.forEach((opt: string, i: number) => {
+      if (i < 5) optsObj[labels[i]] = opt;
+    });
+    normalized.options = optsObj;
+  }
+
+  return normalized as DenemeQuestion;
+}
+
 export async function fetchMiniDenemeData(): Promise<DenemeQuestion[]> {
   try {
     // 1. Fetch Grammar Questions (1 per topic)
@@ -30,8 +88,12 @@ export async function fetchMiniDenemeData(): Promise<DenemeQuestion[]> {
 
       if (error || !data || data.length === 0) return null;
       const randomItem = data[Math.floor(Math.random() * data.length)];
+      const qs = Array.isArray(randomItem.question) ? randomItem.question : [randomItem.question];
+      const randomQ = qs[Math.floor(Math.random() * qs.length)];
+      
+      const normalized = normalizeQuestion(randomQ, topic);
       return {
-        ...randomItem.question,
+        ...normalized,
         id: randomItem.id,
         labType: 'grammar',
         topic: topic
@@ -48,8 +110,12 @@ export async function fetchMiniDenemeData(): Promise<DenemeQuestion[]> {
 
       if (error || !data || data.length === 0) return null;
       const randomItem = data[Math.floor(Math.random() * data.length)];
+      const qs = Array.isArray(randomItem.question) ? randomItem.question : [randomItem.question];
+      const randomQ = qs[Math.floor(Math.random() * qs.length)];
+      
+      const normalized = normalizeQuestion(randomQ, topic);
       return {
-        ...randomItem.question,
+        ...normalized,
         id: randomItem.id,
         labType: 'skills',
         topic: topic
@@ -66,13 +132,17 @@ export async function fetchMiniDenemeData(): Promise<DenemeQuestion[]> {
       if (error || !data || data.length === 0) return [];
       const selectedLab = data[Math.floor(Math.random() * data.length)];
       
-      const passageQuestions = ((selectedLab.questions as any[]) || []).map(q => ({
-        ...q,
-        labType: 'reading',
-        passage: selectedLab.passage,
-        id: `${selectedLab.id}_${q.id || Math.random()}`
-      }));
+      const passageQuestions = ((selectedLab.questions as any[]) || []).map(q => {
+        const normalized = normalizeQuestion(q, 'reading');
+        return {
+          ...normalized,
+          labType: 'reading',
+          passage: selectedLab.passage,
+          id: `${selectedLab.id}_${q.id || Math.random()}`
+        };
+      });
       
+      console.log(`Loaded ${passageQuestions.length} reading questions.`);
       return passageQuestions as DenemeQuestion[];
     };
 
