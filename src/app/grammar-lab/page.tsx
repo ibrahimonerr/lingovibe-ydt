@@ -105,7 +105,7 @@ function GrammarLabContent() {
         };
 
         fetchQuestions();
-    }, [topic, prefetchedLabs.grammar, isGuestMode, getDailySeed, solvedIds]);
+    }, [topic, prefetchedLabs.grammar, isGuestMode, getDailySeed, solvedIds, canSolveMore, resetSessionStats]);
 
     const handleNext = () => {
         if (questions && currentIdx < questions.length - 1) {

@@ -66,7 +66,7 @@ function DenemeLabContent() {
                    onClick={() => router.push('/')}
                    className="px-8 py-4 bg-white text-slate-900 rounded-2xl font-black uppercase text-[11px] tracking-widest shadow-xl active:scale-95 transition-all"
                 >
-                    Dashboard'a Dön
+                    Dashboard&apos;a Dön
                 </button>
             </div>
          );

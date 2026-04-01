@@ -1,0 +1,1593 @@
+{
+  "exam": "YDT Grammar Lab – Set 9",
+  "level": "B2+ / C1",
+  "target_group": "17-18 yaş, YKS-Dil (YDT)",
+  "total_questions": 90,
+  "topics": [
+
+    {
+      "topic": "Tenses & Aspect",
+      "questions": [
+        {
+          "id": 1,
+          "question": "The coral reef system ---- steadily for decades before marine biologists ---- the full extent of thermal bleaching and linked it to ocean acidification.",
+          "options": [
+            "A) had been degrading / documented",
+            "B) was degrading / has documented",
+            "C) degraded / was documenting",
+            "D) has been degrading / documented",
+            "E) had degraded / documented"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'For decades before biologists documented' → uzun süreli arka plan + referans noktası. İkinci eylem anlık tamamlanmış.",
+            "logic": "'For decades before' → referans noktasına kadar süren eylem → Past Perfect Continuous: 'had been degrading'. Belgeleme anlık → Simple Past: 'documented'.",
+            "pitfall": "E) 'had degraded' süreç vurgusunu yok eder; 'for decades' süreklilik işaret eder → Continuous zorunlu."
+          }
+        },
+        {
+          "id": 2,
+          "question": "Electric vehicle adoption ---- sharply since several governments ---- generous subsidies and reduced import tariffs two years ago.",
+          "options": [
+            "A) has risen / introduced",
+            "B) rose / have introduced",
+            "C) is rising / introduced",
+            "D) has risen / have introduced",
+            "E) had risen / introduced"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Since governments introduced' → başlangıç noktası. Bugüne uzanan artış.",
+            "logic": "'Since + Simple Past (introduced two years ago)' → başlangıç noktası. Bugüne uzanan artış → Present Perfect: 'has risen'.",
+            "pitfall": "D) 'have introduced' → 'two years ago' belirli geçmiş zaman → Simple Past 'introduced' gerekli."
+          }
+        },
+        {
+          "id": 3,
+          "question": "By the time the documentary crew ---- the Arctic research station next March, the scientists ---- in isolation for eight consecutive months.",
+          "options": [
+            "A) reaches / will have been living",
+            "B) will reach / will live",
+            "C) reaches / have been living",
+            "D) has reached / will have been living",
+            "E) reaches / will live"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'By the time it reaches next March' → time clause: Simple Present. 'Eight consecutive months' → süreç vurgusu.",
+            "logic": "'By the time + Simple Present (reaches)' → time clause. 'Eight months' süreç → Future Perfect Continuous: 'will have been living'.",
+            "pitfall": "E) 'will live' → Simple Future süreç vurgusunu kaybeder; 'eight consecutive months' → Continuous gerekli."
+          }
+        },
+        {
+          "id": 4,
+          "question": "Developmental psychologists maintain that secure attachment in early childhood ---- long-term emotional resilience and ---- the risk of anxiety disorders in adulthood.",
+          "options": [
+            "A) fosters / reduces",
+            "B) fostered / reduces",
+            "C) has fostered / reduced",
+            "D) is fostering / reduces",
+            "E) fosters / has reduced"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Maintain that...' + genel bilimsel gerçek. Her iki eylem aynı düzlemde mi?",
+            "logic": "'Maintain that' + genel bilimsel gerçek → Simple Present: 'fosters / reduces'. Kalıcı araştırma bulgusunu Simple Present aktarır.",
+            "pitfall": "C) 'has fostered / reduced' → Present Perfect belirli deneyime bağlar; genel bilimsel gerçek için Simple Present tercih edilir."
+          }
+        },
+        {
+          "id": 5,
+          "question": "The lost city of Ani ---- hidden beneath layers of soil for nearly nine centuries before Turkish archaeologists ---- excavating it in the nineteenth century.",
+          "options": [
+            "A) had been lying / began",
+            "B) was lying / have begun",
+            "C) had lain / had begun",
+            "D) lay / began",
+            "E) has been lying / began"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'For nearly nine centuries before archaeologists began' → süreç + referans noktası.",
+            "logic": "'For nine centuries before' → uzun süreli devam eden durum → Past Perfect Continuous: 'had been lying'. Kazı başlangıcı → Simple Past: 'began'.",
+            "pitfall": "C) 'had lain / had begun' → kazıyı da Past Perfect yapar; kazı referans noktasıdır — Simple Past gerekli."
+          }
+        },
+        {
+          "id": 6,
+          "question": "I ---- a volunteer abroad for the past two years, and by the end of next month, I ---- more than three thousand hours of community service.",
+          "options": [
+            "A) have been working as / will have completed",
+            "B) am working as / complete",
+            "C) have worked as / will complete",
+            "D) have been working as / will complete",
+            "E) worked as / will have completed"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'For the past two years' → süreç. 'By the end of next month' → gelecekte tamamlanmış.",
+            "logic": "'For the past two years' → Present Perfect Continuous. 'By the end of next month' → Future Perfect: 'will have completed'.",
+            "pitfall": "D) 'will complete' → Simple Future; 'by the end of next month' tamamlanmış olacağını vurgular → Future Perfect gerekli."
+          }
+        },
+        {
+          "id": 7,
+          "question": "The tech startup ---- impressive early growth but ---- to scale sustainably due to persistent supply chain vulnerabilities.",
+          "options": [
+            "A) showed / has continued to struggle",
+            "B) has shown / struggled",
+            "C) showed / struggled",
+            "D) has shown / continues to struggle",
+            "E) showed / had continued to struggle"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Early growth geçmişte tamamlandı. Mücadele bugüne uzanıyor mu?",
+            "logic": "'Showed impressive early growth' → geçmişte tamamlanmış → Simple Past. 'Has continued to struggle' → geçmişten bugüne uzanan devam eden mücadele → Present Perfect.",
+            "pitfall": "C) 'showed / struggled' → her ikisini Simple Past yapar; mücadele hâlâ devam ediyorsa Present Perfect daha uygun."
+          }
+        },
+        {
+          "id": 8,
+          "question": "Just as the panel of judges ---- their deliberations, a new piece of evidence ---- that fundamentally altered their assessment of the case.",
+          "options": [
+            "A) were concluding / emerged",
+            "B) concluded / was emerging",
+            "C) had concluded / emerged",
+            "D) were concluding / had emerged",
+            "E) concluded / emerged"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Just as' → süregelen arka plan + anlık kesinti. Yeni kanıt anlık mı?",
+            "logic": "'Just as judges were concluding' → arka plan devam eden → Past Continuous. Yeni kanıt ani → Simple Past: 'emerged'.",
+            "pitfall": "D) 'had emerged' → kanıtı müzakereden önce başlatır; 'just as' eş zamanlılık → Simple Past gerekli."
+          }
+        },
+        {
+          "id": 9,
+          "question": "The youth orchestra ---- its international repertoire over the last three seasons and ---- several prestigious awards during that period.",
+          "options": [
+            "A) has expanded / has won",
+            "B) expanded / won",
+            "C) has expanded / won",
+            "D) is expanding / has won",
+            "E) had expanded / won"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Over the last three seasons' → Present Perfect. Her iki eylem de aynı dönemde.",
+            "logic": "'Over the last three seasons' → Present Perfect: 'has expanded / has won'. Her iki eylem aynı dönemin parçası.",
+            "pitfall": "C) 'has expanded / won' → ödülleri Simple Past yapar; 'during that period' her ikisini de Present Perfect'e bağlar."
+          }
+        },
+        {
+          "id": 10,
+          "question": "The ancient irrigation canal ---- in continuous use for nearly a thousand years before it ---- abandoned as the river ---- its course.",
+          "options": [
+            "A) had been / was / shifted",
+            "B) was / had been abandoned / shifted",
+            "C) had been / abandoned / had shifted",
+            "D) was / was abandoned / shifted",
+            "E) had been / was / had shifted"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Üç eylem kronolojisi: kullanım (uzun önce) → terk edilme (referans) → nehrin yönünü değiştirmesi (neden veya eş zamanlı).",
+            "logic": "Kullanım terk edilmeden önce bin yıl sürdü → Past Perfect: 'had been in use'. Terk edilme referans noktası → Simple Past Passive: 'was abandoned'. Nehrin yön değişimi → Simple Past: 'shifted'.",
+            "pitfall": "E) 'had shifted' → nehrin yön değişimini terk edilmeden önce başlatır; iki eylem eş zamanlı veya sıralı — Simple Past daha tutarlı."
+          }
+        }
+      ]
+    },
+
+    {
+      "topic": "Modals & Similar Expressions",
+      "questions": [
+        {
+          "id": 11,
+          "question": "All laboratory equipment ---- sterilised between uses; failure to comply ---- in the immediate suspension of the researcher's access privileges.",
+          "options": [
+            "A) must be / will result",
+            "B) should be / results",
+            "C) must be / would result",
+            "D) has to be / may result",
+            "E) ought to be / will result"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Laboratuvar güvenlik kuralı → kesin zorunluluk. Uyumsuzluk → kesin politika yaptırımı.",
+            "logic": "'Must be sterilised' = kesin zorunluluk (pasif). 'Will result in suspension' = kesin politika bildirimi.",
+            "pitfall": "C) 'would result' → hipotetik kullanım; uyumsuzluğun sonucu kesin kural — 'will result' gerekli."
+          }
+        },
+        {
+          "id": 12,
+          "question": "The patient's symptoms ---- improved considerably by now; the prescribed course of treatment ---- as directed from the outset.",
+          "options": [
+            "A) should have / must not have been followed",
+            "B) would have / was not followed",
+            "C) should have / could not have been followed",
+            "D) ought to have / had not been followed",
+            "E) must have / was not followed"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'By now' + iyileşme bekleniyordu ama olmadı → eleştiri. Tedavi takip edilmedi → geçmiş olumsuz pasif.",
+            "logic": "'Should have improved' = beklenen ama gerçekleşmemiş durum. 'Must not have been followed' = tedavinin takip edilmediğine dair güçlü geçmiş çıkarım (pasif).",
+            "pitfall": "E) 'must have improved' → güçlü geçmiş çıkarım 'iyileşmiş olmalı' anlamı verir; 'by now' + eleştiri tonu ile çelişir."
+          }
+        },
+        {
+          "id": 13,
+          "question": "You ---- submit the final draft before speaking to your supervisor; a preliminary discussion ---- identify weaknesses before you invest weeks of revisions.",
+          "options": [
+            "A) need not / could",
+            "B) must not / will",
+            "C) need not / should",
+            "D) don't have to / could",
+            "E) should not / can"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Need not' = zorunluluk yok. 'Could identify' = öneri / olasılık.",
+            "logic": "'Need not submit' = zorunluluk yok. 'A discussion could identify weaknesses' = faydalı olasılık önerisi.",
+            "pitfall": "D) 'don't have to / could' → yakın ama 'need not' daha akademik ve vurgulu sınav tercihi."
+          }
+        },
+        {
+          "id": 14,
+          "question": "She ---- the prestigious fellowship had the selection committee ---- her research output and community impact more holistically.",
+          "options": [
+            "A) would have received / assessed",
+            "B) could receive / assessed",
+            "C) would have received / had assessed",
+            "D) might receive / assessed",
+            "E) would receive / had assessed"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Inverted conditional: 'had the committee assessed'. Type 3 koşul + sonuç.",
+            "logic": "'Had the committee assessed' → Past Perfect inverted (Type 3). 'Would have received' → Type 3 sonuç.",
+            "pitfall": "C) 'had assessed' inverted değil; 'had the committee' yapısında 'had' inversion için cümle başında gelir — A şıkkı bu yapıyı içermiyor mu? A doğru: 'she would have received... had the committee assessed' inverted."
+          }
+        },
+        {
+          "id": 15,
+          "question": "The lights have been on all night in the editorial office; the team ---- on deadline-critical revisions, or someone ---- to switch them off.",
+          "options": [
+            "A) must be working / forgot",
+            "B) should be working / must have forgotten",
+            "C) must be working / must have forgotten",
+            "D) might be working / forgot",
+            "E) must be working / may have forgotten"
+          ],
+          "correct_answer": "E",
+          "feedback": {
+            "hint": "İki olası açıklama: biri güçlü şimdiki çıkarım, diğeri zayıf geçmiş olasılık.",
+            "logic": "'Must be working' = güçlü şimdiki çıkarım. 'May have forgotten' = zayıf belirsiz geçmiş olasılık.",
+            "pitfall": "C) 'must have forgotten' → iki 'must' yan yana çelişkili güçlü çıkarım — biri alternatif olduğundan 'may' belirsizliği korumalı."
+          }
+        },
+        {
+          "id": 16,
+          "question": "Young people ---- to navigate an increasingly fragmented information landscape, and no single digital literacy course ---- adequately equip them for every challenge.",
+          "options": [
+            "A) are bound / can",
+            "B) are bound / will",
+            "C) tend / would",
+            "D) are bound / could",
+            "E) have to / can"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Are bound to' = kaçınılmazlık. 'No course can adequately equip' = kapasite sınırı.",
+            "logic": "'Are bound to navigate' = kaçınılmaz geleceği ifade eden idiom. 'No course can adequately equip' = genel kapasite sınırı.",
+            "pitfall": "B) 'will equip' → kesin gelecek taahhüt; 'can' kapasite sınırını daha doğru ifade eder."
+          }
+        },
+        {
+          "id": 17,
+          "question": "She ---- her application for the research grant; the missed deadline ---- her funding for an entire academic year.",
+          "options": [
+            "A) should have submitted / has delayed",
+            "B) must have submitted / delayed",
+            "C) should have submitted / would have delayed",
+            "D) ought to submit / has delayed",
+            "E) should have submitted / had delayed"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Başvuru yapılmadı → geçmiş pişmanlık. Gecikme sonucu gerçek ve devam ediyor.",
+            "logic": "'Should have submitted' = geçmişte yapılması gereken ama yapılmamış. 'Has delayed funding' = gerçekleşen ve bugüne uzanan sonuç → Present Perfect.",
+            "pitfall": "C) 'would have delayed' → hipotetik sonuç; gecikme zaten gerçekleşti → Present Perfect 'has delayed' gerekli."
+          }
+        },
+        {
+          "id": 18,
+          "question": "The conference venue ---- be accessed only through the main entrance; all other doors ---- during the event for security reasons.",
+          "options": [
+            "A) can / will be locked",
+            "B) must / will be locked",
+            "C) may / are locked",
+            "D) can / are being locked",
+            "E) is to / will be locked"
+          ],
+          "correct_answer": "E",
+          "feedback": {
+            "hint": "Resmi etkinlik kuralı → 'is to' yapısı. 'Will be locked' → gelecek pasif plan.",
+            "logic": "'Is to be accessed only through' = resmi protokol/kural bildirimi. 'Will be locked during the event' = gelecek plan → Simple Future Passive.",
+            "pitfall": "B) 'must be accessed only through' → 'must' çok doğrudan emir; 'is to' resmi etkinlik/protokol bağlamında daha uygun."
+          }
+        },
+        {
+          "id": 19,
+          "question": "This ---- the original artefact; no authentic piece from that period ---- stored without climate control for that length of time without significant deterioration.",
+          "options": [
+            "A) cannot be / could have been",
+            "B) must not be / could have been",
+            "C) cannot be / must have been",
+            "D) may not be / could have been",
+            "E) cannot be / would have been"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Şimdiki güçlü olumsuz çıkarım. 'Could have been stored' → geçmiş imkânsız/olanaksız koşul.",
+            "logic": "'Cannot be the original' = güçlü olumsuz çıkarım. 'Could have been stored without climate control' = geçmişte mümkün olmazdı.",
+            "pitfall": "C) 'must have been stored' → güçlü geçmiş çıkarım 'depolanmış olmalı'; oysa bağlam depolanmasının imkânsız olduğunu gösteriyor."
+          }
+        },
+        {
+          "id": 20,
+          "question": "The early warning system ---- have detected the anomaly hours before the incident; had it been operational, the damage ---- substantially mitigated.",
+          "options": [
+            "A) should / could have been",
+            "B) must / would have been",
+            "C) should / would have been",
+            "D) ought to / could have been",
+            "E) could / should have been"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Sistem tespit etmeliydi ama etmedi → eleştiri. 'Had it been operational' → Type 3 koşul → sonuç.",
+            "logic": "'Should have detected' = geçmişte yapılması gereken ama yapılmamış. 'Had it been operational, the damage could have been mitigated' = Type 3 → 'could have been'.",
+            "pitfall": "C) 'would have been mitigated' → deterministic Type 3 sonucu; 'could have been' 'mümkün olabilirdi' anlamıyla daha uygun."
+          }
+        }
+      ]
+    },
+
+    {
+      "topic": "The Passive",
+      "questions": [
+        {
+          "id": 21,
+          "question": "The biodegradable packaging initiative ---- launched by three competing companies simultaneously last year, and sales of sustainable products ---- by over forty percent since.",
+          "options": [
+            "A) was / have risen",
+            "B) has been / rose",
+            "C) was / rose",
+            "D) had been / have risen",
+            "E) was / are rising"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Last year' → geçmiş. 'Since' → bugüne uzanan artış.",
+            "logic": "'Last year' → Simple Past Passive: 'was launched'. 'Since' → Present Perfect: 'have risen'.",
+            "pitfall": "C) 'rose' → Simple Past; 'since' bugüne uzanan süreci gösterir → Present Perfect gerekli."
+          }
+        },
+        {
+          "id": 22,
+          "question": "It ---- now ---- by cognitive scientists that habitual multitasking ---- the brain's capacity for sustained deep focus over time.",
+          "options": [
+            "A) is / established / diminishes",
+            "B) has / been established / diminished",
+            "C) is / being established / diminishes",
+            "D) was / established / has diminished",
+            "E) is / established / has diminished"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'It is established that' → impersonal passive. Ardından genel bilimsel gerçek.",
+            "logic": "'It is now established that' = impersonal passive genel kabul. 'Diminishes capacity' = genel bilimsel gerçek → Simple Present.",
+            "pitfall": "E) 'has diminished' → Present Perfect; genel bilimsel gerçek Simple Present ile ifade edilir."
+          }
+        },
+        {
+          "id": 23,
+          "question": "The festival programme ---- being ---- for next summer, and all participating artists ---- to submit their portfolios before the end of this month.",
+          "options": [
+            "A) is / finalised / are required",
+            "B) has / been finalised / were required",
+            "C) is / finalised / are required",
+            "D) was / finalized / are required",
+            "E) is / being finalised / will be required"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Is being finalised' → şu an devam eden. 'Are required to submit' → şimdiki gereklilik.",
+            "logic": "'Is being finalised' → Present Continuous Passive. 'Are required to submit before the end of this month' → Simple Present Passive (şimdiki gereklilik).",
+            "pitfall": "E) 'will be required' → gelecek zorunluluk; 'before the end of this month' şimdiki gereklilik → Simple Present Passive gerekli."
+          }
+        },
+        {
+          "id": 24,
+          "question": "The controversial decision ---- made without consultation before residents ---- an opportunity to voice their concerns publicly.",
+          "options": [
+            "A) had been / were given",
+            "B) was / had been given",
+            "C) had been / had been given",
+            "D) was / were given",
+            "E) had been made / were given"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Before residents were given an opportunity' → karar söz hakkından önce alındı. Kronoloji.",
+            "logic": "Karar → söz hakkı verilmeden önce alındı → Past Perfect Passive: 'had been made'. Söz hakkı referans noktası → Simple Past Passive: 'were given'.",
+            "pitfall": "B) 'was / had been given' → zamanları tersine çevirir; karar söz hakkından önce alındı, 'had been' ilk eyleme ait."
+          }
+        },
+        {
+          "id": 25,
+          "question": "The research paper ---- peer-reviewed by three independent scholars before it ---- to the journal and the final version ---- online within weeks.",
+          "options": [
+            "A) had been / was submitted / was published",
+            "B) was / had been submitted / was published",
+            "C) had been / was submitted / has been published",
+            "D) was / was submitted / was published",
+            "E) had been / submitted / was published"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Üç eylem kronolojisi: hakemlik (önce) → gönderim (referans) → yayın (sonra).",
+            "logic": "Hakemlik gönderimden önce → Past Perfect Passive. Gönderim referans noktası → Simple Past Passive. Yayın ardından → Simple Past Passive.",
+            "pitfall": "C) 'has been published' → Present Perfect; yayın geçmişte tamamlandı — Simple Past Passive gerekli."
+          }
+        },
+        {
+          "id": 26,
+          "question": "The new cycling infrastructure ---- currently ---- across all twelve districts of the city, and a comprehensive assessment report ---- to the mayor's office by Q3.",
+          "options": [
+            "A) is / being rolled out / will be submitted",
+            "B) has / been rolled out / is submitted",
+            "C) is / being rolled out / is submitted",
+            "D) was / being rolled out / will be submitted",
+            "E) is / rolled out / will have been submitted"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Currently' → devam eden pasif. 'By Q3' → gelecek pasif plan.",
+            "logic": "'Currently being rolled out' → Present Continuous Passive. 'Will be submitted to the mayor's office by Q3' → Simple Future Passive.",
+            "pitfall": "C) 'is submitted' → Simple Present Passive; rapor gelecekte sunulacak — 'will be submitted' gerekli."
+          }
+        },
+        {
+          "id": 27,
+          "question": "The athlete ---- disqualified from the competition, and her world ranking ---- accordingly ever since the decision ---- upheld on appeal.",
+          "options": [
+            "A) was / has been affected / was",
+            "B) has been / was affected / was",
+            "C) was / was affected / has been",
+            "D) had been / has been affected / was",
+            "E) was / has been affected / has been"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Was disqualified' → geçmiş. 'Ever since... was upheld' → bugüne uzanan etki. 'Was upheld on appeal' → geçmiş.",
+            "logic": "'Was disqualified' → Simple Past Passive. 'Has been affected ever since' → Present Perfect Passive. 'The decision was upheld' → Simple Past Passive.",
+            "pitfall": "E) 'has been upheld' → Present Perfect; 'on appeal' belirli geçmiş eylem → Simple Past 'was upheld' gerekli."
+          }
+        },
+        {
+          "id": 28,
+          "question": "The winning design ---- selected by a panel of international experts, and the construction ---- to begin next spring, weather permitting.",
+          "options": [
+            "A) has been / is scheduled",
+            "B) was / was scheduled",
+            "C) has been / was scheduled",
+            "D) had been / is scheduled",
+            "E) was / is scheduled"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Seçim → güncel haber. Yapım planı → şimdiki durum.",
+            "logic": "'Has been selected' → güncel → Present Perfect Passive. 'Is scheduled to begin' → şimdiki mevcut plan → Simple Present Passive.",
+            "pitfall": "E) 'was selected / is scheduled' → seçimi Simple Past yapar; güncel haber → Present Perfect daha uygun."
+          }
+        },
+        {
+          "id": 29,
+          "question": "By the end of the decade, it ---- estimated that renewable energy ---- for more than sixty percent of the country's total electricity generation.",
+          "options": [
+            "A) is / will account",
+            "B) has been / accounts",
+            "C) is / will have accounted",
+            "D) was / will account",
+            "E) is / accounts"
+          ],
+          "correct_answer": "C",
+          "feedback": {
+            "hint": "'By the end of the decade' → gelecekte tamamlanmış. 'It is estimated that' → impersonal passive.",
+            "logic": "'It is estimated that' = impersonal Simple Present Passive. 'By the end of the decade + more than sixty percent' → Future Perfect: 'will have accounted for'.",
+            "pitfall": "A) 'will account' → Simple Future; 'by the end of the decade' tamamlanmışlık vurgular → Future Perfect gerekli."
+          }
+        },
+        {
+          "id": 30,
+          "question": "The composer's unfinished symphony ---- in a private archive for over eighty years before it ---- to a wider audience and ---- as a landmark of late Romantic music.",
+          "options": [
+            "A) had been held / was introduced / recognised",
+            "B) was held / had been introduced / recognised",
+            "C) had been held / was introduced / was recognised",
+            "D) held / was introduced / recognised",
+            "E) had been held / introduced / was recognised"
+          ],
+          "correct_answer": "C",
+          "feedback": {
+            "hint": "Üç eylem: arşivde tutuldu (önce) → geniş kitleye tanıtıldı (referans) → dönüm noktası olarak tanındı (eş zamanlı).",
+            "logic": "Arşivde tutulma tanıtımdan önce → Past Perfect Passive: 'had been held'. Tanıtım referans noktası → Simple Past Passive: 'was introduced'. Tanınma eş zamanlı → Simple Past Passive: 'was recognised'.",
+            "pitfall": "A) 'recognised' passive değil active — 'was recognised' zorunlu; müzik kendiliğinden tanınmaz, edilgen."
+          }
+        }
+      ]
+    },
+
+    {
+      "topic": "If & Wish Clauses",
+      "questions": [
+        {
+          "id": 31,
+          "question": "If schools ---- more systematic instruction in financial literacy, young adults ---- better equipped to navigate the challenges of independent living.",
+          "options": [
+            "A) provided / would be",
+            "B) had provided / would be",
+            "C) provide / will be",
+            "D) provided / would have been",
+            "E) had provided / would have been"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Okullar şu an bu eğitimi sistematik biçimde vermiyor → mevcut gerçekliğe karşı hipotez.",
+            "logic": "Mevcut gerçekliğe karşı hipotez → Type 2: 'provided / would be'.",
+            "pitfall": "B) 'had provided / would be' → Mixed Conditional; bağlam tamamen şimdiki durum → Type 2 tutarlılığı gerektirir."
+          }
+        },
+        {
+          "id": 32,
+          "question": "I wish the international community ---- more decisively to the early warning signs of the crisis; countless lives ---- since.",
+          "options": [
+            "A) had responded / could have been saved",
+            "B) responded / could be saved",
+            "C) had responded / could be saved",
+            "D) would respond / could have been saved",
+            "E) responded / could have been saved"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'I wish' + geçmiş pişmanlık. 'Since' → geçmişten bugüne uzanan gerçekleşmemiş alternatif.",
+            "logic": "'Wish + Past Perfect' = geçmiş pişmanlık: 'had responded'. 'Could have been saved since' = geçmiş gerçekleşmemiş pasif olasılık.",
+            "pitfall": "C) 'could be saved' → şimdiki olasılık; kurtarılabilecek hayatlar geçmişe ait → 'could have been saved'."
+          }
+        },
+        {
+          "id": 33,
+          "question": "---- adequate funding ---- allocated to mental health services over the past decade, the current strain on emergency departments ---- far less severe today.",
+          "options": [
+            "A) Had / been / would be",
+            "B) Should / be / will be",
+            "C) Had / been / would have been",
+            "D) Were / to be / would be",
+            "E) Had / been / could be"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Inverted + Mixed. 'Over the past decade' → geçmiş koşul. 'Today' → şimdiki etki.",
+            "logic": "'Had adequate funding been allocated' → Past Perfect Passive inverted. 'Today' → şimdiki etki → Mixed: 'would be'.",
+            "pitfall": "C) 'would have been' → Type 3 geçmiş sonuç; 'today' şimdiki anı işaret eder → Mixed Conditional, 'would be' gerekli."
+          }
+        },
+        {
+          "id": 34,
+          "question": "She wishes her university ---- a wider range of interdisciplinary programmes; she ---- to combine her interests in data science and environmental policy.",
+          "options": [
+            "A) offered / would be able",
+            "B) had offered / would have been able",
+            "C) would offer / would be able",
+            "D) offers / will be able",
+            "E) offered / would have been able"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'I wish' + mevcut duruma pişmanlık. Üniversite hâlâ bu programları sunmuyor → Type 2 sonuç.",
+            "logic": "'Wish + Simple Past' = mevcut duruma pişmanlık: 'offered'. 'Would be able to combine' = Type 2 şimdiki sonuç.",
+            "pitfall": "B) 'had offered / would have been able' → geçmiş pişmanlık + Type 3; bağlam şimdiki durum → Type 2 gerekli."
+          }
+        },
+        {
+          "id": 35,
+          "question": "---- the city council ---- the rezoning proposal without an environmental impact assessment, local conservation groups ---- legal action to block the development.",
+          "options": [
+            "A) Should / approve / will take",
+            "B) Were / to approve / would take",
+            "C) Had / approved / would take",
+            "D) Should / approve / would take",
+            "E) Were / to approve / will take"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Should + subject + base form' → Type 1 inversion (gerçek koşul). 'Will take action' → gerçek gelecek sonuç.",
+            "logic": "'Should the council approve' = Type 1 inversion (gerçek olasılık). 'Will take legal action' = gerçek gelecek sonuç.",
+            "pitfall": "D) 'should approve / would take' → 'would' Type 2 sonucu; 'should' inversion Type 1 → 'will' gerekli."
+          }
+        },
+        {
+          "id": 36,
+          "question": "If only the research team ---- the data more rigorously; the methodological flaw ---- the entire study's credibility.",
+          "options": [
+            "A) had validated / has undermined",
+            "B) validated / would have undermined",
+            "C) had validated / would have undermined",
+            "D) would validate / has undermined",
+            "E) validated / has undermined"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'If only' + geçmiş pişmanlık. Güvenilirlik hasarı zaten gerçekleşmiş ve devam ediyor.",
+            "logic": "'If only + Past Perfect' = geçmiş pişmanlık. 'Has undermined credibility' = gerçekleşen ve bugüne uzanan etki → Present Perfect.",
+            "pitfall": "C) 'would have undermined' → Type 3 hipotetik sonuç; hasar zaten gerçekleşti → Present Perfect 'has undermined' gerekli."
+          }
+        },
+        {
+          "id": 37,
+          "question": "It is about time universities ---- the assumption that standardised tests accurately measure intelligence rather than ---- them as the sole gateway to higher education.",
+          "options": [
+            "A) questioned / using",
+            "B) question / to use",
+            "C) questioned / to use",
+            "D) would question / using",
+            "E) have questioned / using"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'It is about time + ...' → Simple Past subjunctive. 'Rather than + ...' → gerund.",
+            "logic": "'It is about time + Simple Past': 'questioned'. 'Rather than + gerund': 'using'.",
+            "pitfall": "C) 'to use' → 'rather than' edat → gerund gerektirir."
+          }
+        },
+        {
+          "id": 38,
+          "question": "Provided that the clinical trial ---- positive results by the third phase, the drug ---- fast-tracked for regulatory approval.",
+          "options": [
+            "A) shows / will be",
+            "B) showed / would be",
+            "C") has shown / will be",
+            "D) shows / would be",
+            "E) will show / is"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Provided that' → gerçek koşul. 'By the third phase' → gelecek.",
+            "logic": "'Provided that + Simple Present (shows)' → Type 1 gerçek koşul. Gerçek gelecek sonuç: 'will be fast-tracked'.",
+            "pitfall": "B) 'showed / would be' → Type 2 hipotetik; gerçek klinik süreç → Type 1 gerekli."
+          }
+        },
+        {
+          "id": 39,
+          "question": "Even if the startup ---- substantial venture capital funding next quarter, the founders ---- to revise their business model to ensure long-term viability.",
+          "options": [
+            "A) secures / will still need",
+            "B) secured / would still need",
+            "C) had secured / would still need",
+            "D) secures / would still need",
+            "E) were to secure / will still need"
+          ],
+          "correct_answer": "D",
+          "feedback": {
+            "hint": "'Even if' → hipotetik gelecek senaryo. Fon alınsa bile revizyon hâlâ gerekli.",
+            "logic": "'Even if + Simple Past (secured)' → hipotetik Type 2. 'Would still need' = Type 2 sonuç.",
+            "pitfall": "A) 'secures / will still need' → Type 1; 'even if' hipotezi ortadan kaldırır — 'would' koşullu gerekli."
+          }
+        },
+        {
+          "id": 40,
+          "question": "She deeply regrets ---- not having spoken more candidly during the performance review; had she done so, the working relationship ---- far more productively.",
+          "options": [
+            "A) — / could have developed",
+            "B) — / would develop",
+            "C) — / would have developed",
+            "D) — / could develop",
+            "E) — / should have developed"
+          ],
+          "correct_answer": "C",
+          "feedback": {
+            "hint": "'Had she done so' → Past Perfect inverted Type 3. Sonuç da geçmişte gerçekleşmemiş.",
+            "logic": "'Had she done so' → inverted Past Perfect (Type 3). 'Would have developed more productively' → Type 3 sonuç.",
+            "pitfall": "A) 'could have developed' → olasılık içerir; 'would have developed' Type 3'teki mantıksal kesin sonucu daha güçlü ifade eder."
+          }
+        }
+      ]
+    },
+
+    {
+      "topic": "Noun Clauses & Reported Speech",
+      "questions": [
+        {
+          "id": 41,
+          "question": "The review board urged ---- all submitted proposals ---- on merit alone and ---- no funding decision ---- influenced by external political pressure.",
+          "options": [
+            "A) that / be evaluated / that / be",
+            "B) that / was evaluated / and / was",
+            "C) whether / be evaluated / whether / be",
+            "D) that / be evaluated / and / be",
+            "E) that / were evaluated / that / were"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Urged that' → subjunctive. İki paralel talep, her ikisi de 'that' ile noun clause içinde.",
+            "logic": "'Urge that + subjunctive (base form)': 'be evaluated / be influenced'. Her iki talep 'that' noun clause içinde.",
+            "pitfall": "D) İkinci 'that'ı düşürür; formal bağlamda paralel noun clause'larda 'that' tutarlılığı korur."
+          }
+        },
+        {
+          "id": 42,
+          "question": "The documentary maker noted ---- communities in remote regions ---- not inherently resistant to change ---- they ---- access to resources and autonomy over decision-making.",
+          "options": [
+            "A) that / are / as long as / have",
+            "B) how / were / if / had",
+            "C) that / are / but / have",
+            "D) what / are / as long as / have",
+            "E) that / were / as long as / had"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Noted that' → Simple Present gerçek aktarım. 'As long as they have' → gerçek koşul.",
+            "logic": "'Noted that communities are not resistant... as long as they have access' → genel gözlem → Simple Present. 'As long as + Simple Present' → gerçek koşul.",
+            "pitfall": "E) 'were... had' → backshift; 'noted' genel gözlem aktarırken Simple Present kullanılabilir."
+          }
+        },
+        {
+          "id": 43,
+          "question": "It is a matter of considerable debate ---- the benefits of artificial intelligence ---- economic growth in developing nations or ---- new forms of inequality.",
+          "options": [
+            "A) whether / will accelerate / exacerbate",
+            "B) that / accelerate / exacerbate",
+            "C) whether / accelerates / exacerbates",
+            "D) how / will accelerate / exacerbate",
+            "E) whether / would accelerate / exacerbate"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Matter of debate whether' → evet/hayır noun clause. 'Will accelerate or exacerbate' → gelecek belirsizlik.",
+            "logic": "'It is a matter of debate whether X or Y' → evet/hayır noun clause. Gelecek tahmin → 'will accelerate / exacerbate'.",
+            "pitfall": "C) 'accelerates / exacerbates' → Simple Present; gelecekteki belirsizlik 'will' ile daha uygun."
+          }
+        },
+        {
+          "id": 44,
+          "question": "The professor told her students ---- they ---- the reading list too literally and ---- to engage critically with the arguments rather than simply summarising them.",
+          "options": [
+            "A) that / had been approaching / needed",
+            "B) that / were approaching / need",
+            "C) whether / had been approaching / needed",
+            "D) that / approached / need",
+            "E) that / had been approaching / would need"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Told that' → backshift. 'Had been approaching too literally' → geçmişte süregelen tutum. 'Needed to engage' → backshifted 'need'.",
+            "logic": "'Told that' → backshift: 'were approaching' → 'had been approaching'. 'Need to engage' → 'needed to engage'. Her ikisi de backshift.",
+            "pitfall": "B) 'were approaching / need' → tam backshift yapılmamış; 'told' backshift gerektirir."
+          }
+        },
+        {
+          "id": 45,
+          "question": "---- truly distinguishes innovative thinkers from conventional problem-solvers is not ---- ideas they generate but ---- they tolerate ambiguity long enough to reach non-obvious solutions.",
+          "options": [
+            "A) What / the quantity of / how well",
+            "B) That / how many / how well",
+            "C) What / how many / how",
+            "D) How / the quantity of / how well",
+            "E) What / the quantity of / whether"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "İlk: özne noun clause. İkinci: 'the quantity of ideas' — nicelik. Üçüncü: 'how well they tolerate' — biçim/derece.",
+            "logic": "'What distinguishes' = subject noun clause. 'Not the quantity of ideas they generate' = nesne. 'But how well they tolerate ambiguity' = 'how well' derece noun clause.",
+            "pitfall": "C) 'how many' → sayı sorusu; 'the quantity of' aynı anlamı daha akademik ifade eder — A daha güçlü akademik dil."
+          }
+        },
+        {
+          "id": 46,
+          "question": "The career adviser asked each student ---- they ---- their career primarily in terms of financial reward and ---- factors ---- most influenced their professional values.",
+          "options": [
+            "A) whether / defined / what / had",
+            "B) if / defined / which / have",
+            "C) whether / had defined / what / had",
+            "D) whether / defined / that / had",
+            "E) whether / define / what / have"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Asked whether' → evet/hayır dolaylı soru + backshift. 'What factors had influenced' → açık uçlu dolaylı soru.",
+            "logic": "'Asked whether they defined' → evet/hayır + backshift. 'What factors had influenced' = açık uçlu dolaylı soru + backshift.",
+            "pitfall": "C) 'had defined' → over-shift; bir kez backshift (define → defined) yeterli."
+          }
+        },
+        {
+          "id": 47,
+          "question": "The findings of the survey underscore ---- consistent access to arts education ---- not only academic performance but also social cohesion and community identity.",
+          "options": [
+            "A) that / enhances",
+            "B) how / enhances",
+            "C) that / enhanced",
+            "D) what / enhances",
+            "E) that / has enhanced"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Underscore that' → olgusal noun clause. Genel bilimsel gerçek.",
+            "logic": "'Underscore that' → olgusal bağlaç. 'Enhances not only... but also' = genel gerçek → Simple Present.",
+            "pitfall": "E) 'has enhanced' → Present Perfect; genel bilimsel gerçek Simple Present ile ifade edilir."
+          }
+        },
+        {
+          "id": 48,
+          "question": "The panel unanimously recommended ---- the grant ---- renewed for a further three years and ---- a mid-term evaluation ---- conducted at the eighteen-month mark.",
+          "options": [
+            "A) that / be / that / be",
+            "B) that / is / and / is",
+            "C) whether / be / whether / be",
+            "D) that / was / and / was",
+            "E) that / be / and / be"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Recommended that' → subjunctive. İki paralel öneri, her ikisi de 'that' ile.",
+            "logic": "'Recommend that + subjunctive': 'be renewed / be conducted'. Her iki öneri 'that' noun clause içinde.",
+            "pitfall": "E) İkinci 'that'ı düşürür; formal bağlamda paralel noun clause'larda 'that' tekrarı tutarlılığı korur."
+          }
+        },
+        {
+          "id": 49,
+          "question": "The novelist later acknowledged ---- she ---- the novel's central conflict from her own adolescent experiences and ---- its autobiographical nature had not been recognised sooner.",
+          "options": [
+            "A) that / had drawn / that / she wished",
+            "B) that / drew / and / wished",
+            "C) whether / had drawn / that / she wishes",
+            "D) that / drew / that / she wished",
+            "E) that / had drawn / whether / she wished"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Acknowledged that' → backshift. İki itiraf/ifade paralel 'that' ile. 'She wished' → backshifted dilekçe.",
+            "logic": "'Acknowledged that she had drawn' → backshift + Past Perfect. 'And that she wished its nature had not been recognised sooner' → paralel 'that' + backshifted wish.",
+            "pitfall": "D) 'drew' Simple Past backshift; anısini kendi deneyimden çıkarma itiraftan önce gerçekleşti → Past Perfect daha güçlü."
+          }
+        },
+        {
+          "id": 50,
+          "question": "Many adolescents struggle to explain ---- they feel most alienated from meaningful connection and ---- the digital interactions they ---- in partially compensate for that absence.",
+          "options": [
+            "A) when / whether / engage",
+            "B) why / whether / engage",
+            "C) when / if / engaged",
+            "D) what / whether / engage",
+            "E) when / how / engage"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Ne zaman yabancılaşıyorlar → 'when'. Dijital etkileşimlerin telafi edip etmediği → 'whether'. Genel alışkanlık.",
+            "logic": "'Explain when they feel most alienated' → zaman zarflığı noun clause. 'Whether digital interactions... partially compensate' → evet/hayır noun clause. 'Engage in' → genel alışkanlık → Simple Present.",
+            "pitfall": "B) 'why' → neden sorusu; yabancılaşmanın ne zaman hissedildiği soruluyor — 'when' gerekli."
+          }
+        }
+      ]
+    },
+
+    {
+      "topic": "Gerunds & Infinitives",
+      "questions": [
+        {
+          "id": 51,
+          "question": "The foundation is committed to ---- equitable access to STEM education and ---- that talent, not background, determines who enters the field.",
+          "options": [
+            "A) expanding / ensuring",
+            "B) expand / ensure",
+            "C) expanding / to ensure",
+            "D) expand / ensuring",
+            "E) having expanded / ensuring"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Be committed to + ...' edat tamlaması. Paralel gerund.",
+            "logic": "'Committed to + gerund': 'expanding / ensuring'. 'To' edat tamlaması her iki eylem için gerund gerektirir.",
+            "pitfall": "C) 'to ensure' → paraleli bozar; 'committed to' edat tamlaması → gerund 'ensuring' gerekli."
+          }
+        },
+        {
+          "id": 52,
+          "question": "The novelist spent three years ---- the most authentic narrative voice for her protagonist, only ---- that the story worked far better told from multiple perspectives.",
+          "options": [
+            "A) searching for / to discover",
+            "B) to search for / discovering",
+            "C) searching for / discovering",
+            "D) to search for / to discover",
+            "E) having searched for / to discover"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Spend time + ...' yapısı. 'Only to + infinitive' → beklenmedik hayal kırıklığı.",
+            "logic": "'Spent + gerund': 'searching for'. 'Only to discover' → deyimsel beklenmedik sonuç.",
+            "pitfall": "C) 'discovering' → 'only to discover' deyimsel yapı gerund ile karşılanamaz."
+          }
+        },
+        {
+          "id": 53,
+          "question": "Most teenagers tend ---- to criticism as a personal attack rather than ---- it as constructive input that could genuinely improve their work.",
+          "options": [
+            "A) to react / embracing",
+            "B) reacting / to embrace",
+            "C) to react / to embrace",
+            "D) reacting / embracing",
+            "E) to react / having embraced"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Tend + ...' yapısı. 'Rather than + ...' edat.",
+            "logic": "'Tend + infinitive': 'to react'. 'Rather than + gerund': 'embracing'.",
+            "pitfall": "C) 'to embrace' → 'rather than' edat olduğundan gerund gerektirir."
+          }
+        },
+        {
+          "id": 54,
+          "question": "The environmental agency proposed ---- the permitted noise levels in urban areas and ---- residents' exposure to industrial pollution through stricter monitoring.",
+          "options": [
+            "A) lowering / limiting",
+            "B) to lower / to limit",
+            "C) lowering / to limit",
+            "D) lower / limiting",
+            "E) having lowered / limiting"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Propose + ...' (British English). Paralel gerund.",
+            "logic": "'Propose + gerund' (British English): 'lowering / limiting'. İki eylem paralel gerund.",
+            "pitfall": "C) 'to limit' → paraleli bozar; 'propose' British English'te gerund alır — 'limiting' gerekli."
+          }
+        },
+        {
+          "id": 55,
+          "question": "She came remarkably close to ---- the scholarship on her first attempt, ---- that relentless determination is the most significant predictor of eventual success.",
+          "options": [
+            "A) winning / suggesting",
+            "B) win / suggesting",
+            "C) winning / to suggest",
+            "D) win / to suggest",
+            "E) having won / suggesting"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Come close to + ...' edat. 'Suggesting that' → eş zamanlı argüman.",
+            "logic": "'Come close to + gerund': 'winning'. 'Suggesting that' → eş zamanlı sonuç participial phrase.",
+            "pitfall": "C) 'to suggest' → infinitive amaç bildirir; 'suggesting' participial eş zamanlılığı ifade eder."
+          }
+        },
+        {
+          "id": 56,
+          "question": "It is scarcely worth ---- all the variables in the model without first ---- whether the foundational assumptions themselves are valid.",
+          "options": [
+            "A) refining / questioning",
+            "B) to refine / questioning",
+            "C) refining / to question",
+            "D) refine / questioning",
+            "E) having refined / questioning"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Worth + ...' yapısı. 'Without first + ...' edat.",
+            "logic": "'Worth + gerund': 'refining'. 'Without first + gerund': 'questioning'.",
+            "pitfall": "C) 'to question' → 'without' edat → gerund gerektirir."
+          }
+        },
+        {
+          "id": 57,
+          "question": "The coach urged the team ---- a defensive strategy in the second half and ---- high-risk passes unless the scoreline demanded otherwise.",
+          "options": [
+            "A) to adopt / to avoid",
+            "B) adopting / avoiding",
+            "C) to adopt / avoiding",
+            "D) adopt / to avoid",
+            "E) to adopt / not making"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Urge + object + ...' yapısı. Paralel olumsuz infinitive.",
+            "logic": "'Urge + object + infinitive': 'to adopt'. Paralel: 'and to avoid'.",
+            "pitfall": "C) 'avoiding' gerund → paralel yapı için 'to avoid' infinitive gerektirir."
+          }
+        },
+        {
+          "id": 58,
+          "question": "He deeply regrets ---- the opportunity to study abroad and acknowledges ---- more receptive to his mentor's advice at the time.",
+          "options": [
+            "A) having missed / not having been",
+            "B) missing / not being",
+            "C) having missed / not being",
+            "D) to have missed / not having been",
+            "E) missing / not having been"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Regret + ...' geçmiş pişmanlık. 'Acknowledge + ...' → daha önce olmayan durum için perfect gerund.",
+            "logic": "'Regret + having done' = perfect gerund geçmiş pişmanlık. 'Acknowledge + not having been' = perfect gerund (o zamanda böyle olmadığını kabul etmek).",
+            "pitfall": "B) 'missing / not being' → basit gerund; geçmişteki eylemlerin önceliği için perfect gerund daha güçlü."
+          }
+        },
+        {
+          "id": 59,
+          "question": "The award-winning photographer claims ---- inspired by street life in cities she ---- never previously visited, ---- a uniquely spontaneous quality to her work.",
+          "options": [
+            "A) to have been / had / lending",
+            "B) being / has / to lend",
+            "C) to be / had / lending",
+            "D) to have been / had / to lend",
+            "E) having been / had / lending"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Claim + ...' yapısı. İlham geçmişte aldı → perfect infinitive. 'Previously visited' → Past Perfect. 'Lending quality' → eş zamanlı.",
+            "logic": "'Claim + to have been inspired' = perfect infinitive (geçmiş). 'She had never previously visited' = Past Perfect. 'Lending a unique quality' = eş zamanlı participial.",
+            "pitfall": "C) 'to be inspired' → basit infinitive; ilham geçmişte alındı → perfect infinitive gerekli."
+          }
+        },
+        {
+          "id": 60,
+          "question": "There is genuine merit in ---- digital skills across all school subjects rather than ---- them to dedicated technology classes.",
+          "options": [
+            "A) embedding / confining",
+            "B) embed / confine",
+            "C) embedding / to confine",
+            "D) to embed / confining",
+            "E) having embedded / confining"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Merit in + ...' edat. 'Rather than + ...' edat.",
+            "logic": "'Merit in + gerund': 'embedding'. 'Rather than + gerund': 'confining'.",
+            "pitfall": "C) 'to confine' → 'rather than' edat → gerund 'confining' gerektirir."
+          }
+        }
+      ]
+    },
+
+    {
+      "topic": "Relative Clauses",
+      "questions": [
+        {
+          "id": 61,
+          "question": "The research institution, ---- interdisciplinary approach has attracted funding from across the globe, recently launched a fellowship programme ---- targets early-career scientists from under-represented backgrounds.",
+          "options": [
+            "A) whose / that",
+            "B) which's / which",
+            "C) whose / which",
+            "D) of which the / that",
+            "E) whose / where"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "İyelik: 'kurumun yaklaşımı'. 'A programme that targets' → defining.",
+            "logic": "'Whose interdisciplinary approach' → iyelik. 'A fellowship programme that targets early-career scientists' → defining subject: 'that'.",
+            "pitfall": "C) 'which targets' → defining bağlamda 'that' daha standart sınav tercihi."
+          }
+        },
+        {
+          "id": 62,
+          "question": "The year ---- the band released their debut single was also the year ---- they performed at the capital's largest outdoor venue for the very first time.",
+          "options": [
+            "A) when / when",
+            "B) that / which",
+            "C) in which / that",
+            "D) when / in which",
+            "E) that / when"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'The year when' → zaman zarflığı. Paralel yapı.",
+            "logic": "'The year when they released' + 'the year when they performed' → her ikisi de zarflık 'when' → paralel.",
+            "pitfall": "D) 'in which' → resmi ama 'when' daha doğal ve paralel yapıyı korur."
+          }
+        },
+        {
+          "id": 63,
+          "question": "The social enterprise, through ---- work hundreds of marginalised young people ---- found pathways to employment, has just been recognised with a national award.",
+          "options": [
+            "A) whose / have",
+            "B) which's / have",
+            "C") of which the / have",
+            "D) whose / had",
+            "E) the work of which / has"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Through whose work' → preposition + iyelik. 'Hundreds have found' → plural.",
+            "logic": "'Through whose work' → preposition + iyelik. 'Hundreds of young people have found pathways' → plural → 'have'.",
+            "pitfall": "E) 'the work of which / has' → singular fiil; 'hundreds of young people' plural → 'have' gerekli."
+          }
+        },
+        {
+          "id": 64,
+          "question": "The concept of 'digital wellbeing' is one ---- has gained traction in recent years and ---- educators are increasingly incorporating into their pastoral care frameworks.",
+          "options": [
+            "A) that / that",
+            "B) which / which",
+            "C) that / which",
+            "D) which / that",
+            "E) that / where"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'One that has gained traction' → defining subject. 'That educators are incorporating' → defining object.",
+            "logic": "'One that has gained traction' → defining subject: 'that'. 'That educators are increasingly incorporating' → defining object: 'that'.",
+            "pitfall": "C) 'which educators are incorporating' → defining bağlamda 'that' daha standart."
+          }
+        },
+        {
+          "id": 65,
+          "question": "There remain several unresolved questions about the long-term cognitive effects of screen time, ---- the most pressing ---- concerns its impact on the developing adolescent brain.",
+          "options": [
+            "A) of which / is the one that",
+            "B) the most pressing of which / is",
+            "C) the most pressing of which / is the one that",
+            "D) which the most pressing / is",
+            "E) among which the most pressing / is"
+          ],
+          "correct_answer": "B",
+          "feedback": {
+            "hint": "'The most pressing of which' → partitive yapı. 'Is the one that concerns' → tanımlama.",
+            "logic": "'Several questions, the most pressing of which is the question concerning its impact' → partitive: 'the most pressing of which'. 'Is' = singular.",
+            "pitfall": "C) 'is the one that' redundant olur; 'the most pressing of which concerns its impact' doğrudan gerekli — B daha kısa ve doğal."
+          }
+        },
+        {
+          "id": 66,
+          "question": "The mentorship scheme is designed for students ---- academic potential has been identified but ---- circumstances have historically prevented them from accessing elite higher education.",
+          "options": [
+            "A) whose / whose",
+            "B) who's / who's",
+            "C) whose / whom's",
+            "D) of whom the / of whom the",
+            "E) whose / who"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Her iki boşluk da iyelik bildiriyor: 'öğrencinin potansiyeli' ve 'öğrencinin koşulları'.",
+            "logic": "'Students whose academic potential' → iyelik. 'Whose circumstances have prevented' → iyelik. Her iki boşluk 'whose'.",
+            "pitfall": "E) 'who have prevented' → aktif; koşullar öğrencileri engelledi — iyelik 'whose' gerekli."
+          }
+        },
+        {
+          "id": 67,
+          "question": "----ever argues that social media has had no measurable impact on adolescent mental health must contend with a rapidly growing body of longitudinal data ---- directly contradicts that position.",
+          "options": [
+            "A) Whoever / that",
+            "B) Whomever / which",
+            "C) Whatever / that",
+            "D) Whoever / which",
+            "E) However / that"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Whoever argues' → özne free relative. 'Data that contradicts' → defining subject.",
+            "logic": "'Whoever argues' = 'the person who argues' → subject free relative. 'A body of data that directly contradicts' → defining subject: 'that'.",
+            "pitfall": "B) 'Whomever' → nesne hali; 'argues' fiilinin öznesi → özne hali 'whoever' gerekli."
+          }
+        },
+        {
+          "id": 68,
+          "question": "The island ---- I spent the most formative summer of my adolescence no longer looks anything like the place ---- I discovered my passion for marine biology.",
+          "options": [
+            "A) where / where",
+            "B") which / which",
+            "C) where / which",
+            "D) that / where",
+            "E) where / in which"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Her iki boşluk da yer zarflığı bildiriyor. Paralel yapı.",
+            "logic": "'The island where I spent' + 'the place where I discovered' → her ikisi de zarflık 'where' → paralel.",
+            "pitfall": "C) 'the place which I discovered' → 'discover a passion' nesne; 'where I discovered' zarflık daha doğal."
+          }
+        },
+        {
+          "id": 69,
+          "question": "The campaign has introduced several groundbreaking initiatives, the most innovative ---- being the peer-mentoring network ---- has already connected over ten thousand young people.",
+          "options": [
+            "A) of which / that",
+            "B) of them / which",
+            "C) of which / which",
+            "D) among which / that",
+            "E) of which / where"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'The most innovative of which' → partitive. 'Network that has connected' → defining subject.",
+            "logic": "'The most innovative of which being the peer-mentoring network' → partitive: 'of which'. 'The network that has connected' → defining subject: 'that'.",
+            "pitfall": "C) 'which has connected' → defining bağlamda 'that' daha standart sınav tercihi."
+          }
+        },
+        {
+          "id": 70,
+          "question": "The innovation that ---- most excites the tech community is one ---- has the potential to transform not only how we communicate but also how we ---- and store information.",
+          "options": [
+            "A) currently / that / process",
+            "B) currently / which / process",
+            "C) now / that / are processing",
+            "D) currently / that / will process",
+            "E) at present / that / process"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'One that has the potential to transform' → defining. 'How we process and store' → genel gerçek.",
+            "logic": "'One that has the potential' → defining: 'that'. 'How we process and store information' → genel gerçek → Simple Present: 'process'.",
+            "pitfall": "D) 'will process' → gelecek; genel gerçek ifadesi için Simple Present gerekli."
+          }
+        }
+      ]
+    },
+
+    {
+      "topic": "Nouns, Pronouns & Articles",
+      "questions": [
+        {
+          "id": 71,
+          "question": "---- growing recognition that ---- empathy is ---- teachable skill has prompted ---- shift in how social-emotional learning ---- prioritised in schools.",
+          "options": [
+            "A) A / - / a / a / is",
+            "B) The / the / a / a / is",
+            "C) A / - / the / a / is",
+            "D) The / - / a / the / is",
+            "E) A / - / a / the / are"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'A growing recognition' → ilk kez. 'Empathy' → soyut genel. 'A teachable skill' → ilk kez. 'A shift' → ilk kez. 'Is prioritised' → tekil özne.",
+            "logic": "'A growing recognition' belirsiz → 'a'. 'Empathy' genel soyut → article yok. 'A teachable skill' belirsiz → 'a'. 'A shift' belirsiz → 'a'. 'Learning is prioritised' tekil → 'is'.",
+            "pitfall": "B) 'the growing recognition' → daha önce bahsedilmemiş → 'a' gerekli."
+          }
+        },
+        {
+          "id": 72,
+          "question": "---- sheer volume of ---- misinformation circulating online has created ---- urgent need for ---- more robust and transparent approach to platform governance.",
+          "options": [
+            "A) The / - / an / a",
+            "B) A / the / an / the",
+            "C) The / - / the / a",
+            "D) The / the / an / a",
+            "E) A / - / an / a"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'The sheer volume of' → sabit deyim. 'Misinformation' → genel. 'An urgent need' → ünlü. 'A more robust approach' → ilk kez.",
+            "logic": "'The sheer volume of misinformation' → sabit deyim → 'the'; 'misinformation' genel → article yok. 'An urgent need' → 'u' ünlü → 'an'. 'A more robust approach' → belirsiz → 'a'.",
+            "pitfall": "D) 'the misinformation' → genel sayılamaz kavram → article yok."
+          }
+        },
+        {
+          "id": 73,
+          "question": "---- recent longitudinal study found that ---- students who engaged in ---- regular creative writing showed ---- notable gains in both ---- emotional vocabulary and ---- critical thinking.",
+          "options": [
+            "A) A / - / - / - / - / -",
+            "B) The / the / a / the / the / the",
+            "C) A / the / - / a / - / -",
+            "D) A / - / regular / a / - / -",
+            "E) One / - / - / a / - / -"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'A recent study' → ilk kez. 'Students who engaged' → genel. 'Regular creative writing' → genel. 'Notable gains / emotional vocabulary / critical thinking' → genel.",
+            "logic": "'A recent longitudinal study' → belirsiz → 'a'. 'Students / regular creative writing / emotional vocabulary / critical thinking' genel → article yok. 'Notable gains' genel çoğul → article yok.",
+            "pitfall": "B) tüm boşluklara 'the' koyar; genel kavramlar article almaz."
+          }
+        },
+        {
+          "id": 74,
+          "question": "---- capacity of ---- human brain to rewire itself through ---- experience, ---- phenomenon known as neuroplasticity, has profound implications for ---- educational practice.",
+          "options": [
+            "A) The / the / - / a / -",
+            "B) A / the / the / a / the",
+            "C) The / the / the / a / -",
+            "D) The / the / - / the / -",
+            "E) The / - / - / a / -"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'The capacity of the human brain' → belirli. 'Through experience' → genel. 'A phenomenon known as' → belirsiz appositive. 'Educational practice' → genel.",
+            "logic": "'The capacity of the human brain' → belirli. 'Through experience' → genel → article yok. 'A phenomenon known as neuroplasticity' → belirsiz appositive → 'a'. 'Educational practice' → genel → article yok.",
+            "pitfall": "C) 'through the experience' → genel deneyim kavramı belirli değil; article yok."
+          }
+        },
+        {
+          "id": 75,
+          "question": "---- fact that ---- access to ---- quality mentorship dramatically increases ---- likelihood of social mobility remains one of ---- most compelling arguments for educational investment.",
+          "options": [
+            "A) The / - / - / the / the",
+            "B) A / the / a / the / the",
+            "C) The / - / the / the / the",
+            "D) The / the / - / the / the",
+            "E") - / - / - / the / the"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'The fact that' → sabit deyim. 'Access to quality mentorship' → genel. 'The likelihood' → belirli. 'The most compelling arguments' → superlative.",
+            "logic": "'The fact that' → sabit deyim → 'the'. 'Access to quality mentorship' → genel → article yok. 'The likelihood of social mobility' → belirli → 'the'. 'The most compelling arguments' → superlative → 'the'.",
+            "pitfall": "C) 'the quality mentorship' → 'quality mentorship' genel sıfatlı isim → article yok."
+          }
+        },
+        {
+          "id": 76,
+          "question": "---- transition from ---- adolescence to ---- adulthood is rarely linear; ---- period of ambiguity and self-questioning is, for many, ---- unavoidable and ultimately formative stage.",
+          "options": [
+            "A) The / - / - / a / an",
+            "B) A / the / the / a / the",
+            "C) The / the / the / a / an",
+            "D) The / - / - / the / an",
+            "E) A / - / - / a / an"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'The transition from adolescence to adulthood' → belirli + soyut genel. 'A period' → ilk kez. 'An unavoidable stage' → ünlü.",
+            "logic": "'The transition' → belirli + soyut genel (article yok). 'A period of ambiguity' → belirsiz → 'a'. 'An unavoidable and ultimately formative stage' → 'u' ünlü → 'an'.",
+            "pitfall": "C) 'the adolescence / the adulthood' → soyut genel kavramlar → article yok."
+          }
+        },
+        {
+          "id": 77,
+          "question": "---- neither of ---- two proposals satisfied all ---- board members, ---- independent arbitration panel ---- convened to broker a compromise.",
+          "options": [
+            "A) As / the / the / an / was",
+            "B) Since / - / the / a / was",
+            "C) Because / the / - / an / was",
+            "D) As / the / the / a / was",
+            "E) Given that / the / the / an / were"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'As neither' → neden bağlacı. 'The two proposals' → belirli. 'The board members' → belirli. 'An independent panel' → ünlü + ilk kez. 'Panel was convened' → tekil.",
+            "logic": "'As' → neden. 'The two proposals' → belirli. 'The board members' → belirli. 'An independent arbitration panel' → 'i' ünlü → 'an'. 'Was convened' → tekil.",
+            "pitfall": "E) 'were convened' → plural; 'panel' tekil özne → 'was' gerekli."
+          }
+        },
+        {
+          "id": 78,
+          "question": "---- passion she demonstrated for ---- environmental advocacy, combined with ---- remarkable ability to communicate complex issues clearly, made her ---- exceptionally strong candidate.",
+          "options": [
+            "A) The / - / a / an",
+            "B) A / the / a / the",
+            "C) The / - / the / an",
+            "D) The / the / a / an",
+            "E) A / - / a / an"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'The passion she demonstrated' → sıfat tamlaması. 'Environmental advocacy' → genel. 'A remarkable ability' → ilk kez. 'An exceptionally strong candidate' → ünlü.",
+            "logic": "'The passion she demonstrated' → sıfat tamlaması → 'the'. 'Environmental advocacy' → genel → article yok. 'A remarkable ability' → belirsiz → 'a'. 'An exceptionally strong candidate' → 'e' ünlü → 'an'.",
+            "pitfall": "D) 'the environmental advocacy' → genel savunuculuk kavramı → article yok."
+          }
+        },
+        {
+          "id": 79,
+          "question": "---- lack of ---- reliable public transport in rural areas forces many young people to depend on ---- private vehicles, ---- situation that perpetuates both financial hardship and ---- social isolation.",
+          "options": [
+            "A) The / - / - / a / -",
+            "B) A / the / the / a / the",
+            "C) The / - / the / a / -",
+            "D) The / the / - / the / -",
+            "E) The / - / - / the / -"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'The lack of reliable transport' → belirli. 'Reliable transport / private vehicles / financial hardship / social isolation' → genel. 'A situation' → ilk kez.",
+            "logic": "'The lack of reliable public transport' → belirli. 'Rural areas / private vehicles' → genel → article yok. 'A situation that perpetuates' → belirsiz → 'a'. 'Financial hardship / social isolation' → genel → article yok.",
+            "pitfall": "C) 'the private vehicles' → genel araç kullanımı belirli değil → article yok."
+          }
+        },
+        {
+          "id": 80,
+          "question": "---- extent to ---- which social media contributes to ---- radicalisation among young people remains ---- deeply contested empirical question that ---- ongoing research has yet to resolve definitively.",
+          "options": [
+            "A) The / - / - / a / -",
+            "B) - / the / the / the / -",
+            "C) The / - / the / a / the",
+            "D) An / - / - / a / -",
+            "E) The / - / - / the / -"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'The extent to which' → sabit deyim. 'Radicalisation' → soyut genel. 'A deeply contested question' → ilk kez. 'Ongoing research' → genel.",
+            "logic": "'The extent to which' → sabit deyim → 'the'. 'Radicalisation' → genel → article yok. 'A deeply contested empirical question' → belirsiz → 'a'. 'Ongoing research' → genel → article yok.",
+            "pitfall": "E) 'the deeply contested question' → belirli; ilk kez tanıtılan → 'a' gerekli."
+          }
+        }
+      ]
+    },
+
+    {
+      "topic": "Conjunctions & Transitions",
+      "questions": [
+        {
+          "id": 81,
+          "question": "---- its widespread adoption in healthcare settings, AI-assisted diagnostics has yet to demonstrate the kind of reliability ---- would justify ---- replacing human clinical judgement entirely.",
+          "options": [
+            "A) Despite / that / fully",
+            "B) Although / which / fully",
+            "C) In spite of / that / entirely",
+            "D) Notwithstanding / that / fully",
+            "E) Despite / which / fully"
+          ],
+          "correct_answer": "D",
+          "feedback": {
+            "hint": "'Widespread adoption' → isim öbeği. 'The kind of reliability that' → defining relative. 'Fully replacing' → adverb placement.",
+            "logic": "'Notwithstanding + noun phrase' → resmi edat bağlacı. 'The kind of reliability that would justify' → defining: 'that'. 'Fully replacing' → adverb + gerund.",
+            "pitfall": "A) 'Despite / that / fully' → 'fully' doğru pozisyon ama A şıkkında 'Despite' yerine 'Notwithstanding' daha akademik ve resmi."
+          }
+        },
+        {
+          "id": 82,
+          "question": "The workshop proved valuable ---- for the participants ---- for the facilitators, ---- prompted many of them to reconsider their pedagogical assumptions.",
+          "options": [
+            "A) not only / but also / which",
+            "B) both / and / that",
+            "C) not only / but also / that",
+            "D) either / or / which",
+            "E) not only / but also / thereby"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Not only... but also' → paralel. İkinci boşluk tüm cümleye atıf → non-defining.",
+            "logic": "'Not only for participants but also for facilitators' → paralel. İkinci boşluk tüm önceki fikre atıf → non-defining → 'which'.",
+            "pitfall": "C) 'that' → non-defining bağlamda kullanılamaz; virgüllü non-defining clause 'which' alır."
+          }
+        },
+        {
+          "id": 83,
+          "question": "---- the scientific consensus on vaccine safety is clear and well-documented, public trust in immunisation programmes has eroded in some communities, ---- that misinformation can undermine even the most evidence-based interventions.",
+          "options": [
+            "A) Although / demonstrating",
+            "B) Despite / demonstrating",
+            "C) Even though / thereby demonstrating",
+            "D) While / which demonstrates",
+            "E) Although / which demonstrates"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Although + full clause' → zıtlık. 'Demonstrating that' → eş zamanlı sonuç participial.",
+            "logic": "'Although the consensus is clear' → tam cümle zıtlık bağlacı. 'Demonstrating that misinformation can undermine' → eş zamanlı sonuç participial phrase.",
+            "pitfall": "C) 'thereby demonstrating' → 'thereby' sonuç participial için güçlü ama 'demonstrating' alone doğal; her ikisi kabul edilebilir, A daha temiz."
+          }
+        },
+        {
+          "id": 84,
+          "question": "The young athlete broke three national records this season; ----, she has been passed over for the national team, ---- raising questions about the selection criteria.",
+          "options": [
+            "A) yet / thereby",
+            "B) however / thus",
+            "C) nonetheless / thereby",
+            "D) yet / thus",
+            "E) still / thereby"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "Noktalı virgül + zıtlık. 'Thereby raising questions' → eylemin sonucu.",
+            "logic": "'Yet' → noktalı virgül sonrası zıtlık. 'Thereby raising questions' → eylemin mantıksal sonucu participial.",
+            "pitfall": "D) 'thus raising' → dilbilgisel mümkün ama 'thereby + gerund' participial yapıyla daha standart sınav tercihi."
+          }
+        },
+        {
+          "id": 85,
+          "question": "The curriculum reform was designed ---- to punish underperforming students ---- to identify and address the systemic barriers ---- have historically limited their access to quality instruction.",
+          "options": [
+            "A) not / but rather / that",
+            "B) not only / but also / which",
+            "C) not / but rather / which",
+            "D) neither / nor / that",
+            "E) not / but rather / where"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Not to X but rather to Y' → doğrultma. 'Barriers that have limited' → defining subject.",
+            "logic": "'Not to punish but rather to identify and address' → doğrultma yapısı. 'Systemic barriers that have historically limited' → defining subject: 'that'.",
+            "pitfall": "C) 'which' → defining bağlamda 'that' daha standart sınav tercihi."
+          }
+        },
+        {
+          "id": 86,
+          "question": "---- the rapid pace of technological change is undeniable, ---- is the need for education systems to evolve in response, ---- that adaptability, rather than fixed knowledge, is now the most valuable skill.",
+          "options": [
+            "A) While / so too / suggesting",
+            "B) Although / as is / suggesting",
+            "C) While / so too / to suggest",
+            "D) Although / so too / suggesting",
+            "E) Whereas / as is / suggesting"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'While X is undeniable, so too is Y' → paralel vurgu. 'Suggesting that' → sonuç.",
+            "logic": "'While the pace is undeniable, so too is the need' → paralel yapı. 'Suggesting that adaptability is the most valuable skill' → eş zamanlı sonuç participial.",
+            "pitfall": "C) 'to suggest' → infinitive amaç bildirir; 'suggesting' participial eş zamanlılığı ifade eder."
+          }
+        },
+        {
+          "id": 87,
+          "question": "The community project succeeded ---- in raising funds ---- in building meaningful partnerships with local businesses, ---- that genuine impact requires both financial and social capital.",
+          "options": [
+            "A) not only / but also / demonstrating",
+            "B) both / and / thereby",
+            "C) not only / but also / thereby demonstrating",
+            "D) either / or / demonstrating",
+            "E) not only / but also / demonstrated"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Not only... but also' → paralel. 'Demonstrating that' → eş zamanlı sonuç.",
+            "logic": "'Not only in raising funds but also in building partnerships' → paralel. 'Demonstrating that genuine impact requires' → eş zamanlı sonuç participial.",
+            "pitfall": "E) 'demonstrated' → bağımsız fiil gibi okutulur; 'demonstrating' participial eş zamanlı sonucu bildirir."
+          }
+        },
+        {
+          "id": 88,
+          "question": "The report concluded ---- youth unemployment is not merely ---- economic issue but ---- deeply rooted social phenomenon ---- requires structural, not just cyclical, policy responses.",
+          "options": [
+            "A) that / an / a / that",
+            "B) that / the / a / which",
+            "C) whether / an / a / that",
+            "D) that / an / the / that",
+            "E) that / a / a / which"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Concluded that' → noun clause. 'Not merely an economic issue but a deeply rooted social phenomenon'. 'Phenomenon that requires' → defining.",
+            "logic": "'Concluded that' → noun clause. 'An economic issue' → ünlü → 'an'. 'A deeply rooted social phenomenon' → belirsiz → 'a'. 'A phenomenon that requires' → defining: 'that'.",
+            "pitfall": "B) 'which requires' → defining bağlamda 'that' daha standart."
+          }
+        },
+        {
+          "id": 89,
+          "question": "---- the research data is compelling, several methodological limitations ---- reduce confidence in the findings; ----, further longitudinal studies are urgently needed.",
+          "options": [
+            "A) While / still / consequently",
+            "B) Although / however / thus",
+            "C) While / yet / therefore",
+            "D) Even though / still / as a result",
+            "E) While / still / hence"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'While + full clause' → kısmi zıtlık. 'Still reduce confidence' → buna rağmen. 'Consequently, further studies needed' → sonuç.",
+            "logic": "'While the data is compelling' → kısmi zıtlık. 'Still reduce confidence' → devam eden sorun. 'Consequently, further studies are needed' → mantıksal sonuç.",
+            "pitfall": "C) 'therefore' → 'consequently' ve 'therefore' yakın ama A'daki 'consequently' daha akademik."
+          }
+        },
+        {
+          "id": 90,
+          "question": "The festival brought together artists from over thirty countries, ---- fostering ---- cultural dialogue ---- mutual understanding that few other events of its scale ---- managed to achieve.",
+          "options": [
+            "A) thereby / both / and / have",
+            "B) thus / not only / but also / have",
+            "C) thereby / both / and / has",
+            "D) consequently / both / and / have",
+            "E) thereby / either / or / have"
+          ],
+          "correct_answer": "A",
+          "feedback": {
+            "hint": "'Thereby fostering' → eylemin sonucu. 'Both... and' → paralel. 'Few other events... have managed' → plural.",
+            "logic": "'Thereby fostering' → eylemin mantıksal sonucu participial. 'Both cultural dialogue and mutual understanding' → paralel. 'Few other events... have managed' → 'events' plural → 'have'.",
+            "pitfall": "C) 'has managed' → 'events' plural → 'have managed' gerekli."
+          }
+        }
+      ]
+    }
+
+  ]
+}

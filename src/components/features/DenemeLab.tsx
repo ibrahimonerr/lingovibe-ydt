@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   ChevronLeft, ChevronRight, Clock, ClipboardCheck, 
   CheckCircle2, X, AlertCircle, BookOpen, Target, 
@@ -28,6 +28,19 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  const handleFinish = useCallback(() => {
+    setIsFinished(true);
+    if (timerRef.current) clearInterval(timerRef.current);
+    
+    // Calculate total correct/score
+    const totalCorrect = questions.reduce((acc, q, idx) => {
+      const isCorrect = answers[idx] === (q.correct_answer || q.correct);
+      return acc + (isCorrect ? 1 : 0);
+    }, 0);
+    
+    onFinish({ totalCorrect, totalQuestions: questions.length, answers });
+  }, [questions, onFinish, answers]);
+
   // Timer logic
   useEffect(() => {
     if (isFinished) return;
@@ -46,25 +59,12 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isFinished]);
+  }, [isFinished, handleFinish]);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
     return `${m}:${s < 10 ? '0' : ''}${s}`;
-  };
-
-  const handleFinish = () => {
-    setIsFinished(true);
-    if (timerRef.current) clearInterval(timerRef.current);
-    
-    // Calculate total correct/score
-    const totalCorrect = questions.reduce((acc, q, idx) => {
-      const isCorrect = answers[idx] === (q.correct_answer || q.correct);
-      return acc + (isCorrect ? 1 : 0);
-    }, 0);
-    
-    onFinish({ totalCorrect, totalQuestions: questions.length, answers });
   };
 
   const currentQuestion = questions[currentIdx];
@@ -108,7 +108,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
             onClick={() => window.location.href = '/'}
             className="w-full py-5 bg-slate-900 border border-white/10 text-white rounded-[2rem] font-black uppercase text-[12px] tracking-widest active:scale-95 transition-all"
           >
-            Dashboard'a Dön
+            Dashboard&apos;a Dön
           </button>
         </div>
       </div>
