@@ -136,9 +136,9 @@ export default function ReadingLab({
 
           if (romanNumeralRegex.test(part)) {
             return (
-              <strong key={i} className="font-bold text-slate-900 dark:text-white mx-0.5 not-italic">
+              <span key={i} className={`inline-flex items-center justify-center px-1.5 py-0.5 mx-1 rounded-md ${themeStyles.lightBg} ${themeStyles.text} ${themeStyles.textDark} font-black ring-1 ${themeStyles.buttonBorder}/30 shadow-[0_0_10px_rgba(99,102,241,0.2)] not-italic text-[13px]`}>
                 {part}
-              </strong>
+              </span>
             );
           }
 

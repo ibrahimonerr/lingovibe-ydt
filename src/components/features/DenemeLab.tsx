@@ -174,7 +174,11 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
     const parts = processed.split(/(\(\s*(?:VIII|VII|VI|III|II|IV|V|I)\s*\))/gi);
     return parts.map((part, i) => {
       if (/^(\(\s*(?:VIII|VII|VI|III|II|IV|V|I)\s*\))$/i.test(part)) {
-        return <strong key={i} className="font-extrabold mr-1">{part}</strong>;
+        return (
+          <span key={i} className="inline-flex items-center justify-center px-1.5 py-0.5 mx-1 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-black ring-1 ring-indigo-500/30 shadow-[0_0_10px_rgba(99,102,241,0.3)] not-italic text-[13px]">
+            {part}
+          </span>
+        );
       }
       return part;
     });
