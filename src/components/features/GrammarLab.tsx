@@ -47,7 +47,7 @@ export default function GrammarLab({
             {labTitle}
           </div>
           
-          {question.question?.split(/(\*\*.*?\*\*)/g).map((part: string, i: number) =>
+          {question.question?.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n\n$2').split(/(\*\*.*?\*\*)/g).map((part: string, i: number) =>
             part.startsWith('**') && part.endsWith('**')
               ? <span key={i} className={`${isSkills ? 'bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-900/40 dark:text-violet-300 dark:border-violet-800' : 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/40 dark:text-emerald-300 dark:border-emerald-800'} rounded px-2 mx-1 shadow-sm not-italic border-b-2`}>{part.replace(/\*\*/g, '')}</span>
               : part

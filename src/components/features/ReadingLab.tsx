@@ -87,7 +87,10 @@ export default function ReadingLab({
     const blankSplitRegex = /(__\d+__|(?<!\w)\(\d+\)(?!\w)|\(\s*(?:VIII|VII|VI|III|II|IV|V|I)\s*\))/g;
     const blankTestRegex = /^__\d+__$|^\(\d+\)$/;
     const romanNumeralRegex = /^\(\s*(?:VIII|VII|VI|III|II|IV|V|I)\s*\)$/i;
-    const parts = readingPassage.split(blankSplitRegex);
+    
+    // Automatically line-break dialog-like scenarios
+    const processedPassage = readingPassage.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n\n$2');
+    const parts = processedPassage.split(blankSplitRegex);
 
     let quoteRegex: RegExp | null = null;
     if ((showHint || showFeedback) && question.quote) {

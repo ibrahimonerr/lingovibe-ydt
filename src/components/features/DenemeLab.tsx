@@ -245,13 +245,15 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
           )}
 
           {/* QUESTION TEXT */}
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-[2rem] border-2 border-slate-50 dark:border-slate-800/50 shadow-sm">
-            <div className={`text-[10px] font-black uppercase mb-2 tracking-widest ${isReading ? 'text-amber-600 dark:text-amber-400' : 'text-indigo-600 dark:text-indigo-400'}`}>
+          <div className="bg-white dark:bg-slate-900 p-4 lg:p-5 rounded-[2rem] border-2 border-slate-50 dark:border-slate-800/50 shadow-sm">
+            <div className={`text-[10px] font-black uppercase mb-1.5 tracking-widest ${isReading ? 'text-amber-600 dark:text-amber-400' : 'text-indigo-600 dark:text-indigo-400'}`}>
                {isReading ? 'Question Details' : 'Question Context'}
             </div>
-            <h3 className="text-xl font-black text-slate-800 dark:text-slate-100 leading-snug">
-               {currentQuestion?.question || 'Question text not available.'}
-            </h3>
+            <div className="text-[15px] font-medium text-slate-700 dark:text-slate-300 leading-relaxed italic whitespace-pre-wrap">
+               {typeof currentQuestion?.question === 'string'
+                 ? currentQuestion.question.replace(/(\S)\s+(([A-Z][A-Za-z0-9]+\s*){1,3}:\s)/g, '$1\n\n$2')
+                 : (currentQuestion?.question || 'Question text not available.')}
+            </div>
           </div>
 
           {/* OPTIONS */}
