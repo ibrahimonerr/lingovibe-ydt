@@ -135,14 +135,15 @@ export default function MobileShell({ children }: { children: React.ReactNode })
                         scale: isVisible ? 1 : 0.98
                     }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className="absolute bottom-0 w-full bg-white/95 dark:bg-[#070812]/95 backdrop-blur-md border-t dark:border-slate-800 p-6 flex justify-center items-center rounded-t-[3rem] shadow-[0_-15px_40px_-15px_rgba(0,0,0,0.15)] z-50"
-                    style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 1.5rem)' }}
                 >
+            {/* FLOATING NAVIGATION ISLAND (BOTTOM) */}
+            <nav className="z-40 fixed bottom-8 left-0 w-full px-4 flex justify-center pointer-events-none mt-auto">
+                <div className="bg-white/70 dark:bg-[#070812]/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-full p-2 shadow-2xl flex items-center justify-center w-auto pointer-events-auto relative">
                     <button 
-                        onClick={() => { setNavSubMenu('main'); setIsNavMenuOpen(true); }} 
-                        className="w-16 h-16 rounded-[1.5rem] bg-gradient-to-tr from-indigo-900 via-violet-900 to-slate-900 flex items-center justify-center text-white shadow-xl -mt-16 border-[6px] border-white dark:border-[#070812] active:scale-90 transition-all z-50 overflow-hidden relative group"
+                        onClick={() => setIsNavMenuOpen(true)} 
+                        className="w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-900 via-violet-900 to-slate-900 flex items-center justify-center text-white shadow-xl active:scale-90 transition-all z-50 overflow-hidden relative group"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-fuchsia-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-violet-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <svg 
                             viewBox="0 0 100 100" 
                             className="w-1/2 h-1/2 text-white relative z-10 drop-shadow-md" 
@@ -151,7 +152,8 @@ export default function MobileShell({ children }: { children: React.ReactNode })
                             <path d="M20 20 L50 60 L80 20 L60 20 L50 35 L40 20 Z M45 65 L55 65 L55 85 L45 85 Z" />
                         </svg>
                     </button>
-                </motion.nav>
+                </div>
+            </nav>    </motion.nav>
 
                 {/* Y NAVIGATION MODAL */}
                 {isNavMenuOpen && (
