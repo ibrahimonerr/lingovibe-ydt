@@ -123,7 +123,7 @@ export default function YDTHub() {
                 <button onClick={() => handleLabSelection('reading')} className="p-5 rounded-[2.2rem] border-2 border-amber-100 dark:border-amber-900/30 bg-white dark:bg-[#1a1c25] flex flex-col items-center text-center gap-3 active:scale-95 transition-all shadow-sm group">
                   <div className="p-3.5 bg-amber-50 dark:bg-amber-900/20 rounded-2xl text-amber-500 shadow-sm group-hover:scale-110 transition-transform"><Zap size={22} /></div>
                   <div>
-                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Reading</span>
+                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Reading Lab</span>
                     <span className="text-[7px] font-bold text-slate-400 uppercase tracking-widest opacity-60">Comprehension</span>
                   </div>
                 </button>
@@ -132,7 +132,7 @@ export default function YDTHub() {
                 <button onClick={() => setMode('vocab_select')} className="p-5 rounded-[2.2rem] border-2 border-indigo-100 dark:border-indigo-900/30 bg-white dark:bg-[#1a1c25] flex flex-col items-center text-center gap-3 active:scale-95 transition-all shadow-sm group">
                   <div className="p-3.5 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl text-indigo-600 shadow-sm group-hover:scale-110 transition-transform"><Languages size={22} /></div>
                   <div>
-                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Vocab</span>
+                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Vocab Lab</span>
                     <span className="text-[7px] font-bold text-slate-400 uppercase tracking-widest opacity-60">Recall & Retention</span>
                   </div>
                 </button>
@@ -141,7 +141,7 @@ export default function YDTHub() {
                 <button onClick={() => setMode('grammar')} className="p-5 rounded-[2.2rem] border-2 border-emerald-100 dark:border-emerald-900/30 bg-white dark:bg-[#1a1c25] flex flex-col items-center text-center gap-3 active:scale-95 transition-all shadow-sm group">
                   <div className="p-3.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl text-emerald-600 shadow-sm group-hover:scale-110 transition-transform"><PenTool size={22} /></div>
                   <div>
-                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Grammar</span>
+                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Grammar Lab</span>
                     <span className="text-[7px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest opacity-60">Structure Rules</span>
                   </div>
                 </button>
@@ -150,7 +150,7 @@ export default function YDTHub() {
                 <button onClick={() => setMode('skills')} className="p-5 rounded-[2.2rem] border-2 border-violet-100 dark:border-violet-900/30 bg-white dark:bg-[#1a1c25] flex flex-col items-center text-center gap-3 active:scale-95 transition-all shadow-sm group">
                   <div className="p-3.5 bg-violet-50 dark:bg-violet-900/20 rounded-2xl text-violet-600 shadow-sm group-hover:scale-110 transition-transform"><Target size={22} /></div>
                   <div>
-                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Skills</span>
+                    <span className="font-black uppercase text-[12px] block text-slate-800 dark:text-slate-100 leading-none mb-1">Skills Lab</span>
                     <span className="text-[7px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest opacity-60">Strategy & Speed</span>
                   </div>
                 </button>
@@ -161,9 +161,9 @@ export default function YDTHub() {
                 onClick={() => {
                   router.push('/mini-deneme-lab');
                 }}
-                className="w-full p-6 rounded-[2.5rem] bg-gradient-to-br from-indigo-900 via-violet-900 to-slate-900 relative overflow-hidden group shadow-2xl shadow-indigo-500/20 active:scale-95 transition-all mt-2 border border-white/10"
+                className="w-full p-6 rounded-[2.5rem] bg-gradient-to-br from-indigo-800 via-violet-800 to-rose-600 relative overflow-hidden group shadow-2xl shadow-violet-500/20 active:scale-95 transition-all mt-2 border border-white/20"
               >
-                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600/20 via-fuchsia-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-fuchsia-500/20 to-rose-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                   <Sparkles size={100} className="text-white" />
                 </div>
@@ -252,21 +252,23 @@ export default function YDTHub() {
           </div>
         )}
 
-        {/* BOTTOM NAV */}
-        <nav className="absolute bottom-0 w-full bg-white dark:bg-[#070812] border-t dark:border-slate-800 p-6 flex justify-center items-center rounded-t-[3rem] shadow-[0_-15px_40px_-15px_rgba(0,0,0,0.15)] z-50">
-          <button 
-            onClick={() => setIsNavMenuOpen(true)} 
-            className="w-16 h-16 rounded-[1.5rem] bg-gradient-to-tr from-indigo-900 via-violet-900 to-slate-900 flex items-center justify-center text-white shadow-xl -mt-16 border-[6px] border-white dark:border-[#070812] active:scale-90 transition-all z-50 overflow-hidden relative group"
-          >
-            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-fuchsia-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <svg 
-              viewBox="0 0 100 100" 
-              className="w-1/2 h-1/2 text-white relative z-10 drop-shadow-md" 
-              fill="currentColor"
+        {/* FLOATING NAVIGATION ISLAND (BOTTOM) */}
+        <nav className="z-40 sticky bottom-8 left-0 w-full px-4 flex justify-center pointer-events-none mt-auto">
+          <div className="bg-white/70 dark:bg-[#070812]/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-full p-2 shadow-2xl flex items-center justify-center w-auto pointer-events-auto relative">
+            <button 
+              onClick={() => setIsNavMenuOpen(true)} 
+              className="w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-900 via-violet-900 to-slate-900 flex items-center justify-center text-white shadow-xl active:scale-90 transition-all z-50 overflow-hidden relative group"
             >
-              <path d="M20 20 L50 60 L80 20 L60 20 L50 35 L40 20 Z M45 65 L55 65 L55 85 L45 85 Z" />
-            </svg>
-          </button>
+              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 via-violet-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <svg 
+                viewBox="0 0 100 100" 
+                className="w-1/2 h-1/2 text-white relative z-10 drop-shadow-md" 
+                fill="currentColor"
+              >
+                <path d="M20 20 L50 60 L80 20 L60 20 L50 35 L40 20 Z M45 65 L55 65 L55 85 L45 85 Z" />
+              </svg>
+            </button>
+          </div>
         </nav>
 
         {/* Y NAVIGATION MODAL */}

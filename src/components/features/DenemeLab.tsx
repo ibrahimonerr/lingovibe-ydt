@@ -81,7 +81,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
             <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="w-full max-w-md bg-white/5 border border-white/10 rounded-[3rem] p-10 backdrop-blur-xl relative overflow-hidden"
+                className="w-full max-w-md bg-slate-900 border border-white/10 rounded-[3rem] p-10 relative overflow-hidden"
             >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-3xl -mr-16 -mt-16 rounded-full" />
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-violet-500/10 blur-3xl -ml-16 -mb-16 rounded-full" />
@@ -331,10 +331,11 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
 
         {/* OPTIC BUTTON */}
         <button 
-           onClick={() => setIsOpticOpen(true)}
-           className="px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black uppercase text-[11px] tracking-widest shadow-xl flex items-center gap-2 active:scale-95 transition-all"
+          onClick={() => setIsOpticOpen(true)}
+          className="px-6 py-4 bg-gradient-to-tr from-indigo-600 via-violet-600 to-rose-500 text-white rounded-2xl font-black uppercase text-[11px] tracking-widest shadow-xl shadow-indigo-500/20 active:scale-95 transition-all flex items-center gap-2 group border border-white/10"
         >
-          <ClipboardCheck size={18} /> Optik
+          <ClipboardCheck size={18} className="group-hover:scale-110 transition-transform" />
+          OPTİK
         </button>
 
         {currentIdx < questions.length - 1 ? (
