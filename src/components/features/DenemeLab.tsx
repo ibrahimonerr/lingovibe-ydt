@@ -396,43 +396,65 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
                             ? 'bg-indigo-50/80 border-indigo-300 dark:bg-indigo-900/20 dark:border-indigo-700 shadow-sm' 
                             : 'border-transparent hover:bg-slate-50 dark:hover:bg-white/5'}`}
                       >
-                        <span className={`w-8 text-[11px] font-black text-center ${isCurrent ? 'text-indigo-600' : 'text-slate-400'}`}>
+                        <span className={`w-8 text-[11px] font-black text-center ${isCurrent ? 'text-indigo-600' : 'text-slate-400'} flex items-center justify-center gap-1`}>
                           {idx + 1}
+                          {isAnalysisMode && answers[idx] && (
+                            <span className={`w-1.5 h-1.5 rounded-full ${answers[idx] === (q.correct_answer || q.correct) ? 'bg-emerald-500' : 'bg-rose-500'}`} />
+                          )}
                         </span>
                         
                         <div className="flex-1 flex justify-between px-2" onClick={(e) => e.stopPropagation()}>
                            {options.map(opt => {
-                             const isActive = answers[idx] === opt;
-                             const isVisualSelected = visualAnswers[idx] === opt;
-                             
-                             return (
-                               <button
-                                 key={opt}
-                                 disabled={isAnalysisMode || !isCurrent}
-                                 onClick={async (e) => {
-                                   if (isAnalysisMode || !isCurrent) return;
-                                   e.stopPropagation();
-                                   
-                                   // Toggle or set answer
-                                   setAnswers(prev => ({
-                                     ...prev,
-                                     [idx]: prev[idx] === opt ? '' : opt
-                                   }));
-                                   
-                                   await Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
-                                 }}
-                                 className={`w-10 h-10 rounded-full border-2 font-black text-[12px] flex items-center justify-center transition-all 
-                                   ${isActive 
-                                     ? 'bg-slate-900 border-slate-900 text-white dark:bg-white dark:border-white dark:text-slate-900 scale-105 shadow-md' 
-                                     : isVisualSelected && markingMode === 'manual'
-                                       ? 'border-indigo-300 text-indigo-600 border-dashed dark:border-indigo-700 dark:text-indigo-400'
-                                       : 'border-slate-100 text-slate-300 dark:border-white/5 dark:text-slate-600'}
-                                   ${!isCurrent ? 'opacity-40 cursor-not-allowed' : 'active:scale-90 shadow-sm'}`}
-                               >
-                                 {opt}
-                               </button>
-                             );
-                           })}
+                              const isActive = answers[idx] === opt;
+                              const isVisualSelected = visualAnswers[idx] === opt;
+                              const isCorrect = opt === (q.correct_answer || q.correct);
+                              
+                              let statusStyle = "";
+                              if (isAnalysisMode) {
+                                if (isActive) {
+                                  statusStyle = isCorrect 
+                                    ? 'bg-emerald-500 border-emerald-500 text-white shadow-emerald-500/20' 
+                                    : 'bg-rose-500 border-rose-500 text-white shadow-rose-500/20';
+                                } else if (isCorrect) {
+                                  statusStyle = 'border-emerald-500/50 text-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10';
+                                } else {
+                                  statusStyle = 'border-slate-100 text-slate-200 dark:border-white/5 dark:text-slate-800';
+                                }
+                              } else {
+                                // Standard selection logic
+                                if (isActive) {
+                                  statusStyle = 'bg-slate-900 border-slate-900 text-white dark:bg-white dark:border-white dark:text-slate-900 scale-105 shadow-md';
+                                } else if (isVisualSelected && markingMode === 'manual') {
+                                  statusStyle = 'border-indigo-300 text-indigo-600 border-dashed dark:border-indigo-700 dark:text-indigo-400';
+                                } else {
+                                  statusStyle = 'border-slate-100 text-slate-300 dark:border-white/5 dark:text-slate-600';
+                                }
+                              }
+                              
+                              return (
+                                <button
+                                  key={opt}
+                                  disabled={!isCurrent && !isAnalysisMode}
+                                  onClick={async (e) => {
+                                    if (isAnalysisMode || !isCurrent) return;
+                                    e.stopPropagation();
+                                    
+                                    // Toggle or set answer
+                                    setAnswers(prev => ({
+                                      ...prev,
+                                      [idx]: prev[idx] === opt ? '' : opt
+                                    }));
+                                    
+                                    await Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
+                                  }}
+                                  className={`w-10 h-10 rounded-full border-2 font-black text-[12px] flex items-center justify-center transition-all 
+                                    ${statusStyle}
+                                    ${(!isCurrent && !isAnalysisMode) ? 'opacity-40 cursor-not-allowed' : 'active:scale-95 shadow-sm'}`}
+                                >
+                                  {opt}
+                                </button>
+                              );
+                            })}
                         </div>
 
                         {!isAnalysisMode && !isCurrent && (
