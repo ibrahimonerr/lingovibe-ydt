@@ -227,7 +227,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
       </div>
 
       {/* MAIN CONTENT */}
-      <main className="flex-1 pt-[calc(env(safe-area-inset-top)+90px)] pb-[calc(env(safe-area-inset-bottom)+80px)] px-6 overflow-y-auto custom-scrollbar">
+      <main className="flex-1 pt-[calc(env(safe-area-inset-top)+90px)] pb-[calc(env(safe-area-inset-bottom)+60px)] px-6 overflow-y-auto custom-scrollbar">
         <div className="max-w-2xl mx-auto space-y-4">
           
           {/* ANALYSIS / FEEDBACK (ONLY IN ANALYSIS MODE) */}
@@ -320,7 +320,7 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
       </main>
 
       {/* FOOTER NAV */}
-      <footer className="fixed bottom-0 inset-x-0 bg-white/80 dark:bg-[#070812]/80 backdrop-blur-xl border-t dark:border-slate-800/50 px-6 pt-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] flex items-center justify-between z-[100]">
+      <footer className="fixed bottom-0 inset-x-0 bg-white/80 dark:bg-[#070812]/80 backdrop-blur-xl border-t dark:border-slate-800/50 px-6 pt-2 pb-[env(safe-area-inset-bottom)] flex items-center justify-between z-[100]">
         <button 
           onClick={() => currentIdx > 0 && setCurrentIdx(prev => prev - 1)}
           disabled={currentIdx === 0}
