@@ -77,11 +77,11 @@ export default function DenemeLab({ questions, onFinish }: DenemeLabProps) {
   // MODE SELECTION OVERLAY
   if (markingMode === null) {
      return (
-        <div className="min-h-dvh bg-[#070812] flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-700">
+        <div className="min-h-screen bg-slate-50 dark:bg-[#070812] flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-700">
             <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="w-full max-w-md bg-white/5 border border-white/10 rounded-[3rem] p-10 backdrop-blur-xl relative overflow-hidden"
+                className="w-full max-w-md bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[3rem] p-10 backdrop-blur-xl relative overflow-hidden"
             >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-3xl -mr-16 -mt-16 rounded-full" />
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-violet-500/10 blur-3xl -ml-16 -mb-16 rounded-full" />
